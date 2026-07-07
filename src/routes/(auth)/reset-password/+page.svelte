@@ -40,8 +40,8 @@
 </script>
 
 <svelte:head>
-	<title>Reset Password - PeelJobs Recruiter</title>
-	<meta name="description" content="Create a new password for your PeelJobs employer account." />
+	<title>Сброс пароля - PeelJobs Recruiter</title>
+	<meta name="description" content="Создайте новый пароль для аккаунта работодателя PeelJobs." />
 </svelte:head>
 
 <Card padding="lg" class="shadow-lg">
@@ -50,8 +50,8 @@
 		<div>
 			<!-- Header -->
 			<div class="mb-8">
-				<h1 class="text-2xl font-semibold text-black">Reset Password</h1>
-				<p class="text-muted mt-2">Create a new password for your account</p>
+				<h1 class="text-2xl font-semibold text-black">Сброс пароля</h1>
+				<p class="text-muted mt-2">Создайте новый пароль для своего аккаунта</p>
 			</div>
 
 			<!-- Form -->
@@ -71,7 +71,7 @@
 					</div>
 				{/if}
 
-				<FormField label="New Password">
+				<FormField label="Новый пароль">
 					<div class="relative">
 						<Input
 							type={showPassword ? 'text' : 'password'}
@@ -80,7 +80,7 @@
 							bind:value={formData.password}
 							required
 							disabled={loading}
-							placeholder="Create a strong password"
+							placeholder="Создайте надёжный пароль"
 							size="lg"
 							class="pr-12"
 						>
@@ -92,7 +92,7 @@
 							type="button"
 							onclick={() => (showPassword = !showPassword)}
 							class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-black transition-colors"
-							aria-label={showPassword ? 'Hide password' : 'Show password'}
+							aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
 						>
 							{#if showPassword}
 								<EyeOff class="w-5 h-5" />
@@ -105,7 +105,7 @@
 					<!-- Password Requirements -->
 					{#if formData.password}
 						<div class="mt-3 space-y-2">
-							<p class="text-xs font-medium text-black">Password must contain:</p>
+							<p class="text-xs font-medium text-black">Пароль должен содержать:</p>
 							<div class="space-y-1">
 								<div class="flex items-center gap-2 text-xs {validation.minLength ? 'text-success' : 'text-muted'}">
 									<div class="w-4 h-4 rounded-full border-2 {validation.minLength ? 'border-success bg-success' : 'border-border'} flex items-center justify-center">
@@ -113,7 +113,7 @@
 											<CheckCircle class="w-3 h-3 text-white" />
 										{/if}
 									</div>
-									At least 8 characters
+									Не менее 8 символов
 								</div>
 								<div class="flex items-center gap-2 text-xs {validation.hasUpper ? 'text-success' : 'text-muted'}">
 									<div class="w-4 h-4 rounded-full border-2 {validation.hasUpper ? 'border-success bg-success' : 'border-border'} flex items-center justify-center">
@@ -121,7 +121,7 @@
 											<CheckCircle class="w-3 h-3 text-white" />
 										{/if}
 									</div>
-									One uppercase letter
+									Одну заглавную букву
 								</div>
 								<div class="flex items-center gap-2 text-xs {validation.hasLower ? 'text-success' : 'text-muted'}">
 									<div class="w-4 h-4 rounded-full border-2 {validation.hasLower ? 'border-success bg-success' : 'border-border'} flex items-center justify-center">
@@ -129,7 +129,7 @@
 											<CheckCircle class="w-3 h-3 text-white" />
 										{/if}
 									</div>
-									One lowercase letter
+									Одну строчную букву
 								</div>
 								<div class="flex items-center gap-2 text-xs {validation.hasNumber ? 'text-success' : 'text-muted'}">
 									<div class="w-4 h-4 rounded-full border-2 {validation.hasNumber ? 'border-success bg-success' : 'border-border'} flex items-center justify-center">
@@ -137,14 +137,14 @@
 											<CheckCircle class="w-3 h-3 text-white" />
 										{/if}
 									</div>
-									One number
+									Одну цифру
 								</div>
 							</div>
 						</div>
 					{/if}
 				</FormField>
 
-				<FormField label="Confirm Password" error={formData.confirmPassword && formData.password !== formData.confirmPassword ? 'Passwords do not match' : undefined}>
+				<FormField label="Подтвердите пароль" error={formData.confirmPassword && formData.password !== formData.confirmPassword ? 'Пароли не совпадают' : undefined}>
 					<div class="relative">
 						<Input
 							type={showConfirmPassword ? 'text' : 'password'}
@@ -153,7 +153,7 @@
 							bind:value={formData.confirmPassword}
 							required
 							disabled={loading}
-							placeholder="Re-enter your password"
+							placeholder="Повторите пароль"
 							size="lg"
 							error={formData.confirmPassword && formData.password !== formData.confirmPassword}
 							class="pr-12"
@@ -166,7 +166,7 @@
 							type="button"
 							onclick={() => (showConfirmPassword = !showConfirmPassword)}
 							class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-black transition-colors"
-							aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+							aria-label={showConfirmPassword ? 'Скрыть пароль' : 'Показать пароль'}
 						>
 							{#if showConfirmPassword}
 								<EyeOff class="w-5 h-5" />
@@ -178,7 +178,7 @@
 				</FormField>
 
 				<Button type="submit" size="lg" {loading} disabled={loading || !isValid} class="w-full">
-					{loading ? 'Resetting...' : 'Reset Password'}
+					{loading ? 'Сброс...' : 'Сбросить пароль'}
 				</Button>
 			</form>
 		</div>
@@ -189,13 +189,13 @@
 				<CheckCircle class="w-8 h-8 text-success" />
 			</div>
 
-			<h1 class="text-2xl font-semibold text-black mb-3">Password Reset Successful!</h1>
+			<h1 class="text-2xl font-semibold text-black mb-3">Пароль успешно изменён!</h1>
 			<p class="text-muted mb-8">
-				Your password has been successfully reset. You can now sign in with your new password.
+				Ваш пароль успешно сброшен. Теперь вы можете войти с новым паролем.
 			</p>
 
 			<Button size="lg" class="w-full" onclick={() => window.location.href = '/login/'}>
-				Sign In
+				Войти
 			</Button>
 		</div>
 	{/if}

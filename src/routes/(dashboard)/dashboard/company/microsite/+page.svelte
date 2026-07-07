@@ -81,15 +81,15 @@
 </script>
 
 <svelte:head>
-	<title>Company Microsite - PeelJobs</title>
+	<title>Микросайт компании - PeelJobs</title>
 </svelte:head>
 
 <div class="space-y-6">
 	<!-- Header -->
 	<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 		<div>
-			<h1 class="text-2xl md:text-3xl font-bold text-black">Company Microsite</h1>
-			<p class="text-muted mt-1">Manage custom menu items for your company page</p>
+			<h1 class="text-2xl md:text-3xl font-bold text-black">Микросайт компании</h1>
+			<p class="text-muted mt-1">Управляйте пунктами меню на странице компании</p>
 		</div>
 		<div class="flex gap-3">
 			{#if data.company?.slug}
@@ -99,7 +99,7 @@
 					class="inline-flex items-center gap-2 px-4 py-2 border border-border text-muted rounded-lg hover:bg-surface transition-colors text-sm font-medium"
 				>
 					<Globe class="w-4 h-4" />
-					View Company Page
+					Открыть страницу компании
 				</a>
 			{/if}
 			<button
@@ -107,7 +107,7 @@
 				class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium"
 			>
 				<Plus class="w-4 h-4" />
-				Add Menu Item
+				Добавить пункт меню
 			</button>
 		</div>
 	</div>
@@ -135,20 +135,20 @@
 	{#if data.menus.length === 0}
 		<div class="bg-white rounded-lg border border-border p-12 text-center">
 			<Menu class="w-12 h-12 text-muted mx-auto mb-4" />
-			<h3 class="text-lg font-semibold text-black mb-2">No menu items yet</h3>
-			<p class="text-muted mb-6">Create custom menu items for your company page</p>
+			<h3 class="text-lg font-semibold text-black mb-2">Пунктов меню пока нет</h3>
+			<p class="text-muted mb-6">Создайте пользовательские пункты меню для страницы компании</p>
 			<button
 				onclick={() => (showAddDialog = true)}
 				class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors"
 			>
 				<Plus class="w-4 h-4" />
-				Add First Menu Item
+				Добавить первый пункт меню
 			</button>
 		</div>
 	{:else}
 		<div class="bg-white rounded-lg border border-border">
 			<div class="p-6 border-b border-border">
-				<h2 class="text-lg font-semibold text-black">Menu Items ({data.menus.length})</h2>
+				<h2 class="text-lg font-semibold text-black">Пункты меню ({data.menus.length})</h2>
 			</div>
 
 			<div class="divide-y divide-border">
@@ -167,12 +167,12 @@
 									{#if menu.is_active}
 										<span class="inline-flex items-center gap-1 px-2 py-1 bg-success-light text-success text-xs font-medium rounded">
 											<Eye class="w-3 h-3" />
-											Active
+											Активен
 										</span>
 									{:else}
 										<span class="inline-flex items-center gap-1 px-2 py-1 bg-surface text-muted text-xs font-medium rounded">
 											<EyeOff class="w-3 h-3" />
-											Inactive
+											Неактивен
 										</span>
 									{/if}
 								</div>
@@ -184,7 +184,7 @@
 									<Link class="w-3 h-3" />
 									{menu.url}
 								</a>
-								<div class="text-xs text-muted mt-1">Order: {menu.order || index + 1}</div>
+								<div class="text-xs text-muted mt-1">Порядок: {menu.order || index + 1}</div>
 							</div>
 
 							<!-- Actions -->
@@ -205,7 +205,7 @@
 									<button
 										type="submit"
 										class="p-2 text-muted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
-										title={menu.is_active ? 'Deactivate' : 'Activate'}
+										title={menu.is_active ? 'Деактивировать' : 'Активировать'}
 									>
 										{#if menu.is_active}
 											<EyeOff class="w-4 h-4" />
@@ -219,7 +219,7 @@
 								<button
 									onclick={() => openEditDialog(menu)}
 									class="p-2 text-muted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
-									title="Edit"
+									title="Редактировать"
 								>
 									<Edit class="w-4 h-4" />
 								</button>
@@ -228,7 +228,7 @@
 								<button
 									onclick={() => openDeleteDialog(menu)}
 									class="p-2 text-muted hover:text-error hover:bg-error-light rounded-lg transition-colors"
-									title="Delete"
+									title="Удалить"
 								>
 									<Trash2 class="w-4 h-4" />
 								</button>
@@ -245,7 +245,7 @@
 {#if showAddDialog}
 	<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
 		<div class="bg-white rounded-lg max-w-md w-full p-6">
-			<h2 class="text-xl font-bold text-black mb-4">Add Menu Item</h2>
+			<h2 class="text-xl font-bold text-black mb-4">Добавить пункт меню</h2>
 
 			<form
 				method="POST"
@@ -260,7 +260,7 @@
 				<div class="space-y-4">
 					<div>
 						<label for="title" class="block text-sm font-medium text-muted mb-1">
-							Menu Title <span class="text-error">*</span>
+							Название пункта <span class="text-error">*</span>
 						</label>
 						<input
 							type="text"
@@ -269,7 +269,7 @@
 							bind:value={menuForm.title}
 							required
 							class="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
-							placeholder="e.g., About Us"
+							placeholder="например, О нас"
 						/>
 					</div>
 
@@ -297,7 +297,7 @@
 							value="true"
 							class="w-4 h-4 text-primary border-border rounded focus:ring-primary"
 						/>
-						<label for="is_active" class="text-sm text-muted">Active (visible on company page)</label>
+						<label for="is_active" class="text-sm text-muted">Активен (отображается на странице компании)</label>
 					</div>
 				</div>
 
@@ -311,14 +311,14 @@
 						class="flex-1 px-4 py-2 border border-border text-muted rounded-lg hover:bg-surface transition-colors"
 						disabled={submitting}
 					>
-						Cancel
+						Отмена
 					</button>
 					<button
 						type="submit"
 						class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-50"
 						disabled={submitting}
 					>
-						{submitting ? 'Creating...' : 'Create Menu'}
+						{submitting ? 'Создание...' : 'Создать пункт меню'}
 					</button>
 				</div>
 			</form>
@@ -330,7 +330,7 @@
 {#if showEditDialog && selectedMenu}
 	<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
 		<div class="bg-white rounded-lg max-w-md w-full p-6">
-			<h2 class="text-xl font-bold text-black mb-4">Edit Menu Item</h2>
+			<h2 class="text-xl font-bold text-black mb-4">Редактировать пункт меню</h2>
 
 			<form
 				method="POST"
@@ -347,7 +347,7 @@
 				<div class="space-y-4">
 					<div>
 						<label for="edit_title" class="block text-sm font-medium text-muted mb-1">
-							Menu Title <span class="text-error">*</span>
+							Название пункта <span class="text-error">*</span>
 						</label>
 						<input
 							type="text"
@@ -382,7 +382,7 @@
 							value="true"
 							class="w-4 h-4 text-primary border-border rounded focus:ring-primary"
 						/>
-						<label for="edit_is_active" class="text-sm text-muted">Active (visible on company page)</label>
+						<label for="edit_is_active" class="text-sm text-muted">Активен (отображается на странице компании)</label>
 					</div>
 				</div>
 
@@ -397,14 +397,14 @@
 						class="flex-1 px-4 py-2 border border-border text-muted rounded-lg hover:bg-surface transition-colors"
 						disabled={submitting}
 					>
-						Cancel
+						Отмена
 					</button>
 					<button
 						type="submit"
 						class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-50"
 						disabled={submitting}
 					>
-						{submitting ? 'Updating...' : 'Update Menu'}
+						{submitting ? 'Сохранение...' : 'Сохранить изменения'}
 					</button>
 				</div>
 			</form>
@@ -416,9 +416,9 @@
 {#if showDeleteDialog && selectedMenu}
 	<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
 		<div class="bg-white rounded-lg max-w-md w-full p-6">
-			<h2 class="text-xl font-bold text-black mb-4">Delete Menu Item</h2>
+			<h2 class="text-xl font-bold text-black mb-4">Удалить пункт меню</h2>
 			<p class="text-muted mb-6">
-				Are you sure you want to delete "<strong>{selectedMenu.title}</strong>"? This action cannot be undone.
+				Вы уверены, что хотите удалить «<strong>{selectedMenu.title}</strong>»? Это действие нельзя отменить.
 			</p>
 
 			<form
@@ -443,14 +443,14 @@
 						class="flex-1 px-4 py-2 border border-border text-muted rounded-lg hover:bg-surface transition-colors"
 						disabled={submitting}
 					>
-						Cancel
+						Отмена
 					</button>
 					<button
 						type="submit"
 						class="flex-1 px-4 py-2 bg-error text-white rounded-lg hover:bg-error transition-colors disabled:opacity-50"
 						disabled={submitting}
 					>
-						{submitting ? 'Deleting...' : 'Delete'}
+						{submitting ? 'Удаление...' : 'Удалить'}
 					</button>
 				</div>
 			</form>

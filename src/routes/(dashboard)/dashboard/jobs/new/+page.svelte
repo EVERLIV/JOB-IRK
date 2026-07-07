@@ -150,75 +150,75 @@
 	});
 
 	const steps = [
-		{ number: 1, title: 'Basics', icon: Briefcase },
-		{ number: 2, title: 'Location', icon: MapPin },
-		{ number: 3, title: 'Details', icon: FileText },
-		{ number: 4, title: 'Compensation', icon: DollarSign },
-		{ number: 5, title: 'Application', icon: Send },
-		{ number: 6, title: 'Settings', icon: Settings },
-		{ number: 7, title: 'Preview', icon: Eye }
+		{ number: 1, title: 'Основное', icon: Briefcase },
+		{ number: 2, title: 'Локация', icon: MapPin },
+		{ number: 3, title: 'Детали', icon: FileText },
+		{ number: 4, title: 'Оплата', icon: DollarSign },
+		{ number: 5, title: 'Отклики', icon: Send },
+		{ number: 6, title: 'Настройки', icon: Settings },
+		{ number: 7, title: 'Просмотр', icon: Eye }
 	];
 
 	const employmentTypes = [
-		{ value: 'full-time', label: 'Full-time' },
-		{ value: 'permanent', label: 'Permanent' },
-		{ value: 'contract', label: 'Contract' },
-		{ value: 'part-time', label: 'Part-time' },
-		{ value: 'internship', label: 'Internship' },
-		{ value: 'freelance', label: 'Freelance' }
+		{ value: 'full-time', label: 'Полная занятость' },
+		{ value: 'permanent', label: 'Постоянная' },
+		{ value: 'contract', label: 'Контракт' },
+		{ value: 'part-time', label: 'Частичная занятость' },
+		{ value: 'internship', label: 'Стажировка' },
+		{ value: 'freelance', label: 'Фриланс' }
 	];
 
 	const seniorityLevels = [
-		{ value: 'intern', label: 'Intern' },
-		{ value: 'junior', label: 'Junior' },
-		{ value: 'mid', label: 'Mid-Level' },
-		{ value: 'senior', label: 'Senior' },
-		{ value: 'lead', label: 'Lead' },
-		{ value: 'manager', label: 'Manager' }
+		{ value: 'intern', label: 'Стажёр' },
+		{ value: 'junior', label: 'Младший' },
+		{ value: 'mid', label: 'Средний' },
+		{ value: 'senior', label: 'Старший' },
+		{ value: 'lead', label: 'Ведущий' },
+		{ value: 'manager', label: 'Менеджер' }
 	];
 
 	const experienceLevels = [
-		'Fresher',
-		'1-3 years',
-		'3-5 years',
-		'5-10 years',
-		'10+ years'
+		{ value: 'Fresher', label: 'Без опыта' },
+		{ value: '1-3 years', label: '1–3 года' },
+		{ value: '3-5 years', label: '3–5 лет' },
+		{ value: '5-10 years', label: '5–10 лет' },
+		{ value: '10+ years', label: '10+ лет' }
 	];
 
 	const workModes = [
-		{ value: 'in-office', label: 'In-Office' },
-		{ value: 'remote', label: 'Remote' },
-		{ value: 'hybrid', label: 'Hybrid' }
+		{ value: 'in-office', label: 'В офисе' },
+		{ value: 'remote', label: 'Удалённо' },
+		{ value: 'hybrid', label: 'Гибрид' }
 	];
 
 	const benefitOptions = [
-		'PF',
-		'ESI',
-		'Health Insurance',
-		'Annual Bonus',
-		'Food',
-		'Cab',
-		'Work From Home',
-		'Flexible Hours'
+		{ value: 'PF', label: 'ПФ' },
+		{ value: 'ESI', label: 'ESI' },
+		{ value: 'Health Insurance', label: 'Медицинская страховка' },
+		{ value: 'Annual Bonus', label: 'Годовой бонус' },
+		{ value: 'Food', label: 'Питание' },
+		{ value: 'Cab', label: 'Транспорт' },
+		{ value: 'Work From Home', label: 'Удалённая работа' },
+		{ value: 'Flexible Hours', label: 'Гибкий график' }
 	];
 
 	const languageProficiencies: { value: LanguageProficiency; label: string }[] = [
-		{ value: 'basic', label: 'Basic' },
-		{ value: 'conversational', label: 'Conversational' },
-		{ value: 'fluent', label: 'Fluent' }
+		{ value: 'basic', label: 'Базовый' },
+		{ value: 'conversational', label: 'Разговорный' },
+		{ value: 'fluent', label: 'Свободный' }
 	];
 
 	const hiringTimelines: { value: HiringTimeline; label: string }[] = [
-		{ value: '1-3days', label: '1-3 Days' },
-		{ value: '1-2weeks', label: '1-2 Weeks' },
-		{ value: '1month', label: '1 Month' },
-		{ value: '1-3months', label: '1-3 Months' }
+		{ value: '1-3days', label: '1–3 дня' },
+		{ value: '1-2weeks', label: '1–2 недели' },
+		{ value: '1month', label: '1 месяц' },
+		{ value: '1-3months', label: '1–3 месяца' }
 	];
 
 	const hiringPriorities: { value: HiringPriority; label: string }[] = [
-		{ value: 'Low', label: 'Low' },
-		{ value: 'Normal', label: 'Normal' },
-		{ value: 'High', label: 'High' }
+		{ value: 'Low', label: 'Низкий' },
+		{ value: 'Normal', label: 'Обычный' },
+		{ value: 'High', label: 'Высокий' }
 	];
 
 	function nextStep() {
@@ -329,6 +329,23 @@
 		}
 	}
 
+	function getEmploymentTypeLabel(value: string): string {
+		return employmentTypes.find(t => t.value === value)?.label || value;
+	}
+
+	function getWorkModeLabel(value: string): string {
+		return workModes.find(m => m.value === value)?.label || value;
+	}
+
+	function getApplicationMethodLabel(method: string): string {
+		const labels: Record<string, string> = {
+			portal: 'Через портал PeelJobs',
+			external: 'Внешняя ссылка',
+			email: 'По email'
+		};
+		return labels[method] || method;
+	}
+
 	// Handle form action results
 	$effect(() => {
 		if (form?.success && form?.jobId) {
@@ -338,14 +355,14 @@
 </script>
 
 <svelte:head>
-	<title>Post New Job - PeelJobs Recruiter</title>
+	<title>Новая вакансия - PeelJobs Recruiter</title>
 </svelte:head>
 
 <div class="max-w-5xl mx-auto space-y-6">
 	<!-- Header -->
 	<div>
-		<h1 class="text-2xl md:text-3xl font-bold text-black">Post New Job</h1>
-		<p class="text-muted mt-1">Fill in the details to create a new job posting</p>
+		<h1 class="text-2xl md:text-3xl font-bold text-black">Новая вакансия</h1>
+		<p class="text-muted mt-1">Заполните данные для публикации вакансии</p>
 	</div>
 
 	<!-- Success/Error Messages -->
@@ -353,7 +370,7 @@
 		<div class="bg-success-light border border-success/30 rounded-lg p-4 flex items-start gap-3">
 			<CheckCircle class="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
 			<div>
-				<p class="text-sm font-medium text-success">{form.message || 'Success!'}</p>
+				<p class="text-sm font-medium text-success">{form.message || 'Успешно!'}</p>
 				{#if form.warning}
 					<p class="text-sm text-success mt-1">{form.warning}</p>
 				{/if}
@@ -429,20 +446,20 @@
 				<div class="space-y-6">
 					<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 						<Briefcase class="w-6 h-6" />
-						Job Basics
+						Основная информация
 					</h2>
 
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div class="md:col-span-2">
 							<label for="job-title" class="block text-sm font-medium text-muted mb-2">
-								Job Title <span class="text-error">*</span>
+								Название вакансии <span class="text-error">*</span>
 							</label>
 							<input
 								id="job-title"
 								type="text"
 								name="title"
 								bind:value={formData.jobTitle}
-								placeholder="e.g., Senior Frontend Developer"
+								placeholder="например, Senior Frontend Developer"
 								required
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							/>
@@ -450,14 +467,14 @@
 
 						<div>
 							<label for="company-name" class="block text-sm font-medium text-muted mb-2">
-								Company Name <span class="text-error">*</span>
+								Название компании <span class="text-error">*</span>
 							</label>
 							<input
 								id="company-name"
 								type="text"
 								name="company_name"
 								bind:value={formData.companyName}
-								placeholder="e.g., Acme Inc."
+								placeholder="например, Acme Inc."
 								required
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							/>
@@ -465,14 +482,14 @@
 
 						<div>
 							<label for="job-department" class="block text-sm font-medium text-muted mb-2">
-								Department <span class="text-error">*</span>
+								Отдел <span class="text-error">*</span>
 							</label>
 							<input
 								id="job-department"
 								type="text"
 								name="job_role"
 								bind:value={formData.department}
-								placeholder="e.g., Engineering"
+								placeholder="например, Engineering"
 								required
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							/>
@@ -480,7 +497,7 @@
 
 						<div>
 							<label for="employment-type" class="block text-sm font-medium text-muted mb-2">
-								Employment Type <span class="text-error">*</span>
+								Тип занятости <span class="text-error">*</span>
 							</label>
 							<select
 								id="employment-type"
@@ -497,7 +514,7 @@
 
 						<div>
 							<label for="seniority-level" class="block text-sm font-medium text-muted mb-2">
-								Seniority Level
+								Уровень должности
 							</label>
 							<select
 								id="seniority-level"
@@ -505,7 +522,7 @@
 								bind:value={formData.seniorityLevel}
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							>
-								<option value="">Select level</option>
+								<option value="">Выберите уровень</option>
 								{#each seniorityLevels as level}
 									<option value={level.value}>{level.label}</option>
 								{/each}
@@ -514,7 +531,7 @@
 
 						<div>
 							<label for="experience-level" class="block text-sm font-medium text-muted mb-2">
-								Experience Level <span class="text-error">*</span>
+								Требуемый опыт <span class="text-error">*</span>
 							</label>
 							<select
 								id="experience-level"
@@ -523,16 +540,16 @@
 								required
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							>
-								<option value="">Select experience level</option>
+								<option value="">Выберите уровень опыта</option>
 								{#each experienceLevels as level}
-									<option value={level}>{level}</option>
+									<option value={level.value}>{level.label}</option>
 								{/each}
 							</select>
 						</div>
 
 						<div>
 							<label for="number-of-positions" class="block text-sm font-medium text-muted mb-2">
-								Number of Positions <span class="text-error">*</span>
+								Количество позиций <span class="text-error">*</span>
 							</label>
 							<input
 								id="number-of-positions"
@@ -552,13 +569,13 @@
 				<div class="space-y-6">
 					<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 						<MapPin class="w-6 h-6" />
-						Location & Work Mode
+						Локация и формат работы
 					</h2>
 
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div class="md:col-span-2">
 							<label for="work-mode" class="block text-sm font-medium text-muted mb-2">
-								Work Mode <span class="text-error">*</span>
+								Формат работы <span class="text-error">*</span>
 							</label>
 							<div id="work-mode" class="grid grid-cols-3 gap-3">
 								{#each workModes as mode}
@@ -580,14 +597,14 @@
 
 						<div class="md:col-span-2">
 							<label for="job-locations-search" class="block text-sm font-medium text-muted mb-2">
-								Job Location(s) <span class="text-error">*</span> <span class="text-muted text-xs">(Max 3)</span>
+								Локация вакансии <span class="text-error">*</span> <span class="text-muted text-xs">(макс. 3)</span>
 							</label>
 							<div class="space-y-3">
 								<input
 									id="job-locations-search"
 									type="text"
 									bind:value={formData.searchCity}
-									placeholder="Search city... (e.g., Bangalore, Mumbai)"
+									placeholder="Поиск города... (например, Bangalore, Mumbai)"
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 									disabled={formData.selectedLocationIds.length >= 3}
 								/>
@@ -613,7 +630,7 @@
 								{/if}
 
 								{#if formData.selectedLocationIds.length >= 3}
-									<p class="text-sm text-warning">Maximum 3 locations reached. Remove a location to add another.</p>
+									<p class="text-sm text-warning">Достигнут лимит в 3 локации. Удалите одну, чтобы добавить другую.</p>
 								{/if}
 
 								{#if formData.searchCity.length > 0}
@@ -630,7 +647,7 @@
 												disabled={formData.selectedLocationIds.length >= 3 && !formData.selectedLocationIds.includes(city.id)}
 												class="w-full text-left px-4 py-2 hover:bg-surface flex items-center justify-between {formData.selectedLocationIds.includes(city.id) ? 'bg-primary/10 text-primary' : ''} disabled:opacity-50 disabled:cursor-not-allowed"
 											>
-												<span class="text-sm">{city.name}, {city.state?.name || 'N/A'}</span>
+												<span class="text-sm">{city.name}, {city.state?.name || 'Н/Д'}</span>
 												{#if formData.selectedLocationIds.includes(city.id)}
 													<CheckCircle class="w-4 h-4 text-primary" />
 												{/if}
@@ -639,20 +656,20 @@
 									</div>
 								{/if}
 							</div>
-							<p class="text-xs text-muted mt-1">Select up to 3 cities where the job is available</p>
+							<p class="text-xs text-muted mt-1">Выберите до 3 городов, где доступна вакансия</p>
 						</div>
 
 						{#if formData.workMode !== 'remote'}
 							<div class="md:col-span-2">
 								<label for="new-office-address" class="block text-sm font-medium text-muted mb-2">
-									Office Address
+									Адрес офиса
 								</label>
 								<textarea
 									id="new-office-address"
 									name="company_address"
 									bind:value={formData.officeAddress}
 									rows="2"
-									placeholder="Office address"
+									placeholder="Адрес офиса"
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 								></textarea>
 							</div>
@@ -665,13 +682,13 @@
 				<div class="space-y-6">
 					<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 						<FileText class="w-6 h-6" />
-						Job Details & Requirements
+						Описание и требования
 					</h2>
 
 					<div class="space-y-6">
 						<div>
 							<label for="job-description" class="block text-sm font-medium text-muted mb-2">
-								Job Description <span class="text-error">*</span>
+								Описание вакансии <span class="text-error">*</span>
 							</label>
 							<textarea
 								id="job-description"
@@ -679,21 +696,21 @@
 								bind:value={formData.description}
 								rows="6"
 								required
-								placeholder="Describe the role, responsibilities, and what you're looking for..."
+								placeholder="Опишите роль, обязанности и ожидания от кандидата..."
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							></textarea>
 						</div>
 
 						<div>
 							<label for="key-skills-search" class="block text-sm font-medium text-muted mb-2">
-								Key Skills <span class="text-muted text-xs">(Max 8)</span>
+								Ключевые навыки <span class="text-muted text-xs">(макс. 8)</span>
 							</label>
 							<div class="space-y-3">
 								<input
 									id="key-skills-search"
 									type="text"
 									bind:value={formData.searchSkill}
-									placeholder="Search skills... (e.g., Python, React, AWS)"
+									placeholder="Поиск навыков... (например, Python, React, AWS)"
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 								/>
 
@@ -740,13 +757,13 @@
 									</div>
 								{/if}
 							</div>
-							<p class="text-xs text-muted mt-1">Select up to 8 key skills required for this role</p>
+							<p class="text-xs text-muted mt-1">Выберите до 8 ключевых навыков для этой роли</p>
 						</div>
 
 						<!-- Industries -->
 						<div>
 							<label for="industry-preferences" class="block text-sm font-medium text-muted mb-2">
-								Industry/Domain Preference
+								Предпочтительная отрасль
 							</label>
 							<div id="industry-preferences" class="border border-border rounded-lg p-3 max-h-60 overflow-y-auto">
 								<div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -763,13 +780,13 @@
 									{/each}
 								</div>
 							</div>
-							<p class="text-xs text-muted mt-1">Select preferred industries for candidates</p>
+							<p class="text-xs text-muted mt-1">Выберите предпочтительные отрасли для кандидатов</p>
 						</div>
 
 						<!-- Education/Qualifications -->
 						<div>
 							<label for="education-qualifications" class="block text-sm font-medium text-muted mb-2">
-								Education Qualification
+								Образование
 							</label>
 							<div id="education-qualifications" class="border border-border rounded-lg p-3 max-h-60 overflow-y-auto">
 								<div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -786,13 +803,13 @@
 									{/each}
 								</div>
 							</div>
-							<p class="text-xs text-muted mt-1">Select minimum education qualifications required</p>
+							<p class="text-xs text-muted mt-1">Выберите минимальные требования к образованию</p>
 						</div>
 
 						<!-- Language Requirements -->
 						<div>
 							<label for="language-requirements" class="block text-sm font-medium text-muted mb-2">
-								Language Requirements
+								Требования к языкам
 							</label>
 							<div id="language-requirements" class="space-y-3">
 								{#each formData.languages as lang, index}
@@ -801,7 +818,7 @@
 											id="language-{index}"
 											type="text"
 											bind:value={lang.language}
-											placeholder="Language (e.g., English)"
+											placeholder="Язык (например, English)"
 											class="flex-1 px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 										/>
 										<select
@@ -828,7 +845,7 @@
 									class="text-sm text-primary hover:text-primary flex items-center gap-2"
 								>
 									<Plus class="w-4 h-4" />
-									Add Language
+									Добавить язык
 								</button>
 							</div>
 						</div>
@@ -837,32 +854,32 @@
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 							<div>
 								<label for="required-certifications" class="block text-sm font-medium text-muted mb-2">
-									Required Certifications
+									Обязательные сертификаты
 								</label>
 								<textarea
 									id="required-certifications"
 									name="required_certifications"
 									bind:value={formData.requiredCertifications}
-									placeholder="e.g., AWS Solutions Architect, Azure Administrator"
+									placeholder="например, AWS Solutions Architect, Azure Administrator"
 									rows="3"
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 								></textarea>
-								<p class="text-xs text-muted mt-1">Comma-separated list</p>
+								<p class="text-xs text-muted mt-1">Список через запятую</p>
 							</div>
 
 							<div>
 								<label for="preferred-certifications" class="block text-sm font-medium text-muted mb-2">
-									Preferred Certifications
+									Желательные сертификаты
 								</label>
 								<textarea
 									id="preferred-certifications"
 									name="preferred_certifications"
 									bind:value={formData.preferredCertifications}
-									placeholder="e.g., PMP, ISTQB"
+									placeholder="например, PMP, ISTQB"
 									rows="3"
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 								></textarea>
-								<p class="text-xs text-muted mt-1">Nice-to-have certifications</p>
+								<p class="text-xs text-muted mt-1">Желательные, но необязательные сертификаты</p>
 							</div>
 						</div>
 					</div>
@@ -873,34 +890,34 @@
 				<div class="space-y-6">
 					<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 						<DollarSign class="w-6 h-6" />
-						Compensation & Benefits
+						Оплата и льготы
 					</h2>
 
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="minimum-salary" class="block text-sm font-medium text-muted mb-2">
-								Minimum Salary (INR)
+								Минимальная зарплата (INR)
 							</label>
 							<input
 								id="minimum-salary"
 								type="number"
 								name="min_salary"
 								bind:value={formData.salaryMin}
-								placeholder="e.g., 500000"
+								placeholder="например, 500000"
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							/>
 						</div>
 
 						<div>
 							<label for="maximum-salary" class="block text-sm font-medium text-muted mb-2">
-								Maximum Salary (INR)
+								Максимальная зарплата (INR)
 							</label>
 							<input
 								id="maximum-salary"
 								type="number"
 								name="max_salary"
 								bind:value={formData.salaryMax}
-								placeholder="e.g., 800000"
+								placeholder="например, 800000"
 								class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 							/>
 						</div>
@@ -915,7 +932,7 @@
 									class="w-4 h-4 text-primary border-border rounded focus:ring-primary/20"
 								/>
 								<span class="text-sm font-medium text-muted">
-									Show salary range to job seekers
+									Показывать диапазон зарплаты соискателям
 								</span>
 							</label>
 						</div>
@@ -923,18 +940,18 @@
 						<!-- Benefits & Perks -->
 						<div class="md:col-span-2">
 							<label for="benefits-perks" class="block text-sm font-medium text-muted mb-3">
-								Benefits & Perks
+								Льготы и бонусы
 							</label>
 							<div id="benefits-perks" class="grid grid-cols-2 md:grid-cols-4 gap-3">
 								{#each benefitOptions as benefit}
 									<label class="flex items-center gap-2 cursor-pointer">
 										<input
 											type="checkbox"
-											checked={formData.benefits.includes(benefit)}
-											onchange={() => toggleBenefit(benefit)}
+											checked={formData.benefits.includes(benefit.value)}
+											onchange={() => toggleBenefit(benefit.value)}
 											class="w-4 h-4 text-primary border-border rounded focus:ring-primary/20"
 										/>
-										<span class="text-sm text-muted">{benefit}</span>
+										<span class="text-sm text-muted">{benefit.label}</span>
 									</label>
 								{/each}
 							</div>
@@ -947,14 +964,14 @@
 				<div class="space-y-6">
 					<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 						<Send class="w-6 h-6" />
-						Application Settings
+						Настройки откликов
 					</h2>
 
 					<div class="space-y-6">
 						<!-- Application Method -->
 						<div>
 							<label for="application-method" class="block text-sm font-medium text-muted mb-3">
-								Application Method <span class="text-error">*</span>
+								Способ отклика <span class="text-error">*</span>
 							</label>
 							<div id="application-method" class="space-y-3">
 								<label class="flex items-center gap-3 cursor-pointer p-3 border-2 border-border rounded-lg hover:border-primary/50 transition-colors {formData.applicationMethod === 'portal' ? 'border-primary bg-primary/10' : ''}">
@@ -966,8 +983,8 @@
 										class="w-4 h-4 text-primary"
 									/>
 									<div>
-										<div class="text-sm font-medium text-black">Apply on PeelJobs Portal</div>
-										<div class="text-xs text-muted">Candidates apply through our platform</div>
+										<div class="text-sm font-medium text-black">Отклик на портале PeelJobs</div>
+										<div class="text-xs text-muted">Кандидаты откликаются через нашу платформу</div>
 									</div>
 								</label>
 								<label class="flex items-center gap-3 cursor-pointer p-3 border-2 border-border rounded-lg hover:border-primary/50 transition-colors {formData.applicationMethod === 'external' ? 'border-primary bg-primary/10' : ''}">
@@ -979,8 +996,8 @@
 										class="w-4 h-4 text-primary"
 									/>
 									<div>
-										<div class="text-sm font-medium text-black">External URL</div>
-										<div class="text-xs text-muted">Redirect to your company careers page</div>
+										<div class="text-sm font-medium text-black">Внешняя ссылка</div>
+										<div class="text-xs text-muted">Перенаправление на карьерную страницу компании</div>
 									</div>
 								</label>
 								<label class="flex items-center gap-3 cursor-pointer p-3 border-2 border-border rounded-lg hover:border-primary/50 transition-colors {formData.applicationMethod === 'email' ? 'border-primary bg-primary/10' : ''}">
@@ -993,14 +1010,14 @@
 									/>
 									<div>
 										<div class="text-sm font-medium text-black">Email</div>
-										<div class="text-xs text-muted">Candidates apply via email</div>
+										<div class="text-xs text-muted">Кандидаты откликаются по email</div>
 									</div>
 								</label>
 							</div>
 
 							{#if formData.applicationMethod === 'external'}
 								<div class="mt-3">
-									<label for="application-url" class="sr-only">Application URL</label>
+									<label for="application-url" class="sr-only">URL для отклика</label>
 									<input
 										id="application-url"
 										type="url"
@@ -1015,7 +1032,7 @@
 
 						<div>
 							<label for="application-deadline" class="block text-sm font-medium text-muted mb-2">
-								Application Deadline
+								Срок приёма откликов
 							</label>
 							<input
 								id="application-deadline"
@@ -1033,7 +1050,7 @@
 				<div class="space-y-6">
 					<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 						<Settings class="w-6 h-6" />
-						Additional Settings
+						Дополнительные настройки
 					</h2>
 
 					<div class="space-y-6">
@@ -1049,14 +1066,14 @@
 										class="w-4 h-4 text-primary border-border rounded focus:ring-primary/20"
 									/>
 									<span class="text-sm font-medium text-muted">
-										Relocation Required
+										Требуется переезд
 									</span>
 								</label>
 							</div>
 
 							<div>
 								<label for="travel-requirements" class="block text-sm font-medium text-muted mb-2">
-									Travel Requirements
+									Командировки
 								</label>
 								<select
 									id="travel-requirements"
@@ -1064,7 +1081,7 @@
 									bind:value={formData.travelPercentage}
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 								>
-									<option value="">No travel required</option>
+									<option value="">Командировки не требуются</option>
 									<option value="0-10%">0-10%</option>
 									<option value="10-25%">10-25%</option>
 									<option value="25-50%">25-50%</option>
@@ -1077,7 +1094,7 @@
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 							<div>
 								<label for="hiring-timeline" class="block text-sm font-medium text-muted mb-2">
-									Hiring Timeline
+									Срок найма
 								</label>
 								<select
 									id="hiring-timeline"
@@ -1085,7 +1102,7 @@
 									bind:value={formData.hiringTimeline}
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 								>
-									<option value="">Select timeline</option>
+									<option value="">Выберите срок</option>
 									{#each hiringTimelines as timeline}
 										<option value={timeline.value}>{timeline.label}</option>
 									{/each}
@@ -1094,7 +1111,7 @@
 
 							<div>
 								<label for="hiring-priority" class="block text-sm font-medium text-muted mb-2">
-									Priority <span class="text-error">*</span>
+									Приоритет <span class="text-error">*</span>
 								</label>
 								<select
 									id="hiring-priority"
@@ -1117,36 +1134,36 @@
 				<div class="space-y-6">
 					<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 						<Eye class="w-6 h-6" />
-						Preview & Submit
+						Просмотр и публикация
 					</h2>
 
 					<div class="space-y-6 border border-border rounded-lg p-6">
 						<!-- Job Basics -->
 						<div>
-							<h3 class="font-semibold text-black mb-3">Job Basics</h3>
+							<h3 class="font-semibold text-black mb-3">Основная информация</h3>
 							<dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
 								<div>
-									<dt class="text-muted">Job Title</dt>
-									<dd class="text-black font-medium">{formData.jobTitle || 'Not set'}</dd>
+									<dt class="text-muted">Название вакансии</dt>
+									<dd class="text-black font-medium">{formData.jobTitle || 'Не указано'}</dd>
 								</div>
 								<div>
-									<dt class="text-muted">Company</dt>
-									<dd class="text-black font-medium">{formData.companyName || 'Not set'}</dd>
+									<dt class="text-muted">Компания</dt>
+									<dd class="text-black font-medium">{formData.companyName || 'Не указано'}</dd>
 								</div>
 								<div>
-									<dt class="text-muted">Employment Type</dt>
-									<dd class="text-black font-medium capitalize">{formData.employmentType}</dd>
+									<dt class="text-muted">Тип занятости</dt>
+									<dd class="text-black font-medium">{getEmploymentTypeLabel(formData.employmentType)}</dd>
 								</div>
 								<div>
-									<dt class="text-muted">Seniority Level</dt>
-									<dd class="text-black font-medium capitalize">{formData.seniorityLevel || 'Not set'}</dd>
+									<dt class="text-muted">Уровень должности</dt>
+									<dd class="text-black font-medium">{seniorityLevels.find(l => l.value === formData.seniorityLevel)?.label || formData.seniorityLevel || 'Не указано'}</dd>
 								</div>
 								<div>
-									<dt class="text-muted">Work Mode</dt>
-									<dd class="text-black font-medium capitalize">{formData.workMode}</dd>
+									<dt class="text-muted">Формат работы</dt>
+									<dd class="text-black font-medium">{getWorkModeLabel(formData.workMode)}</dd>
 								</div>
 								<div>
-									<dt class="text-muted">Positions</dt>
+									<dt class="text-muted">Позиций</dt>
 									<dd class="text-black font-medium">{formData.positions}</dd>
 								</div>
 							</dl>
@@ -1155,17 +1172,17 @@
 						<!-- Compensation -->
 						{#if formData.salaryMin || formData.salaryMax}
 							<div>
-								<h3 class="font-semibold text-black mb-3">Compensation</h3>
+								<h3 class="font-semibold text-black mb-3">Оплата</h3>
 								<p class="text-sm text-muted">
-									INR {formData.salaryMin || '0'} - {formData.salaryMax || '0'} per year
-									{#if !formData.showSalary}<span class="text-muted">(Hidden from candidates)</span>{/if}
+									INR {formData.salaryMin || '0'} - {formData.salaryMax || '0'} в год
+									{#if !formData.showSalary}<span class="text-muted">(скрыто от кандидатов)</span>{/if}
 								</p>
 								{#if formData.benefits.length > 0}
 									<div class="mt-2">
-										<p class="text-sm text-muted mb-1">Benefits:</p>
+										<p class="text-sm text-muted mb-1">Льготы:</p>
 										<div class="flex flex-wrap gap-2">
 											{#each formData.benefits as benefit}
-												<span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded">{benefit}</span>
+												<span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded">{benefitOptions.find(b => b.value === benefit)?.label || benefit}</span>
 											{/each}
 										</div>
 									</div>
@@ -1176,7 +1193,7 @@
 						<!-- Skills & Requirements -->
 						{#if formData.selectedSkillIds.length > 0}
 							<div>
-								<h3 class="font-semibold text-black mb-3">Skills</h3>
+								<h3 class="font-semibold text-black mb-3">Навыки</h3>
 								<div class="flex flex-wrap gap-2">
 									{#each formData.selectedSkillIds as skillId}
 										{@const skill = data.metadata.skills.find(s => s.id === skillId)}
@@ -1191,7 +1208,7 @@
 						<!-- Locations -->
 						{#if formData.selectedLocationIds.length > 0}
 							<div>
-								<h3 class="font-semibold text-black mb-3">Locations</h3>
+								<h3 class="font-semibold text-black mb-3">Локации</h3>
 								<div class="flex flex-wrap gap-2">
 									{#each formData.selectedLocationIds as cityId}
 										{@const city = data.metadata.cities.find(c => c.id === cityId)}
@@ -1205,8 +1222,8 @@
 
 						<!-- Application Method -->
 						<div>
-							<h3 class="font-semibold text-black mb-3">Application Method</h3>
-							<p class="text-sm text-muted capitalize">{formData.applicationMethod}</p>
+							<h3 class="font-semibold text-black mb-3">Способ отклика</h3>
+							<p class="text-sm text-muted">{getApplicationMethodLabel(formData.applicationMethod)}</p>
 							{#if formData.applicationMethod === 'external' && formData.applicationUrl}
 								<p class="text-sm text-primary mt-1">{formData.applicationUrl}</p>
 							{/if}
@@ -1289,7 +1306,7 @@
 					class="px-6 py-2 border border-border rounded-lg text-muted hover:bg-surface disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
 				>
 					<ChevronLeft class="w-4 h-4" />
-					Previous
+					Назад
 				</button>
 
 				{#if currentStep < totalSteps}
@@ -1300,7 +1317,7 @@
 						class="px-6 py-2 border border-border rounded-lg text-muted hover:bg-surface disabled:opacity-50 flex items-center gap-2"
 					>
 						<Save class="w-4 h-4" />
-						{isSubmitting && currentAction === 'saveDraft' ? 'Saving...' : 'Save Draft'}
+						{isSubmitting && currentAction === 'saveDraft' ? 'Сохранение...' : 'Сохранить черновик'}
 					</button>
 				{/if}
 			</div>
@@ -1311,7 +1328,7 @@
 					onclick={nextStep}
 					class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover flex items-center gap-2"
 				>
-					Next
+					Далее
 					<ChevronRight class="w-4 h-4" />
 				</button>
 			{:else}
@@ -1323,7 +1340,7 @@
 						class="px-6 py-2 border border-border rounded-lg text-muted hover:bg-surface disabled:opacity-50 flex items-center gap-2"
 					>
 						<Save class="w-4 h-4" />
-						{isSubmitting && currentAction === 'saveDraft' ? 'Saving...' : 'Save as Draft'}
+						{isSubmitting && currentAction === 'saveDraft' ? 'Сохранение...' : 'Сохранить как черновик'}
 					</button>
 					<button
 						type="submit"
@@ -1332,7 +1349,7 @@
 						class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover disabled:opacity-50 flex items-center gap-2"
 					>
 						<Send class="w-4 h-4" />
-						{isSubmitting && currentAction === 'publish' ? 'Publishing...' : 'Publish Job'}
+						{isSubmitting && currentAction === 'publish' ? 'Публикация...' : 'Опубликовать вакансию'}
 					</button>
 				</div>
 			{/if}

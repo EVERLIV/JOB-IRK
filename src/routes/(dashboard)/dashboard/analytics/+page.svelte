@@ -19,9 +19,9 @@
 	const { analytics, period } = data;
 
 	const periodOptions = [
-		{ value: '7d', label: 'Last 7 days' },
-		{ value: '30d', label: 'Last 30 days' },
-		{ value: '90d', label: 'Last 90 days' }
+		{ value: '7d', label: 'Последние 7 дней' },
+		{ value: '30d', label: 'Последние 30 дней' },
+		{ value: '90d', label: 'Последние 90 дней' }
 	];
 
 	function changePeriod(newPeriod: string) {
@@ -31,30 +31,30 @@
 	// Build overview metrics from real data
 	$: overviewMetrics = [
 		{
-			label: 'Total Applications',
+			label: 'Всего откликов',
 			value: analytics.overview.total_applications.toLocaleString(),
 			change: analytics.overview.trend,
 			isPositive: analytics.overview.trend.startsWith('+'),
 			icon: Users
 		},
 		{
-			label: 'Active Jobs',
+			label: 'Активные вакансии',
 			value: analytics.overview.total_jobs.toString(),
-			change: `${analytics.overview.avg_per_day} apps/day`,
+			change: `${analytics.overview.avg_per_day} откл./день`,
 			isPositive: true,
 			icon: Briefcase
 		},
 		{
-			label: 'Hired',
+			label: 'Нанято',
 			value: analytics.pipeline.hired.toString(),
-			change: `${analytics.pipeline.conversion_rate}% conversion`,
+			change: `${analytics.pipeline.conversion_rate}% конверсия`,
 			isPositive: true,
 			icon: CheckCircle
 		},
 		{
-			label: 'Pending Review',
+			label: 'На рассмотрении',
 			value: analytics.pipeline.pending.toString(),
-			change: 'Need attention',
+			change: 'Требуют внимания',
 			isPositive: false,
 			icon: Clock
 		}
@@ -63,22 +63,22 @@
 	// Pipeline metrics with percentages
 	$: pipelineMetrics = [
 		{
-			stage: 'New Applications',
+			stage: 'Новые отклики',
 			count: analytics.overview.total_applications,
 			percentage: 100
 		},
 		{
-			stage: 'Shortlisted',
+			stage: 'Отобраны',
 			count: analytics.pipeline.shortlisted,
 			percentage: Math.round((analytics.pipeline.shortlisted / analytics.overview.total_applications) * 100)
 		},
 		{
-			stage: 'Hired',
+			stage: 'Нанято',
 			count: analytics.pipeline.hired,
 			percentage: Math.round((analytics.pipeline.hired / analytics.overview.total_applications) * 100)
 		},
 		{
-			stage: 'Rejected',
+			stage: 'Отклонены',
 			count: analytics.pipeline.rejected,
 			percentage: Math.round((analytics.pipeline.rejected / analytics.overview.total_applications) * 100)
 		}
@@ -86,22 +86,31 @@
 
 	// Sort peak days
 	const dayOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+	const dayNamesRu: Record<string, string> = {
+		monday: 'Понедельник',
+		tuesday: 'Вторник',
+		wednesday: 'Среда',
+		thursday: 'Четверг',
+		friday: 'Пятница',
+		saturday: 'Суббота',
+		sunday: 'Воскресенье'
+	};
 	$: peakDaysArray = dayOrder.map(day => ({
-		day: day.charAt(0).toUpperCase() + day.slice(1),
+		day: dayNamesRu[day],
 		count: analytics.peak_days[day] || 0
 	}));
 </script>
 
 <svelte:head>
-	<title>Analytics - PeelJobs Recruiter</title>
+	<title>Аналитика - PeelJobs Recruiter</title>
 </svelte:head>
 
 <div class="space-y-6">
 	<!-- Header -->
 	<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 		<div>
-			<h1 class="text-2xl md:text-3xl font-bold text-black">Application Analytics</h1>
-			<p class="text-muted mt-1">Track your hiring performance and insights</p>
+			<h1 class="text-2xl md:text-3xl font-bold text-black">Аналитика откликов</h1>
+			<p class="text-muted mt-1">Отслеживайте эффективность найма и аналитику</p>
 		</div>
 		<div class="flex items-center gap-3">
 			<select
@@ -117,7 +126,7 @@
 				class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-sm font-medium text-muted hover:bg-surface transition-colors"
 			>
 				<Download class="w-4 h-4" />
-				Export Report
+				Экспорт отчёта
 			</button>
 		</div>
 	</div>
@@ -153,7 +162,7 @@
 	<!-- Job Performance -->
 	<div class="bg-white rounded-lg border border-border">
 		<div class="p-6 border-b border-border">
-			<h2 class="text-lg font-semibold text-black">Job Performance</h2>
+			<h2 class="text-lg font-semibold text-black">Эффективность вакансий</h2>
 		</div>
 		{#if analytics.job_performance.length > 0}
 			<div class="overflow-x-auto">
@@ -161,25 +170,25 @@
 					<thead class="bg-surface border-b border-border">
 						<tr>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Job Title
+								Название вакансии
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Applications
+								Отклики
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Pending
+								На рассмотрении
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Shortlisted
+								Отобраны
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Hired
+								Нанято
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Conversion
+								Конверсия
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Avg/Day
+								Сред./день
 							</th>
 						</tr>
 					</thead>
@@ -220,7 +229,7 @@
 		{:else}
 			<div class="p-12 text-center">
 				<Briefcase class="w-12 h-12 text-muted mx-auto mb-3" />
-				<p class="text-muted">No active jobs in this period</p>
+				<p class="text-muted">Нет активных вакансий за этот период</p>
 			</div>
 		{/if}
 	</div>
@@ -230,7 +239,7 @@
 		<!-- Application Pipeline -->
 		<div class="bg-white rounded-lg border border-border">
 			<div class="p-6 border-b border-border">
-				<h2 class="text-lg font-semibold text-black">Application Pipeline</h2>
+				<h2 class="text-lg font-semibold text-black">Воронка откликов</h2>
 			</div>
 			<div class="p-6">
 				<div class="space-y-4">
@@ -246,7 +255,7 @@
 									style="width: {stage.percentage}%"
 								></div>
 							</div>
-							<div class="text-xs text-muted mt-1">{stage.percentage}% of total</div>
+							<div class="text-xs text-muted mt-1">{stage.percentage}% от общего</div>
 						</div>
 					{/each}
 				</div>
@@ -256,7 +265,7 @@
 		<!-- Peak Days -->
 		<div class="bg-white rounded-lg border border-border">
 			<div class="p-6 border-b border-border">
-				<h2 class="text-lg font-semibold text-black">Applications by Day of Week</h2>
+				<h2 class="text-lg font-semibold text-black">Отклики по дням недели</h2>
 			</div>
 			<div class="p-6">
 				<div class="space-y-4">
@@ -284,7 +293,7 @@
 	<!-- Key Insights -->
 	<div class="bg-white rounded-lg border border-border">
 		<div class="p-6 border-b border-border">
-			<h2 class="text-lg font-semibold text-black">Key Insights</h2>
+			<h2 class="text-lg font-semibold text-black">Ключевые выводы</h2>
 		</div>
 		<div class="p-6">
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -294,9 +303,9 @@
 							<Clock class="w-6 h-6 text-warning" />
 						</div>
 						<div>
-							<h3 class="font-semibold text-black mb-1">Action Required</h3>
+							<h3 class="font-semibold text-black mb-1">Требуются действия</h3>
 							<p class="text-sm text-muted">
-								{analytics.pipeline.pending} applications are pending review.
+								{analytics.pipeline.pending} откликов ожидают рассмотрения.
 							</p>
 						</div>
 					</div>
@@ -308,9 +317,9 @@
 							<Target class="w-6 h-6 text-success" />
 						</div>
 						<div>
-							<h3 class="font-semibold text-black mb-1">Strong Conversion Rate</h3>
+							<h3 class="font-semibold text-black mb-1">Высокая конверсия</h3>
 							<p class="text-sm text-muted">
-								{analytics.pipeline.conversion_rate}% conversion rate from applications to hires.
+								{analytics.pipeline.conversion_rate}% конверсия от откликов до найма.
 							</p>
 						</div>
 					</div>
@@ -322,9 +331,9 @@
 							<TrendingUp class="w-6 h-6 text-primary" />
 						</div>
 						<div>
-							<h3 class="font-semibold text-black mb-1">Application Velocity</h3>
+							<h3 class="font-semibold text-black mb-1">Скорость откликов</h3>
 							<p class="text-sm text-muted">
-								Receiving an average of {analytics.overview.avg_per_day} applications per day.
+								В среднем {analytics.overview.avg_per_day} откликов в день.
 							</p>
 						</div>
 					</div>
@@ -336,9 +345,9 @@
 							<UserCheck class="w-6 h-6 text-purple-600" />
 						</div>
 						<div>
-							<h3 class="font-semibold text-black mb-1">Active Pipeline</h3>
+							<h3 class="font-semibold text-black mb-1">Активная воронка</h3>
 							<p class="text-sm text-muted">
-								{analytics.pipeline.shortlisted} qualified candidates in your pipeline.
+								{analytics.pipeline.shortlisted} квалифицированных кандидатов в воронке.
 							</p>
 						</div>
 					</div>

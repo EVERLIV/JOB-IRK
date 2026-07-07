@@ -18,13 +18,13 @@
 	let job = $derived(data.job);
 
 	function formatDate(dateString?: string): string {
-		if (!dateString) return 'Not set';
+		if (!dateString) return 'Не указано';
 		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { month: 'long', day: 'numeric', year: 'numeric' });
 	}
 
 	function formatSalary(min: number, max: number, type: string): string {
-		if (!min && !max) return 'Not disclosed';
+		if (!min && !max) return 'Не указана';
 		const formatAmount = (amount: number) => {
 			if (amount >= 10000000) return `₹${(amount / 10000000).toFixed(2)}Cr`;
 			if (amount >= 100000) return `₹${(amount / 100000).toFixed(1)}L`;
@@ -33,23 +33,23 @@
 		const minStr = min ? formatAmount(min) : '';
 		const maxStr = max ? formatAmount(max) : '';
 		const range = minStr && maxStr ? `${minStr} - ${maxStr}` : minStr || maxStr;
-		return `${range} per ${type === 'Month' ? 'month' : 'year'}`;
+		return `${range} в ${type === 'Month' ? 'месяц' : 'год'}`;
 	}
 
 	function formatExperience(minYear: number, maxYear: number, minMonth: number, maxMonth: number, fresher: boolean): string {
-		if (fresher) return 'Fresher';
-		if (!minYear && !maxYear) return 'Not specified';
+		if (fresher) return 'Без опыта';
+		if (!minYear && !maxYear) return 'Не указан';
 
 		let exp = '';
 		if (minYear === maxYear) {
-			exp = `${minYear} year${minYear > 1 ? 's' : ''}`;
+			exp = `${minYear} ${minYear === 1 ? 'год' : minYear >= 2 && minYear <= 4 ? 'года' : 'лет'}`;
 			if (minMonth || maxMonth) {
 				const months = minMonth === maxMonth ? minMonth : `${minMonth}-${maxMonth}`;
 				const monthsNum = typeof months === 'number' ? months : parseInt(months) || 0;
-				exp += ` ${months} month${monthsNum > 1 ? 's' : ''}`;
+				exp += ` ${months} ${monthsNum === 1 ? 'месяц' : monthsNum >= 2 && monthsNum <= 4 ? 'месяца' : 'месяцев'}`;
 			}
 		} else {
-			exp = `${minYear}-${maxYear} years`;
+			exp = `${minYear}–${maxYear} лет`;
 		}
 		return exp;
 	}
@@ -61,33 +61,54 @@
 				return {
 					color: 'bg-success-light border-success/30 text-success',
 					icon: CheckCircle2,
-					message: 'This job is currently live and visible to job seekers'
+					message: 'Вакансия активна и видна соискателям'
 				};
 			case 'Draft':
 				return {
 					color: 'bg-primary/10 border-primary/30 text-primary',
 					icon: Eye,
-					message: 'This is a preview of how your job will appear once published'
+					message: 'Предпросмотр того, как вакансия будет выглядеть после публикации'
 				};
 			case 'Disabled':
 				return {
 					color: 'bg-error-light border-error/30 text-error',
 					icon: AlertCircle,
-					message: 'This job is currently closed and not accepting applications'
+					message: 'Вакансия закрыта и не принимает отклики'
 				};
 			case 'Expired':
 				return {
 					color: 'bg-warning-light border-warning/30 text-warning',
 					icon: AlertCircle,
-					message: 'This job has expired and is no longer visible to job seekers'
+					message: 'Срок вакансии истёк, она больше не видна соискателям'
 				};
 			default:
 				return {
 					color: 'bg-surface border-border text-black',
 					icon: AlertCircle,
-					message: 'Job preview'
+					message: 'Предпросмотр вакансии'
 				};
 		}
+	}
+
+	function getWorkModeLabel(mode: string): string {
+		const labels: Record<string, string> = {
+			'in-office': 'В офисе',
+			remote: 'Удалённо',
+			hybrid: 'Гибрид'
+		};
+		return labels[mode] || mode.replace('-', ' ');
+	}
+
+	function getJobTypeLabel(type: string): string {
+		const labels: Record<string, string> = {
+			'full-time': 'Полная занятость',
+			permanent: 'Постоянная',
+			contract: 'Контракт',
+			'part-time': 'Частичная занятость',
+			internship: 'Стажировка',
+			freelance: 'Фриланс'
+		};
+		return labels[type] || type.replace('-', ' ');
 	}
 
 	let statusInfo = $derived(getStatusInfo(job.status));
@@ -95,7 +116,7 @@
 </script>
 
 <svelte:head>
-	<title>Preview: {job.title} - PeelJobs</title>
+	<title>Предпросмотр: {job.title} - PeelJobs</title>
 </svelte:head>
 
 <div class="min-h-screen bg-surface">
@@ -107,16 +128,16 @@
 					<a
 						href="/dashboard/jobs/{job.id}/"
 						class="p-2 hover:bg-surface rounded-lg transition-colors"
-						title="Back to Job Details"
+						title="Вернуться к деталям вакансии"
 					>
 						<ArrowLeft class="w-5 h-5" />
 					</a>
 					<div>
 						<div class="flex items-center gap-2">
 							<Eye class="w-5 h-5 text-primary" />
-							<h1 class="text-lg font-semibold text-black">Job Preview</h1>
+							<h1 class="text-lg font-semibold text-black">Предпросмотр вакансии</h1>
 						</div>
-						<p class="text-sm text-muted mt-0.5">How your job appears to candidates</p>
+						<p class="text-sm text-muted mt-0.5">Как вакансия выглядит для кандидатов</p>
 					</div>
 				</div>
 				<div class="flex gap-3">
@@ -125,14 +146,14 @@
 							href="/dashboard/jobs/{job.id}/edit/"
 							class="px-4 py-2 border border-border text-muted rounded-lg hover:bg-surface transition-colors text-sm font-medium"
 						>
-							Edit Job
+							Редактировать
 						</a>
 					{/if}
 					<a
 						href="/dashboard/jobs/{job.id}/"
 						class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium"
 					>
-						Back to Dashboard
+						В панель управления
 					</a>
 				</div>
 			</div>
@@ -145,7 +166,7 @@
 			<div class="flex items-start gap-3">
 				<StatusIcon class="w-5 h-5 flex-shrink-0 mt-0.5" />
 				<div>
-					<div class="font-medium">Preview Mode</div>
+					<div class="font-medium">Режим предпросмотра</div>
 					<div class="text-sm mt-1">{statusInfo.message}</div>
 				</div>
 			</div>
@@ -174,9 +195,9 @@
 							<Briefcase class="w-5 h-5 text-primary" />
 						</div>
 						<div>
-							<div class="text-sm text-muted">Job Type</div>
-							<div class="font-medium text-black capitalize">
-								{job.job_type.replace('-', ' ')}
+							<div class="text-sm text-muted">Тип занятости</div>
+							<div class="font-medium text-black">
+								{getJobTypeLabel(job.job_type)}
 							</div>
 						</div>
 					</div>
@@ -186,7 +207,7 @@
 							<DollarSign class="w-5 h-5 text-success" />
 						</div>
 						<div>
-							<div class="text-sm text-muted">Salary</div>
+							<div class="text-sm text-muted">Зарплата</div>
 							<div class="font-medium text-black">
 								{formatSalary(job.min_salary, job.max_salary, job.salary_type)}
 							</div>
@@ -198,7 +219,7 @@
 							<Clock class="w-5 h-5 text-purple-600" />
 						</div>
 						<div>
-							<div class="text-sm text-muted">Experience</div>
+							<div class="text-sm text-muted">Опыт</div>
 							<div class="font-medium text-black">
 								{formatExperience(job.min_year, job.max_year, job.min_month, job.max_month, job.fresher)}
 							</div>
@@ -210,9 +231,9 @@
 							<MapPin class="w-5 h-5 text-warning" />
 						</div>
 						<div>
-							<div class="text-sm text-muted">Location</div>
+							<div class="text-sm text-muted">Локация</div>
 							<div class="font-medium text-black">
-								{job.location_display || 'Remote'}
+								{job.location_display || 'Удалённо'}
 							</div>
 						</div>
 					</div>
@@ -223,17 +244,17 @@
 					{#if job.published_on}
 						<div class="flex items-center gap-2">
 							<Calendar class="w-4 h-4" />
-							<span>Posted on {formatDate(job.published_on)}</span>
+							<span>Опубликовано {formatDate(job.published_on)}</span>
 						</div>
 					{/if}
 					<div class="flex items-center gap-2">
 						<Users class="w-4 h-4" />
-						<span>{job.vacancies} {job.vacancies === 1 ? 'opening' : 'openings'}</span>
+						<span>{job.vacancies} {job.vacancies === 1 ? 'место' : job.vacancies >= 2 && job.vacancies <= 4 ? 'места' : 'мест'}</span>
 					</div>
 					{#if job.work_mode}
 						<div class="flex items-center gap-2">
 							<Briefcase class="w-4 h-4" />
-							<span class="capitalize">{job.work_mode.replace('-', ' ')}</span>
+							<span>{getWorkModeLabel(job.work_mode)}</span>
 						</div>
 					{/if}
 				</div>
@@ -241,9 +262,9 @@
 
 			<!-- Job Description -->
 			<div class="p-6 border-b border-border">
-				<h2 class="text-xl font-semibold text-black mb-4">Job Description</h2>
+				<h2 class="text-xl font-semibold text-black mb-4">Описание вакансии</h2>
 				<div class="prose prose-sm max-w-none text-muted">
-					{@html job.description || '<p class="text-muted">No description provided</p>'}
+					{@html job.description || '<p class="text-muted">Описание не указано</p>'}
 				</div>
 			</div>
 
@@ -254,7 +275,7 @@
 					<div>
 						<h3 class="text-lg font-semibold text-black mb-3 flex items-center gap-2">
 							<CheckCircle2 class="w-5 h-5 text-success" />
-							Required Skills
+							Требуемые навыки
 						</h3>
 						<div class="flex flex-wrap gap-2">
 							{#each job.skills as skill}
@@ -271,7 +292,7 @@
 					<div>
 						<h3 class="text-lg font-semibold text-black mb-3 flex items-center gap-2">
 							<GraduationCap class="w-5 h-5 text-purple-600" />
-							Education
+							Образование
 						</h3>
 						<div class="flex flex-wrap gap-2">
 							{#each job.qualifications as qual}
@@ -287,7 +308,7 @@
 			<!-- Company Info -->
 			{#if job.company_description || job.company_address}
 				<div class="p-6 border-t border-border bg-surface">
-					<h2 class="text-xl font-semibold text-black mb-4">About {job.company_name}</h2>
+					<h2 class="text-xl font-semibold text-black mb-4">О компании {job.company_name}</h2>
 
 					{#if job.company_description}
 						<div class="prose prose-sm max-w-none text-muted mb-4">

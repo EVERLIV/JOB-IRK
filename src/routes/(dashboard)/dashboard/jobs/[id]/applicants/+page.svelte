@@ -36,12 +36,23 @@
 
 	// Derived status filters that react to data changes
 	const statusFilters = $derived([
-		{ value: 'all', label: 'All Applicants', count: data.totalApplicants },
-		{ value: 'Pending', label: 'Pending', count: data.stats.pending },
-		{ value: 'Shortlisted', label: 'Shortlisted', count: data.stats.shortlisted },
-		{ value: 'Hired', label: 'Hired', count: data.stats.selected },
-		{ value: 'Rejected', label: 'Rejected', count: data.stats.rejected }
+		{ value: 'all', label: 'Все кандидаты', count: data.totalApplicants },
+		{ value: 'Pending', label: 'На рассмотрении', count: data.stats.pending },
+		{ value: 'Shortlisted', label: 'Отобран', count: data.stats.shortlisted },
+		{ value: 'Hired', label: 'Нанят', count: data.stats.selected },
+		{ value: 'Rejected', label: 'Отклонён', count: data.stats.rejected }
 	]);
+
+	function getApplicantStatusLabel(status: string): string {
+		const labels: Record<string, string> = {
+			Pending: 'На рассмотрении',
+			Shortlisted: 'Отобран',
+			Hired: 'Нанят',
+			Selected: 'Нанят',
+			Rejected: 'Отклонён'
+		};
+		return labels[status] || status;
+	}
 
 	function updateFilters() {
 		const params = new URLSearchParams();
@@ -90,19 +101,11 @@
 	}
 
 	async function viewApplicantDetail(applicantId: number) {
-		// Fetch detailed applicant profile
-		const accessToken = document.cookie
-			.split('; ')
-			.find((row) => row.startsWith('access_token='))
-			?.split('=')[1];
-
 		try {
 			const response = await fetch(
 				`${API_BASE_URL}/recruiter/jobs/${data.job.id}/applicants/${applicantId}/`,
 				{
-					headers: {
-						Authorization: `Bearer ${accessToken}`
-					}
+					credentials: 'include'
 				}
 			);
 
@@ -111,11 +114,11 @@
 				showDetailModal = true;
 			} else {
 				console.error('Failed to fetch applicant details');
-				alert('Failed to load applicant details');
+				alert('Не удалось загрузить данные кандидата');
 			}
 		} catch (err) {
 			console.error('Failed to fetch applicant details:', err);
-			alert('Failed to load applicant details');
+			alert('Не удалось загрузить данные кандидата');
 		}
 	}
 
@@ -145,11 +148,11 @@
 				await invalidateAll();
 				closeDetailModal();
 			} else {
-				alert('Failed to update applicant status');
+				alert('Не удалось обновить статус кандидата');
 			}
 		} catch (err) {
 			console.error('Failed to update status:', err);
-			alert('Failed to update applicant status');
+			alert('Не удалось обновить статус кандидата');
 		} finally {
 			submittingAction = null;
 		}
@@ -157,7 +160,7 @@
 </script>
 
 <svelte:head>
-	<title>Applicants - {data.job.title} - PeelJobs</title>
+	<title>Кандидаты - {data.job.title} - PeelJobs</title>
 </svelte:head>
 
 <div class="space-y-6">
@@ -167,18 +170,18 @@
 			<a
 				href="/dashboard/jobs/"
 				class="p-2 hover:bg-surface rounded-lg transition-colors"
-				title="Back to Jobs"
+				title="Вернуться к вакансиям"
 			>
 				<ArrowLeft class="w-5 h-5" />
 			</a>
 			<div>
-				<h1 class="text-2xl md:text-3xl font-bold text-black">Applicants</h1>
+				<h1 class="text-2xl md:text-3xl font-bold text-black">Кандидаты</h1>
 				<p class="text-muted mt-1">{data.job.title}</p>
 			</div>
 		</div>
 		<div class="flex items-center gap-2 text-sm text-muted">
 			<Users class="w-4 h-4" />
-			<span class="font-medium">{data.totalApplicants} total applicants</span>
+			<span class="font-medium">Всего кандидатов: {data.totalApplicants}</span>
 		</div>
 	</div>
 
@@ -223,7 +226,7 @@
 						type="text"
 						bind:value={searchQuery}
 						onchange={updateFilters}
-						placeholder="Search applicants by name or email..."
+						placeholder="Поиск кандидатов по имени или email..."
 						class="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
 					/>
 				</div>
@@ -248,10 +251,10 @@
 			<a
 				href="/dashboard/jobs/{data.job.id}/applicants/download?status={selectedFilter !== 'all' ? selectedFilter : ''}&search={searchQuery}"
 				class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-success text-white rounded-lg hover:bg-success transition-colors text-sm font-medium whitespace-nowrap"
-				title="Download applicants as CSV"
+				title="Скачать список кандидатов в CSV"
 			>
 				<Download class="w-4 h-4" />
-				<span class="hidden md:inline">Download CSV</span>
+				<span class="hidden md:inline">Скачать CSV</span>
 				<span class="md:hidden">CSV</span>
 			</a>
 		</div>
@@ -261,11 +264,11 @@
 	{#if data.applications.length === 0}
 		<div class="bg-white rounded-lg border border-border p-12 text-center">
 			<Users class="w-12 h-12 text-muted mx-auto mb-4" />
-			<h3 class="text-lg font-semibold text-black mb-2">No applicants found</h3>
+			<h3 class="text-lg font-semibold text-black mb-2">Кандидаты не найдены</h3>
 			<p class="text-muted">
 				{searchQuery || selectedFilter !== 'all'
-					? 'Try adjusting your filters'
-					: 'No one has applied to this job yet'}
+					? 'Попробуйте изменить фильтры'
+					: 'На эту вакансию пока никто не откликнулся'}
 			</p>
 		</div>
 	{:else}
@@ -296,7 +299,7 @@
 								<div class="flex items-center gap-3 mb-2">
 									<h3 class="text-lg font-semibold text-black">{applicant.name}</h3>
 									<span class="px-2 py-1 text-xs font-medium rounded {getStatusBadgeClass(application.status)}">
-										{application.status}
+										{getApplicantStatusLabel(application.status)}
 									</span>
 								</div>
 
@@ -324,12 +327,12 @@
 								</div>
 
 								<div class="text-xs text-muted">
-									Applied {application.applied_time_ago}
+									Откликнулся {application.applied_time_ago}
 								</div>
 
 								{#if application.remarks}
 									<div class="mt-3 p-3 bg-surface rounded-lg">
-										<p class="text-sm text-muted"><strong>Remarks:</strong> {application.remarks}</p>
+										<p class="text-sm text-muted"><strong>Комментарий:</strong> {application.remarks}</p>
 									</div>
 								{/if}
 							</div>
@@ -342,7 +345,7 @@
 								class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium"
 							>
 								<Eye class="w-4 h-4" />
-								View Profile
+								Открыть профиль
 							</button>
 
 							{#if applicant.resume_url}
@@ -352,7 +355,7 @@
 									class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-border text-muted rounded-lg hover:bg-surface transition-colors text-sm font-medium"
 								>
 									<Download class="w-4 h-4" />
-									Resume
+									Резюме
 								</a>
 							{/if}
 
@@ -363,7 +366,7 @@
 									class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-success text-white rounded-lg hover:bg-success transition-colors text-sm font-medium disabled:opacity-50"
 								>
 									<UserCheck class="w-4 h-4" />
-									Shortlist
+									В шорт-лист
 								</button>
 
 								<button
@@ -372,7 +375,7 @@
 									class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-error text-white rounded-lg hover:bg-error transition-colors text-sm font-medium disabled:opacity-50"
 								>
 									<UserX class="w-4 h-4" />
-									Reject
+									Отклонить
 								</button>
 							{/if}
 
@@ -383,7 +386,7 @@
 									class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-success text-white rounded-lg hover:bg-success transition-colors text-sm font-medium disabled:opacity-50"
 								>
 									<CheckCircle class="w-4 h-4" />
-									Mark Hired
+									Отметить как нанятого
 								</button>
 							{/if}
 						</div>

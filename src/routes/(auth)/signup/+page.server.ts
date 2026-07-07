@@ -1,6 +1,7 @@
 import { redirect, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { getApiBaseUrl } from '$lib/config/env';
+import { setAuthCookies } from '$lib/server/auth';
 
 export const load: PageServerLoad = async ({ url }) => {
 	// Check for invitation token in URL
@@ -34,14 +35,14 @@ export const actions: Actions = {
 		// Validation
 		if (!firstName || !lastName || !email || !password) {
 			return fail(400, {
-				error: 'Please fill in all required fields',
+				error: 'Заполните все обязательные поля',
 				values: Object.fromEntries(formData)
 			});
 		}
 
 		if (password !== confirmPassword) {
 			return fail(400, {
-				error: 'Passwords do not match',
+				error: 'Пароли не совпадают',
 				values: Object.fromEntries(formData)
 			});
 		}
@@ -81,7 +82,7 @@ export const actions: Actions = {
 
 			if (!response.ok) {
 				// Format error message from Django validation errors
-				let errorMessage = 'Registration failed';
+				let errorMessage = 'Не удалось зарегистрироваться';
 				if (data.detail) {
 					errorMessage = data.detail;
 				} else if (typeof data === 'object') {
@@ -110,13 +111,13 @@ export const actions: Actions = {
 
 			console.error('Registration error:', error);
 			return fail(500, {
-				error: 'An unexpected error occurred. Please try again.',
+				error: 'Произошла непредвиденная ошибка. Попробуйте снова.',
 				values: Object.fromEntries(formData)
 			});
 		}
 	},
 
-	acceptInvitation: async ({ request, cookies, fetch }) => {
+	acceptInvitation: async ({ request, cookies, fetch, url }) => {
 		const formData = await request.formData();
 
 		const token = formData.get('token')?.toString() || '';
@@ -128,14 +129,14 @@ export const actions: Actions = {
 		// Validation
 		if (!token || !firstName || !lastName || !password) {
 			return fail(400, {
-				error: 'Please fill in all required fields',
+				error: 'Заполните все обязательные поля',
 				values: Object.fromEntries(formData)
 			});
 		}
 
 		if (password !== confirmPassword) {
 			return fail(400, {
-				error: 'Passwords do not match',
+				error: 'Пароли не совпадают',
 				values: Object.fromEntries(formData)
 			});
 		}
@@ -158,7 +159,7 @@ export const actions: Actions = {
 			const data = await response.json();
 
 			if (!response.ok) {
-				let errorMessage = 'Failed to accept invitation';
+				let errorMessage = 'Не удалось принять приглашение';
 				if (data.detail) {
 					errorMessage = data.detail;
 				} else if (typeof data === 'object') {
@@ -177,26 +178,8 @@ export const actions: Actions = {
 				});
 			}
 
-			// Set HttpOnly cookies for JWT tokens
-			if (data.access) {
-				cookies.set('access_token', data.access, {
-					httpOnly: true,
-					secure: false,
-					sameSite: 'lax',
-					path: '/',
-					maxAge: 60 * 15
-				});
-			}
-
-			if (data.refresh) {
-				cookies.set('refresh_token', data.refresh, {
-					httpOnly: true,
-					secure: false,
-					sameSite: 'lax',
-					path: '/',
-					maxAge: 60 * 60 * 24 * 7
-				});
-			}
+			const secureCookies = url.protocol === 'https:';
+			setAuthCookies(cookies, data, secureCookies);
 
 			// Redirect to dashboard
 			throw redirect(302, '/dashboard/');
@@ -208,7 +191,7 @@ export const actions: Actions = {
 
 			console.error('Accept invitation error:', error);
 			return fail(500, {
-				error: 'An unexpected error occurred. Please try again.',
+				error: 'Произошла непредвиденная ошибка. Попробуйте снова.',
 				values: Object.fromEntries(formData)
 			});
 		}

@@ -96,7 +96,7 @@
 </script>
 
 <svelte:head>
-	<title>Company Profile - PeelJobs Recruiter</title>
+	<title>Профиль компании - PeelJobs Recruiter</title>
 </svelte:head>
 
 <div class="max-w-4xl space-y-6">
@@ -105,8 +105,8 @@
 		<div class="bg-success-light border border-success/30 rounded-lg p-4 flex items-start gap-3">
 			<CheckCircle class="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
 			<div class="flex-1">
-				<h3 class="text-sm font-medium text-success">Success!</h3>
-				<p class="text-sm text-success mt-1">{form?.message || 'Company profile updated successfully'}</p>
+				<h3 class="text-sm font-medium text-success">Успех!</h3>
+				<p class="text-sm text-success mt-1">{form?.message || 'Профиль компании успешно обновлён'}</p>
 			</div>
 		</div>
 	{/if}
@@ -115,8 +115,8 @@
 		<div class="bg-error-light border border-error/30 rounded-lg p-4 flex items-start gap-3">
 			<XCircle class="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
 			<div class="flex-1">
-				<h3 class="text-sm font-medium text-error">Error</h3>
-				<p class="text-sm text-error mt-1">{form?.error || 'Failed to update company profile'}</p>
+				<h3 class="text-sm font-medium text-error">Ошибка</h3>
+				<p class="text-sm text-error mt-1">{form?.error || 'Не удалось обновить профиль компании'}</p>
 			</div>
 		</div>
 	{/if}
@@ -124,10 +124,10 @@
 	<!-- Header -->
 	<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 		<div>
-			<h1 class="text-2xl md:text-3xl font-bold text-black">Company Profile</h1>
-			<p class="text-muted mt-1">Manage your company's public information</p>
+			<h1 class="text-2xl md:text-3xl font-bold text-black">Профиль компании</h1>
+			<p class="text-muted mt-1">Управляйте публичной информацией о вашей компании</p>
 			{#if !isAdmin}
-				<p class="text-sm text-amber-600 mt-1">⚠️ Only company admins can edit the profile</p>
+				<p class="text-sm text-amber-600 mt-1">⚠️ Только администраторы компании могут редактировать профиль</p>
 			{/if}
 		</div>
 		{#if isAdmin}
@@ -136,7 +136,7 @@
 				class="inline-flex items-center gap-2 px-4 py-2 border border-border text-muted rounded-lg hover:bg-surface transition-colors text-sm font-medium"
 			>
 				<Globe class="w-4 h-4" />
-				Manage Microsite
+				Управление микросайтом
 			</a>
 		{/if}
 	</div>
@@ -144,14 +144,14 @@
 	<!-- Profile Completeness -->
 	<div class="bg-white rounded-lg border border-border p-6">
 		<div class="flex items-center justify-between mb-3">
-			<h3 class="text-sm font-medium text-black">Profile Completeness</h3>
+			<h3 class="text-sm font-medium text-black">Заполненность профиля</h3>
 			<span class="text-sm font-semibold text-primary">{completeness}%</span>
 		</div>
 		<div class="w-full bg-surface rounded-full h-2">
 			<div class="bg-primary h-2 rounded-full transition-all" style="width: {completeness}%"></div>
 		</div>
 		<p class="text-xs text-muted mt-2">
-			Complete your profile to attract more qualified candidates
+			Заполните профиль, чтобы привлечь более квалифицированных кандидатов
 		</p>
 	</div>
 
@@ -159,14 +159,14 @@
 	<div class="bg-white rounded-lg border border-border p-6">
 		<h2 class="text-lg font-semibold text-black mb-4 flex items-center gap-2">
 			<Building2 class="w-5 h-5" />
-			Company Logo
+			Логотип компании
 		</h2>
 		<div class="flex items-start gap-6">
 			<div
 				class="w-32 h-32 rounded-lg border-2 border-dashed border-border flex items-center justify-center bg-surface overflow-hidden"
 			>
 				{#if formData.logo}
-					<img src={formData.logo} alt="Company Logo" class="w-full h-full object-cover" />
+					<img src={formData.logo} alt="Логотип компании" class="w-full h-full object-cover" />
 				{:else}
 					<Building2 class="w-12 h-12 text-muted" />
 				{/if}
@@ -176,11 +176,11 @@
 					class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-sm font-medium text-muted hover:bg-surface transition-colors cursor-pointer"
 				>
 					<Upload class="w-4 h-4" />
-					Upload Logo
+					Загрузить логотип
 					<input type="file" accept="image/*" onchange={handleLogoUpload} class="hidden" />
 				</label>
 				<p class="text-sm text-muted mt-2">
-					Recommended: Square image, at least 200x200px. Max file size: 2MB.
+					Рекомендуется: квадратное изображение, минимум 200×200 px. Максимальный размер файла: 2 МБ.
 				</p>
 			</div>
 		</div>
@@ -199,18 +199,18 @@
 	>
 		<!-- Basic Information -->
 		<div class="bg-white rounded-lg border border-border p-6">
-			<h2 class="text-lg font-semibold text-black mb-6">Basic Information</h2>
+			<h2 class="text-lg font-semibold text-black mb-6">Основная информация</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<div class="md:col-span-2">
 					<label for="company-name" class="block text-sm font-medium text-muted mb-2">
-						Company Name <span class="text-error">*</span>
+						Название компании <span class="text-error">*</span>
 					</label>
 					<input
 						id="company-name"
 						type="text"
 						name="name"
 						bind:value={formData.companyName}
-						placeholder="Your Company Name"
+						placeholder="Название вашей компании"
 						required
 						disabled={!isAdmin}
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:bg-surface disabled:text-muted"
@@ -219,7 +219,7 @@
 
 				<div>
 					<label for="company-size" class="block text-sm font-medium text-muted mb-2">
-						Company Size <span class="text-error">*</span>
+						Размер компании <span class="text-error">*</span>
 					</label>
 					<select
 						id="company-size"
@@ -229,13 +229,13 @@
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:bg-surface disabled:text-muted"
 					>
 						{#each companySizes as size}
-							<option value={size}>{size} employees</option>
+							<option value={size}>{size} сотрудников</option>
 						{/each}
 					</select>
 				</div>
 
 				<div>
-					<label for="company-website" class="block text-sm font-medium text-muted mb-2">Website URL</label>
+					<label for="company-website" class="block text-sm font-medium text-muted mb-2">URL сайта</label>
 					<div class="relative">
 						<Globe class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted" />
 						<input
@@ -254,18 +254,18 @@
 
 		<!-- About Company -->
 		<div class="bg-white rounded-lg border border-border p-6 mt-6">
-			<h2 class="text-lg font-semibold text-black mb-6">About Company</h2>
+			<h2 class="text-lg font-semibold text-black mb-6">О компании</h2>
 			<div class="space-y-6">
 				<div>
 					<label for="company-profile" class="block text-sm font-medium text-muted mb-2">
-						Company Description <span class="text-error">*</span>
+						Описание компании <span class="text-error">*</span>
 					</label>
 					<textarea
 						id="company-profile"
 						name="profile"
 						bind:value={formData.about}
 						rows="5"
-						placeholder="Tell candidates about your company..."
+						placeholder="Расскажите кандидатам о вашей компании..."
 						disabled={!isAdmin}
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:bg-surface disabled:text-muted"
 					></textarea>
@@ -275,11 +275,11 @@
 
 		<!-- Contact Information -->
 		<div class="bg-white rounded-lg border border-border p-6 mt-6">
-			<h2 class="text-lg font-semibold text-black mb-6">Contact Information</h2>
+			<h2 class="text-lg font-semibold text-black mb-6">Контактная информация</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<div>
 					<label for="company-email" class="block text-sm font-medium text-muted mb-2">
-						Primary Email <span class="text-error">*</span>
+						Основной email <span class="text-error">*</span>
 					</label>
 					<input
 						id="company-email"
@@ -293,7 +293,7 @@
 				</div>
 
 				<div>
-					<label for="company-phone" class="block text-sm font-medium text-muted mb-2">Phone Number</label>
+					<label for="company-phone" class="block text-sm font-medium text-muted mb-2">Номер телефона</label>
 					<input
 						id="company-phone"
 						type="tel"
@@ -306,13 +306,13 @@
 				</div>
 
 				<div class="md:col-span-2">
-					<label for="company-address" class="block text-sm font-medium text-muted mb-2">Office Address</label>
+					<label for="company-address" class="block text-sm font-medium text-muted mb-2">Адрес офиса</label>
 					<textarea
 						id="company-address"
 						name="address"
 						bind:value={formData.address}
 						rows="2"
-						placeholder="Full office address"
+						placeholder="Полный адрес офиса"
 						disabled={!isAdmin}
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:bg-surface disabled:text-muted"
 					></textarea>
@@ -329,7 +329,7 @@
 					class="inline-flex items-center gap-2 px-6 py-3 bg-primary rounded-lg text-sm font-medium text-white hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 				>
 					<Save class="w-4 h-4" />
-					{saving ? 'Saving...' : 'Save Changes'}
+					{saving ? 'Сохранение...' : 'Сохранить изменения'}
 				</button>
 			</div>
 		{/if}

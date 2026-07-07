@@ -31,7 +31,7 @@ export const load: PageServerLoad = async ({ parent, fetch }) => {
 			user,
 			team: teamData || { company: null, members: [], total_members: 0 },
 			invitations: invitationsData || { invitations: [], total: 0, pending_count: 0 },
-			error: !teamResponse.ok ? 'Failed to load team data' : null
+			error: !teamResponse.ok ? 'Не удалось загрузить данные команды' : null
 		};
 	} catch (error) {
 		console.error('Error loading team data:', error);
@@ -39,7 +39,7 @@ export const load: PageServerLoad = async ({ parent, fetch }) => {
 			user,
 			team: { company: null, members: [], total_members: 0 },
 			invitations: { invitations: [], total: 0, pending_count: 0 },
-			error: 'Failed to load team data'
+			error: 'Не удалось загрузить данные команды'
 		};
 	}
 };
@@ -70,14 +70,14 @@ export const actions: Actions = {
 				return {
 					action: 'invite',
 					success: true,
-					message: result.message || 'Invitation sent successfully',
+					message: result.message || 'Приглашение успешно отправлено',
 					invitation: result.invitation
 				};
 			} else {
 				return fail(400, {
 					action: 'invite',
 					success: false,
-					error: result.error || 'Failed to send invitation',
+					error: result.error || 'Не удалось отправить приглашение',
 					errors: result
 				});
 			}
@@ -86,7 +86,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'invite',
 				success: false,
-				error: 'An error occurred while sending the invitation'
+				error: 'Произошла ошибка при отправке приглашения'
 			});
 		}
 	},
@@ -100,7 +100,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'update',
 				success: false,
-				error: 'User ID is required'
+				error: 'Не указан ID пользователя'
 			});
 		}
 
@@ -131,14 +131,14 @@ export const actions: Actions = {
 				return {
 					action: 'update',
 					success: true,
-					message: result.message || 'Team member updated successfully',
+					message: result.message || 'Данные участника команды успешно обновлены',
 					user: result.user
 				};
 			} else {
 				return fail(400, {
 					action: 'update',
 					success: false,
-					error: result.error || 'Failed to update team member',
+					error: result.error || 'Не удалось обновить данные участника команды',
 					errors: result
 				});
 			}
@@ -147,7 +147,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'update',
 				success: false,
-				error: 'An error occurred while updating the team member'
+				error: 'Произошла ошибка при обновлении данных участника команды'
 			});
 		}
 	},
@@ -161,7 +161,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'remove',
 				success: false,
-				error: 'User ID is required'
+				error: 'Не указан ID пользователя'
 			});
 		}
 
@@ -176,13 +176,13 @@ export const actions: Actions = {
 				return {
 					action: 'remove',
 					success: true,
-					message: result.message || 'Team member removed successfully'
+					message: result.message || 'Участник команды успешно удалён'
 				};
 			} else {
 				return fail(400, {
 					action: 'remove',
 					success: false,
-					error: result.error || 'Failed to remove team member'
+					error: result.error || 'Не удалось удалить участника команды'
 				});
 			}
 		} catch (error) {
@@ -190,7 +190,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'remove',
 				success: false,
-				error: 'An error occurred while removing the team member'
+				error: 'Произошла ошибка при удалении участника команды'
 			});
 		}
 	},
@@ -204,7 +204,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'resend',
 				success: false,
-				error: 'Invitation ID is required'
+				error: 'Не указан ID приглашения'
 			});
 		}
 
@@ -222,14 +222,14 @@ export const actions: Actions = {
 				return {
 					action: 'resend',
 					success: true,
-					message: result.message || 'Invitation resent successfully',
+					message: result.message || 'Приглашение успешно отправлено повторно',
 					invitation: result.invitation
 				};
 			} else {
 				return fail(400, {
 					action: 'resend',
 					success: false,
-					error: result.error || 'Failed to resend invitation'
+					error: result.error || 'Не удалось повторно отправить приглашение'
 				});
 			}
 		} catch (error) {
@@ -237,7 +237,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'resend',
 				success: false,
-				error: 'An error occurred while resending the invitation'
+				error: 'Произошла ошибка при повторной отправке приглашения'
 			});
 		}
 	},
@@ -251,7 +251,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'cancel',
 				success: false,
-				error: 'Invitation ID is required'
+				error: 'Не указан ID приглашения'
 			});
 		}
 
@@ -269,13 +269,13 @@ export const actions: Actions = {
 				return {
 					action: 'cancel',
 					success: true,
-					message: result.message || 'Invitation cancelled successfully'
+					message: result.message || 'Приглашение успешно отменено'
 				};
 			} else {
 				return fail(400, {
 					action: 'cancel',
 					success: false,
-					error: result.error || 'Failed to cancel invitation'
+					error: result.error || 'Не удалось отменить приглашение'
 				});
 			}
 		} catch (error) {
@@ -283,7 +283,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'cancel',
 				success: false,
-				error: 'An error occurred while cancelling the invitation'
+				error: 'Произошла ошибка при отмене приглашения'
 			});
 		}
 	},
@@ -297,7 +297,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'toggleStatus',
 				success: false,
-				error: 'User ID is required'
+				error: 'Не указан ID пользователя'
 			});
 		}
 
@@ -312,14 +312,14 @@ export const actions: Actions = {
 				return {
 					action: 'toggleStatus',
 					success: true,
-					message: result.message || 'Member status updated successfully',
+					message: result.message || 'Статус участника успешно обновлён',
 					user: result.user
 				};
 			} else {
 				return fail(400, {
 					action: 'toggleStatus',
 					success: false,
-					error: result.error || 'Failed to toggle member status'
+					error: result.error || 'Не удалось изменить статус участника'
 				});
 			}
 		} catch (error) {
@@ -327,7 +327,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'toggleStatus',
 				success: false,
-				error: 'An error occurred while toggling member status'
+				error: 'Произошла ошибка при изменении статуса участника'
 			});
 		}
 	}

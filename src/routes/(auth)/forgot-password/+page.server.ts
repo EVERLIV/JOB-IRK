@@ -9,7 +9,7 @@ export const actions: Actions = {
 
 		if (!email) {
 			return fail(400, {
-				error: 'Email address is required',
+				error: 'Укажите адрес электронной почты',
 				email
 			});
 		}
@@ -26,7 +26,7 @@ export const actions: Actions = {
 			if (!response.ok) {
 				const data = await response.json();
 				return fail(400, {
-					error: data.detail || data.message || 'Failed to send reset link',
+					error: data.detail || data.message || 'Не удалось отправить ссылку для сброса',
 					email
 				});
 			}
@@ -39,7 +39,7 @@ export const actions: Actions = {
 		} catch (error) {
 			console.error('Forgot password error:', error);
 			return fail(500, {
-				error: 'An unexpected error occurred. Please try again.',
+				error: 'Произошла непредвиденная ошибка. Попробуйте ещё раз.',
 				email
 			});
 		}

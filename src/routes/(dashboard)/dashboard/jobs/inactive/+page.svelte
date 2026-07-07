@@ -29,10 +29,32 @@
 	let submittingAction = $state<number | null>(null);
 
 	const filterOptions = [
-		{ value: 'all', label: 'All Inactive' },
-		{ value: 'Disabled', label: 'Closed' },
-		{ value: 'Expired', label: 'Expired' }
+		{ value: 'all', label: 'Все неактивные' },
+		{ value: 'Disabled', label: 'Закрытые' },
+		{ value: 'Expired', label: 'Истекшие' }
 	];
+
+	function getJobStatusLabel(status: JobStatus): string {
+		const labels: Record<string, string> = {
+			Live: 'Активна',
+			Draft: 'Черновик',
+			Disabled: 'Закрыта',
+			Expired: 'Истекла'
+		};
+		return labels[status] || status;
+	}
+
+	function getJobTypeLabel(type: string): string {
+		const labels: Record<string, string> = {
+			'full-time': 'Полная занятость',
+			permanent: 'Постоянная',
+			contract: 'Контракт',
+			'part-time': 'Частичная занятость',
+			internship: 'Стажировка',
+			freelance: 'Фриланс'
+		};
+		return labels[type] || type.replace('-', ' ');
+	}
 
 	function updateFilters() {
 		const params = new URLSearchParams();
@@ -56,9 +78,9 @@
 	}
 
 	function formatDate(dateString?: string): string {
-		if (!dateString) return 'N/A';
+		if (!dateString) return 'Н/Д';
 		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { month: 'short', day: 'numeric', year: 'numeric' });
 	}
 
 	function getStatusVariant(status: JobStatus): 'error' | 'warning' | 'neutral' {
@@ -74,7 +96,7 @@
 </script>
 
 <svelte:head>
-	<title>Inactive Jobs - PeelJobs</title>
+	<title>Неактивные вакансии - PeelJobs</title>
 </svelte:head>
 
 <div class="space-y-6">
@@ -84,13 +106,13 @@
 			<a
 				href="/dashboard/jobs/"
 				class="p-2 hover:bg-surface rounded-lg transition-colors"
-				title="Back to All Jobs"
+				title="Вернуться ко всем вакансиям"
 			>
 				<ArrowLeft class="w-5 h-5 text-muted" />
 			</a>
 			<div>
-				<h1 class="text-2xl md:text-3xl font-bold text-black">Inactive Jobs</h1>
-				<p class="text-muted mt-1">Closed and expired job postings</p>
+				<h1 class="text-2xl md:text-3xl font-bold text-black">Неактивные вакансии</h1>
+				<p class="text-muted mt-1">Закрытые и просроченные публикации</p>
 			</div>
 		</div>
 	</div>
@@ -104,7 +126,7 @@
 				</div>
 				<div>
 					<div class="text-2xl font-bold text-black">{data.stats.total}</div>
-					<div class="text-sm text-muted">Total Inactive</div>
+					<div class="text-sm text-muted">Всего неактивных</div>
 				</div>
 			</div>
 		</Card>
@@ -116,7 +138,7 @@
 				</div>
 				<div>
 					<div class="text-2xl font-bold text-black">{data.stats.disabled}</div>
-					<div class="text-sm text-muted">Closed</div>
+					<div class="text-sm text-muted">Закрытые</div>
 				</div>
 			</div>
 		</Card>
@@ -128,7 +150,7 @@
 				</div>
 				<div>
 					<div class="text-2xl font-bold text-black">{data.stats.expired}</div>
-					<div class="text-sm text-muted">Expired</div>
+					<div class="text-sm text-muted">Просроченные</div>
 				</div>
 			</div>
 		</Card>
@@ -150,7 +172,7 @@
 					type="text"
 					bind:value={searchQuery}
 					onchange={updateFilters}
-					placeholder="Search inactive jobs..."
+					placeholder="Поиск по неактивным вакансиям..."
 					class="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 				/>
 			</div>
@@ -175,11 +197,11 @@
 	{#if data.jobs.length === 0}
 		<Card padding="lg" class="text-center">
 			<Archive class="w-12 h-12 text-muted mx-auto mb-4" />
-			<h3 class="text-lg font-semibold text-black mb-2">No inactive jobs found</h3>
+			<h3 class="text-lg font-semibold text-black mb-2">Неактивные вакансии не найдены</h3>
 			<p class="text-muted">
 				{searchQuery || selectedFilter !== 'all'
-					? 'Try adjusting your filters'
-					: 'All your closed and expired jobs will appear here'}
+					? 'Попробуйте изменить фильтры'
+					: 'Здесь появятся все ваши закрытые и просроченные вакансии'}
 			</p>
 		</Card>
 	{:else}
@@ -192,33 +214,33 @@
 							<div class="flex items-center gap-3 mb-2">
 								<h3 class="text-lg font-semibold text-black truncate">{job.title}</h3>
 								<Badge variant={getStatusVariant(job.status)}>
-									{job.status}
+									{getJobStatusLabel(job.status)}
 								</Badge>
 							</div>
 
 							<div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-muted mb-3">
 								<div class="flex items-center gap-2">
 									<Briefcase class="w-4 h-4" />
-									<span class="capitalize">{job.job_type.replace('-', ' ')}</span>
+									<span>{getJobTypeLabel(job.job_type)}</span>
 								</div>
 								<div class="flex items-center gap-2">
 									<MapPin class="w-4 h-4" />
-									<span>{job.location_display || 'Remote'}</span>
+									<span>{job.location_display || 'Удалённо'}</span>
 								</div>
 								<div class="flex items-center gap-2">
 									<Calendar class="w-4 h-4" />
-									<span>Posted {formatDate(job.published_on)}</span>
+									<span>Опубликовано {formatDate(job.published_on)}</span>
 								</div>
 							</div>
 
 							<div class="flex items-center gap-4 text-sm">
 								<div class="flex items-center gap-2 text-muted">
 									<Users class="w-4 h-4" />
-									<span>{job.applicants_count} applicants</span>
+									<span>{job.applicants_count} откликов</span>
 								</div>
 								<div class="flex items-center gap-2 text-muted">
 									<Eye class="w-4 h-4" />
-									<span>{job.views_count} views</span>
+									<span>{job.views_count} просмотров</span>
 								</div>
 							</div>
 						</div>
@@ -227,7 +249,7 @@
 						<div class="flex flex-col gap-2">
 							<Button href="/dashboard/jobs/{job.id}/" variant="secondary" size="sm">
 								<Eye class="w-4 h-4" />
-								View
+								Открыть
 							</Button>
 
 							<form
@@ -246,7 +268,7 @@
 								<input type="hidden" name="jobId" value={job.id} />
 								<Button type="submit" size="sm" disabled={submittingAction === job.id} class="w-full">
 									<RotateCcw class="w-4 h-4" />
-									Reactivate
+									Восстановить
 								</Button>
 							</form>
 
@@ -254,7 +276,7 @@
 								method="POST"
 								action="?/delete"
 								use:enhance={() => {
-									if (!confirm('Are you sure you want to permanently delete this job?')) {
+									if (!confirm('Вы уверены, что хотите навсегда удалить эту вакансию?')) {
 										return () => {};
 									}
 									submittingAction = job.id;
@@ -273,7 +295,7 @@
 									class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 border border-error/30 text-error rounded-full hover:bg-error-light transition-colors text-sm font-medium disabled:opacity-50"
 								>
 									<Trash2 class="w-4 h-4" />
-									Delete
+									Удалить
 								</button>
 							</form>
 						</div>
@@ -287,20 +309,20 @@
 			<Card padding="sm">
 				<div class="flex items-center justify-between">
 					<div class="text-sm text-muted">
-						Showing page <span class="font-medium text-black">{data.currentPage}</span> of
+						Страница <span class="font-medium text-black">{data.currentPage}</span> из
 						<span class="font-medium text-black">{Math.ceil(data.count / 20)}</span>
 					</div>
 
 					<div class="flex gap-2">
 						{#if data.previous}
 							<Button variant="secondary" size="sm" onclick={() => goToPage(data.currentPage - 1)}>
-								Previous
+								Назад
 							</Button>
 						{/if}
 
 						{#if data.next}
 							<Button variant="secondary" size="sm" onclick={() => goToPage(data.currentPage + 1)}>
-								Next
+								Далее
 							</Button>
 						{/if}
 					</div>

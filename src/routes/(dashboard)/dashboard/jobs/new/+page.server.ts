@@ -8,6 +8,8 @@
 import { error, redirect, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import type { JobCreateData, JobFormMetadata } from '$lib/types';
+import { getApiBaseUrl } from '$lib/config/env';
+import { clearAuthCookies } from '$lib/server/auth';
 
 /**
  * Load function - runs on server before page renders
@@ -26,17 +28,16 @@ export const load: PageServerLoad = async ({ cookies, fetch, url }) => {
 	try {
 		// Fetch form metadata (countries, states, cities, skills, etc.)
 		// The fetch function here is enhanced by hooks.server.ts to add Authorization header
-		const apiUrl = 'http://localhost:8000/api/v1/recruiter/jobs/metadata/';
+		const apiUrl = `${getApiBaseUrl()}/recruiter/jobs/metadata/`;
 		const response = await fetch(apiUrl);
 
 		if (!response.ok) {
 			if (response.status === 401) {
 				// Clear invalid tokens and redirect to login
-				cookies.delete('access_token', { path: '/' });
-				cookies.delete('refresh_token', { path: '/' });
+				clearAuthCookies(cookies);
 				throw redirect(302, '/login?redirect=' + encodeURIComponent(url.pathname));
 			}
-			throw error(response.status, `Failed to load form metadata: ${response.statusText}`);
+			throw error(response.status, `Не удалось загрузить метаданные формы: ${response.statusText}`);
 		}
 
 		const metadata: JobFormMetadata = await response.json();
@@ -47,12 +48,12 @@ export const load: PageServerLoad = async ({ cookies, fetch, url }) => {
 
 		if (copyFromJobId) {
 			try {
-				const jobResponse = await fetch(`http://localhost:8000/api/v1/recruiter/jobs/${copyFromJobId}/`);
+				const jobResponse = await fetch(`${getApiBaseUrl()}/recruiter/jobs/${copyFromJobId}/`);
 
 				if (jobResponse.ok) {
 					jobToCopy = await jobResponse.json();
 					// Modify the copied job data
-					jobToCopy.title = `Copy of ${jobToCopy.title}`;
+					jobToCopy.title = `Копия ${jobToCopy.title}`;
 					// Remove fields that shouldn't be copied
 					delete jobToCopy.id;
 					delete jobToCopy.slug;
@@ -81,7 +82,7 @@ export const load: PageServerLoad = async ({ cookies, fetch, url }) => {
 			throw err;
 		}
 
-		throw error(500, err.message || 'Failed to load form data');
+		throw error(500, err.message || 'Не удалось загрузить данные формы');
 	}
 };
 
@@ -103,7 +104,7 @@ export const actions: Actions = {
 			console.log('Sending job data:', JSON.stringify(jobData, null, 2));
 
 			// Create job with status 'Draft' (default in API)
-			const response = await fetch('http://localhost:8000/api/v1/recruiter/jobs/create/', {
+			const response = await fetch(`${getApiBaseUrl()}/recruiter/jobs/create/`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -116,7 +117,7 @@ export const actions: Actions = {
 				console.error('API Error Response:', errorData);
 
 				// Format error message
-				let errorMessage = 'Failed to save draft';
+				let errorMessage = 'Не удалось сохранить черновик';
 				if (errorData.error) {
 					errorMessage = errorData.error;
 				} else if (errorData.detail) {
@@ -143,13 +144,13 @@ export const actions: Actions = {
 			// Return success with job ID for redirect
 			return {
 				success: true,
-				message: result.message || 'Job saved as draft successfully',
+				message: result.message || 'Вакансия успешно сохранена как черновик',
 				jobId: result.job.id
 			};
 		} catch (err: any) {
 			console.error('Error saving draft:', err);
 			return fail(400, {
-				error: err.message || 'Failed to save draft',
+				error: err.message || 'Не удалось сохранить черновик',
 				values: Object.fromEntries(formData)
 			});
 		}
@@ -165,7 +166,7 @@ export const actions: Actions = {
 			const jobData = extractJobDataFromForm(formData);
 
 			// Step 1: Create job (will be created as Draft by default)
-			const createResponse = await fetch('http://localhost:8000/api/v1/recruiter/jobs/create/', {
+			const createResponse = await fetch(`${getApiBaseUrl()}/recruiter/jobs/create/`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -176,7 +177,7 @@ export const actions: Actions = {
 			if (!createResponse.ok) {
 				const errorData = await createResponse.json().catch(() => ({}));
 				return fail(400, {
-					error: errorData.error || errorData.detail || 'Failed to create job',
+					error: errorData.error || errorData.detail || 'Не удалось создать вакансию',
 					values: Object.fromEntries(formData)
 				});
 			}
@@ -186,7 +187,7 @@ export const actions: Actions = {
 
 			// Step 2: Publish the job
 			const publishResponse = await fetch(
-				`http://localhost:8000/api/v1/recruiter/jobs/${jobId}/publish/`,
+				`${getApiBaseUrl()}/recruiter/jobs/${jobId}/publish/`,
 				{
 					method: 'POST',
 					headers: {
@@ -200,20 +201,20 @@ export const actions: Actions = {
 				// Still return success but with a warning
 				return {
 					success: true,
-					warning: 'Job created as draft. Failed to publish automatically.',
+					warning: 'Вакансия создана как черновик. Не удалось опубликовать автоматически.',
 					jobId: jobId
 				};
 			}
 
 			return {
 				success: true,
-				message: 'Job published successfully',
+				message: 'Вакансия успешно опубликована',
 				jobId: jobId
 			};
 		} catch (err: any) {
 			console.error('Error publishing job:', err);
 			return fail(400, {
-				error: err.message || 'Failed to publish job',
+				error: err.message || 'Не удалось опубликовать вакансию',
 				values: Object.fromEntries(formData)
 			});
 		}

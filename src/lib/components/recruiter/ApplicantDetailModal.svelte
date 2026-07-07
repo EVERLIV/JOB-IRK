@@ -60,9 +60,9 @@
 	}
 
 	function formatDate(dateStr: string | null): string {
-		if (!dateStr) return 'Present';
+		if (!dateStr) return 'настоящее время';
 		const date = new Date(dateStr);
-		return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { month: 'short', year: 'numeric' });
 	}
 </script>
 
@@ -105,7 +105,7 @@
 							{applicant.first_name} {applicant.last_name}
 						</h2>
 						<p class="text-primary/60 mt-1">
-							{applicant.experience?.display || 'Fresher'}
+							{applicant.experience?.display || 'Без опыта'}
 						</p>
 					</div>
 				</div>
@@ -142,10 +142,10 @@
 		<div class="border-b border-border px-6">
 			<div class="flex gap-6">
 				{#each [
-					{ id: 'profile' as const, label: 'Profile' },
-					{ id: 'experience' as const, label: 'Experience' },
-					{ id: 'education' as const, label: 'Education' },
-					{ id: 'skills' as const, label: 'Skills' }
+					{ id: 'profile' as const, label: 'Профиль' },
+					{ id: 'experience' as const, label: 'Опыт' },
+					{ id: 'education' as const, label: 'Образование' },
+					{ id: 'skills' as const, label: 'Навыки' }
 				] as tab}
 					<button
 						onclick={() => (activeTab = tab.id)}
@@ -165,34 +165,34 @@
 				<div class="space-y-6">
 					<!-- Application Status -->
 					<div class="bg-surface rounded-lg p-4">
-						<h3 class="text-sm font-semibold text-black mb-3">Application Status</h3>
+						<h3 class="text-sm font-semibold text-black mb-3">Статус отклика</h3>
 						{#if applicant.application}
 							<div class="space-y-4">
 								<div>
 									<label for="applicant-status" class="block text-sm font-medium text-muted mb-2">
-										Current Status
+										Текущий статус
 									</label>
 									<select
 										id="applicant-status"
 										bind:value={newStatus}
 										class="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 									>
-										<option value="Pending">Pending</option>
-										<option value="Shortlisted">Shortlisted</option>
-										<option value="Hired">Hired</option>
-										<option value="Rejected">Rejected</option>
+										<option value="Pending">На рассмотрении</option>
+										<option value="Shortlisted">В шорт-листе</option>
+										<option value="Hired">Нанят</option>
+										<option value="Rejected">Отклонён</option>
 									</select>
 								</div>
 
 								<div>
 									<label for="recruiter-remarks" class="block text-sm font-medium text-muted mb-2">
-										Recruiter Remarks
+										Заметки рекрутера
 									</label>
 									<textarea
 										id="recruiter-remarks"
 										bind:value={remarksText}
 										rows="3"
-										placeholder="Add notes about this candidate..."
+										placeholder="Добавьте заметки о кандидате..."
 										class="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 									></textarea>
 								</div>
@@ -203,11 +203,11 @@
 									class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-50"
 								>
 									<CheckCircle class="w-4 h-4" />
-									{isUpdating ? 'Updating...' : 'Update Status'}
+									{isUpdating ? 'Обновление...' : 'Обновить статус'}
 								</button>
 
 								<div class="text-xs text-muted">
-									Applied on {new Date(applicant.application.applied_on).toLocaleDateString()}
+									Отклик отправлен {new Date(applicant.application.applied_on).toLocaleDateString('ru-RU')}
 								</div>
 							</div>
 						{/if}
@@ -216,7 +216,7 @@
 					<!-- Profile Description -->
 					{#if applicant.profile_description}
 						<div>
-							<h3 class="text-sm font-semibold text-black mb-2">About</h3>
+							<h3 class="text-sm font-semibold text-black mb-2">О кандидате</h3>
 							<p class="text-muted leading-relaxed">{applicant.profile_description}</p>
 						</div>
 					{/if}
@@ -225,25 +225,25 @@
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						{#if applicant.current_salary}
 							<div>
-								<h4 class="text-sm font-medium text-muted mb-1">Current Salary</h4>
+								<h4 class="text-sm font-medium text-muted mb-1">Текущая зарплата</h4>
 								<p class="text-black">{applicant.current_salary}</p>
 							</div>
 						{/if}
 						{#if applicant.expected_salary}
 							<div>
-								<h4 class="text-sm font-medium text-muted mb-1">Expected Salary</h4>
+								<h4 class="text-sm font-medium text-muted mb-1">Ожидаемая зарплата</h4>
 								<p class="text-black">{applicant.expected_salary}</p>
 							</div>
 						{/if}
 						{#if applicant.notice_period}
 							<div>
-								<h4 class="text-sm font-medium text-muted mb-1">Notice Period</h4>
+								<h4 class="text-sm font-medium text-muted mb-1">Срок уведомления</h4>
 								<p class="text-black">{applicant.notice_period}</p>
 							</div>
 						{/if}
 						<div>
-							<h4 class="text-sm font-medium text-muted mb-1">Open to Relocation</h4>
-							<p class="text-black">{applicant.relocation ? 'Yes' : 'No'}</p>
+							<h4 class="text-sm font-medium text-muted mb-1">Готов к переезду</h4>
+							<p class="text-black">{applicant.relocation ? 'Да' : 'Нет'}</p>
 						</div>
 					</div>
 
@@ -256,7 +256,7 @@
 								class="inline-flex items-center gap-2 px-4 py-2 bg-success text-white rounded-lg hover:bg-success transition-colors"
 							>
 								<Download class="w-4 h-4" />
-								Download Resume
+								Скачать резюме
 							</a>
 						</div>
 					{/if}
@@ -275,8 +275,8 @@
 										<p class="text-muted">{job.company}</p>
 										<div class="flex items-center gap-2 text-sm text-muted mt-1">
 											<Calendar class="w-3 h-3" />
-											{formatDate(job.from_date)} - {job.current_job
-												? 'Present'
+											{formatDate(job.from_date)} — {job.current_job
+												? 'настоящее время'
 												: formatDate(job.to_date)}
 										</div>
 										{#if job.job_profile}
@@ -287,7 +287,7 @@
 							</div>
 						{/each}
 					{:else}
-						<p class="text-muted text-center py-8">No employment history added</p>
+						<p class="text-muted text-center py-8">История работы не указана</p>
 					{/if}
 				</div>
 			{:else if activeTab === 'education'}
@@ -300,20 +300,20 @@
 										<GraduationCap class="w-5 h-5 text-purple-600" />
 									</div>
 									<div class="flex-1">
-										<h4 class="font-semibold text-black">{edu.degree || 'Degree'}</h4>
+										<h4 class="font-semibold text-black">{edu.degree || 'Степень'}</h4>
 										{#if edu.specialization}
 											<p class="text-muted">{edu.specialization}</p>
 										{/if}
-										<p class="text-muted">{edu.institute || 'Institute'}</p>
+										<p class="text-muted">{edu.institute || 'Учебное заведение'}</p>
 										<div class="flex items-center gap-4 text-sm text-muted mt-1">
 											<div class="flex items-center gap-1">
 												<Calendar class="w-3 h-3" />
-												{formatDate(edu.from_date)} - {edu.current_education
-													? 'Present'
+												{formatDate(edu.from_date)} — {edu.current_education
+													? 'настоящее время'
 													: formatDate(edu.to_date)}
 											</div>
 											{#if edu.score}
-												<div>Score: {edu.score}</div>
+												<div>Оценка: {edu.score}</div>
 											{/if}
 										</div>
 									</div>
@@ -321,7 +321,7 @@
 							</div>
 						{/each}
 					{:else}
-						<p class="text-muted text-center py-8">No education details added</p>
+						<p class="text-muted text-center py-8">Данные об образовании не указаны</p>
 					{/if}
 
 					<!-- Certifications -->
@@ -329,7 +329,7 @@
 						<div class="mt-8">
 							<h3 class="text-sm font-semibold text-black mb-4 flex items-center gap-2">
 								<Award class="w-4 h-4" />
-								Certifications
+								Сертификаты
 							</h3>
 							<div class="space-y-3">
 								{#each applicant.certifications as cert}
@@ -338,13 +338,13 @@
 										<p class="text-muted text-sm">{cert.organization}</p>
 										{#if cert.credential_id}
 											<p class="text-muted text-sm mt-1">
-												Credential ID: {cert.credential_id}
+												ID сертификата: {cert.credential_id}
 											</p>
 										{/if}
 										<div class="text-xs text-muted mt-1">
-											Issued: {formatDate(cert.issued_date)}
+											Выдан: {formatDate(cert.issued_date)}
 											{#if !cert.does_not_expire && cert.expiry_date}
-												- Expires: {formatDate(cert.expiry_date)}
+												— Истекает: {formatDate(cert.expiry_date)}
 											{/if}
 										</div>
 										{#if cert.credential_url}
@@ -353,7 +353,7 @@
 												target="_blank"
 												class="text-primary hover:text-primary text-sm mt-2 inline-block"
 											>
-												View Credential →
+												Посмотреть сертификат →
 											</a>
 										{/if}
 									</div>
@@ -366,7 +366,7 @@
 				<div class="space-y-6">
 					{#if applicant.skills && applicant.skills.length > 0}
 						<div>
-							<h3 class="text-sm font-semibold text-black mb-4">Technical Skills</h3>
+							<h3 class="text-sm font-semibold text-black mb-4">Технические навыки</h3>
 							<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 								{#each applicant.skills as skill}
 									<div
@@ -378,21 +378,21 @@
 											<h4 class="font-medium text-black">{skill.name}</h4>
 											{#if skill.is_major}
 												<span class="text-xs px-2 py-1 bg-primary/10 text-primary rounded">
-													Primary
+													Основной
 												</span>
 											{/if}
 										</div>
 										<div class="text-sm text-muted space-y-1">
 											{#if skill.years || skill.months}
 												<div>
-													Experience: {skill.years || 0}y {skill.months || 0}m
+													Опыт: {skill.years || 0} г. {skill.months || 0} мес.
 												</div>
 											{/if}
 											{#if skill.proficiency}
-												<div>Proficiency: {skill.proficiency}</div>
+												<div>Уровень: {skill.proficiency}</div>
 											{/if}
 											{#if skill.last_used}
-												<div>Last used: {formatDate(skill.last_used)}</div>
+												<div>Последнее использование: {formatDate(skill.last_used)}</div>
 											{/if}
 										</div>
 									</div>
@@ -400,7 +400,7 @@
 							</div>
 						</div>
 					{:else}
-						<p class="text-muted text-center py-8">No skills added</p>
+						<p class="text-muted text-center py-8">Навыки не указаны</p>
 					{/if}
 				</div>
 			{/if}

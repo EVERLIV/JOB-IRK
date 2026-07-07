@@ -19,32 +19,32 @@
 	$: stats = data.stats
 		? [
 				{
-					label: 'Active Jobs',
+					label: 'Активные вакансии',
 					value: data.stats.live_jobs.toString(),
 					icon: Briefcase,
-					trend: `${data.stats.draft_jobs} drafts`,
+					trend: `${data.stats.draft_jobs} черновиков`,
 					trendPositive: true
 				},
 				{
-					label: 'Total Applicants',
+					label: 'Всего кандидатов',
 					value: data.stats.total_applicants.toString(),
 					icon: Users,
-					trend: `${data.stats.new_applicants} new (30d)`,
+					trend: `${data.stats.new_applicants} новых (30 дн.)`,
 					trendPositive: true,
 					change: data.stats.applicants_trend
 				},
 				{
-					label: 'Pending Review',
+					label: 'На рассмотрении',
 					value: data.pipeline ? data.pipeline.pending.toString() : '0',
 					icon: Clock,
-					trend: 'Need action',
+					trend: 'Требуют действий',
 					trendPositive: false
 				},
 				{
-					label: 'Hired',
+					label: 'Нанято',
 					value: data.pipeline ? data.pipeline.hired.toString() : '0',
 					icon: CheckCircle,
-					trend: data.pipeline ? `${data.pipeline.conversion_rate}% conversion` : '0%',
+					trend: data.pipeline ? `${data.pipeline.conversion_rate}% конверсия` : '0%',
 					trendPositive: true
 				}
 			]
@@ -69,22 +69,32 @@
 		};
 		return variants[status] || 'neutral';
 	}
+
+	function getJobStatusLabel(status: string): string {
+		const labels: Record<string, string> = {
+			Live: 'Активна',
+			Draft: 'Черновик',
+			Disabled: 'Закрыта',
+			Expired: 'Истекла'
+		};
+		return labels[status] || status;
+	}
 </script>
 
 <svelte:head>
-	<title>Dashboard - PeelJobs Recruiter</title>
+	<title>Панель управления - PeelJobs Recruiter</title>
 </svelte:head>
 
 <div class="space-y-6">
 	<!-- Header -->
 	<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 		<div>
-			<h1 class="text-2xl md:text-3xl font-bold text-black">Dashboard</h1>
-			<p class="text-muted mt-1">Welcome back! Here's what's happening today.</p>
+			<h1 class="text-2xl md:text-3xl font-bold text-black">Панель управления</h1>
+			<p class="text-muted mt-1">С возвращением! Вот что происходит сегодня.</p>
 		</div>
 		<Button href="/dashboard/jobs/new/">
 			<Plus class="w-4 h-4" />
-			Post New Job
+			Опубликовать вакансию
 		</Button>
 	</div>
 
@@ -125,23 +135,23 @@
 	<!-- Hiring Pipeline Overview -->
 	{#if data.pipeline}
 		<Card padding="md">
-			<h2 class="text-lg font-semibold text-black mb-4">Hiring Pipeline</h2>
+			<h2 class="text-lg font-semibold text-black mb-4">Воронка найма</h2>
 			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 				<div class="text-center p-4 rounded-lg bg-primary/5">
 					<div class="text-3xl font-bold text-primary">{data.pipeline.pending}</div>
-					<div class="text-sm text-muted mt-1">Pending Review</div>
+					<div class="text-sm text-muted mt-1">На рассмотрении</div>
 				</div>
 				<div class="text-center p-4 rounded-lg bg-purple-50">
 					<div class="text-3xl font-bold text-purple-600">{data.pipeline.shortlisted}</div>
-					<div class="text-sm text-muted mt-1">Shortlisted</div>
+					<div class="text-sm text-muted mt-1">Отобраны</div>
 				</div>
 				<div class="text-center p-4 rounded-lg bg-success-light">
 					<div class="text-3xl font-bold text-success">{data.pipeline.hired}</div>
-					<div class="text-sm text-muted mt-1">Hired</div>
+					<div class="text-sm text-muted mt-1">Нанято</div>
 				</div>
 				<div class="text-center p-4 rounded-lg bg-surface">
 					<div class="text-3xl font-bold text-muted">{data.pipeline.rejected}</div>
-					<div class="text-sm text-muted mt-1">Rejected</div>
+					<div class="text-sm text-muted mt-1">Отклонены</div>
 				</div>
 			</div>
 		</Card>
@@ -151,9 +161,9 @@
 	<Card padding="none">
 		<div class="p-6 border-b border-border">
 			<div class="flex items-center justify-between">
-				<h2 class="text-lg font-semibold text-black">Recent Jobs</h2>
+				<h2 class="text-lg font-semibold text-black">Недавние вакансии</h2>
 				<a href="/dashboard/jobs/" class="text-sm text-primary hover:text-primary-hover font-medium transition-colors">
-					View all jobs
+					Все вакансии
 				</a>
 			</div>
 		</div>
@@ -163,19 +173,19 @@
 					<thead class="bg-surface border-b border-border">
 						<tr>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Job Title
+								Название вакансии
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Applications
+								Отклики
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								New (7d)
+								Новые (7 дн.)
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Pending
+								На рассмотрении
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Status
+								Статус
 							</th>
 						</tr>
 					</thead>
@@ -215,7 +225,7 @@
 								</td>
 								<td class="px-6 py-4 text-sm">
 									<Badge variant={getJobStatusVariant(job.status)}>
-										{job.status}
+										{getJobStatusLabel(job.status)}
 									</Badge>
 								</td>
 							</tr>
@@ -226,10 +236,10 @@
 		{:else}
 			<div class="p-12 text-center">
 				<Briefcase class="w-12 h-12 text-muted mx-auto mb-3" />
-				<p class="text-muted mb-4">No jobs posted yet</p>
+				<p class="text-muted mb-4">Вакансии ещё не опубликованы</p>
 				<Button href="/dashboard/jobs/new/">
 					<Plus class="w-4 h-4" />
-					Post Your First Job
+					Опубликовать первую вакансию
 				</Button>
 			</div>
 		{/if}

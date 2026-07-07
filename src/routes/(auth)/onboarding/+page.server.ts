@@ -58,7 +58,7 @@ export const actions: Actions = {
 
 			if (!profileResponse.ok) {
 				const data = await profileResponse.json();
-				let errorMessage = 'Failed to update profile';
+				let errorMessage = 'Не удалось обновить профиль';
 				if (data.detail) {
 					errorMessage = data.detail;
 				}
@@ -96,7 +96,7 @@ export const actions: Actions = {
 
 			console.error('Onboarding error:', error);
 			return fail(500, {
-				error: 'An unexpected error occurred. Please try again.'
+				error: 'Произошла непредвиденная ошибка. Попробуйте ещё раз.'
 			});
 		}
 	},

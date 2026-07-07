@@ -25,8 +25,8 @@
 </script>
 
 <svelte:head>
-	<title>Verify Email - PeelJobs Recruiter</title>
-	<meta name="description" content="Verify your PeelJobs employer account email address." />
+	<title>Подтверждение email - PeelJobs Recruiter</title>
+	<meta name="description" content="Подтвердите email вашего аккаунта работодателя PeelJobs." />
 </svelte:head>
 
 <Card padding="lg" class="shadow-lg">
@@ -37,15 +37,15 @@
 				<Mail class="w-8 h-8 text-primary" />
 			</div>
 
-			<h1 class="text-2xl font-semibold text-black mb-3">Check Your Email</h1>
+			<h1 class="text-2xl font-semibold text-black mb-3">Проверьте почту</h1>
 			<p class="text-muted mb-6">
-				We've sent a verification link to {#if email}<strong class="text-black">{email}</strong>{:else}your email address{/if}.
-				Please click the link to verify your account.
+				Мы отправили ссылку для подтверждения на {#if email}<strong class="text-black">{email}</strong>{:else}ваш email{/if}.
+				Нажмите на ссылку, чтобы подтвердить аккаунт.
 			</p>
 
 			{#if resendSuccess}
 				<div class="bg-success-light border border-success/20 text-success px-4 py-3 rounded-lg text-sm mb-4">
-					Verification email sent! Please check your inbox.
+					Письмо для подтверждения отправлено. Проверьте почту.
 				</div>
 			{/if}
 
@@ -65,7 +65,7 @@
 				}}>
 					<input type="hidden" name="email" value={email} />
 					<Button type="submit" size="lg" loading={resending} class="w-full mb-4">
-						{resending ? 'Sending...' : 'Resend Verification Email'}
+						{resending ? 'Отправка...' : 'Отправить письмо повторно'}
 					</Button>
 				</form>
 			{/if}
@@ -74,7 +74,7 @@
 				href="/login/"
 				class="inline-block text-sm text-muted hover:text-black transition-colors"
 			>
-				Back to login
+				Вернуться ко входу
 			</a>
 		</div>
 	{:else if status === 'success'}
@@ -84,20 +84,20 @@
 				<CheckCircle class="w-8 h-8 text-success" />
 			</div>
 
-			<h1 class="text-2xl font-semibold text-black mb-3">Email Verified!</h1>
+			<h1 class="text-2xl font-semibold text-black mb-3">Email подтверждён!</h1>
 			<p class="text-muted mb-8">
-				Your email address has been successfully verified. You can now access all features of your employer account.
+				Адрес электронной почты успешно подтверждён. Теперь вам доступны все функции аккаунта работодателя.
 			</p>
 
 			<Button size="lg" class="w-full mb-4" onclick={() => window.location.href = '/onboarding/'}>
-				Complete Your Profile
+				Заполнить профиль
 			</Button>
 
 			<a
 				href="/dashboard/"
 				class="inline-block text-sm text-muted hover:text-black transition-colors"
 			>
-				Skip for now and go to dashboard
+				Пропустить и перейти в кабинет
 			</a>
 		</div>
 	{:else if status === 'expired'}
@@ -107,9 +107,9 @@
 				<Mail class="w-8 h-8 text-warning" />
 			</div>
 
-			<h1 class="text-2xl font-semibold text-black mb-3">Verification Link Expired</h1>
+			<h1 class="text-2xl font-semibold text-black mb-3">Срок действия ссылки истёк</h1>
 			<p class="text-muted mb-8">
-				{errorMessage || 'This verification link has expired. Please request a new verification email.'}
+				{errorMessage || 'Ссылка для подтверждения устарела. Запросите новое письмо для подтверждения.'}
 			</p>
 
 			{#if email}
@@ -122,7 +122,7 @@
 				}}>
 					<input type="hidden" name="email" value={email} />
 					<Button type="submit" size="lg" loading={resending} class="w-full mb-4">
-						{resending ? 'Sending...' : 'Resend Verification Email'}
+						{resending ? 'Отправка...' : 'Отправить письмо повторно'}
 					</Button>
 				</form>
 			{/if}
@@ -131,7 +131,7 @@
 				href="/login/"
 				class="inline-block text-sm text-muted hover:text-black transition-colors"
 			>
-				Back to login
+				Вернуться ко входу
 			</a>
 		</div>
 	{:else}
@@ -141,9 +141,9 @@
 				<XCircle class="w-8 h-8 text-error" />
 			</div>
 
-			<h1 class="text-2xl font-semibold text-black mb-3">Verification Failed</h1>
+			<h1 class="text-2xl font-semibold text-black mb-3">Подтвердить email не удалось</h1>
 			<p class="text-muted mb-8">
-				{errorMessage || "We couldn't verify your email address. The verification link may be invalid or has already been used."}
+				{errorMessage || 'Не удалось подтвердить email. Ссылка может быть недействительной или уже использованной.'}
 			</p>
 
 			{#if email}
@@ -156,7 +156,7 @@
 				}}>
 					<input type="hidden" name="email" value={email} />
 					<Button type="submit" size="lg" loading={resending} class="w-full mb-4">
-						{resending ? 'Sending...' : 'Resend Verification Email'}
+						{resending ? 'Отправка...' : 'Отправить письмо повторно'}
 					</Button>
 				</form>
 			{/if}
@@ -165,7 +165,7 @@
 				href="/login/"
 				class="inline-block text-sm text-muted hover:text-black transition-colors"
 			>
-				Back to login
+				Вернуться ко входу
 			</a>
 		</div>
 	{/if}

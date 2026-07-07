@@ -19,9 +19,19 @@
 	let member = $derived(data.member);
 
 	function formatDate(dateString?: string): string {
-		if (!dateString) return 'N/A';
+		if (!dateString) return '—';
 		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { month: 'long', day: 'numeric', year: 'numeric' });
+	}
+
+	function getJobStatusLabel(status: string): string {
+		const labels: Record<string, string> = {
+			Live: 'Активна',
+			Draft: 'Черновик',
+			Disabled: 'Закрыта',
+			Expired: 'Истекла'
+		};
+		return labels[status] || status;
 	}
 
 	function getInitials(firstName: string, lastName: string): string {
@@ -30,7 +40,7 @@
 </script>
 
 <svelte:head>
-	<title>{member.first_name} {member.last_name} - Team Member - PeelJobs</title>
+	<title>{member.first_name} {member.last_name} — участник команды — PeelJobs</title>
 </svelte:head>
 
 <div class="space-y-6">
@@ -39,13 +49,13 @@
 		<a
 			href="/dashboard/team/"
 			class="p-2 hover:bg-surface rounded-lg transition-colors"
-			title="Back to Team"
+			title="Назад к команде"
 		>
 			<ArrowLeft class="w-5 h-5" />
 		</a>
 		<div>
-			<h1 class="text-2xl md:text-3xl font-bold text-black">Team Member Details</h1>
-			<p class="text-muted mt-1">View performance and activity history</p>
+			<h1 class="text-2xl md:text-3xl font-bold text-black">Профиль участника команды</h1>
+			<p class="text-muted mt-1">Результаты работы и история активности</p>
 		</div>
 	</div>
 
@@ -77,23 +87,23 @@
 					{#if member.is_admin}
 						<span class="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">
 							<Crown class="w-4 h-4" />
-							Admin
+							Администратор
 						</span>
 					{/if}
 					{#if member.is_active}
 						<span class="inline-flex items-center gap-1 px-3 py-1 bg-success-light text-success text-sm font-medium rounded-full">
 							<CheckCircle class="w-4 h-4" />
-							Active
+							Активен
 						</span>
 					{:else}
 						<span class="inline-flex items-center gap-1 px-3 py-1 bg-surface text-black text-sm font-medium rounded-full">
 							<Clock class="w-4 h-4" />
-							Inactive
+							Неактивен
 						</span>
 					{/if}
 				</div>
 
-				<p class="text-lg text-muted mb-4">{member.job_title || 'No job title set'}</p>
+				<p class="text-lg text-muted mb-4">{member.job_title || 'Должность не указана'}</p>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
 					<div class="flex items-center gap-2 text-muted">
@@ -110,13 +120,13 @@
 
 					<div class="flex items-center gap-2 text-muted">
 						<Calendar class="w-4 h-4" />
-						<span>Joined {formatDate(member.date_joined)}</span>
+						<span>В команде с {formatDate(member.date_joined)}</span>
 					</div>
 
 					{#if member.last_login}
 						<div class="flex items-center gap-2 text-muted">
 							<Clock class="w-4 h-4" />
-							<span>Last active {formatDate(member.last_login)}</span>
+							<span>Последняя активность: {formatDate(member.last_login)}</span>
 						</div>
 					{/if}
 				</div>
@@ -131,12 +141,12 @@
 				<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
 					<Briefcase class="w-5 h-5 text-primary" />
 				</div>
-				<h3 class="text-sm font-medium text-muted">Jobs Posted</h3>
+				<h3 class="text-sm font-medium text-muted">Опубликовано вакансий</h3>
 			</div>
 			<div class="text-3xl font-bold text-black">{member.stats?.jobs_posted || 0}</div>
 			<div class="flex items-center gap-1 mt-2 text-sm text-muted">
 				<TrendingUp class="w-4 h-4" />
-				<span>{member.stats?.active_jobs || 0} currently active</span>
+				<span>{member.stats?.active_jobs || 0} активны сейчас</span>
 			</div>
 		</div>
 
@@ -145,10 +155,10 @@
 				<div class="w-10 h-10 bg-success-light rounded-lg flex items-center justify-center">
 					<Users class="w-5 h-5 text-success" />
 				</div>
-				<h3 class="text-sm font-medium text-muted">Total Applicants</h3>
+				<h3 class="text-sm font-medium text-muted">Всего откликов</h3>
 			</div>
 			<div class="text-3xl font-bold text-black">{member.stats?.total_applicants || 0}</div>
-			<div class="text-sm text-muted mt-2">Across all jobs</div>
+			<div class="text-sm text-muted mt-2">По всем вакансиям</div>
 		</div>
 
 		<div class="bg-white rounded-lg border border-border p-6">
@@ -156,10 +166,10 @@
 				<div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
 					<Eye class="w-5 h-5 text-purple-600" />
 				</div>
-				<h3 class="text-sm font-medium text-muted">Total Views</h3>
+				<h3 class="text-sm font-medium text-muted">Всего просмотров</h3>
 			</div>
 			<div class="text-3xl font-bold text-black">{member.stats?.total_views || 0}</div>
-			<div class="text-sm text-muted mt-2">On all job postings</div>
+			<div class="text-sm text-muted mt-2">По всем вакансиям</div>
 		</div>
 	</div>
 
@@ -169,7 +179,7 @@
 			<div class="p-6 border-b border-border">
 				<h3 class="text-lg font-semibold text-black flex items-center gap-2">
 					<FileText class="w-5 h-5" />
-					Recent Job Postings
+					Последние вакансии
 				</h3>
 			</div>
 			<div class="divide-y divide-border">
@@ -187,10 +197,10 @@
 										: job.status === 'Draft'
 											? 'bg-surface text-black'
 											: 'bg-error-light text-error'}">
-										{job.status}
+										{getJobStatusLabel(job.status)}
 									</span>
 								</span>
-								<span>Posted {formatDate(job.posted_date)}</span>
+								<span>Опубликовано {formatDate(job.posted_date)}</span>
 							</div>
 						</div>
 						<div class="flex items-center gap-6 text-sm">
@@ -210,8 +220,8 @@
 	{:else}
 		<div class="bg-white rounded-lg border border-border p-12 text-center">
 			<Briefcase class="w-12 h-12 text-muted mx-auto mb-4" />
-			<h3 class="text-lg font-semibold text-black mb-2">No jobs posted yet</h3>
-			<p class="text-muted">This team member hasn't posted any jobs</p>
+			<h3 class="text-lg font-semibold text-black mb-2">Вакансий пока нет</h3>
+			<p class="text-muted">Этот участник команды ещё не публиковал вакансии</p>
 		</div>
 	{/if}
 
@@ -219,39 +229,39 @@
 	<div class="bg-white rounded-lg border border-border p-6">
 		<h3 class="text-lg font-semibold text-black mb-4 flex items-center gap-2">
 			<Shield class="w-5 h-5" />
-			Permissions
+			Права доступа
 		</h3>
 		<div class="space-y-2">
 			<div class="flex items-center justify-between py-2">
-				<span class="text-muted">Post Jobs</span>
+				<span class="text-muted">Публикация вакансий</span>
 				{#if member.permissions?.can_post_jobs}
 					<CheckCircle class="w-5 h-5 text-success" />
 				{:else}
-					<span class="text-sm text-muted">No access</span>
+					<span class="text-sm text-muted">Нет доступа</span>
 				{/if}
 			</div>
 			<div class="flex items-center justify-between py-2">
-				<span class="text-muted">Manage Team</span>
+				<span class="text-muted">Управление командой</span>
 				{#if member.permissions?.can_manage_team}
 					<CheckCircle class="w-5 h-5 text-success" />
 				{:else}
-					<span class="text-sm text-muted">No access</span>
+					<span class="text-sm text-muted">Нет доступа</span>
 				{/if}
 			</div>
 			<div class="flex items-center justify-between py-2">
-				<span class="text-muted">Edit Company Profile</span>
+				<span class="text-muted">Редактирование профиля компании</span>
 				{#if member.permissions?.can_edit_company}
 					<CheckCircle class="w-5 h-5 text-success" />
 				{:else}
-					<span class="text-sm text-muted">No access</span>
+					<span class="text-sm text-muted">Нет доступа</span>
 				{/if}
 			</div>
 			<div class="flex items-center justify-between py-2">
-				<span class="text-muted">Company Admin</span>
+				<span class="text-muted">Администратор компании</span>
 				{#if member.permissions?.is_company_admin}
 					<CheckCircle class="w-5 h-5 text-success" />
 				{:else}
-					<span class="text-sm text-muted">No access</span>
+					<span class="text-sm text-muted">Нет доступа</span>
 				{/if}
 			</div>
 		</div>

@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ params, url, cookies, fetch }) => {
 	const accessToken = cookies.get('access_token');
 
 	if (!accessToken) {
-		throw error(401, 'Unauthorized');
+		throw error(401, 'Не авторизован');
 	}
 
 	try {
@@ -40,13 +40,13 @@ export const load: PageServerLoad = async ({ params, url, cookies, fetch }) => {
 
 		if (!jobResponse.ok) {
 			if (jobResponse.status === 404) {
-				throw error(404, 'Job not found');
+				throw error(404, 'Вакансия не найдена');
 			}
-			throw error(jobResponse.status, 'Failed to fetch job details');
+			throw error(jobResponse.status, 'Не удалось загрузить данные вакансии');
 		}
 
 		if (!applicantsResponse.ok) {
-			throw error(applicantsResponse.status, 'Failed to fetch applicants');
+			throw error(applicantsResponse.status, 'Не удалось загрузить список кандидатов');
 		}
 
 		const job = await jobResponse.json();
@@ -69,7 +69,7 @@ export const load: PageServerLoad = async ({ params, url, cookies, fetch }) => {
 		};
 	} catch (err: any) {
 		console.error('Error loading applicants:', err);
-		throw error(500, err.message || 'Failed to load applicants');
+		throw error(500, err.message || 'Не удалось загрузить список кандидатов');
 	}
 };
 
@@ -79,7 +79,7 @@ export const actions: Actions = {
 		const accessToken = cookies.get('access_token');
 
 		if (!accessToken) {
-			return fail(401, { error: 'Unauthorized' });
+			return fail(401, { error: 'Не авторизован' });
 		}
 
 		const formData = await request.formData();
@@ -88,7 +88,7 @@ export const actions: Actions = {
 		const remarks = formData.get('remarks');
 
 		if (!applicantId || !status) {
-			return fail(400, { error: 'Missing required fields' });
+			return fail(400, { error: 'Не заполнены обязательные поля' });
 		}
 
 		try {
@@ -109,7 +109,7 @@ export const actions: Actions = {
 
 			if (!response.ok) {
 				const errorData = await response.json();
-				return fail(response.status, { error: errorData.error || 'Failed to update status' });
+				return fail(response.status, { error: errorData.error || 'Не удалось обновить статус' });
 			}
 
 			const result = await response.json();
@@ -120,7 +120,7 @@ export const actions: Actions = {
 			};
 		} catch (err: any) {
 			console.error('Error updating applicant status:', err);
-			return fail(500, { error: err.message || 'Failed to update status' });
+			return fail(500, { error: err.message || 'Не удалось обновить статус' });
 		}
 	}
 };

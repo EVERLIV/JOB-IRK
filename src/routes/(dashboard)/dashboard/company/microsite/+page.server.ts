@@ -38,7 +38,7 @@ export const load: PageServerLoad = async ({ parent, fetch }) => {
 			user,
 			company: user.company,
 			menus: [],
-			error: 'Failed to load menu items'
+			error: 'Не удалось загрузить пункты меню'
 		};
 	}
 };
@@ -60,7 +60,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'create',
 				success: false,
-				error: 'Title and URL are required'
+				error: 'Укажите название и URL'
 			});
 		}
 
@@ -79,14 +79,14 @@ export const actions: Actions = {
 				return {
 					action: 'create',
 					success: true,
-					message: result.message || 'Menu item created successfully',
+					message: result.message || 'Пункт меню успешно создан',
 					menu: result.menu
 				};
 			} else {
 				return fail(400, {
 					action: 'create',
 					success: false,
-					error: result.error || 'Failed to create menu item',
+					error: result.error || 'Не удалось создать пункт меню',
 					errors: result
 				});
 			}
@@ -95,7 +95,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'create',
 				success: false,
-				error: 'An error occurred while creating the menu item'
+				error: 'Произошла ошибка при создании пункта меню'
 			});
 		}
 	},
@@ -111,7 +111,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'update',
 				success: false,
-				error: 'Menu ID is required'
+				error: 'Не указан ID пункта меню'
 			});
 		}
 
@@ -142,14 +142,14 @@ export const actions: Actions = {
 				return {
 					action: 'update',
 					success: true,
-					message: result.message || 'Menu item updated successfully',
+					message: result.message || 'Пункт меню успешно обновлён',
 					menu: result.menu
 				};
 			} else {
 				return fail(400, {
 					action: 'update',
 					success: false,
-					error: result.error || 'Failed to update menu item',
+					error: result.error || 'Не удалось обновить пункт меню',
 					errors: result
 				});
 			}
@@ -158,7 +158,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'update',
 				success: false,
-				error: 'An error occurred while updating the menu item'
+				error: 'Произошла ошибка при обновлении пункта меню'
 			});
 		}
 	},
@@ -174,7 +174,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'delete',
 				success: false,
-				error: 'Menu ID is required'
+				error: 'Не указан ID пункта меню'
 			});
 		}
 
@@ -189,13 +189,13 @@ export const actions: Actions = {
 				return {
 					action: 'delete',
 					success: true,
-					message: result.message || 'Menu item deleted successfully'
+					message: result.message || 'Пункт меню успешно удалён'
 				};
 			} else {
 				return fail(400, {
 					action: 'delete',
 					success: false,
-					error: result.error || 'Failed to delete menu item'
+					error: result.error || 'Не удалось удалить пункт меню'
 				});
 			}
 		} catch (error) {
@@ -203,7 +203,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'delete',
 				success: false,
-				error: 'An error occurred while deleting the menu item'
+				error: 'Произошла ошибка при удалении пункта меню'
 			});
 		}
 	},
@@ -219,7 +219,7 @@ export const actions: Actions = {
 			return fail(400, {
 				action: 'toggleStatus',
 				success: false,
-				error: 'Menu ID is required'
+				error: 'Не указан ID пункта меню'
 			});
 		}
 
@@ -234,14 +234,14 @@ export const actions: Actions = {
 				return {
 					action: 'toggleStatus',
 					success: true,
-					message: result.message || 'Menu status updated successfully',
+					message: result.message || 'Статус пункта меню успешно обновлён',
 					menu: result.menu
 				};
 			} else {
 				return fail(400, {
 					action: 'toggleStatus',
 					success: false,
-					error: result.error || 'Failed to toggle menu status'
+					error: result.error || 'Не удалось изменить статус пункта меню'
 				});
 			}
 		} catch (error) {
@@ -249,7 +249,7 @@ export const actions: Actions = {
 			return fail(500, {
 				action: 'toggleStatus',
 				success: false,
-				error: 'An error occurred while toggling menu status'
+				error: 'Произошла ошибка при изменении статуса пункта меню'
 			});
 		}
 	}
