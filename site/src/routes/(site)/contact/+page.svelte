@@ -58,7 +58,7 @@
 		{
 			icon: MapPin,
 			title: 'Офис',
-			details: 'Hyderabad, Telangana, India',
+			details: 'Хайдарабад, Телангана, Индия',
 			link: null,
 			description: 'Главный офис'
 		}
@@ -198,7 +198,7 @@
 
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 relative">
 		<!-- Breadcrumb -->
-		<nav class="mb-8" aria-label="Breadcrumb">
+		<nav class="mb-8" aria-label="Навигация">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
 					<a href="/" class="hover:text-white transition-colors">Главная</a>
@@ -292,7 +292,7 @@
 									id="firstName"
 									type="text"
 									bind:value={formData.firstName}
-									placeholder="John"
+									placeholder="Иван"
 									class="w-full px-4 py-3 border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.firstName ? 'border-error' : 'border-border'}"
 									disabled={isSubmitting}
 								/>
@@ -310,7 +310,7 @@
 									id="lastName"
 									type="text"
 									bind:value={formData.lastName}
-									placeholder="Doe"
+									placeholder="Иванов"
 									class="w-full px-4 py-3 border border-border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
 									disabled={isSubmitting}
 								/>
@@ -322,13 +322,13 @@
 							<!-- Email -->
 							<div>
 								<label for="email" class="block text-sm font-medium text-muted mb-2">
-									Email <span class="text-error">*</span>
+									Эл. почта <span class="text-error">*</span>
 								</label>
 								<input
 									id="email"
 									type="email"
 									bind:value={formData.email}
-									placeholder="john.doe@example.com"
+									placeholder="ivan@example.com"
 									class="w-full px-4 py-3 border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.email ? 'border-error' : 'border-border'}"
 									disabled={isSubmitting}
 								/>

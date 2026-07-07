@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
   import { Lock, Eye, EyeOff, CheckCircle, XCircle, ShieldCheck } from '@lucide/svelte';
+  import { apiClient } from '$lib/api/client';
 
   let password = '';
   let confirmPassword = '';
@@ -19,21 +20,7 @@
     if (!token) {
       tokenValid = false;
     } else {
-      validateToken(token);
-    }
-  }
-
-  /**
-   * @param {string} token
-   */
-  async function validateToken(token) {
-    try {
-      console.log('Validating token:', token);
-      await new Promise(resolve => setTimeout(resolve, 500));
       tokenValid = true;
-    } catch (error) {
-      console.error('Token validation error:', error);
-      tokenValid = false;
     }
   }
 
@@ -75,8 +62,15 @@
     isLoading = true;
 
     try {
-      console.log('Resetting password with token:', token);
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await apiClient.post(
+        '/auth/reset-password/',
+        {
+          token,
+          password,
+          confirm_password: confirmPassword
+        },
+        true
+      );
       resetSuccess = true;
 
       setTimeout(() => {
@@ -84,7 +78,18 @@
       }, 3000);
     } catch (error) {
       console.error('Password reset error:', error);
-      errors.submit = 'Не удалось сбросить пароль. Попробуйте снова или запросите новую ссылку для сброса.';
+      const message = error instanceof Error
+        ? error.message
+        : 'Не удалось сбросить пароль. Попробуйте снова или запросите новую ссылку для сброса.';
+      errors.submit = message;
+      if (
+        message.toLowerCase().includes('expired') ||
+        message.toLowerCase().includes('invalid') ||
+        message.toLowerCase().includes('устар') ||
+        message.toLowerCase().includes('недейств')
+      ) {
+        tokenValid = false;
+      }
     } finally {
       isLoading = false;
     }

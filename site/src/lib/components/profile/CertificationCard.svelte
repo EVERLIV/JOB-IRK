@@ -44,7 +44,7 @@
 			<div class="space-y-3 pl-0 md:pl-13">
 				{#if certification.credential_id}
 					<div class="text-xs md:text-sm text-gray-600">
-						<span class="font-medium">ID:</span> {certification.credential_id}
+						<span class="font-medium">Номер:</span> {certification.credential_id}
 					</div>
 				{/if}
 

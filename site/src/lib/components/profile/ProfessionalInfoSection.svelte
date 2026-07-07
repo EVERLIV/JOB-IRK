@@ -118,7 +118,7 @@
 					id="current_salary"
 					type="text"
 					bind:value={formData.current_salary}
-					placeholder="e.g., 500000"
+					placeholder="напр., 500000"
 					class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 				/>
 			</div>
@@ -137,7 +137,7 @@
 					id="expected_salary"
 					type="text"
 					bind:value={formData.expected_salary}
-					placeholder="e.g., 800000"
+					placeholder="напр., 800000"
 					class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 				/>
 			</div>

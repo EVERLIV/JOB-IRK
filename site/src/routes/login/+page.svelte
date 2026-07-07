@@ -3,11 +3,15 @@
 
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
-  import { AlertCircle, Loader2, Briefcase, Shield, Zap } from '@lucide/svelte';
+  import { AlertCircle, Loader2, Briefcase, Shield, Zap, Mail, Lock } from '@lucide/svelte';
+  import { authStore } from '$lib/stores/auth';
+  import { goto } from '$app/navigation';
 
   let isLoading = false;
   let loadingProvider = '';
   let error = '';
+  let email = '';
+  let password = '';
 
   onMount(() => {
     const urlError = $page.url.searchParams.get('error');
@@ -16,6 +20,7 @@
     }
   });
 
+  /** @param {string} errorCode */
   function getErrorMessage(errorCode) {
     const errorMessages = {
       'access_denied': 'Вход отменён. Пожалуйста, попробуйте снова.',
@@ -23,9 +28,10 @@
       'server_error': 'Произошла ошибка сервера. Пожалуйста, попробуйте позже.',
       'temporarily_unavailable': 'Сервис временно недоступен. Пожалуйста, попробуйте позже.'
     };
-    return errorMessages[errorCode] || 'Произошла ошибка при входе. Пожалуйста, попробуйте снова.';
+    return errorMessages[/** @type {keyof typeof errorMessages} */ (errorCode)] || 'Произошла ошибка при входе. Пожалуйста, попробуйте снова.';
   }
 
+  /** @param {string} provider */
   async function handleSocialLogin(provider) {
     if (isLoading) return;
     isLoading = true;
@@ -44,6 +50,31 @@
       }
     } catch (err) {
       error = err instanceof Error ? err.message : 'Не удалось начать вход. Пожалуйста, попробуйте снова.';
+      isLoading = false;
+      loadingProvider = '';
+    }
+  }
+
+  async function handlePasswordLogin() {
+    if (isLoading) return;
+    if (!email || !password) {
+      error = 'Введите email и пароль.';
+      return;
+    }
+
+    isLoading = true;
+    loadingProvider = 'password';
+    error = '';
+
+    try {
+      const { login } = await import('$lib/api/auth');
+      const response = await login(email, password);
+      authStore.login(response.user);
+      const redirectTo = $page.url.searchParams.get('redirect') || '/';
+      goto(redirectTo);
+    } catch (err) {
+      error = err instanceof Error ? err.message : 'Не удалось войти. Пожалуйста, попробуйте снова.';
+    } finally {
       isLoading = false;
       loadingProvider = '';
     }
@@ -158,6 +189,42 @@
             <span class="px-4 bg-white text-sm text-muted">или</span>
           </div>
         </div>
+        <form onsubmit={(e) => { e.preventDefault(); handlePasswordLogin(); }} class="space-y-3 mb-6">
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Mail size={18} class="text-muted" />
+            </span>
+            <input
+              type="email"
+              bind:value={email}
+              placeholder="email@example.com"
+              class="w-full h-12 pl-10 pr-4 border border-border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary-500/20 outline-none"
+            />
+          </div>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Lock size={18} class="text-muted" />
+            </span>
+            <input
+              type="password"
+              bind:value={password}
+              placeholder="Пароль"
+              class="w-full h-12 pl-10 pr-4 border border-border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary-500/20 outline-none"
+            />
+          </div>
+          <button type="submit" disabled={isLoading} class="w-full h-12 px-5 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-all disabled:opacity-50">
+            {#if loadingProvider === 'password'}
+              Вход...
+            {:else}
+              Войти по email
+            {/if}
+          </button>
+          <div class="text-center">
+            <a href="/forgot-password/" class="text-sm text-primary-600 hover:text-primary-700 font-semibold hover:underline">
+              Забыли пароль?
+            </a>
+          </div>
+        </form>
         <div class="flex items-center justify-center gap-2 text-sm text-muted">
           <Shield size={16} class="text-success-500" />
           <span>Защищено безопасностью корпоративного уровня</span>

@@ -1,9 +1,6 @@
 /**
  * Authentication API
- * Google OAuth and JWT token management
- *
- * JWT tokens are stored in localStorage for cross-platform compatibility (web + mobile)
- * Tokens are sent via Authorization header with each API request
+ * Candidate auth API with cookie-first session handling.
  */
 
 import { ApiClient } from './client';
@@ -28,16 +25,16 @@ export interface User {
 
 export interface AuthResponse {
 	user: User;
-	access: string;
-	refresh: string;
 	requires_profile_completion: boolean;
 	redirect_to: string;
 	is_new_user: boolean;
+	message?: string;
 }
 
 export interface GoogleAuthUrlResponse {
 	auth_url: string;
 	user_type: string;
+	state: string;
 }
 
 /**
@@ -54,12 +51,18 @@ export async function getGoogleAuthUrl(redirectUri: string): Promise<GoogleAuthU
  */
 export async function googleAuthCallback(
 	code: string,
-	redirectUri: string
+	redirectUri: string,
+	state: string
 ): Promise<AuthResponse> {
 	return ApiClient.post<AuthResponse>('/auth/google/callback/', {
 		code,
-		redirect_uri: redirectUri
+		redirect_uri: redirectUri,
+		state
 	}, true); // Skip auth - public endpoint
+}
+
+export async function login(email: string, password: string): Promise<AuthResponse> {
+	return ApiClient.post<AuthResponse>('/auth/login/', { email, password }, true);
 }
 
 /**
@@ -73,9 +76,7 @@ export async function getCurrentUser(): Promise<User> {
  * Logout - blacklist refresh token
  */
 export async function logout(): Promise<void> {
-	const { getRefreshToken } = await import('$lib/utils/token-storage');
-	const refreshToken = getRefreshToken();
-	await ApiClient.post('/auth/logout/', { refresh: refreshToken });
+	await ApiClient.post('/auth/logout/', {});
 }
 
 /**

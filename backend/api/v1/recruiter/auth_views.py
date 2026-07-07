@@ -11,7 +11,15 @@ from drf_spectacular.utils import extend_schema
 
 from django.conf import settings
 from django.utils.crypto import get_random_string
-from peeldb.models import User, Google
+from django.utils import timezone
+from peeldb.models import User, Google, Company
+from api.auth_helpers import (
+    CookieTokenRefreshView,
+    auth_response,
+    build_oauth_state,
+    clear_auth_cookies,
+    verify_oauth_state,
+)
 
 from .auth_serializers import (
     RegisterSerializer,
@@ -84,7 +92,7 @@ def send_password_reset_email(user, request):
 
     # Use recruiter UI URL for password reset
     frontend_url = settings.RECRUITER_FRONTEND_URL if hasattr(settings, 'RECRUITER_FRONTEND_URL') else 'http://localhost:5174'
-    reset_url = f"{frontend_url}/reset-password?token={user.activation_code}"
+    reset_url = f"{frontend_url}/reset-password?token={user.password_reset_token}"
 
     # Render email template
     template = loader.get_template('recruiter/email/password_reset.html')
@@ -165,10 +173,7 @@ def register(request):
 @permission_classes([AllowAny])
 def login(request):
     """
-    Login for recruiter/company users
-
-    Returns JWT tokens in response body ONLY (not in cookies)
-    SvelteKit frontend will store these in HttpOnly cookies
+    Login for recruiter/company users.
     """
     serializer = LoginSerializer(data=request.data)
 
@@ -181,13 +186,13 @@ def login(request):
         # Get user data
         user_serializer = UserSerializer(user)
 
-        # Return JWT tokens in response body ONLY
-        # SvelteKit will store these in HttpOnly cookies via /api/auth/set-cookies
-        return Response({
+        return auth_response({
+            "success": True,
             "access": tokens['access'],
             "refresh": tokens['refresh'],
-            "user": user_serializer.data
-        })
+            "user": user_serializer.data,
+            "message": "Login successful",
+        }, access_token=tokens["access"], refresh_token=tokens["refresh"])
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -202,14 +207,18 @@ def login(request):
 def logout(request):
     """
     Logout user
-
-    Django does NOT manage cookies - SvelteKit handles cookie clearing
-    This endpoint is just for blacklisting tokens if needed
     """
-    return Response({
+    refresh_token = request.COOKIES.get("refresh_token") or request.data.get("refresh")
+    if refresh_token:
+        try:
+            RefreshToken(refresh_token).blacklist()
+        except Exception:
+            pass
+
+    return clear_auth_cookies(Response({
         "success": True,
         "message": "Logged out successfully"
-    })
+    }))
 
 
 @extend_schema(
@@ -224,31 +233,31 @@ def verify_email(request):
     """
     Verify email address
 
-    Activates account and auto-logs in user
-    Returns JWT tokens in response body (SvelteKit stores in cookies)
+    Activates account and auto-logs in user.
     """
     serializer = VerifyEmailSerializer(data=request.data)
 
     if serializer.is_valid():
         user = serializer.context['user']
 
-        # Activate user
+        # Activate user and invalidate the verification token.
         user.is_active = True
         user.email_verified = True
-        user.save()
+        user.activation_code = ""
+        user.activation_code_created = None
+        user.save(update_fields=["is_active", "email_verified", "activation_code", "activation_code_created"])
 
         # Auto-login - generate tokens
         tokens = get_tokens_for_user(user)
         user_serializer = UserSerializer(user)
 
-        # Return tokens in response body ONLY (not in cookies)
-        return Response({
+        return auth_response({
             "success": True,
             "access": tokens['access'],
             "refresh": tokens['refresh'],
             "user": user_serializer.data,
             "message": "Email verified successfully"
-        })
+        }, access_token=tokens["access"], refresh_token=tokens["refresh"])
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -269,6 +278,9 @@ def resend_verification(request):
         user = serializer.context.get('user')
 
         if user:
+            user.activation_code = get_random_string(32)
+            user.activation_code_created = timezone.now()
+            user.save(update_fields=["activation_code", "activation_code_created"])
             send_verification_email(user, request)
 
         # Always return success (don't reveal if email exists)
@@ -296,9 +308,9 @@ def forgot_password(request):
         user = serializer.context.get('user')
 
         if user:
-            # Generate new activation code for password reset
-            user.activation_code = get_random_string(32)
-            user.save()
+            user.password_reset_token = get_random_string(48)
+            user.password_reset_token_created = timezone.now()
+            user.save(update_fields=["password_reset_token", "password_reset_token_created"])
 
             send_password_reset_email(user, request)
 
@@ -328,9 +340,9 @@ def reset_password(request):
 
         # Update password
         user.set_password(serializer.validated_data['password'])
-        # Clear activation code (one-time use)
-        user.activation_code = ''
-        user.save()
+        user.password_reset_token = ''
+        user.password_reset_token_created = None
+        user.save(update_fields=["password", "password_reset_token", "password_reset_token_created"])
 
         return Response({
             "success": True,
@@ -401,16 +413,13 @@ def accept_invitation(request):
         tokens = get_tokens_for_user(user)
         user_serializer = UserSerializer(user)
 
-        response = Response({
+        return auth_response({
             "success": True,
             "access": tokens['access'],
             "refresh": tokens['refresh'],
             "user": user_serializer.data,
             "message": f"Account created successfully. Welcome to {user.company.name}!"
-        }, status=status.HTTP_201_CREATED)
-
-        # Return tokens in response body only (no cookies)
-        return response
+        }, status_code=status.HTTP_201_CREATED, access_token=tokens["access"], refresh_token=tokens["refresh"])
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -432,6 +441,7 @@ def google_auth_url(request):
         account_type = serializer.validated_data['account_type']
 
         # Build Google OAuth URL
+        state = build_oauth_state("recruiter_google", redirect_uri, account_type)
         google_auth_url = (
             "https://accounts.google.com/o/oauth2/auth"
             f"?client_id={settings.GOOGLE_CLIENT_ID}"
@@ -439,14 +449,15 @@ def google_auth_url(request):
             "&scope=https://www.googleapis.com/auth/userinfo.profile "
             "https://www.googleapis.com/auth/userinfo.email"
             f"&redirect_uri={redirect_uri}"
-            f"&state={account_type}"  # company or recruiter
+            f"&state={state}"
             "&access_type=offline"
             "&prompt=consent"
         )
 
         return Response({
             "auth_url": google_auth_url,
-            "account_type": account_type
+            "account_type": account_type,
+            "state": state,
         })
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -471,7 +482,17 @@ def google_callback(request):
     if serializer.is_valid():
         code = serializer.validated_data['code']
         redirect_uri = serializer.validated_data['redirect_uri']
-        serializer.validated_data['account_type']
+        account_type = serializer.validated_data['account_type']
+        try:
+            state_payload = verify_oauth_state(
+                serializer.validated_data["state"],
+                expected_flow="recruiter_google",
+                redirect_uri=redirect_uri,
+            )
+            if state_payload.get("account_type") != account_type:
+                return Response({"error": "OAuth account type mismatch"}, status=status.HTTP_400_BAD_REQUEST)
+        except ValueError as exc:
+            return Response({"error": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             # Exchange code for tokens
@@ -511,18 +532,16 @@ def google_callback(request):
                         "error": "This Google account is linked to a job seeker account"
                     }, status=status.HTTP_400_BAD_REQUEST)
 
-                # Existing user - auto login
                 tokens = get_tokens_for_user(user)
                 user_serializer = UserSerializer(user)
 
-                # Return tokens in response body ONLY (no cookies)
-                # SvelteKit will store these in HttpOnly cookies
-                return Response({
-                    "status": "authenticated",
+                return auth_response({
+                    "success": True,
                     "access": tokens['access'],
                     "refresh": tokens['refresh'],
-                    "user": user_serializer.data
-                })
+                    "user": user_serializer.data,
+                    "message": "Google login successful",
+                }, access_token=tokens["access"], refresh_token=tokens["refresh"])
 
             except Google.DoesNotExist:
                 # New user - return Google data for completion
@@ -536,7 +555,8 @@ def google_callback(request):
                     'first_name': google_data.get('given_name', ''),
                     'last_name': google_data.get('family_name', ''),
                     'picture': google_data.get('picture', ''),
-                    'access_token': token_data['access_token']
+                    'access_token': token_data['access_token'],
+                    'account_type': account_type,
                 }
 
                 return Response({
@@ -585,7 +605,13 @@ def google_complete(request):
         # Create user similar to regular registration
         from django.template.defaultfilters import slugify
 
-        account_type = serializer.validated_data['account_type']
+        account_type = google_session_data.get('account_type')
+        requested_account_type = serializer.validated_data['account_type']
+        if account_type != requested_account_type:
+            return Response(
+                {"error": "OAuth account type mismatch"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         email = google_session_data['email']
 
         # Check if email already exists
@@ -649,13 +675,10 @@ def google_complete(request):
         # Clear session
         del request.session[f'google_oauth_{session_token}']
 
-        # Auto-login
         tokens = get_tokens_for_user(user)
         user_serializer = UserSerializer(user)
 
-        # Return tokens in response body ONLY (no cookies)
-        # SvelteKit will store these in HttpOnly cookies
-        return Response({
+        return auth_response({
             "success": True,
             "access": tokens['access'],
             "refresh": tokens['refresh'],
@@ -664,8 +687,9 @@ def google_complete(request):
                 "id": company.id,
                 "name": company.name,
                 "slug": company.slug
-            } if company else None
-        }, status=status.HTTP_201_CREATED)
+            } if company else None,
+            "message": "Google signup completed successfully",
+        }, status_code=status.HTTP_201_CREATED, access_token=tokens["access"], refresh_token=tokens["refresh"])
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

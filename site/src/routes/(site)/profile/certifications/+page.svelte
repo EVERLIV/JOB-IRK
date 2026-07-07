@@ -157,7 +157,7 @@
 			<div>
 				<h3 class="font-semibold text-gray-900 mb-1">
 					{certificationList.length}
-					{certificationList.length === 1 ? 'Сертификат' : 'Сертификата'} Добавлено
+					{certificationList.length === 1 ? 'сертификат' : 'сертификата'} добавлено
 				</h3>
 				<p class="text-sm text-gray-600">
 					Профессиональные сертификаты подтверждают ваши навыки и делают ваш профиль более привлекательным для работодателей.

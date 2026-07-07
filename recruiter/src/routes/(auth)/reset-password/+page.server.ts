@@ -22,25 +22,25 @@ export const actions: Actions = {
 		// Validation
 		if (!token) {
 			return fail(400, {
-				error: 'Invalid or missing reset token'
+				error: 'Недействительный или отсутствующий токен сброса'
 			});
 		}
 
 		if (!password) {
 			return fail(400, {
-				error: 'Password is required'
+				error: 'Укажите пароль'
 			});
 		}
 
 		if (password !== confirmPassword) {
 			return fail(400, {
-				error: 'Passwords do not match'
+				error: 'Пароли не совпадают'
 			});
 		}
 
 		if (password.length < 8) {
 			return fail(400, {
-				error: 'Password must be at least 8 characters'
+				error: 'Пароль должен содержать не менее 8 символов'
 			});
 		}
 
@@ -59,11 +59,11 @@ export const actions: Actions = {
 
 			if (!response.ok) {
 				const data = await response.json();
-				let errorMessage = 'Failed to reset password';
+				let errorMessage = 'Не удалось сбросить пароль';
 				if (data.detail) {
 					errorMessage = data.detail;
 				} else if (data.token) {
-					errorMessage = 'Reset link is invalid or has expired';
+					errorMessage = 'Ссылка для сброса недействительна или истекла';
 				} else if (data.password) {
 					errorMessage = Array.isArray(data.password) ? data.password.join(', ') : data.password;
 				}
@@ -80,7 +80,7 @@ export const actions: Actions = {
 		} catch (error) {
 			console.error('Reset password error:', error);
 			return fail(500, {
-				error: 'An unexpected error occurred. Please try again.'
+				error: 'Произошла непредвиденная ошибка. Попробуйте ещё раз.'
 			});
 		}
 	}

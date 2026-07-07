@@ -7,31 +7,31 @@
  * Format field name to be user-friendly
  * Converts snake_case to Title Case, with special handling for common terms
  */
-function formatFieldName(field: string): string {
+	function formatFieldName(field: string): string {
 	// Special cases - common field names that should be formatted differently
 	const specialCases: Record<string, string> = {
-		email: 'Email',
-		password: 'Password',
-		old_password: 'Current password',
-		new_password: 'New password',
-		confirm_password: 'Password confirmation',
-		first_name: 'First name',
-		last_name: 'Last name',
-		phone: 'Phone number',
-		mobile: 'Mobile number',
-		company_name: 'Company name',
-		job_title: 'Job title',
-		current_salary: 'Current salary',
-		expected_salary: 'Expected salary',
-		notice_period: 'Notice period',
-		degree: 'Degree',
-		university: 'University',
-		percentage: 'Percentage/CGPA',
-		passing_year: 'Passing year',
-		title: 'Title',
-		description: 'Description',
-		start_date: 'Start date',
-		end_date: 'End date'
+		email: 'Эл. почта',
+		password: 'Пароль',
+		old_password: 'Текущий пароль',
+		new_password: 'Новый пароль',
+		confirm_password: 'Подтверждение пароля',
+		first_name: 'Имя',
+		last_name: 'Фамилия',
+		phone: 'Номер телефона',
+		mobile: 'Мобильный телефон',
+		company_name: 'Название компании',
+		job_title: 'Должность',
+		current_salary: 'Текущая зарплата',
+		expected_salary: 'Ожидаемая зарплата',
+		notice_period: 'Срок уведомления',
+		degree: 'Степень',
+		university: 'Университет',
+		percentage: 'Процент/CGPA',
+		passing_year: 'Год окончания',
+		title: 'Название',
+		description: 'Описание',
+		start_date: 'Дата начала',
+		end_date: 'Дата окончания'
 	};
 
 	if (specialCases[field]) {
@@ -96,5 +96,5 @@ export function formatApiError(errorData: any): string {
 	}
 
 	// Fallback
-	return 'An error occurred. Please try again.';
+	return 'Произошла ошибка. Пожалуйста, попробуйте снова.';
 }

@@ -277,8 +277,8 @@
 </script>
 
 <svelte:head>
-  <title>Лучшие компании India - PeelJobs</title>
-  <meta name="description" content="Откройте для себя лучшие компании, нанимающие в India. Просматривайте {totalCompanies.toLocaleString()} компаний по отраслям, местоположению и типу." />
+  <title>Лучшие компании Индии - PeelJobs</title>
+  <meta name="description" content="Откройте для себя лучшие компании, нанимающие в Индии. Просматривайте {totalCompanies.toLocaleString()} компаний по отраслям, местоположению и типу." />
 </svelte:head>
 
 <div class="min-h-screen bg-surface">
@@ -552,7 +552,7 @@
                         <div class="w-14 h-14 rounded bg-surface border border-border overflow-hidden flex items-center justify-center p-2">
                           <img
                             src={company.logo}
-                            alt="{company.name} logo"
+                            alt="Логотип {company.name}"
                             class="w-full h-full object-contain"
                             loading="lazy"
                           />

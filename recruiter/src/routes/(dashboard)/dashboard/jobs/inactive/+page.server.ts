@@ -5,6 +5,8 @@
 import type { PageServerLoad, Actions } from './$types';
 import { error, redirect } from '@sveltejs/kit';
 import type { JobsListResponse } from '$lib/types';
+import { getApiBaseUrl } from '$lib/config/env';
+import { clearAuthCookies } from '$lib/server/auth';
 
 export const load: PageServerLoad = async ({ fetch, url, cookies }) => {
 	// Check authentication
@@ -41,17 +43,16 @@ export const load: PageServerLoad = async ({ fetch, url, cookies }) => {
 		}
 
 		// Make API request - fetch will use hooks.server.ts to add Authorization header
-		const apiUrl = `http://localhost:8000/api/v1/recruiter/jobs/?${params.toString()}`;
+		const apiUrl = `${getApiBaseUrl()}/recruiter/jobs/?${params.toString()}`;
 		const response = await fetch(apiUrl);
 
 		if (!response.ok) {
 			if (response.status === 401) {
 				// Clear invalid tokens and redirect to login
-				cookies.delete('access_token', { path: '/' });
-				cookies.delete('refresh_token', { path: '/' });
+				clearAuthCookies(cookies);
 				throw redirect(302, '/login?redirect=' + encodeURIComponent(url.pathname));
 			}
-			throw error(response.status, `Failed to load inactive jobs: ${response.statusText}`);
+			throw error(response.status, `Не удалось загрузить неактивные вакансии: ${response.statusText}`);
 		}
 
 		const data: JobsListResponse = await response.json();
@@ -93,7 +94,7 @@ export const load: PageServerLoad = async ({ fetch, url, cookies }) => {
 			throw err;
 		}
 
-		throw error(500, err.message || 'Failed to load inactive jobs');
+		throw error(500, err.message || 'Не удалось загрузить неактивные вакансии');
 	}
 };
 
@@ -106,11 +107,11 @@ export const actions: Actions = {
 		const jobId = formData.get('jobId');
 
 		if (!jobId) {
-			return { success: false, error: 'Job ID is required' };
+			return { success: false, error: 'Не указан ID вакансии' };
 		}
 
 		try {
-			const response = await fetch(`http://localhost:8000/api/v1/recruiter/jobs/${jobId}/update/`, {
+			const response = await fetch(`${getApiBaseUrl()}/recruiter/jobs/${jobId}/update/`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json'
@@ -124,13 +125,13 @@ export const actions: Actions = {
 				const errorData = await response.json().catch(() => ({}));
 				return {
 					success: false,
-					error: errorData.error || 'Failed to reactivate job'
+					error: errorData.error || 'Не удалось активировать вакансию'
 				};
 			}
 
-			return { success: true, message: 'Job reactivated as draft' };
+			return { success: true, message: 'Вакансия активирована как черновик' };
 		} catch (err: any) {
-			return { success: false, error: err.message || 'Failed to reactivate job' };
+			return { success: false, error: err.message || 'Не удалось активировать вакансию' };
 		}
 	},
 
@@ -142,12 +143,12 @@ export const actions: Actions = {
 		const jobId = formData.get('jobId');
 
 		if (!jobId) {
-			return { success: false, error: 'Job ID is required' };
+			return { success: false, error: 'Не указан ID вакансии' };
 		}
 
 		try {
 			const response = await fetch(
-				`http://localhost:8000/api/v1/recruiter/jobs/${jobId}/delete/?force=true`,
+				`${getApiBaseUrl()}/recruiter/jobs/${jobId}/delete/?force=true`,
 				{
 					method: 'DELETE'
 				}
@@ -157,13 +158,13 @@ export const actions: Actions = {
 				const errorData = await response.json().catch(() => ({}));
 				return {
 					success: false,
-					error: errorData.error || 'Failed to delete job'
+					error: errorData.error || 'Не удалось удалить вакансию'
 				};
 			}
 
-			return { success: true, message: 'Job deleted successfully' };
+			return { success: true, message: 'Вакансия успешно удалена' };
 		} catch (err: any) {
-			return { success: false, error: err.message || 'Failed to delete job' };
+			return { success: false, error: err.message || 'Не удалось удалить вакансию' };
 		}
 	}
 };

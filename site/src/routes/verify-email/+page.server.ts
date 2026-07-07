@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { API_BASE_URL } from '$lib/config/env';
 
 export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
@@ -35,7 +35,7 @@ export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
 					httpOnly: true,
 					secure: process.env.NODE_ENV === 'production',
 					sameSite: 'lax',
-					maxAge: 60 * 60 * 24 * 7 // 7 days
+					maxAge: 60 * 60
 				});
 
 				cookies.set('refresh_token', data.refresh, {
@@ -43,20 +43,23 @@ export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
 					httpOnly: true,
 					secure: process.env.NODE_ENV === 'production',
 					sameSite: 'lax',
-					maxAge: 60 * 60 * 24 * 30 // 30 days
+					maxAge: 60 * 60 * 24 * 7
 				});
 			}
 
 			return {
 				status: 'success',
 				email: data.user?.email || email,
-				message: 'Email подтверждён'
+				message: 'Электронная почта подтверждена'
 			};
 		}
 
 		// Check if token expired
 		const errorMessage = data.token?.[0] || data.detail || 'Неверный токен подтверждения';
-		const isExpired = errorMessage.toLowerCase().includes('expired');
+		const normalizedMessage = errorMessage.toLowerCase();
+		const isExpired =
+			normalizedMessage.includes('expired') ||
+			normalizedMessage.includes('устар');
 
 		return {
 			status: isExpired ? 'expired' : 'error',

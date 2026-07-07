@@ -13,11 +13,11 @@ class PasswordlessAuthBackend(ModelBackend):
         try:
             # Try to find a user matching your username
             user = User.objects.get(Q(username=username) | Q(email=username))
-            if password:
-                if check_password(password, user.password):
-                    return user
+            if not password:
                 return None
-            return user
+            if check_password(password, user.password):
+                return user
+            return None
         except User.DoesNotExist:
             # No user was found, return None - triggers default login failed
             return None

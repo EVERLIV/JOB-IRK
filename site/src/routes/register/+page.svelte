@@ -3,6 +3,7 @@
   import { goto } from '$app/navigation';
   import { enhance } from '$app/forms';
   import { RECRUITER_URL } from '$lib/config/env';
+  import { getGoogleAuthUrl } from '$lib/api/auth';
   import {
     User,
     Mail,
@@ -165,7 +166,13 @@
   async function handleOAuthLogin(provider) {
     isLoading = true;
     try {
-      window.location.href = `/auth/${provider}?userType=${userType}`;
+      if (provider === 'google') {
+        const redirectUri = window.location.origin + '/auth/google/callback';
+        const response = await getGoogleAuthUrl(redirectUri);
+        window.location.href = response.auth_url;
+        return;
+      }
+      throw new Error('Неподдерживаемый OAuth-провайдер');
     } catch (error) {
       console.error('OAuth error:', error);
       errors.submit = 'Ошибка входа через соцсеть. Попробуйте снова.';
@@ -467,7 +474,7 @@
                     id="email"
                     type="email"
                     bind:value={email}
-                    placeholder="you@example.com"
+                    placeholder="email@example.com"
                     class="w-full h-12 pl-10 pr-4 border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.email ? 'border-error' : 'border-border'}"
                   />
                 </div>

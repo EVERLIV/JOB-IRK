@@ -153,7 +153,7 @@
 			<div>
 				<h3 class="font-semibold text-gray-900 mb-1">
 					{educationList.length}
-					{educationList.length === 1 ? 'Квалификация' : 'Квалификации'} Добавлено
+					{educationList.length === 1 ? 'квалификация' : 'квалификации'} добавлено
 				</h3>
 				<p class="text-sm text-gray-600">
 					Держите данные об образовании в актуальном состоянии, чтобы повысить видимость профиля и привлечь лучшие вакансии.

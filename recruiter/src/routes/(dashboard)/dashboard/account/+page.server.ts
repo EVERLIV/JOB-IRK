@@ -49,19 +49,19 @@ export const actions: Actions = {
 
 			if (!response.ok) {
 				return fail(response.status, {
-					error: result.error || result.detail || 'Failed to update profile',
+					error: result.error || result.detail || 'Не удалось обновить профиль',
 					values: updates
 				});
 			}
 
 			return {
 				success: true,
-				message: result.message || 'Profile updated successfully',
+				message: result.message || 'Профиль успешно обновлён',
 				user: result.user
 			};
 		} catch (error: any) {
 			return fail(500, {
-				error: error.message || 'Network error occurred',
+				error: error.message || 'Произошла сетевая ошибка',
 				values: updates
 			});
 		}
@@ -76,7 +76,7 @@ export const actions: Actions = {
 
 		if (!file || !(file instanceof File)) {
 			return fail(400, {
-				error: 'Please provide a profile picture'
+				error: 'Загрузите фото профиля'
 			});
 		}
 
@@ -84,7 +84,7 @@ export const actions: Actions = {
 		const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 		if (!allowedTypes.includes(file.type)) {
 			return fail(400, {
-				error: 'Invalid file type. Please upload a JPEG or PNG image'
+				error: 'Недопустимый тип файла. Загрузите изображение JPEG или PNG'
 			});
 		}
 
@@ -92,7 +92,7 @@ export const actions: Actions = {
 		const maxSize = 2 * 1024 * 1024;
 		if (file.size > maxSize) {
 			return fail(400, {
-				error: 'File too large. Maximum size is 2MB'
+				error: 'Файл слишком большой. Максимальный размер — 2 МБ'
 			});
 		}
 
@@ -107,18 +107,18 @@ export const actions: Actions = {
 
 			if (!response.ok) {
 				return fail(response.status, {
-					error: result.error || result.detail || 'Failed to upload profile picture'
+					error: result.error || result.detail || 'Не удалось загрузить фото профиля'
 				});
 			}
 
 			return {
 				success: true,
-				message: result.message || 'Profile picture uploaded successfully',
+				message: result.message || 'Фото профиля успешно загружено',
 				user: result.user
 			};
 		} catch (error: any) {
 			return fail(500, {
-				error: error.message || 'Network error occurred'
+				error: error.message || 'Произошла сетевая ошибка'
 			});
 		}
 	}

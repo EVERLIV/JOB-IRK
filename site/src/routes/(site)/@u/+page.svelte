@@ -60,11 +60,11 @@
 	const profile: Profile = {
 		name: 'Sarah Johnson',
 		title: 'Senior Frontend Developer',
-		location: 'San Francisco, CA',
+		location: 'Сан-Франциско, Калифорния',
 		profileImage: '/api/placeholder/200/200',
-		bio: "Passionate frontend developer with 5+ years of experience building scalable web applications using React, Vue, and Svelte. I love creating intuitive user experiences and writing clean, maintainable code.",
+		bio: 'Frontend-разработчик с более чем 5-летним опытом создания масштабируемых веб-приложений на React, Vue и Svelte. Люблю создавать интуитивные интерфейсы и писать чистый, поддерживаемый код.',
 		email: 'sarah.johnson@email.com',
-		joinDate: 'March 2024',
+		joinDate: 'март 2024',
 		isContactEnabled: true,
 		isResumePublic: true,
 		resumeUrl: '/resumes/sarah-johnson-resume.pdf',
@@ -91,31 +91,31 @@
 			{
 				title: 'Senior Frontend Developer',
 				company: 'TechCorp Inc.',
-				location: 'San Francisco, CA',
-				duration: 'Jan 2022 - Present',
+				location: 'Сан-Франциско, Калифорния',
+				duration: 'янв. 2022 — настоящее время',
 				description:
-					'Lead frontend development for enterprise SaaS platform serving 10k+ users. Implemented modern React architecture and improved performance by 40%.'
+					'Руководство frontend-разработкой корпоративной SaaS-платформы для более чем 10 000 пользователей. Внедрила современную архитектуру на React и повысила производительность на 40%.'
 			},
 			{
 				title: 'Frontend Developer',
 				company: 'StartupXYZ',
-				location: 'Remote',
-				duration: 'Jun 2020 - Dec 2021',
+				location: 'Удалённо',
+				duration: 'июн. 2020 — дек. 2021',
 				description:
-					'Built responsive web applications using Vue.js and Node.js. Collaborated with design team to implement pixel-perfect UI components.'
+					'Создавала адаптивные веб-приложения на Vue.js и Node.js. Сотрудничала с дизайн-командой для реализации pixel-perfect UI-компонентов.'
 			},
 			{
 				title: 'Junior Web Developer',
 				company: 'Digital Agency',
-				location: 'San Francisco, CA',
-				duration: 'Aug 2019 - May 2020',
+				location: 'Сан-Франциско, Калифорния',
+				duration: 'авг. 2019 — май 2020',
 				description:
-					'Developed custom WordPress themes and plugins. Maintained multiple client websites and improved site performance.'
+					'Разрабатывала пользовательские темы и плагины WordPress. Поддерживала несколько клиентских сайтов и улучшала их производительность.'
 			}
 		],
 		education: [
 			{
-				degree: 'Bachelor of Science in Computer Science',
+				degree: 'Бакалавр компьютерных наук',
 				institution: 'University of California, Berkeley',
 				year: '2019',
 				gpa: '3.8/4.0'
@@ -124,7 +124,7 @@
 				degree: 'Full Stack Web Development Bootcamp',
 				institution: 'Tech Academy',
 				year: '2019',
-				certification: 'Certificate of Completion'
+				certification: 'Сертификат об окончании'
 			}
 		]
 	};
@@ -182,7 +182,7 @@
 				<div class="flex-shrink-0">
 					<img
 						src={profile.profileImage}
-						alt="{profile.name}'s profile picture"
+						alt="Фото профиля {profile.name}"
 						class="w-28 h-28 lg:w-32 lg:h-32 rounded-2xl object-cover border-4 border-white/20"
 					/>
 				</div>
@@ -197,11 +197,11 @@
 					</h2>
 
 					<div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-gray-300 text-sm mb-4">
-						<div class="flex items-center gap-1.5" aria-label="Location">
+						<div class="flex items-center gap-1.5" aria-label="Местоположение">
 							<MapPin size={16} class="text-gray-400" />
 							<span>{profile.location}</span>
 						</div>
-						<div class="flex items-center gap-1.5" aria-label="Join date">
+						<div class="flex items-center gap-1.5" aria-label="Дата регистрации">
 							<Calendar size={16} class="text-gray-400" />
 							<span>Присоединился {profile.joinDate}</span>
 						</div>
@@ -215,7 +215,7 @@
 									type="button"
 									onclick={() => openSocialLink(profile.socialLinks.github)}
 									class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:bg-white/20 hover:text-white transition-colors"
-									aria-label="Visit {profile.name}'s GitHub profile"
+									aria-label="Профиль {profile.name} на GitHub"
 								>
 									<Github size={18} />
 								</button>
@@ -226,7 +226,7 @@
 									type="button"
 									onclick={() => openSocialLink(profile.socialLinks.linkedin)}
 									class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:bg-white/20 hover:text-white transition-colors"
-									aria-label="Visit {profile.name}'s LinkedIn profile"
+									aria-label="Профиль {profile.name} на LinkedIn"
 								>
 									<Linkedin size={18} />
 								</button>
@@ -237,7 +237,7 @@
 									type="button"
 									onclick={() => openSocialLink(profile.socialLinks.twitter)}
 									class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:bg-white/20 hover:text-white transition-colors"
-									aria-label="Visit {profile.name}'s Twitter profile"
+									aria-label="Профиль {profile.name} в Twitter"
 								>
 									<Twitter size={18} />
 								</button>
@@ -376,7 +376,7 @@
 									<span>{edu.year}</span>
 									{#if edu.gpa}
 										<span class="text-gray-300">•</span>
-										<span>GPA: {edu.gpa}</span>
+										<span>Средний балл: {edu.gpa}</span>
 									{/if}
 								</div>
 								{#if edu.certification}

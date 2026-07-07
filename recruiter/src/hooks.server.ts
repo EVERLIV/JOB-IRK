@@ -59,15 +59,15 @@ const authGuard: Handle = async ({ event, resolve }) => {
 		'/signup',
 		'/forgot-password',
 		'/reset-password',
-		'/verify-email',
-		'/onboarding'
+		'/verify-email'
 	];
+	const protectedPrefixes = ['/dashboard', '/onboarding'];
 
 	// Check if current route is public
 	const isPublicRoute = publicRoutes.some((route) => url.pathname.startsWith(route));
 
 	// If accessing dashboard without any auth tokens, redirect to login
-	if (url.pathname.startsWith('/dashboard') && !hasValidAuth) {
+	if (protectedPrefixes.some((route) => url.pathname.startsWith(route)) && !hasValidAuth) {
 		return new Response(null, {
 			status: 302,
 			headers: {

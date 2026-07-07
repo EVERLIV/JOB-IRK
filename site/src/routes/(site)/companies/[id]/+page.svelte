@@ -57,8 +57,8 @@
     }
 
     const shareData = {
-      title: `${company.name} - Company Profile`,
-      text: `Check out ${company.name} on PeelJobs`,
+      title: `${company.name} — профиль компании`,
+      text: `Посмотрите ${company.name} на PeelJobs`,
       url: window.location.href,
     };
 
@@ -78,19 +78,19 @@
   // Company stats
   const stats = $derived([
     { label: 'Открытые вакансии', value: jobs.length.toString(), icon: Briefcase },
-    { label: 'Тип компании', value: company.company_type || 'Н/A', icon: Building2 },
-    { label: 'Размер компании', value: company.size || 'N/A', icon: Users },
-    { label: 'Отрасль', value: company.industry?.name || 'N/A', icon: Factory }
+    { label: 'Тип компании', value: company.company_type || '—', icon: Building2 },
+    { label: 'Размер компании', value: company.size || '—', icon: Users },
+    { label: 'Отрасль', value: company.industry?.name || '—', icon: Factory }
   ]);
 </script>
 
 <svelte:head>
-  <title>{company.name} - Company Profile | PeelJobs</title>
-  <meta name="description" content="{company.profile || `Explore ${company.name} and discover job opportunities. View company profile, open positions, and more on PeelJobs.`}" />
+  <title>{company.name} — профиль компании | PeelJobs</title>
+  <meta name="description" content="{company.profile || `Узнайте больше о ${company.name} и найдите вакансии. Профиль компании, открытые позиции и многое другое на PeelJobs.`}" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="{company.name} - Company Profile" />
-  <meta property="og:description" content="{company.profile || `Explore ${company.name} and discover job opportunities.`}" />
+  <meta property="og:title" content="{company.name} — профиль компании" />
+  <meta property="og:description" content="{company.profile || `Узнайте больше о ${company.name} и найдите вакансии.`}" />
   {#if company.logo}
     <meta property="og:image" content="{company.logo}" />
   {/if}
@@ -98,8 +98,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{company.name} - Company Profile" />
-  <meta name="twitter:description" content="{company.profile || `Explore ${company.name} and discover job opportunities.`}" />
+  <meta name="twitter:title" content="{company.name} — профиль компании" />
+  <meta name="twitter:description" content="{company.profile || `Узнайте больше о ${company.name} и найдите вакансии.`}" />
   {#if company.logo}
     <meta name="twitter:image" content="{company.logo}" />
   {/if}
@@ -164,7 +164,7 @@
         <!-- Company Logo -->
         {#if company.logo}
           <div class="w-24 h-24 lg:w-28 lg:h-28 bg-white rounded-lg p-3 shadow-md flex items-center justify-center animate-fade-in-up" style="opacity: 0; animation-delay: 100ms; animation-fill-mode: forwards;">
-            <img src={company.logo} alt="{company.name} logo" class="w-full h-full object-contain" />
+            <img src={company.logo} alt="Логотип {company.name}" class="w-full h-full object-contain" />
           </div>
         {:else}
           <div class="w-24 h-24 lg:w-28 lg:h-28 bg-primary/20 rounded-lg flex items-center justify-center border-2 border-white/20 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms; animation-fill-mode: forwards;">

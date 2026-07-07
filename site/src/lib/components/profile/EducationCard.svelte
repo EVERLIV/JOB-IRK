@@ -10,6 +10,12 @@
 
 	let { education, onEdit, onDelete }: Props = $props();
 
+	function formatDegreeType(type: string): string {
+		if (type === 'Permanent') return 'Очная';
+		if (type === 'PartTime') return 'Заочная';
+		return type;
+	}
+
 	/**
 	 * Format date to readable format
 	 */
@@ -66,7 +72,7 @@
 								? 'bg-success-50 text-success-700 border-success-200'
 								: 'bg-warning-50 text-warning-700 border-warning-200'}"
 						>
-							{education.degree_type}
+							{formatDegreeType(education.degree_type)}
 						</span>
 					{/if}
 				</div>

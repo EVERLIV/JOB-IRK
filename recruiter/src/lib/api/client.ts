@@ -22,20 +22,28 @@ export interface ApiError {
 }
 
 let isRefreshing = false;
-let refreshSubscribers: ((token: string) => void)[] = [];
+let refreshSubscribers: Array<{
+	resolve: () => void;
+	reject: (error: unknown) => void;
+}> = [];
 
-function subscribeTokenRefresh(callback: (token: string) => void) {
-	refreshSubscribers.push(callback);
+function subscribeTokenRefresh(resolve: () => void, reject: (error: unknown) => void) {
+	refreshSubscribers.push({ resolve, reject });
 }
 
-function onTokenRefreshed(token: string) {
-	refreshSubscribers.forEach((callback) => callback(token));
+function onTokenRefreshed() {
+	refreshSubscribers.forEach(({ resolve }) => resolve());
+	refreshSubscribers = [];
+}
+
+function onTokenRefreshFailed(error: unknown) {
+	refreshSubscribers.forEach(({ reject }) => reject(error));
 	refreshSubscribers = [];
 }
 
 export class ApiClient {
 	/**
-	 * Make authenticated request with JWT token
+	 * Make authenticated request with HttpOnly auth cookies.
 	 *
 	 * Architecture:
 	 * - Browser: Stores tokens in HttpOnly cookies (XSS protection)
@@ -58,18 +66,10 @@ export class ApiClient {
 			headers.set('Content-Type', 'application/json');
 		}
 
-		// On server-side (SSR), read token from cookies and send in Authorization header
-		// On client-side, browser sends cookies automatically
-		if (!browser && !skipAuth) {
-			// Server-side: We need to get cookies from the request context
-			// This will be handled by hooks.server.ts which has access to cookies
-			// For now, we'll let the credentials: 'include' handle it
-		}
-
 		const response = await fetch(url, {
 			...options,
 			headers,
-			credentials: skipAuth ? 'omit' : 'include' // Send cookies for authenticated requests
+			credentials: 'include'
 		});
 
 		// Handle 401 Unauthorized - try to refresh token
@@ -88,18 +88,18 @@ export class ApiClient {
 					if (refreshResponse.ok) {
 						// New tokens are set in HttpOnly cookies by the server
 						isRefreshing = false;
-						onTokenRefreshed('refreshed');
+						onTokenRefreshed();
 
 						// Retry the original request with new token from cookie
 						return this.request<T>(endpoint, options, skipAuth, isFormData, 1);
 					} else {
-						// Refresh failed, clear auth and redirect to login
 						isRefreshing = false;
+						const refreshError = new Error('Session expired. Please login again.');
+						onTokenRefreshFailed(refreshError);
 						if (typeof window !== 'undefined') {
-							localStorage.removeItem('recruiter_user'); // Clear user data
 							window.location.href = '/login';
 						}
-						throw new Error('Session expired. Please login again.');
+						throw refreshError;
 					}
 				} else {
 					// Wait for the ongoing refresh to complete
@@ -109,14 +109,13 @@ export class ApiClient {
 							this.request<T>(endpoint, options, skipAuth, isFormData, 1)
 								.then(resolve)
 								.catch(reject);
-						});
+						}, reject);
 					});
 				}
 			} catch (error) {
 				isRefreshing = false;
-				// Clear user data and redirect to login
+				onTokenRefreshFailed(error);
 				if (typeof window !== 'undefined') {
-					localStorage.removeItem('recruiter_user');
 					window.location.href = '/login';
 				}
 				throw error;

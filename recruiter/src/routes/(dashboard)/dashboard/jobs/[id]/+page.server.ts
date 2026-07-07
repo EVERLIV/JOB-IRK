@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params, cookies, fetch }) => {
 	const accessToken = cookies.get('access_token');
 
 	if (!accessToken) {
-		throw error(401, 'Unauthorized');
+		throw error(401, 'Не авторизован');
 	}
 
 	try {
@@ -22,9 +22,9 @@ export const load: PageServerLoad = async ({ params, cookies, fetch }) => {
 
 		if (!jobResponse.ok) {
 			if (jobResponse.status === 404) {
-				throw error(404, 'Job not found');
+				throw error(404, 'Вакансия не найдена');
 			}
-			throw error(jobResponse.status, 'Failed to fetch job details');
+			throw error(jobResponse.status, 'Не удалось загрузить данные вакансии');
 		}
 
 		const job = await jobResponse.json();
@@ -70,7 +70,7 @@ export const load: PageServerLoad = async ({ params, cookies, fetch }) => {
 		};
 	} catch (err: any) {
 		console.error('Error loading job details:', err);
-		throw error(500, err.message || 'Failed to load job details');
+		throw error(500, err.message || 'Не удалось загрузить данные вакансии');
 	}
 };
 
@@ -83,7 +83,7 @@ export const actions: Actions = {
 		const accessToken = cookies.get('access_token');
 
 		if (!accessToken) {
-			return fail(401, { error: 'Unauthorized' });
+			return fail(401, { error: 'Не авторизован' });
 		}
 
 		try {
@@ -95,7 +95,7 @@ export const actions: Actions = {
 			});
 
 			if (!jobResponse.ok) {
-				return fail(jobResponse.status, { error: 'Failed to fetch job details' });
+				return fail(jobResponse.status, { error: 'Не удалось загрузить данные вакансии' });
 			}
 
 			const job = await jobResponse.json();
@@ -118,19 +118,19 @@ export const actions: Actions = {
 			if (!updateResponse.ok) {
 				const errorData = await updateResponse.json();
 				return fail(updateResponse.status, {
-					error: errorData.error || 'Failed to update notification settings'
+					error: errorData.error || 'Не удалось обновить настройки уведомлений'
 				});
 			}
 
 			return {
 				success: true,
 				message: newNotificationState
-					? 'Email notifications enabled'
-					: 'Email notifications disabled'
+					? 'Email-уведомления включены'
+					: 'Email-уведомления отключены'
 			};
 		} catch (err: any) {
 			console.error('Error toggling notifications:', err);
-			return fail(500, { error: err.message || 'Failed to toggle notifications' });
+			return fail(500, { error: err.message || 'Не удалось изменить настройки уведомлений' });
 		}
 	}
 };

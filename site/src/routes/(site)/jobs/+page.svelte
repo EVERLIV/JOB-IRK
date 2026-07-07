@@ -769,7 +769,7 @@
                       {#if job.company_logo}
                         <img
                           src={job.company_logo}
-                          alt="{job.company_name} logo"
+                          alt="Логотип {job.company_name}"
                           class="w-12 h-12 rounded object-cover bg-surface"
                         />
                       {:else}

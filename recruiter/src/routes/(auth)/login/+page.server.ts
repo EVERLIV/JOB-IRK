@@ -1,6 +1,7 @@
 import { redirect, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { getApiBaseUrl } from '$lib/config/env';
+import { setAuthCookies } from '$lib/server/auth';
 
 export const load: PageServerLoad = async ({ url }) => {
 	// Get redirect URL from query params (for post-login redirect)
@@ -23,7 +24,7 @@ export const actions: Actions = {
 		// Validate required fields
 		if (!email || !password) {
 			return fail(400, {
-				error: 'Email and password are required',
+				error: 'Укажите email и пароль',
 				email
 			});
 		}
@@ -46,7 +47,7 @@ export const actions: Actions = {
 
 			if (!response.ok) {
 				// Format error message
-				let errorMessage = 'Login failed. Please check your credentials.';
+				let errorMessage = 'Не удалось войти. Проверьте введённые данные.';
 				if (data.detail) {
 					errorMessage = data.detail;
 				} else if (data.non_field_errors) {
@@ -54,7 +55,7 @@ export const actions: Actions = {
 				} else if (data.email) {
 					errorMessage = `Email: ${data.email.join(', ')}`;
 				} else if (data.password) {
-					errorMessage = `Password: ${data.password.join(', ')}`;
+					errorMessage = `Пароль: ${data.password.join(', ')}`;
 				}
 
 				return fail(400, {
@@ -63,26 +64,8 @@ export const actions: Actions = {
 				});
 			}
 
-			// Set HttpOnly cookies for JWT tokens
-			if (data.access) {
-				cookies.set('access_token', data.access, {
-					httpOnly: true,
-					secure: false, // Set to true in production (HTTPS)
-					sameSite: 'lax',
-					path: '/',
-					maxAge: 60 * 15 // 15 minutes
-				});
-			}
-
-			if (data.refresh) {
-				cookies.set('refresh_token', data.refresh, {
-					httpOnly: true,
-					secure: false, // Set to true in production
-					sameSite: 'lax',
-					path: '/',
-					maxAge: 60 * 60 * 24 * 7 // 7 days
-				});
-			}
+			const secureCookies = url.protocol === 'https:';
+			setAuthCookies(cookies, data, secureCookies);
 
 			// Redirect to dashboard or requested URL
 			throw redirect(302, redirectTo);
@@ -94,7 +77,7 @@ export const actions: Actions = {
 
 			console.error('Login error:', error);
 			return fail(500, {
-				error: 'An unexpected error occurred. Please try again.',
+				error: 'Произошла непредвиденная ошибка. Попробуйте снова.',
 				email
 			});
 		}

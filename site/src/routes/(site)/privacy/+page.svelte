@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Shield, ChevronRight, Lock, Database, UserCheck, AlertTriangle, Eye, Cookie, Globe, Users, Bell, MessageCircle, ArrowRight } from '@lucide/svelte';
 
-	const lastUpdated = 'October 19, 2025';
+	const lastUpdated = '19 октября 2025';
 
 	interface Section {
 		id: string;
@@ -62,7 +62,7 @@
 
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 relative">
 		<!-- Breadcrumb -->
-		<nav class="mb-8" aria-label="Breadcrumb">
+		<nav class="mb-8" aria-label="Навигация">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
 					<a href="/" class="hover:text-white transition-colors">Главная</a>

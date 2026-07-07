@@ -27,7 +27,11 @@
   import Toast from "$lib/components/Toast.svelte";
 
   // Receive children snippet
-  let { children }: { children: any } = $props();
+  let { children, data }: { children: any; data: { user: any; isAuthenticated: boolean } } = $props();
+
+  $effect(() => {
+    authStore.setAuthState(data?.isAuthenticated ? data.user : null);
+  });
 
   let mobileMenuOpen = $state(false);
   let latestJobsDropdownOpen = $state(false);
@@ -77,49 +81,48 @@
     headerScrolled = window.scrollY > 10;
   }
 
-  // Auth state comes from client-side store (tokens stored in localStorage)
   let isAuthenticated = $derived($authStore.isAuthenticated);
   let user = $derived($authStore.user);
 
   // Navigation items for mega menu - full data
   const skills = [
-    { name: "Basic Computer Knowledge", slug: "basic-computer-knowledge" },
-    { name: "Basic Computer Skills", slug: "basic-computer-skills" },
-    { name: "Sales", slug: "sales" },
-    { name: "Communication Skills", slug: "communication-skills" },
+    { name: "Базовые знания ПК", slug: "basic-computer-knowledge" },
+    { name: "Базовые навыки ПК", slug: "basic-computer-skills" },
+    { name: "Продажи", slug: "sales" },
+    { name: "Коммуникативные навыки", slug: "communication-skills" },
     { name: "Java", slug: "java" },
     { name: "JavaScript", slug: "javascript" },
     { name: "BPO", slug: "bpo" },
     { name: "PHP", slug: "php" },
     { name: "HTML", slug: "html" },
-    { name: "Good Communication", slug: "good-communication" },
+    { name: "Хорошая коммуникация", slug: "good-communication" },
     { name: "ASP.NET", slug: "asp-dot-net" },
     { name: "jQuery", slug: "jquery" },
-    { name: "Accounting", slug: "accounting" },
+    { name: "Бухгалтерия", slug: "accounting" },
     { name: "CSS", slug: "css" },
-    { name: "Marketing", slug: "marketing" },
-    { name: "Business Development", slug: "business-development" },
-    { name: "English Communication", slug: "english-communication" },
+    { name: "Маркетинг", slug: "marketing" },
+    { name: "Развитие бизнеса", slug: "business-development" },
+    { name: "Английский язык", slug: "english-communication" },
   ];
 
   const industries = [
-    { name: "IT-Software", slug: "it-software" },
+    { name: "IT / ПО", slug: "it-software" },
     { name: "BPO", slug: "bpo" },
-    { name: "Education", slug: "education" },
-    { name: "Banking", slug: "banking" },
-    { name: "Sales & Marketing", slug: "sales" },
-    { name: "Travel & Hotels", slug: "travel" },
-    { name: "Accounting", slug: "accounting" },
-    { name: "Medical", slug: "medical" },
-    { name: "Other", slug: "other" },
-    { name: "Advertising", slug: "advertising" },
-    { name: "Construction", slug: "construction" },
-    { name: "Automobile", slug: "automobile" },
-    { name: "Aviation", slug: "aviation" },
-    { name: "Freshers", slug: "freshers" },
-    { name: "IT-Hardware", slug: "it-hardware" },
-    { name: "Recruitment", slug: "recruitment" },
-    { name: "Digital Marketing", slug: "digital-marketing" },
+    { name: "Образование", slug: "education" },
+    { name: "Банковское дело", slug: "banking" },
+    { name: "Продажи и маркетинг", slug: "sales" },
+    { name: "Путешествия и отели", slug: "travel" },
+    { name: "Бухгалтерия", slug: "accounting" },
+    { name: "Медицина", slug: "medical" },
+    { name: "Другое", slug: "other" },
+    { name: "Реклама", slug: "advertising" },
+    { name: "Строительство", slug: "construction" },
+    { name: "Автомобильная промышленность", slug: "automobile" },
+    { name: "Авиация", slug: "aviation" },
+    { name: "Начинающим", slug: "freshers" },
+    { name: "IT / Оборудование", slug: "it-hardware" },
+    { name: "Подбор персонала", slug: "recruitment" },
+    { name: "Цифровой маркетинг", slug: "digital-marketing" },
   ];
 
   const locations = [
@@ -128,7 +131,7 @@
     { name: "Mumbai", slug: "mumbai" },
     { name: "Kolkata", slug: "kolkata" },
     { name: "Delhi", slug: "delhi" },
-    { name: "Hyderabad", slug: "hyderabad" },
+    { name: "Хайдарабад", slug: "hyderabad" },
     { name: "Noida", slug: "noida" },
     { name: "Gurgaon", slug: "gurgaon" },
     { name: "Pune", slug: "pune" },
@@ -143,7 +146,7 @@
   ];
 
   const internshipCities = [
-    { name: "Hyderabad", slug: "hyderabad" },
+    { name: "Хайдарабад", slug: "hyderabad" },
     { name: "Bangalore", slug: "bangalore" },
     { name: "Chennai", slug: "chennai" },
     { name: "Pune", slug: "pune" },
@@ -860,7 +863,7 @@
               >
                 <MapPin size={14} />
               </div>
-              <span class="text-sm">Hyderabad, Telangana, India</span>
+              <span class="text-sm">Хайдарабад, Телангана, Индия</span>
             </div>
           </div>
         </div>

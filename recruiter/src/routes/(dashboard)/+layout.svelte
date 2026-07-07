@@ -14,7 +14,6 @@
 	import { authStore } from '$lib/stores/auth';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	import { Avatar } from '$lib/components/ui';
 	import type { LayoutData } from './$types';
 
@@ -22,20 +21,23 @@
 	let sidebarOpen = $state(false);
 	let userMenuOpen = $state(false);
 
-	// Get user info from server data (SSR-safe) or fallback to store
+	$effect(() => {
+		authStore.setAuthState(data.user ?? null);
+	});
+
 	let user = $derived(data.user || $authStore.user);
 
 	// Base navigation items available to all users
 	const baseNavItems = [
-		{ href: '/dashboard/', icon: LayoutDashboard, label: 'Dashboard' },
-		{ href: '/dashboard/jobs/', icon: Briefcase, label: 'Jobs' },
-		{ href: '/dashboard/analytics/', icon: BarChart3, label: 'Analytics' },
-		{ href: '/dashboard/account/', icon: User, label: 'Account' }
+		{ href: '/dashboard/', icon: LayoutDashboard, label: 'Панель управления' },
+		{ href: '/dashboard/jobs/', icon: Briefcase, label: 'Вакансии' },
+		{ href: '/dashboard/analytics/', icon: BarChart3, label: 'Аналитика' },
+		{ href: '/dashboard/account/', icon: User, label: 'Аккаунт' }
 	];
 
 	// Company-specific nav items (only for users with a company)
-	const companyNavItem = { href: '/dashboard/company/', icon: Building2, label: 'Company' };
-	const teamNavItem = { href: '/dashboard/team/', icon: Users, label: 'Team' };
+	const companyNavItem = { href: '/dashboard/company/', icon: Building2, label: 'Компания' };
+	const teamNavItem = { href: '/dashboard/team/', icon: Users, label: 'Команда' };
 
 	// Compute final nav items based on user's company status
 	let navItems = $derived(
@@ -63,14 +65,6 @@
 		goto('/login/');
 	}
 
-	// Sync server-loaded user data with auth store on mount
-	onMount(() => {
-		if (data.user) {
-			// Update store with server-loaded user data
-			// This keeps localStorage in sync with the actual authenticated state
-			authStore.updateUser(data.user);
-		}
-	});
 </script>
 
 <div class="min-h-screen bg-surface">
@@ -79,7 +73,7 @@
 		<button
 			onclick={() => (sidebarOpen = !sidebarOpen)}
 			class="p-2 rounded-lg text-muted hover:bg-surface transition-colors"
-			aria-label="Toggle menu"
+			aria-label="Переключить меню"
 		>
 			{#if sidebarOpen}
 				<X class="w-6 h-6" />
@@ -131,10 +125,10 @@
 						<Avatar name="{user?.first_name || 'U'} {user?.last_name || ''}" size="md" />
 						<div class="flex-1 min-w-0 text-left">
 							<p class="text-sm font-medium text-black truncate">
-								{user?.first_name || 'User'} {user?.last_name || ''}
+								{user?.first_name || 'Пользователь'} {user?.last_name || ''}
 							</p>
 							<p class="text-xs text-muted truncate">
-								{user?.company?.name || 'Independent Recruiter'}
+								{user?.company?.name || 'Независимый рекрутер'}
 							</p>
 						</div>
 						<ChevronDown class="w-4 h-4 text-muted flex-shrink-0 transition-transform duration-200 {userMenuOpen ? 'rotate-180' : ''}" />
@@ -148,14 +142,14 @@
 								class="flex items-center gap-2 px-4 py-2 text-sm text-muted hover:bg-surface hover:text-black transition-colors"
 							>
 								<User class="w-4 h-4" />
-								Account Settings
+								Настройки аккаунта
 							</a>
 							<button
 								onclick={handleLogout}
 								class="w-full flex items-center gap-2 px-4 py-2 text-sm text-error hover:bg-error-light transition-colors"
 							>
 								<LogOut class="w-4 h-4" />
-								Logout
+								Выйти
 							</button>
 						</div>
 					{/if}

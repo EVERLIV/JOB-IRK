@@ -107,9 +107,9 @@
 	}
 
 	function formatDate(dateString: string) {
-		if (!dateString) return 'N/A';
+		if (!dateString) return '—';
 		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'short', day: 'numeric' });
 	}
 
 	function getInitials(firstName: string, lastName: string) {
@@ -130,10 +130,25 @@
 				return 'bg-surface text-black';
 		}
 	}
+
+	function getStatusLabel(status: string) {
+		switch (status) {
+			case 'pending':
+				return 'Ожидает';
+			case 'accepted':
+				return 'Принято';
+			case 'expired':
+				return 'Истекло';
+			case 'cancelled':
+				return 'Отменено';
+			default:
+				return status;
+		}
+	}
 </script>
 
 <svelte:head>
-	<title>Team Management - PeelJobs Recruiter</title>
+	<title>Управление командой - PeelJobs Recruiter</title>
 </svelte:head>
 
 <div class="max-w-7xl space-y-6">
@@ -142,8 +157,8 @@
 		<div class="bg-success-light border border-success/30 rounded-lg p-4 flex items-start gap-3">
 			<CheckCircle class="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
 			<div class="flex-1">
-				<h3 class="text-sm font-medium text-success">Success!</h3>
-				<p class="text-sm text-success mt-1">{form?.message || 'Action completed successfully'}</p>
+				<h3 class="text-sm font-medium text-success">Готово!</h3>
+				<p class="text-sm text-success mt-1">{form?.message || 'Действие выполнено успешно'}</p>
 			</div>
 		</div>
 	{/if}
@@ -152,8 +167,8 @@
 		<div class="bg-error-light border border-error/30 rounded-lg p-4 flex items-start gap-3">
 			<XCircle class="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
 			<div class="flex-1">
-				<h3 class="text-sm font-medium text-error">Error</h3>
-				<p class="text-sm text-error mt-1">{form?.error || 'Failed to complete action'}</p>
+				<h3 class="text-sm font-medium text-error">Ошибка</h3>
+				<p class="text-sm text-error mt-1">{form?.error || 'Не удалось выполнить действие'}</p>
 			</div>
 		</div>
 	{/if}
@@ -163,13 +178,13 @@
 		<div>
 			<h1 class="text-2xl md:text-3xl font-bold text-black flex items-center gap-2">
 				<Users class="w-8 h-8" />
-				Team Management
+				Управление командой
 			</h1>
 			<p class="text-muted mt-1">
-				Manage your team members and collaborate on job postings
+				Управляйте участниками команды и совместно работайте над вакансиями
 			</p>
 			{#if !isAdmin}
-				<p class="text-sm text-amber-600 mt-1">⚠️ Only company admins can manage team members</p>
+				<p class="text-sm text-amber-600 mt-1">⚠️ Только администраторы компании могут управлять участниками команды</p>
 			{/if}
 		</div>
 
@@ -179,7 +194,7 @@
 				class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors"
 			>
 				<UserPlus class="w-4 h-4" />
-				Invite Team Member
+				Пригласить участника
 			</button>
 		{/if}
 	</div>
@@ -192,7 +207,7 @@
 					<Users class="w-6 h-6 text-primary" />
 				</div>
 				<div>
-					<p class="text-sm text-muted">Total Members</p>
+					<p class="text-sm text-muted">Всего участников</p>
 					<p class="text-2xl font-bold text-black">{data.team.total_members}</p>
 				</div>
 			</div>
@@ -204,7 +219,7 @@
 					<Crown class="w-6 h-6 text-purple-600" />
 				</div>
 				<div>
-					<p class="text-sm text-muted">Admins</p>
+					<p class="text-sm text-muted">Администраторы</p>
 					<p class="text-2xl font-bold text-black">
 						{data.team.members.filter((m: any) => m.is_admin).length}
 					</p>
@@ -218,7 +233,7 @@
 					<Mail class="w-6 h-6 text-success" />
 				</div>
 				<div>
-					<p class="text-sm text-muted">Pending Invites</p>
+					<p class="text-sm text-muted">Ожидающие приглашения</p>
 					<p class="text-2xl font-bold text-black">{data.invitations.pending_count}</p>
 				</div>
 			</div>
@@ -230,7 +245,7 @@
 		<input
 			type="text"
 			bind:value={searchQuery}
-			placeholder="Search team members by name, email, or role..."
+			placeholder="Поиск участников по имени, email или должности..."
 			class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 		/>
 	</div>
@@ -238,7 +253,7 @@
 	<!-- Team Members List -->
 	<div class="bg-white rounded-lg border border-border">
 		<div class="p-6 border-b border-border">
-			<h2 class="text-lg font-semibold text-black">Team Members ({filteredMembers.length})</h2>
+			<h2 class="text-lg font-semibold text-black">Участники команды ({filteredMembers.length})</h2>
 		</div>
 
 		<div class="divide-y divide-border">
@@ -266,14 +281,14 @@
 												class="inline-flex items-center gap-1 px-2 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded"
 											>
 												<Crown class="w-3 h-3" />
-												Admin
+												Админ
 											</span>
 										{/if}
 										{#if member.id === data.user.id}
 											<span
 												class="inline-flex items-center px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded"
 											>
-												You
+												Вы
 											</span>
 										{/if}
 									</div>
@@ -292,21 +307,21 @@
 										<a
 											href="/dashboard/team/{member.id}/"
 											class="p-2 text-muted hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
-											title="View details"
+											title="Просмотр деталей"
 										>
 											<Eye class="w-4 h-4" />
 										</a>
 										<button
 											onclick={() => openEditDialog(member)}
 											class="p-2 text-muted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
-											title="Edit member"
+											title="Редактировать участника"
 										>
 											<Edit class="w-4 h-4" />
 										</button>
 										<button
 											onclick={() => openRemoveDialog(member)}
 											class="p-2 text-muted hover:text-error hover:bg-error-light rounded-lg transition-colors"
-											title="Remove member"
+											title="Удалить участника"
 										>
 											<Trash2 class="w-4 h-4" />
 										</button>
@@ -317,15 +332,15 @@
 							<!-- Member Stats -->
 							<div class="grid grid-cols-3 gap-4 mt-4">
 								<div class="text-center p-3 bg-surface rounded-lg">
-									<p class="text-xs text-muted">Jobs Posted</p>
+									<p class="text-xs text-muted">Опубликовано вакансий</p>
 									<p class="text-lg font-semibold text-black">{member.stats.jobs_posted}</p>
 								</div>
 								<div class="text-center p-3 bg-surface rounded-lg">
-									<p class="text-xs text-muted">Active Jobs</p>
+									<p class="text-xs text-muted">Активные вакансии</p>
 									<p class="text-lg font-semibold text-black">{member.stats.active_jobs}</p>
 								</div>
 								<div class="text-center p-3 bg-surface rounded-lg">
-									<p class="text-xs text-muted">Total Applicants</p>
+									<p class="text-xs text-muted">Всего соискателей</p>
 									<p class="text-lg font-semibold text-black">{member.stats.total_applicants}</p>
 								</div>
 							</div>
@@ -333,12 +348,12 @@
 							<div class="flex items-center gap-4 mt-3 text-xs text-muted">
 								<span class="flex items-center gap-1">
 									<Calendar class="w-3 h-3" />
-									Joined {formatDate(member.date_joined)}
+									В команде с {formatDate(member.date_joined)}
 								</span>
 								{#if member.last_login}
 									<span class="flex items-center gap-1">
 										<Clock class="w-3 h-3" />
-										Last active {formatDate(member.last_login)}
+										Последняя активность {formatDate(member.last_login)}
 									</span>
 								{/if}
 							</div>
@@ -350,7 +365,7 @@
 			{#if filteredMembers.length === 0}
 				<div class="p-12 text-center">
 					<Users class="w-12 h-12 text-muted mx-auto mb-3" />
-					<p class="text-muted">No team members found</p>
+					<p class="text-muted">Участники команды не найдены</p>
 				</div>
 			{/if}
 		</div>
@@ -362,7 +377,7 @@
 			<div class="p-6 border-b border-border">
 				<h2 class="text-lg font-semibold text-black flex items-center gap-2">
 					<Mail class="w-5 h-5" />
-					Pending Invitations ({data.invitations.pending_count})
+					Ожидающие приглашения ({data.invitations.pending_count})
 				</h2>
 			</div>
 
@@ -375,17 +390,17 @@
 									<Mail class="w-4 h-4 text-muted" />
 									<p class="font-medium text-black">{invitation.email}</p>
 									<span class="px-2 py-1 text-xs font-medium rounded {getStatusColor(invitation.status)}">
-										{invitation.status}
+										{getStatusLabel(invitation.status)}
 									</span>
 								</div>
 								{#if invitation.role_title}
-									<p class="text-sm text-muted mt-1">Role: {invitation.role_title}</p>
+									<p class="text-sm text-muted mt-1">Роль: {invitation.role_title}</p>
 								{/if}
 								<div class="flex items-center gap-4 mt-2 text-xs text-muted">
-									<span>Invited by {invitation.invited_by_name}</span>
-									<span>Sent {formatDate(invitation.created_at)}</span>
+									<span>Пригласил(а) {invitation.invited_by_name}</span>
+									<span>Отправлено {formatDate(invitation.created_at)}</span>
 									{#if invitation.status === 'pending'}
-										<span class="text-amber-600">Expires in {invitation.days_remaining} days</span>
+										<span class="text-amber-600">Истекает через {invitation.days_remaining} дн.</span>
 									{/if}
 								</div>
 							</div>
@@ -397,7 +412,7 @@
 										<button
 											type="submit"
 											class="p-2 text-muted hover:text-success hover:bg-success-light rounded-lg transition-colors"
-											title="Resend invitation"
+											title="Отправить приглашение повторно"
 										>
 											<Send class="w-4 h-4" />
 										</button>
@@ -407,7 +422,7 @@
 										<button
 											type="submit"
 											class="p-2 text-muted hover:text-error hover:bg-error-light rounded-lg transition-colors"
-											title="Cancel invitation"
+											title="Отменить приглашение"
 										>
 											<X class="w-4 h-4" />
 										</button>
@@ -430,7 +445,7 @@
 				<div class="flex items-center justify-between">
 					<h3 class="text-lg font-semibold text-black flex items-center gap-2">
 						<UserPlus class="w-5 h-5" />
-						Invite Team Member
+						Пригласить участника
 					</h3>
 					<button
 						onclick={() => {
@@ -457,7 +472,7 @@
 				<div class="p-6 space-y-4">
 					<div>
 						<label for="invite-email" class="block text-sm font-medium text-muted mb-2">
-							Email Address <span class="text-error">*</span>
+							Адрес электронной почты <span class="text-error">*</span>
 						</label>
 						<input
 							id="invite-email"
@@ -465,40 +480,40 @@
 							name="email"
 							bind:value={inviteForm.email}
 							required
-							placeholder="colleague@example.com"
+							placeholder="kollega@example.com"
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						/>
 					</div>
 
 					<div>
-						<label for="invite-job-title" class="block text-sm font-medium text-muted mb-2">Job Title (Optional)</label>
+						<label for="invite-job-title" class="block text-sm font-medium text-muted mb-2">Должность (необязательно)</label>
 						<input
 							id="invite-job-title"
 							type="text"
 							name="job_title"
 							bind:value={inviteForm.job_title}
-							placeholder="e.g., Senior Recruiter"
+							placeholder="напр., Старший рекрутер"
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						/>
 					</div>
 
 					<div>
 						<label for="invite-message" class="block text-sm font-medium text-muted mb-2">
-							Personal Message (Optional)
+							Личное сообщение (необязательно)
 						</label>
 						<textarea
 							id="invite-message"
 							name="message"
 							bind:value={inviteForm.message}
 							rows="3"
-							placeholder="Add a personal message to the invitation..."
+							placeholder="Добавьте личное сообщение к приглашению..."
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						></textarea>
 					</div>
 
 					<p class="text-sm text-muted">
-						An invitation email will be sent with a link to join your team. The invitation will expire
-						in 7 days.
+						На указанный email будет отправлено приглашение со ссылкой для присоединения к команде.
+						Срок действия приглашения — 7 дней.
 					</p>
 				</div>
 
@@ -511,14 +526,14 @@
 						}}
 						class="px-4 py-2 text-muted bg-surface rounded-lg hover:bg-surface transition-colors"
 					>
-						Cancel
+						Отмена
 					</button>
 					<button
 						type="submit"
 						disabled={submitting || !inviteForm.email}
 						class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						{submitting ? 'Sending...' : 'Send Invitation'}
+						{submitting ? 'Отправка...' : 'Отправить приглашение'}
 					</button>
 				</div>
 			</form>
@@ -534,7 +549,7 @@
 				<div class="flex items-center justify-between">
 					<h3 class="text-lg font-semibold text-black flex items-center gap-2">
 						<Edit class="w-5 h-5" />
-						Edit Team Member
+						Редактировать участника
 					</h3>
 					<button
 						onclick={() => {
@@ -563,18 +578,18 @@
 				<div class="p-6 space-y-4">
 					<div>
 						<p class="text-sm text-muted mb-4">
-							Editing: <strong>{selectedMember.first_name} {selectedMember.last_name}</strong>
+							Редактирование: <strong>{selectedMember.first_name} {selectedMember.last_name}</strong>
 						</p>
 					</div>
 
 					<div>
-						<label for="edit-job-title" class="block text-sm font-medium text-muted mb-2">Job Title</label>
+						<label for="edit-job-title" class="block text-sm font-medium text-muted mb-2">Должность</label>
 						<input
 							id="edit-job-title"
 							type="text"
 							name="job_title"
 							bind:value={editForm.job_title}
-							placeholder="e.g., Senior Recruiter"
+							placeholder="напр., Старший рекрутер"
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						/>
 					</div>
@@ -591,10 +606,10 @@
 						<label for="is_admin" class="flex-1">
 							<div class="flex items-center gap-2 text-sm font-medium text-black">
 								<Shield class="w-4 h-4 text-purple-600" />
-								Company Admin
+								Администратор компании
 							</div>
 							<p class="text-xs text-muted mt-1">
-								Admins can invite members, manage team, and edit company profile
+								Администраторы могут приглашать участников, управлять командой и редактировать профиль компании
 							</p>
 						</label>
 					</div>
@@ -609,14 +624,14 @@
 						}}
 						class="px-4 py-2 text-muted bg-surface rounded-lg hover:bg-surface transition-colors"
 					>
-						Cancel
+						Отмена
 					</button>
 					<button
 						type="submit"
 						disabled={submitting}
 						class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						{submitting ? 'Saving...' : 'Save Changes'}
+						{submitting ? 'Сохранение...' : 'Сохранить изменения'}
 					</button>
 				</div>
 			</form>
@@ -632,7 +647,7 @@
 				<div class="flex items-center justify-between">
 					<h3 class="text-lg font-semibold text-error flex items-center gap-2">
 						<Trash2 class="w-5 h-5" />
-						Remove Team Member
+						Удалить участника
 					</h3>
 					<button
 						onclick={() => {
@@ -660,14 +675,14 @@
 
 				<div class="p-6">
 					<p class="text-muted mb-4">
-						Are you sure you want to remove
+						Вы уверены, что хотите удалить
 						<strong>{selectedMember.first_name} {selectedMember.last_name}</strong>
-						from your team?
+						из команды?
 					</p>
 					<div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
 						<p class="text-sm text-amber-800">
-							⚠️ This member will lose access to all company jobs and data. They will become an
-							independent recruiter.
+							⚠️ Этот участник потеряет доступ ко всем вакансиям и данным компании. Он станет
+							независимым рекрутером.
 						</p>
 					</div>
 				</div>
@@ -681,14 +696,14 @@
 						}}
 						class="px-4 py-2 text-muted bg-surface rounded-lg hover:bg-surface transition-colors"
 					>
-						Cancel
+						Отмена
 					</button>
 					<button
 						type="submit"
 						disabled={submitting}
 						class="px-4 py-2 bg-error text-white rounded-lg hover:bg-error transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						{submitting ? 'Removing...' : 'Remove Member'}
+						{submitting ? 'Удаление...' : 'Удалить участника'}
 					</button>
 				</div>
 			</form>

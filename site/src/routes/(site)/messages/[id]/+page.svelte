@@ -56,7 +56,7 @@
 			recruiter: {
 				name: 'Sarah Johnson',
 				company: 'Innovate Inc.',
-				position: 'Senior Recruiter',
+				position: 'Старший рекрутер',
 				avatar: null,
 				online: true,
 				email: 'sarah.johnson@innovate.com',
@@ -68,35 +68,35 @@
 				{
 					id: 101,
 					sender: 'recruiter',
-					text: "Hi! I reviewed your application for the Senior Software Engineer position. Your background in React and Node.js is really impressive!",
+					text: 'Здравствуйте! Я рассмотрела ваш отклик на позицию Senior Software Engineer. Ваш опыт работы с React и Node.js впечатляет!',
 					timestamp: '2024-01-18T13:00:00',
 					read: true
 				},
 				{
 					id: 102,
 					sender: 'me',
-					text: "Thank you for reaching out! I'm very interested in this opportunity. I've been working with React for the past 4 years and would love to learn more about the role.",
+					text: 'Спасибо, что написали! Мне очень интересна эта возможность. Я работаю с React уже 4 года и хотел бы узнать больше о роли.',
 					timestamp: '2024-01-18T13:15:00',
 					read: true
 				},
 				{
 					id: 103,
 					sender: 'recruiter',
-					text: 'Great! The role involves leading a team of 5 developers and working on our new customer-facing platform. The tech stack is React, Node.js, PostgreSQL, and AWS.',
+					text: 'Отлично! Роль предполагает руководство командой из 5 разработчиков и работу над новой клиентской платформой. Стек: React, Node.js, PostgreSQL и AWS.',
 					timestamp: '2024-01-18T13:20:00',
 					read: true
 				},
 				{
 					id: 104,
 					sender: 'me',
-					text: 'That sounds perfect! I have experience with all those technologies. What would be the next steps?',
+					text: 'Звучит отлично! У меня есть опыт работы со всеми этими технологиями. Какие будут следующие шаги?',
 					timestamp: '2024-01-18T13:25:00',
 					read: true
 				},
 				{
 					id: 105,
 					sender: 'recruiter',
-					text: 'Great! When would you be available for a quick call to discuss the position in more detail?',
+					text: 'Отлично! Когда вам будет удобно созвониться, чтобы обсудить позицию подробнее?',
 					timestamp: '2024-01-18T14:30:00',
 					read: false
 				}
@@ -107,7 +107,7 @@
 			recruiter: {
 				name: 'Michael Chen',
 				company: 'Tech Corp',
-				position: 'Talent Acquisition Manager',
+				position: 'Менеджер по подбору персонала',
 				avatar: null,
 				online: false,
 				email: 'michael.chen@techcorp.com',
@@ -119,14 +119,14 @@
 				{
 					id: 201,
 					sender: 'recruiter',
-					text: 'Hello! Your profile caught our attention. We have a Full Stack Developer position that matches your skills.',
+					text: 'Здравствуйте! Ваш профиль привлёк наше внимание. У нас есть вакансия Full Stack Developer, которая соответствует вашим навыкам.',
 					timestamp: '2024-01-18T09:00:00',
 					read: true
 				},
 				{
 					id: 202,
 					sender: 'recruiter',
-					text: "We'd like to schedule an interview with you. Are you available next week?",
+					text: 'Мы хотели бы назначить с вами собеседование. Вы свободны на следующей неделе?',
 					timestamp: '2024-01-18T10:15:00',
 					read: false
 				}
@@ -137,7 +137,7 @@
 			recruiter: {
 				name: 'Emily Rodriguez',
 				company: 'StartupXYZ',
-				position: 'HR Manager',
+				position: 'HR-менеджер',
 				avatar: null,
 				online: true,
 				email: 'emily@startupxyz.com',
@@ -149,21 +149,21 @@
 				{
 					id: 301,
 					sender: 'recruiter',
-					text: 'Hi! Are you available next Tuesday for an interview?',
+					text: 'Здравствуйте! Вы свободны во вторник на собеседование?',
 					timestamp: '2024-01-17T15:00:00',
 					read: true
 				},
 				{
 					id: 302,
 					sender: 'me',
-					text: 'Yes, Tuesday works great for me! What time would be best?',
+					text: 'Да, вторник мне подходит! В какое время будет удобнее?',
 					timestamp: '2024-01-17T15:30:00',
 					read: true
 				},
 				{
 					id: 303,
 					sender: 'recruiter',
-					text: "Perfect! I'll send you the meeting invite for 2 PM. Looking forward to speaking with you!",
+					text: 'Отлично! Отправлю приглашение на встречу на 14:00. Буду рада пообщаться с вами!',
 					timestamp: '2024-01-17T16:45:00',
 					read: true
 				}
@@ -241,7 +241,7 @@
 
 	function formatMessageTime(timestamp: string): string {
 		const date = new Date(timestamp);
-		return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+		return date.toLocaleTimeString('ru-RU', { hour: 'numeric', minute: '2-digit', hour12: false });
 	}
 
 	function formatMessageDate(timestamp: string): string {
@@ -252,18 +252,18 @@
 
 		if (diffDays === 0) return 'Сегодня';
 		if (diffDays === 1) return 'Вчера';
-		if (diffDays < 7) return date.toLocaleDateString('en-US', { weekday: 'long' });
+		if (diffDays < 7) return date.toLocaleDateString('ru-RU', { weekday: 'long' });
 
-		return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { month: 'short', day: 'numeric', year: 'numeric' });
 	}
 
 	function attachFile(type: AttachmentType): void {
-		alert(`${type} attachment will be implemented`);
+		alert(`Функция прикрепления ${type === 'image' ? 'изображения' : 'файла'} будет реализована позже`);
 		showAttachmentMenu = false;
 	}
 
 	function makeCall(type: CallType): void {
-		alert(`${type} call feature will be implemented`);
+		alert(`Функция ${type === 'voice' ? 'аудио' : 'видео'}звонка будет реализована позже`);
 	}
 
 	function getInitials(name: string): string {
@@ -327,7 +327,7 @@
 						<div class="flex-1 min-w-0">
 							<h1 class="font-semibold text-gray-900 truncate">{conversation.recruiter.name}</h1>
 							<p class="text-sm text-gray-500 truncate">
-								{conversation.recruiter.position} at {conversation.recruiter.company}
+								{conversation.recruiter.position} в {conversation.recruiter.company}
 								{#if conversation.recruiter.online}
 									<span class="text-success-600">• В сети</span>
 								{:else}
@@ -443,7 +443,7 @@
 									class="flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-xl transition-colors text-sm font-medium"
 								>
 									<ImageIcon size={16} />
-									Image
+									Изображение
 								</button>
 								<button
 									onclick={() => attachFile('file')}
@@ -646,24 +646,24 @@
 							class="inline-flex items-center gap-1.5 mt-3 text-sm text-success-600 bg-success-500/10 px-3 py-1 rounded-full"
 						>
 							<span class="w-2 h-2 bg-success-500 rounded-full"></span>
-							Online
+							В сети
 						</span>
 					{:else}
 						<span
 							class="inline-flex items-center gap-1.5 mt-3 text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full"
 						>
 							<span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-							Offline
+							Не в сети
 						</span>
 					{/if}
 				</div>
 
 				<!-- Contact Info -->
 				<div class="space-y-4 mb-6 pb-6 border-b border-gray-200">
-					<h4 class="font-medium text-gray-900">Contact Information</h4>
+					<h4 class="font-medium text-gray-900">Контактная информация</h4>
 					<div class="space-y-3">
 						<div>
-							<p class="text-xs text-gray-500 mb-1">Email</p>
+							<p class="text-xs text-gray-500 mb-1">Эл. почта</p>
 							<a
 								href="mailto:{conversation.recruiter.email}"
 								class="text-sm text-primary-600 hover:underline flex items-center gap-1.5"
@@ -673,7 +673,7 @@
 							</a>
 						</div>
 						<div>
-							<p class="text-xs text-gray-500 mb-1">Phone</p>
+							<p class="text-xs text-gray-500 mb-1">Телефон</p>
 							<a
 								href="tel:{conversation.recruiter.phone}"
 								class="text-sm text-primary-600 hover:underline flex items-center gap-1.5"
@@ -687,7 +687,7 @@
 
 				<!-- Job Info -->
 				<div class="space-y-4">
-					<h4 class="font-medium text-gray-900">Related Job</h4>
+					<h4 class="font-medium text-gray-900">Связанная вакансия</h4>
 					<a
 						href="/jobs/{conversation.jobId}/"
 						class="block p-4 bg-primary-50 hover:bg-primary-100 border border-primary-200 rounded-2xl transition-colors"
@@ -695,7 +695,7 @@
 						<p class="font-semibold text-gray-900 mb-1">{conversation.jobTitle}</p>
 						<p class="text-sm text-gray-600">{conversation.recruiter.company}</p>
 						<p class="text-xs text-primary-600 mt-2 flex items-center gap-1">
-							View job details
+							Просмотреть вакансию
 							<ExternalLink size={12} />
 						</p>
 					</a>

@@ -348,7 +348,7 @@
           <div class="mt-5 pt-5 border-t border-border">
             <p class="text-xs text-muted mb-2">Популярные:</p>
             <div class="flex flex-wrap gap-2">
-              {#each ["Python Developer", "React", "Bangalore", "Remote", "Начинающим"] as term}
+              {#each ["Python Developer", "React", "Bangalore", "Удалённо", "Начинающим"] as term}
                 <a
                   href="/jobs/?search={encodeURIComponent(term)}"
                   class="px-3 py-1 bg-surface text-muted hover:text-primary-600 hover:bg-primary-50 rounded-full text-xs font-medium transition-colors"
@@ -540,7 +540,7 @@
             <div class="flex items-start gap-3 mb-3">
               <img
                 src={job.company_logo}
-                alt="{job.company_name} logo"
+                alt="Логотип {job.company_name}"
                 class="w-12 h-12 rounded object-cover bg-surface flex-shrink-0"
                 onerror={(e) => {
                   const target = e.target as HTMLImageElement;

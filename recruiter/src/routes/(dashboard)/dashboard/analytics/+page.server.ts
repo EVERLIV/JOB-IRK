@@ -1,5 +1,6 @@
 import { redirect, error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { getApiBaseUrl } from '$lib/config/env';
 
 export const load: PageServerLoad = async ({ fetch, cookies, url }) => {
 	try {
@@ -7,14 +8,14 @@ export const load: PageServerLoad = async ({ fetch, cookies, url }) => {
 
 		// Fetch application analytics from API
 		const response = await fetch(
-			`http://localhost:8000/api/v1/recruiter/analytics/applications/?period=${period}`
+			`${getApiBaseUrl()}/recruiter/analytics/applications/?period=${period}`
 		);
 
 		if (!response.ok) {
 			if (response.status === 401) {
 				throw redirect(302, '/login/');
 			}
-			throw error(response.status, 'Failed to load analytics');
+			throw error(response.status, 'Не удалось загрузить аналитику');
 		}
 
 		const data = await response.json();
@@ -29,6 +30,6 @@ export const load: PageServerLoad = async ({ fetch, cookies, url }) => {
 			throw err;
 		}
 		console.error('Analytics load error:', err);
-		throw error(500, 'Failed to load analytics data');
+		throw error(500, 'Не удалось загрузить данные аналитики');
 	}
 };

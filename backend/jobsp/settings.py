@@ -17,7 +17,8 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "peeljobs@micropyramid.com"
 PEEL_URL = os.getenv("PEEL_URL", "http://peeljobs.com/")
 
 # Recruiter Frontend URL for team invitation emails
-RECRUITER_FRONTEND_URL = os.getenv("RECRUITER_FRONTEND_URL", "http://localhost:5173")
+RECRUITER_FRONTEND_URL = os.getenv("RECRUITER_FRONTEND_URL", "http://localhost:5174")
+SITE_FRONTEND_URL = os.getenv("SITE_FRONTEND_URL", "http://localhost:5173")
 
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/1")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
@@ -185,6 +186,17 @@ AUTHENTICATION_BACKENDS = (
     "social.auth_backend.PasswordlessAuthBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
+
+AUTH_COOKIE_DOMAIN = os.getenv("AUTH_COOKIE_DOMAIN")
+AUTH_COOKIE_SECURE = os.getenv("AUTH_COOKIE_SECURE", "false").lower() == "true"
+AUTH_COOKIE_SAMESITE = os.getenv("AUTH_COOKIE_SAMESITE", "Lax")
+EMAIL_VERIFICATION_TOKEN_EXPIRY_HOURS = int(
+    os.getenv("EMAIL_VERIFICATION_TOKEN_EXPIRY_HOURS", "48")
+)
+PASSWORD_RESET_TOKEN_EXPIRY_HOURS = int(
+    os.getenv("PASSWORD_RESET_TOKEN_EXPIRY_HOURS", "24")
+)
+OAUTH_STATE_MAX_AGE_SECONDS = int(os.getenv("OAUTH_STATE_MAX_AGE_SECONDS", "600"))
 
 TEMPLATES = [
     {
@@ -424,7 +436,7 @@ DAILY_REPORT_USERS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",  # JWT from Authorization header
+        "api.authentication.CookieJWTAuthentication",  # JWT from header or HttpOnly cookie
         "rest_framework.authentication.TokenAuthentication",  # Keep for backward compatibility
     ],
     "DEFAULT_PERMISSION_CLASSES": [

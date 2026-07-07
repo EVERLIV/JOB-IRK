@@ -23,8 +23,8 @@
 </script>
 
 <svelte:head>
-	<title>Forgot Password - PeelJobs Recruiter</title>
-	<meta name="description" content="Reset your PeelJobs employer account password." />
+	<title>Восстановление пароля - PeelJobs Recruiter</title>
+	<meta name="description" content="Сбросьте пароль аккаунта работодателя PeelJobs." />
 </svelte:head>
 
 <Card padding="lg" class="shadow-lg">
@@ -37,14 +37,14 @@
 				class="inline-flex items-center gap-2 text-sm text-muted hover:text-black transition-colors mb-6"
 			>
 				<ArrowLeft class="w-4 h-4" />
-				Back to login
+				Вернуться ко входу
 			</a>
 
 			<!-- Header -->
 			<div class="mb-8">
-				<h1 class="text-2xl font-semibold text-black">Forgot Password?</h1>
+				<h1 class="text-2xl font-semibold text-black">Забыли пароль?</h1>
 				<p class="text-muted mt-2">
-					No worries! Enter your email address and we'll send you a link to reset your password.
+					Ничего страшного. Укажите email, и мы отправим ссылку для сброса пароля.
 				</p>
 			</div>
 
@@ -62,7 +62,7 @@
 					</div>
 				{/if}
 
-				<FormField label="Email Address">
+				<FormField label="Email">
 					<Input
 						type="email"
 						id="email"
@@ -70,7 +70,7 @@
 						bind:value={email}
 						required
 						disabled={loading}
-						placeholder="you@company.com"
+						placeholder="name@company.com"
 						size="lg"
 					>
 						{#snippet iconLeft()}
@@ -80,7 +80,7 @@
 				</FormField>
 
 				<Button type="submit" size="lg" {loading} class="w-full">
-					{loading ? 'Sending...' : 'Send Reset Link'}
+					{loading ? 'Отправка...' : 'Отправить ссылку для сброса'}
 				</Button>
 			</form>
 		</div>
@@ -91,18 +91,18 @@
 				<CheckCircle class="w-8 h-8 text-success" />
 			</div>
 
-			<h1 class="text-2xl font-semibold text-black mb-3">Check Your Email</h1>
+			<h1 class="text-2xl font-semibold text-black mb-3">Проверьте почту</h1>
 			<p class="text-muted mb-6">
-				We've sent a password reset link to <strong class="text-black">{email}</strong>
+				Мы отправили ссылку для сброса пароля на <strong class="text-black">{email}</strong>
 			</p>
 
 			<div class="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
 				<div class="text-sm text-primary">
-					Didn't receive the email? Check your spam folder or
+					Не получили письмо? Проверьте папку со спамом или
 					<form method="POST" class="inline" use:enhance>
 						<input type="hidden" name="email" value={email} />
 						<button type="submit" class="font-medium underline hover:no-underline">
-							resend the link
+							отправьте ссылку повторно
 						</button>
 					</form>
 				</div>
@@ -113,7 +113,7 @@
 				class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-hover font-medium transition-colors"
 			>
 				<ArrowLeft class="w-4 h-4" />
-				Back to login
+				Вернуться ко входу
 			</a>
 		</div>
 	{/if}

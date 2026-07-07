@@ -81,7 +81,7 @@
 				type="text"
 				bind:value={formData.pincode}
 				maxlength="6"
-				placeholder="e.g., 560001"
+				placeholder="напр., 560001"
 				class="w-full px-4 py-3 border rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white transition-all outline-none {validationErrors.pincode ? 'border-error-500 focus:border-error-500 focus:ring-2 focus:ring-error-500/20' : 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20'}"
 			/>
 			{#if validationErrors.pincode}

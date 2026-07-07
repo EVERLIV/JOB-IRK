@@ -614,6 +614,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)  # agency created user
     profile_completeness = models.CharField(max_length=500, default="")
     activation_code = models.CharField(max_length=100, null=True, blank=True)
+    activation_code_created = models.DateTimeField(null=True, blank=True)
     # is_register_through_mail = models.BooleanField(default=False)
     registered_from = models.CharField(
         choices=REGISTERED_FROM, max_length=15, default=""

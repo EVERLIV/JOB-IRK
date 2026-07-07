@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
 	}
 
 	if (!user?.is_admin) {
-		throw error(403, 'You do not have permission to view team member details');
+		throw error(403, 'У вас нет прав для просмотра данных участника команды');
 	}
 
 	try {
@@ -28,12 +28,12 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
 
 		if (!response.ok) {
 			if (response.status === 404) {
-				throw error(404, 'Team member not found');
+				throw error(404, 'Участник команды не найден');
 			}
 			if (response.status === 403) {
-				throw error(403, 'You do not have permission to view this team member');
+				throw error(403, 'У вас нет прав для просмотра этого участника команды');
 			}
-			throw error(response.status, 'Failed to load team member details');
+			throw error(response.status, 'Не удалось загрузить данные участника команды');
 		}
 
 		const memberData = await response.json();
@@ -50,6 +50,6 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
 			throw err;
 		}
 
-		throw error(500, err.message || 'Failed to load team member details');
+		throw error(500, err.message || 'Не удалось загрузить данные участника команды');
 	}
 };

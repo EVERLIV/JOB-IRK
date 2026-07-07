@@ -30,12 +30,12 @@
 			recruiter: {
 				name: 'Sarah Johnson',
 				company: 'Innovate Inc.',
-				position: 'Senior Recruiter',
+				position: 'Старший рекрутер',
 				avatar: null,
 				online: true
 			},
 			jobTitle: 'Senior Software Engineer',
-			lastMessage: 'Great! When would you be available for a quick call?',
+			lastMessage: 'Отлично! Когда вам будет удобно созвониться?',
 			lastMessageSender: 'recruiter',
 			timestamp: '2024-01-18T14:30:00',
 			unread: 2,
@@ -47,12 +47,12 @@
 			recruiter: {
 				name: 'Michael Chen',
 				company: 'Tech Corp',
-				position: 'Talent Acquisition Manager',
+				position: 'Менеджер по подбору персонала',
 				avatar: null,
 				online: false
 			},
 			jobTitle: 'Full Stack Developer',
-			lastMessage: "We'd like to schedule an interview with you.",
+			lastMessage: 'Мы хотели бы назначить с вами собеседование.',
 			lastMessageSender: 'recruiter',
 			timestamp: '2024-01-18T10:15:00',
 			unread: 1,
@@ -64,12 +64,12 @@
 			recruiter: {
 				name: 'Emily Rodriguez',
 				company: 'StartupXYZ',
-				position: 'HR Manager',
+				position: 'HR-менеджер',
 				avatar: null,
 				online: true
 			},
 			jobTitle: 'React Developer',
-			lastMessage: "Perfect! I'll send you the meeting invite shortly.",
+			lastMessage: 'Отлично! Скоро отправлю приглашение на встречу.',
 			lastMessageSender: 'recruiter',
 			timestamp: '2024-01-17T16:45:00',
 			unread: 0,
@@ -81,12 +81,12 @@
 			recruiter: {
 				name: 'David Williams',
 				company: 'Cloud Solutions',
-				position: 'Lead Recruiter',
+				position: 'Ведущий рекрутер',
 				avatar: null,
 				online: false
 			},
 			jobTitle: 'DevOps Engineer',
-			lastMessage: 'Thank you for your interest!',
+			lastMessage: 'Спасибо за ваш интерес!',
 			lastMessageSender: 'recruiter',
 			timestamp: '2024-01-16T14:20:00',
 			unread: 0,
@@ -98,12 +98,12 @@
 			recruiter: {
 				name: 'Jessica Park',
 				company: 'Data Analytics Inc.',
-				position: 'Technical Recruiter',
+				position: 'Технический рекрутер',
 				avatar: null,
 				online: true
 			},
 			jobTitle: 'Backend Engineer',
-			lastMessage: 'Looking forward to our conversation!',
+			lastMessage: 'С нетерпением жду нашего разговора!',
 			lastMessageSender: 'me',
 			timestamp: '2024-01-15T11:30:00',
 			unread: 0,
@@ -188,7 +188,7 @@
 		if (diffDays === 1) return 'Вчера';
 		if (diffDays < 7) return `${diffDays} дн. назад`;
 
-		return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { month: 'short', day: 'numeric' });
 	}
 </script>
 
@@ -207,7 +207,7 @@
 
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 relative">
 		<!-- Breadcrumb -->
-		<nav class="mb-6" aria-label="Breadcrumb">
+		<nav class="mb-6" aria-label="Навигация">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
 					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>
@@ -340,7 +340,7 @@
 					: 'bg-white text-muted'}"
 			>
 				<Star size={14} />
-				Starred
+				Избранные
 			</button>
 			<button
 				onclick={() => (filterType = 'archived')}
@@ -350,7 +350,7 @@
 					: 'bg-white text-muted'}"
 			>
 				<Archive size={14} />
-				Archived
+				Архив
 			</button>
 		</div>
 
@@ -445,7 +445,7 @@
 							<div class="flex items-center gap-2 text-sm text-muted mb-2">
 								<Building2 size={14} class="text-muted flex-shrink-0" />
 								<span class="truncate"
-									>{conversation.recruiter.position} at {conversation.recruiter.company}</span
+									>{conversation.recruiter.position} в {conversation.recruiter.company}</span
 								>
 							</div>
 

@@ -33,7 +33,7 @@ export const load: PageServerLoad = async ({ parent, fetch }) => {
 			return {
 				user,
 				company: null,
-				error: 'Failed to load company profile'
+				error: 'Не удалось загрузить профиль компании'
 			};
 		}
 	} catch (error) {
@@ -41,7 +41,7 @@ export const load: PageServerLoad = async ({ parent, fetch }) => {
 		return {
 			user,
 			company: null,
-			error: 'Failed to load company profile'
+			error: 'Не удалось загрузить профиль компании'
 		};
 	}
 };
@@ -75,13 +75,13 @@ export const actions: Actions = {
 			if (response.ok) {
 				return {
 					success: true,
-					message: result.message || 'Company profile updated successfully',
+					message: result.message || 'Профиль компании успешно обновлён',
 					company: result.company
 				};
 			} else {
 				return fail(400, {
 					success: false,
-					error: result.error || 'Failed to update company profile',
+					error: result.error || 'Не удалось обновить профиль компании',
 					errors: result
 				});
 			}
@@ -89,7 +89,7 @@ export const actions: Actions = {
 			console.error('Error updating company:', error);
 			return fail(500, {
 				success: false,
-				error: 'An error occurred while updating the company profile'
+				error: 'Произошла ошибка при обновлении профиля компании'
 			});
 		}
 	}

@@ -5,6 +5,7 @@ Google OAuth 2.0 integration for modern frontend clients
 import requests
 from django.conf import settings
 from django.utils.crypto import get_random_string
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -20,6 +21,7 @@ from .serializers import (
     UserSerializer,
     GoogleUrlRequestSerializer,
     ChangePasswordSerializer,
+    LoginSerializer,
     RegisterSerializer,
     VerifyEmailSerializer,
     ResendVerificationSerializer,
@@ -27,7 +29,13 @@ from .serializers import (
     ResetPasswordSerializer,
 )
 from .utils import create_or_update_google_user, get_tokens_for_user
-from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
+from api.auth_helpers import (
+    CookieTokenRefreshView,
+    auth_response,
+    build_oauth_state,
+    clear_auth_cookies,
+    verify_oauth_state,
+)
 
 
 def send_verification_email(user, request):
@@ -65,7 +73,7 @@ def send_password_reset_email(user, request):
 
     # Use site UI URL for password reset
     frontend_url = settings.SITE_FRONTEND_URL if hasattr(settings, 'SITE_FRONTEND_URL') else 'http://localhost:5173'
-    reset_url = f"{frontend_url}/reset-password/?token={user.activation_code}"
+    reset_url = f"{frontend_url}/reset-password/?token={user.password_reset_token}"
 
     # Render email template
     template = loader.get_template('jobseeker/email/password_reset.html')
@@ -81,6 +89,33 @@ def send_password_reset_email(user, request):
         mto=[user.email],
         msubject="Reset your PeelJobs password",
         mbody=html_content
+    )
+
+
+@extend_schema(
+    tags=["Authentication"],
+    summary="Login Job Seeker",
+    description="Authenticate a job seeker with email and password.",
+    request=LoginSerializer,
+)
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def login(request):
+    serializer = LoginSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    user = serializer.validated_data["user"]
+    tokens = get_tokens_for_user(user)
+    return auth_response(
+        {
+            "success": True,
+            "user": UserSerializer(user).data,
+            "access": tokens["access"],
+            "refresh": tokens["refresh"],
+            "message": "Login successful",
+        },
+        access_token=tokens["access"],
+        refresh_token=tokens["refresh"],
     )
 
 
@@ -145,19 +180,20 @@ def verify_email(request):
         user = serializer.user
         user.is_active = True
         user.email_verified = True
-        user.activation_code = ''  # Clear the token
-        user.save()
+        user.activation_code = ''
+        user.activation_code_created = None
+        user.save(update_fields=["is_active", "email_verified", "activation_code", "activation_code_created"])
 
         # Generate JWT tokens
         tokens = get_tokens_for_user(user)
 
-        return Response({
+        return auth_response({
             "success": True,
             "user": UserSerializer(user).data,
             "access": tokens["access"],
             "refresh": tokens["refresh"],
             "message": "Email verified successfully"
-        }, status=status.HTTP_200_OK)
+        }, status_code=status.HTTP_200_OK, access_token=tokens["access"], refresh_token=tokens["refresh"])
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -183,7 +219,8 @@ def resend_verification(request):
 
         # Generate new activation code
         user.activation_code = get_random_string(32)
-        user.save()
+        user.activation_code_created = timezone.now()
+        user.save(update_fields=["activation_code", "activation_code_created"])
 
         # Send verification email
         try:
@@ -224,8 +261,9 @@ def forgot_password(request):
             user = serializer.user
 
             # Generate new reset token
-            user.activation_code = get_random_string(32)
-            user.save()
+            user.password_reset_token = get_random_string(48)
+            user.password_reset_token_created = timezone.now()
+            user.save(update_fields=["password_reset_token", "password_reset_token_created"])
 
             # Send reset email
             try:
@@ -261,8 +299,9 @@ def reset_password(request):
     if serializer.is_valid():
         user = serializer.user
         user.set_password(serializer.validated_data['password'])
-        user.activation_code = ''  # Clear the token
-        user.save()
+        user.password_reset_token = ''
+        user.password_reset_token_created = None
+        user.save(update_fields=["password", "password_reset_token", "password_reset_token_created"])
 
         return Response({
             "success": True,
@@ -335,6 +374,7 @@ def google_auth_url(request):
     redirect_uri = serializer.validated_data["redirect_uri"]
 
     # Build Google OAuth URL
+    state = build_oauth_state("jobseeker_google", redirect_uri)
     google_auth_url = (
         "https://accounts.google.com/o/oauth2/auth"
         f"?client_id={settings.GOOGLE_CLIENT_ID}"
@@ -342,12 +382,12 @@ def google_auth_url(request):
         "&scope=https://www.googleapis.com/auth/userinfo.profile "
         "https://www.googleapis.com/auth/userinfo.email"
         f"&redirect_uri={redirect_uri}"
-        "&state=JS"  # Job Seeker
+        f"&state={state}"
         "&access_type=offline"
         "&prompt=consent"
     )
 
-    return Response({"auth_url": google_auth_url, "user_type": "JS"})
+    return Response({"auth_url": google_auth_url, "user_type": "JS", "state": state})
 
 
 @extend_schema(
@@ -433,6 +473,14 @@ def google_auth_callback(request):
     """
     serializer = GoogleAuthSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
+    try:
+        verify_oauth_state(
+            serializer.validated_data["state"],
+            expected_flow="jobseeker_google",
+            redirect_uri=serializer.validated_data["redirect_uri"],
+        )
+    except ValueError as exc:
+        return Response({"error": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
 
     # Exchange code for access token
     token_params = {
@@ -490,15 +538,22 @@ def google_auth_callback(request):
     redirect_to = "/"  # Redirect to home page after successful login
 
     response_data = {
+        "success": True,
         "user": UserSerializer(user).data,
         "access": tokens["access"],
         "refresh": tokens["refresh"],
         "requires_profile_completion": requires_profile_completion,
         "redirect_to": redirect_to,
         "is_new_user": created,
+        "message": "Google login successful",
     }
 
-    return Response(response_data, status=status.HTTP_200_OK)
+    return auth_response(
+        response_data,
+        status_code=status.HTTP_200_OK,
+        access_token=tokens["access"],
+        refresh_token=tokens["refresh"],
+    )
 
 
 @extend_schema(
@@ -657,41 +712,16 @@ def logout(request):
         # Always clear cookies and return success (even if token missing/invalid)
         # This ensures user can logout even if token is corrupted
         response = Response(
-            {"message": "Logout successful"}, status=status.HTTP_200_OK
+            {"success": True, "message": "Logout successful"}, status=status.HTTP_200_OK
         )
-
-        # Get cookie domain for consistent clearing
-        cookie_domain = getattr(settings, 'SESSION_COOKIE_DOMAIN', None)
-
-        # Clear access token cookie
-        response.delete_cookie(
-            key='access_token',
-            path='/',
-            domain=cookie_domain,
-            samesite='Lax',
-        )
-
-        # Clear refresh token cookie
-        response.delete_cookie(
-            key='refresh_token',
-            path='/',
-            domain=cookie_domain,
-            samesite='Lax',
-        )
-
-        return response
+        return clear_auth_cookies(response)
     except Exception as e:
         # Even on error, try to clear cookies
         response = Response(
-            {"message": "Logout completed (with errors)", "detail": str(e)},
+            {"success": True, "message": "Logout completed (with errors)", "detail": str(e)},
             status=status.HTTP_200_OK  # Return 200 so frontend can continue
         )
-
-        cookie_domain = getattr(settings, 'SESSION_COOKIE_DOMAIN', None)
-        response.delete_cookie(key='access_token', path='/', domain=cookie_domain, samesite='Lax')
-        response.delete_cookie(key='refresh_token', path='/', domain=cookie_domain, samesite='Lax')
-
-        return response
+        return clear_auth_cookies(response)
 
 
 @extend_schema(
@@ -768,80 +798,3 @@ def change_password(request):
     )
 
 
-class CookieTokenRefreshView(TokenRefreshView):
-    """
-    Custom TokenRefreshView that reads refresh token from HttpOnly cookie
-    and sets new tokens in HttpOnly cookies
-    """
-    def post(self, request, *args, **kwargs):
-        # Get refresh token from cookie or request body (backward compatibility)
-        refresh_token = request.COOKIES.get('refresh_token') or request.data.get('refresh')
-
-        if not refresh_token:
-            return Response(
-                {"error": "Refresh token is required"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        # Create request data with refresh token
-        # Handle both QueryDict (from forms) and dict (from JSON)
-        if hasattr(request.data, '_mutable'):
-            # It's a QueryDict
-            request.data._mutable = True
-            request.data['refresh'] = refresh_token
-            request.data._mutable = False
-        else:
-            # It's a regular dict, create a new mutable copy
-            request._full_data = {'refresh': refresh_token}
-
-        # Call parent class to perform token refresh
-        try:
-            response = super().post(request, *args, **kwargs)
-
-            if response.status_code == 200:
-                # Extract new tokens from response
-                access_token = response.data.get('access')
-                new_refresh_token = response.data.get('refresh', refresh_token)
-
-                # Create new response without tokens in body
-                new_response = Response(
-                    {"message": "Token refreshed successfully"},
-                    status=status.HTTP_200_OK
-                )
-
-                # Get cookie domain for cross-subdomain support
-                cookie_domain = getattr(settings, 'SESSION_COOKIE_DOMAIN', None)
-
-                # Set new access token cookie
-                new_response.set_cookie(
-                    key='access_token',
-                    value=access_token,
-                    max_age=7 * 24 * 60 * 60,  # 7 days
-                    httponly=True,
-                    secure=not settings.DEBUG,
-                    samesite='Lax',
-                    domain=cookie_domain,
-                    path='/',
-                )
-
-                # Set new refresh token cookie
-                new_response.set_cookie(
-                    key='refresh_token',
-                    value=new_refresh_token,
-                    max_age=30 * 24 * 60 * 60,  # 30 days
-                    httponly=True,
-                    secure=not settings.DEBUG,
-                    samesite='Lax',
-                    domain=cookie_domain,
-                    path='/',
-                )
-
-                return new_response
-
-            return response
-
-        except (TokenError, InvalidToken) as e:
-            return Response(
-                {"error": "Invalid or expired refresh token", "detail": str(e)},
-                status=status.HTTP_401_UNAUTHORIZED
-            )

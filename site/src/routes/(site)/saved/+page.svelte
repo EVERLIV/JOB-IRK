@@ -29,13 +29,13 @@
 	let savedJobs = $state<SavedJob[]>([
 		{
 			id: 1,
-			title: 'Frontend Developer',
+			title: 'Frontend-разработчик',
 			company: 'TechCorp',
 			companyLogo: null,
-			location: 'Remote',
-			type: 'Full-time',
-			salary: '$80k - $120k',
-			posted: '2 days ago',
+			location: 'Удалённо',
+			type: 'Полная занятость',
+			salary: '₹80 тыс. – ₹120 тыс.',
+			posted: '2 дня назад',
 			deadline: '2025-05-15'
 		},
 		{
@@ -43,32 +43,32 @@
 			title: 'Senior React Engineer',
 			company: 'StartupXYZ',
 			companyLogo: null,
-			location: 'San Francisco',
-			type: 'Full-time',
-			salary: '$120k - $160k',
-			posted: '3 days ago',
+			location: 'Сан-Франциско',
+			type: 'Полная занятость',
+			salary: '₹120 тыс. – ₹160 тыс.',
+			posted: '3 дня назад',
 			deadline: null
 		},
 		{
 			id: 3,
-			title: 'UI/UX Designer',
+			title: 'UI/UX-дизайнер',
 			company: 'Designify',
 			companyLogo: null,
-			location: 'Mumbai',
-			type: 'Contract',
-			salary: '$60k - $80k',
-			posted: '5 days ago',
+			location: 'Мумбаи',
+			type: 'Контракт',
+			salary: '₹60 тыс. – ₹80 тыс.',
+			posted: '5 дней назад',
 			deadline: '2025-04-30'
 		},
 		{
 			id: 4,
-			title: 'Full Stack Developer',
+			title: 'Full Stack разработчик',
 			company: 'WebSolutions',
 			companyLogo: null,
-			location: 'Bangalore',
-			type: 'Full-time',
-			salary: '$90k - $130k',
-			posted: '1 week ago',
+			location: 'Бангалор',
+			type: 'Полная занятость',
+			salary: '₹90 тыс. – ₹130 тыс.',
+			posted: '1 неделю назад',
 			deadline: null
 		}
 	]);
@@ -107,7 +107,7 @@
 
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 relative">
 		<!-- Breadcrumb -->
-		<nav class="mb-6" aria-label="Breadcrumb">
+		<nav class="mb-6" aria-label="Навигация">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
 					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>
@@ -269,7 +269,7 @@
 								{#if job.deadline}
 									<div class="text-xs text-warning bg-warning-light px-3 py-1.5 rounded-lg mb-4">
 										<Calendar size={12} class="inline mr-1" />
-										Deadline: {new Date(job.deadline).toLocaleDateString('en-US', {
+										Срок подачи: {new Date(job.deadline).toLocaleDateString('ru-RU', {
 											month: 'short',
 											day: 'numeric',
 											year: 'numeric'

@@ -12,6 +12,7 @@ urlpatterns = [
     path("auth/register/", auth_views.register, name="register"),
     path("auth/login/", auth_views.login, name="login"),
     path("auth/logout/", auth_views.logout, name="logout"),
+    path("auth/token/refresh/", auth_views.CookieTokenRefreshView.as_view(), name="token-refresh"),
 
     # Email Verification
     path("auth/verify-email/", auth_views.verify_email, name="verify-email"),

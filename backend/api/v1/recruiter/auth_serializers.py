@@ -1,10 +1,14 @@
 """
 Authentication Serializers for Recruiter/Employer
 """
+from datetime import timedelta
+
+from django.conf import settings
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.utils import timezone
 from peeldb.models import User, Company
 from django.utils.crypto import get_random_string
 from .serializers import CompanyBasicSerializer
@@ -123,7 +127,8 @@ class RegisterSerializer(serializers.Serializer):
             mobile=validated_data.get('phone', ''),
             is_active=False,  # Requires email verification
             email_verified=False,
-            activation_code=activation_code
+            activation_code=activation_code,
+            activation_code_created=timezone.now(),
         )
 
         return {
@@ -154,8 +159,8 @@ class LoginSerializer(serializers.Serializer):
                         "This email is registered as a job seeker. Please use the job seeker login."
                     )
 
-                # Check if email is verified
-                if not user.is_active:
+                # Keep recruiter login aligned with candidate auth gating.
+                if not user.is_active or not user.email_verified:
                     raise serializers.ValidationError(
                         "Please verify your email address first. Check your inbox for the verification link."
                     )
@@ -181,6 +186,12 @@ class VerifyEmailSerializer(serializers.Serializer):
                 user_type='EM',
                 is_active=False
             )
+            created_at = user.activation_code_created or user.date_joined
+            max_age = timedelta(
+                hours=getattr(settings, "EMAIL_VERIFICATION_TOKEN_EXPIRY_HOURS", 48)
+            )
+            if timezone.now() > created_at + max_age:
+                raise User.DoesNotExist
             self.context['user'] = user
             return value
         except User.DoesNotExist:
@@ -228,13 +239,27 @@ class ResetPasswordSerializer(serializers.Serializer):
 
     def validate_token(self, value):
         """Validate reset token"""
-        # TODO: Implement proper password reset token model
-        # For now, using activation_code field (should create separate PasswordReset model)
         try:
-            user = User.objects.get(
-                activation_code=value,
-                user_type='EM'
+            try:
+                user = User.objects.get(
+                    password_reset_token=value,
+                    user_type='EM'
+                )
+            except User.DoesNotExist:
+                user = User.objects.get(
+                    activation_code=value,
+                    user_type='EM',
+                    is_active=True,
+                    email_verified=True,
+                )
+            created_at = user.password_reset_token_created
+            if not created_at and user.password_reset_token != value:
+                created_at = user.activation_code_created or user.date_joined
+            max_age = timedelta(
+                hours=getattr(settings, "PASSWORD_RESET_TOKEN_EXPIRY_HOURS", 24)
             )
+            if not created_at or timezone.now() > created_at + max_age:
+                raise User.DoesNotExist
             self.context['user'] = user
             return value
         except User.DoesNotExist:
@@ -290,6 +315,7 @@ class GoogleCallbackSerializer(serializers.Serializer):
     code = serializers.CharField()
     account_type = serializers.ChoiceField(choices=['company', 'recruiter'])
     redirect_uri = serializers.URLField()
+    state = serializers.CharField()
 
 
 class GoogleCompleteSerializer(serializers.Serializer):

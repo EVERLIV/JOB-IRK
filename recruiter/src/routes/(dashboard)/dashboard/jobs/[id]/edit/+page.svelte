@@ -100,27 +100,68 @@
 	);
 
 	const steps = [
-		{ number: 1, title: 'Job Basics', icon: Briefcase },
-		{ number: 2, title: 'Location', icon: MapPin },
-		{ number: 3, title: 'Details', icon: FileText },
-		{ number: 4, title: 'Compensation', icon: DollarSign },
-		{ number: 5, title: 'Settings', icon: Settings },
-		{ number: 6, title: 'Preview', icon: Eye }
+		{ number: 1, title: 'Основное', icon: Briefcase },
+		{ number: 2, title: 'Локация', icon: MapPin },
+		{ number: 3, title: 'Детали', icon: FileText },
+		{ number: 4, title: 'Оплата', icon: DollarSign },
+		{ number: 5, title: 'Настройки', icon: Settings },
+		{ number: 6, title: 'Просмотр', icon: Eye }
 	];
 
-	const employmentTypes = ['Full-time', 'Part-time', 'Contract', 'Internship'];
+	const employmentTypes = [
+		{ value: 'full-time', label: 'Полная занятость' },
+		{ value: 'part-time', label: 'Частичная занятость' },
+		{ value: 'contract', label: 'Контракт' },
+		{ value: 'internship', label: 'Стажировка' }
+	];
+
 	const experienceLevels = [
-		'Fresher',
-		'1-3 years',
-		'3-5 years',
-		'5-10 years',
-		'10+ years'
+		{ value: 'Fresher', label: 'Без опыта' },
+		{ value: '1-3 years', label: '1–3 года' },
+		{ value: '3-5 years', label: '3–5 лет' },
+		{ value: '5-10 years', label: '5–10 лет' },
+		{ value: '10+ years', label: '10+ лет' }
 	];
+
 	const workModes: { value: WorkMode; label: string }[] = [
-		{ value: 'in-office', label: 'In-Office' },
-		{ value: 'remote', label: 'Remote' },
-		{ value: 'hybrid', label: 'Hybrid' }
+		{ value: 'in-office', label: 'В офисе' },
+		{ value: 'remote', label: 'Удалённо' },
+		{ value: 'hybrid', label: 'Гибрид' }
 	];
+
+	function getJobStatusLabel(status: string): string {
+		const labels: Record<string, string> = {
+			Live: 'Активна',
+			Draft: 'Черновик',
+			Disabled: 'Закрыта',
+			Expired: 'Истекла'
+		};
+		return labels[status] || status;
+	}
+
+	function getWorkModeLabel(mode: string): string {
+		const labels: Record<string, string> = {
+			'in-office': 'В офисе',
+			remote: 'Удалённо',
+			hybrid: 'Гибрид'
+		};
+		return labels[mode] || mode.replace('-', ' ');
+	}
+
+	function getJobTypeLabel(type: string): string {
+		const labels: Record<string, string> = {
+			'full-time': 'Полная занятость',
+			'part-time': 'Частичная занятость',
+			contract: 'Контракт',
+			internship: 'Стажировка',
+			freelance: 'Фриланс'
+		};
+		return labels[type] || type.replace('-', ' ');
+	}
+
+	function getEmploymentTypeLabel(value: string): string {
+		return employmentTypes.find(t => t.value === value)?.label || getJobTypeLabel(value);
+	}
 
 	function nextStep() {
 		if (currentStep < totalSteps) {
@@ -168,17 +209,17 @@
 </script>
 
 <svelte:head>
-	<title>Edit Job - {data.job.title} - PeelJobs Recruiter</title>
+	<title>Редактирование — {data.job.title} - PeelJobs Recruiter</title>
 </svelte:head>
 
 <div class="max-w-5xl mx-auto space-y-6">
 	<!-- Header -->
 	<div>
-		<h1 class="text-2xl md:text-3xl font-bold text-black">Edit Job</h1>
-		<p class="text-muted mt-1">Update details for: {data.job.title}</p>
+		<h1 class="text-2xl md:text-3xl font-bold text-black">Редактирование вакансии</h1>
+		<p class="text-muted mt-1">Обновление данных: {data.job.title}</p>
 		<div class="mt-2 inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/30 rounded-lg text-sm">
-			<span class="font-medium text-primary">Status:</span>
-			<span class="text-primary">{data.job.status}</span>
+			<span class="font-medium text-primary">Статус:</span>
+			<span class="text-primary">{getJobStatusLabel(data.job.status)}</span>
 		</div>
 	</div>
 
@@ -187,12 +228,12 @@
 		<div class="bg-success-light border border-success/30 rounded-lg p-4 flex items-start gap-3">
 			<CheckCircle class="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
 			<div class="flex-1">
-				<p class="text-sm font-medium text-success">{form.message || 'Job updated successfully!'}</p>
+				<p class="text-sm font-medium text-success">{form.message || 'Вакансия успешно обновлена!'}</p>
 			</div>
 			<button
 				onclick={() => (form = null)}
 				class="text-success hover:text-success transition-colors"
-				aria-label="Dismiss"
+				aria-label="Закрыть"
 			>
 				<X class="w-4 h-4" />
 			</button>
@@ -208,7 +249,7 @@
 			<button
 				onclick={() => (form = null)}
 				class="text-error hover:text-error transition-colors"
-				aria-label="Dismiss"
+				aria-label="Закрыть"
 			>
 				<X class="w-4 h-4" />
 			</button>
@@ -314,20 +355,20 @@
 			<div class="space-y-6">
 				<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 					<Briefcase class="w-6 h-6" />
-					Job Basics
+					Основная информация
 				</h2>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<div class="md:col-span-2">
 						<label for="edit-job-title" class="block text-sm font-medium text-muted mb-2">
-							Job Title <span class="text-error">*</span>
+							Название вакансии <span class="text-error">*</span>
 						</label>
 						<input
 							id="edit-job-title"
 							type="text"
 							name="title"
 							bind:value={formData.jobTitle}
-							placeholder="e.g., Senior Frontend Developer"
+							placeholder="например, Senior Frontend Developer"
 							required
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						/>
@@ -335,14 +376,14 @@
 
 					<div>
 						<label for="edit-company-name" class="block text-sm font-medium text-muted mb-2">
-							Company Name <span class="text-error">*</span>
+							Название компании <span class="text-error">*</span>
 						</label>
 						<input
 							id="edit-company-name"
 							type="text"
 							name="company_name"
 							bind:value={formData.companyName}
-							placeholder="e.g., Acme Inc."
+							placeholder="например, Acme Inc."
 							required
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						/>
@@ -350,14 +391,14 @@
 
 					<div>
 						<label for="edit-department" class="block text-sm font-medium text-muted mb-2">
-							Department <span class="text-error">*</span>
+							Отдел <span class="text-error">*</span>
 						</label>
 						<input
 							id="edit-department"
 							type="text"
 							name="job_role"
 							bind:value={formData.department}
-							placeholder="e.g., Engineering"
+							placeholder="например, Engineering"
 							required
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						/>
@@ -365,7 +406,7 @@
 
 					<div>
 						<label for="edit-employment-type" class="block text-sm font-medium text-muted mb-2">
-							Employment Type <span class="text-error">*</span>
+							Тип занятости <span class="text-error">*</span>
 						</label>
 						<select
 							id="edit-employment-type"
@@ -375,14 +416,14 @@
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						>
 							{#each employmentTypes as type}
-								<option value={type.toLowerCase()}>{type}</option>
+								<option value={type.value}>{type.label}</option>
 							{/each}
 						</select>
 					</div>
 
 					<div>
 						<label for="edit-experience-level" class="block text-sm font-medium text-muted mb-2">
-							Experience Level <span class="text-error">*</span>
+							Требуемый опыт <span class="text-error">*</span>
 						</label>
 						<select
 							id="edit-experience-level"
@@ -391,16 +432,16 @@
 							required
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						>
-							<option value="">Select experience level</option>
+							<option value="">Выберите уровень опыта</option>
 							{#each experienceLevels as level}
-								<option value={level}>{level}</option>
+								<option value={level.value}>{level.label}</option>
 							{/each}
 						</select>
 					</div>
 
 					<div>
 						<label for="edit-positions" class="block text-sm font-medium text-muted mb-2">
-							Number of Positions <span class="text-error">*</span>
+							Количество позиций <span class="text-error">*</span>
 						</label>
 						<input
 							id="edit-positions"
@@ -419,12 +460,12 @@
 			<div class="space-y-6">
 				<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 					<MapPin class="w-6 h-6" />
-					Location & Work Mode
+					Локация и формат работы
 				</h2>
 
 				<div>
 					<label for="edit-work-mode" class="block text-sm font-medium text-muted mb-2">
-						Work Mode <span class="text-error">*</span>
+						Формат работы <span class="text-error">*</span>
 					</label>
 					<div class="grid grid-cols-3 gap-3">
 						{#each workModes as mode}
@@ -443,7 +484,7 @@
 				</div>
 
 				<div>
-					<label for="edit-current-locations" class="block text-sm font-medium text-muted mb-3">Current Locations</label>
+					<label for="edit-current-locations" class="block text-sm font-medium text-muted mb-3">Текущие локации</label>
 					{#if data.job.locations && data.job.locations.length > 0}
 						<div class="flex flex-wrap gap-2 mb-3">
 							{#each data.job.locations as location}
@@ -453,43 +494,43 @@
 							{/each}
 						</div>
 					{:else}
-						<p class="text-sm text-muted mb-3">No locations set</p>
+						<p class="text-sm text-muted mb-3">Локации не указаны</p>
 					{/if}
-					<p class="text-xs text-muted">Note: Location editing coming soon. Please contact support to change locations.</p>
+					<p class="text-xs text-muted">Примечание: редактирование локаций скоро будет доступно. Для изменения обратитесь в поддержку.</p>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 					<div>
-						<label for="edit-country" class="block text-sm font-medium text-muted mb-2">Country</label>
+						<label for="edit-country" class="block text-sm font-medium text-muted mb-2">Страна</label>
 						<input
 							id="edit-country"
 							type="text"
 							bind:value={formData.country}
-							placeholder="e.g., United States"
+							placeholder="например, Россия"
 							disabled
 							class="w-full px-4 py-2 border border-border rounded-lg bg-surface"
 						/>
 					</div>
 
 					<div>
-						<label for="edit-state" class="block text-sm font-medium text-muted mb-2">State</label>
+						<label for="edit-state" class="block text-sm font-medium text-muted mb-2">Регион</label>
 						<input
 							id="edit-state"
 							type="text"
 							bind:value={formData.state}
-							placeholder="e.g., California"
+							placeholder="например, Московская область"
 							disabled
 							class="w-full px-4 py-2 border border-border rounded-lg bg-surface"
 						/>
 					</div>
 
 					<div>
-						<label for="edit-city" class="block text-sm font-medium text-muted mb-2">City</label>
+						<label for="edit-city" class="block text-sm font-medium text-muted mb-2">Город</label>
 						<input
 							id="edit-city"
 							type="text"
 							bind:value={formData.city}
-							placeholder="e.g., San Francisco"
+							placeholder="например, Москва"
 							disabled
 							class="w-full px-4 py-2 border border-border rounded-lg bg-surface"
 						/>
@@ -498,12 +539,12 @@
 
 				{#if formData.workMode !== 'remote'}
 					<div>
-						<label for="edit-office-address" class="block text-sm font-medium text-muted mb-2">Office Address</label>
+						<label for="edit-office-address" class="block text-sm font-medium text-muted mb-2">Адрес офиса</label>
 						<textarea
 							id="edit-office-address"
 							bind:value={formData.officeAddress}
 							rows="3"
-							placeholder="Enter the full office address"
+							placeholder="Введите полный адрес офиса"
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						></textarea>
 					</div>
@@ -514,58 +555,58 @@
 			<div class="space-y-6">
 				<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 					<FileText class="w-6 h-6" />
-					Job Details
+					Детали вакансии
 				</h2>
 
 				<div>
 					<label for="edit-description" class="block text-sm font-medium text-muted mb-2">
-						Job Description <span class="text-error">*</span>
+						Описание вакансии <span class="text-error">*</span>
 					</label>
 					<textarea
 						id="edit-description"
 						name="description"
 						bind:value={formData.description}
 						rows="6"
-						placeholder="Describe the role and what the candidate will be doing..."
+						placeholder="Опишите роль и задачи кандидата..."
 						required
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 					></textarea>
 				</div>
 
 				<div>
-					<label for="edit-responsibilities" class="block text-sm font-medium text-muted mb-2">Responsibilities</label>
+					<label for="edit-responsibilities" class="block text-sm font-medium text-muted mb-2">Обязанности</label>
 					<textarea
 						id="edit-responsibilities"
 						bind:value={formData.responsibilities}
 						rows="5"
-						placeholder="List the key responsibilities (one per line)"
+						placeholder="Перечислите ключевые обязанности (по одной на строку)"
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 					></textarea>
 				</div>
 
 				<div>
 					<label for="edit-requirements" class="block text-sm font-medium text-muted mb-2">
-						Requirements <span class="text-error">*</span>
+						Требования <span class="text-error">*</span>
 					</label>
 					<textarea
 						id="edit-requirements"
 						bind:value={formData.requirements}
 						rows="5"
-						placeholder="List the requirements and qualifications (one per line)"
+						placeholder="Перечислите требования и квалификацию (по одному на строку)"
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 					></textarea>
 				</div>
 
 				<div>
 					<label for="edit-search-skill" class="block text-sm font-medium text-muted mb-2">
-						Key Skills <span class="text-muted text-xs">(Max 8)</span>
+						Ключевые навыки <span class="text-muted text-xs">(макс. 8)</span>
 					</label>
 					<div class="space-y-3">
 						<input
 							id="edit-search-skill"
 							type="text"
 							bind:value={searchSkill}
-							placeholder="Search skills... (e.g., Python, React, AWS)"
+							placeholder="Поиск навыков... (например, Python, React, AWS)"
 							class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 						/>
 
@@ -612,16 +653,16 @@
 							</div>
 						{/if}
 					</div>
-					<p class="text-xs text-muted mt-1">Select up to 8 key skills required for this role</p>
+					<p class="text-xs text-muted mt-1">Выберите до 8 ключевых навыков для этой роли</p>
 				</div>
 
 				<div>
-					<label for="edit-education" class="block text-sm font-medium text-muted mb-2">Education Requirements</label>
+					<label for="edit-education" class="block text-sm font-medium text-muted mb-2">Требования к образованию</label>
 					<input
 						id="edit-education"
 						type="text"
 						bind:value={formData.education}
-						placeholder="e.g., Bachelor's degree in Computer Science or related field"
+						placeholder="например, высшее образование в области IT или смежной специальности"
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 					/>
 				</div>
@@ -631,12 +672,12 @@
 			<div class="space-y-6">
 				<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 					<DollarSign class="w-6 h-6" />
-					Compensation & Benefits
+					Оплата и льготы
 				</h2>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<div>
-						<label for="edit-salary-min" class="block text-sm font-medium text-muted mb-2">Minimum Salary</label>
+						<label for="edit-salary-min" class="block text-sm font-medium text-muted mb-2">Минимальная зарплата</label>
 						<input
 							id="edit-salary-min"
 							type="number"
@@ -647,7 +688,7 @@
 					</div>
 
 					<div>
-						<label for="edit-salary-max" class="block text-sm font-medium text-muted mb-2">Maximum Salary</label>
+						<label for="edit-salary-max" class="block text-sm font-medium text-muted mb-2">Максимальная зарплата</label>
 						<input
 							id="edit-salary-max"
 							type="number"
@@ -661,28 +702,28 @@
 				<div>
 					<label for="edit-hide-salary" class="flex items-center gap-2 cursor-pointer">
 						<input id="edit-hide-salary" type="checkbox" bind:checked={formData.hideSalary} class="w-4 h-4 text-primary rounded" />
-						<span class="text-sm text-muted">Hide salary range from public job posting</span>
+						<span class="text-sm text-muted">Скрыть диапазон зарплаты в публичной вакансии</span>
 					</label>
 				</div>
 
 				<div>
-					<label for="edit-benefits" class="block text-sm font-medium text-muted mb-2">Benefits</label>
+					<label for="edit-benefits" class="block text-sm font-medium text-muted mb-2">Льготы</label>
 					<textarea
 						id="edit-benefits"
 						bind:value={formData.benefits}
 						rows="4"
-						placeholder="List the benefits (e.g., Health insurance, 401k, etc.)"
+						placeholder="Перечислите льготы (например, медстраховка, 401k и т.д.)"
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 					></textarea>
 				</div>
 
 				<div>
-					<label for="edit-perks" class="block text-sm font-medium text-muted mb-2">Perks</label>
+					<label for="edit-perks" class="block text-sm font-medium text-muted mb-2">Дополнительные бонусы</label>
 					<textarea
 						id="edit-perks"
 						bind:value={formData.perks}
 						rows="4"
-						placeholder="List additional perks (e.g., Flexible hours, Remote work, etc.)"
+						placeholder="Перечислите дополнительные бонусы (например, гибкий график, удалённая работа и т.д.)"
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 					></textarea>
 				</div>
@@ -692,16 +733,16 @@
 			<div class="space-y-6">
 				<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 					<Settings class="w-6 h-6" />
-					Application Settings
+					Настройки откликов
 				</h2>
 
 				<div>
-					<label for="edit-auto-reply" class="block text-sm font-medium text-muted mb-2">Auto-Reply Email Template</label>
+					<label for="edit-auto-reply" class="block text-sm font-medium text-muted mb-2">Шаблон автоответа на email</label>
 					<textarea
 						id="edit-auto-reply"
 						bind:value={formData.autoReplyTemplate}
 						rows="4"
-						placeholder="Thank you for applying! We have received your application and will review it shortly..."
+						placeholder="Спасибо за отклик! Мы получили вашу заявку и скоро её рассмотрим..."
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 					></textarea>
 				</div>
@@ -711,47 +752,47 @@
 			<div class="space-y-6">
 				<h2 class="text-xl font-semibold text-black flex items-center gap-2">
 					<Eye class="w-6 h-6" />
-					Preview & Update
+					Просмотр и обновление
 				</h2>
 
 				<div class="bg-surface rounded-lg p-6 space-y-4">
 					<div>
-						<h3 class="text-2xl font-bold text-black">{formData.jobTitle || 'Job Title'}</h3>
+						<h3 class="text-2xl font-bold text-black">{formData.jobTitle || 'Название вакансии'}</h3>
 						<div class="flex flex-wrap gap-3 mt-2 text-sm text-muted">
-							<span>{formData.department || 'Department'}</span>
+							<span>{formData.department || 'Отдел'}</span>
 							<span>•</span>
-							<span>{formData.companyName || 'Company'}</span>
+							<span>{formData.companyName || 'Компания'}</span>
 							<span>•</span>
-							<span>{formData.employmentType}</span>
+							<span>{getEmploymentTypeLabel(formData.employmentType)}</span>
 							<span>•</span>
-							<span>{formData.workMode}</span>
+							<span>{getWorkModeLabel(formData.workMode)}</span>
 						</div>
 					</div>
 
 					{#if formData.description}
 						<div>
-							<h4 class="font-semibold text-black mb-2">Description</h4>
+							<h4 class="font-semibold text-black mb-2">Описание</h4>
 							<p class="text-muted whitespace-pre-line">{formData.description}</p>
 						</div>
 					{/if}
 
 					{#if formData.responsibilities}
 						<div>
-							<h4 class="font-semibold text-black mb-2">Responsibilities</h4>
+							<h4 class="font-semibold text-black mb-2">Обязанности</h4>
 							<p class="text-muted whitespace-pre-line">{formData.responsibilities}</p>
 						</div>
 					{/if}
 
 					{#if formData.requirements}
 						<div>
-							<h4 class="font-semibold text-black mb-2">Requirements</h4>
+							<h4 class="font-semibold text-black mb-2">Требования</h4>
 							<p class="text-muted whitespace-pre-line">{formData.requirements}</p>
 						</div>
 					{/if}
 
 					{#if data.job.skills && data.job.skills.length > 0}
 						<div>
-							<h4 class="font-semibold text-black mb-2">Required Skills</h4>
+							<h4 class="font-semibold text-black mb-2">Требуемые навыки</h4>
 							<div class="flex flex-wrap gap-2">
 								{#each data.job.skills as skill}
 									<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">{skill.name}</span>
@@ -763,7 +804,7 @@
 					{#if formData.salaryMin || formData.salaryMax}
 						{#if !formData.hideSalary}
 							<div>
-								<h4 class="font-semibold text-black mb-2">Salary Range</h4>
+								<h4 class="font-semibold text-black mb-2">Диапазон зарплаты</h4>
 								<p class="text-muted">
 									${formData.salaryMin || '0'} - ${formData.salaryMax || '0'}
 								</p>
@@ -774,7 +815,7 @@
 
 				<div class="bg-primary/10 border border-primary/30 rounded-lg p-4">
 					<p class="text-sm text-primary">
-						<strong>Note:</strong> Changes will be saved to this job posting. If you publish, it will be visible to job seekers.
+						<strong>Примечание:</strong> Изменения будут сохранены в этой вакансии. При публикации она станет видна соискателям.
 					</p>
 				</div>
 			</div>
@@ -790,7 +831,7 @@
 				class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-sm font-medium text-muted hover:bg-surface disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
 			>
 				<ChevronLeft class="w-4 h-4" />
-				Previous
+				Назад
 			</button>
 
 			<div class="flex items-center gap-3">
@@ -801,7 +842,7 @@
 					class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-sm font-medium text-muted hover:bg-surface disabled:opacity-50 transition-colors"
 				>
 					<Save class="w-4 h-4" />
-					{isSubmitting ? 'Saving...' : 'Save Changes'}
+					{isSubmitting ? 'Сохранение...' : 'Сохранить изменения'}
 				</button>
 
 				{#if currentStep < totalSteps}
@@ -810,7 +851,7 @@
 						onclick={nextStep}
 						class="inline-flex items-center gap-2 px-6 py-2 bg-primary rounded-lg text-sm font-medium text-white hover:bg-primary-hover transition-colors"
 					>
-						Next
+						Далее
 						<ChevronRight class="w-4 h-4" />
 					</button>
 				{:else}
@@ -821,7 +862,7 @@
 						class="inline-flex items-center gap-2 px-6 py-2 bg-success rounded-lg text-sm font-medium text-white hover:bg-success disabled:opacity-50 transition-colors"
 					>
 						<Send class="w-4 h-4" />
-						{isSubmitting ? 'Publishing...' : data.job.status === 'Live' ? 'Update & Republish' : 'Update & Publish'}
+						{isSubmitting ? 'Публикация...' : data.job.status === 'Live' ? 'Обновить и опубликовать' : 'Обновить и опубликовать'}
 					</button>
 				{/if}
 			</div>

@@ -105,7 +105,7 @@
     }
 
     const shareData = {
-      title: `${job.title} at ${job.company_name}`,
+      title: `${job.title} в ${job.company_name}`,
       text: `Посмотрите вакансию: ${job.title} в ${job.company_name}`,
       url: window.location.href,
     };
@@ -150,7 +150,7 @@
 </script>
 
 <svelte:head>
-  <title>{job.title} at {job.company_name} | PeelJobs</title>
+  <title>{job.title} в {job.company_name} | PeelJobs</title>
   <meta
     name="description"
     content="{job.title} в {job.company_name}, {job.location_display}. {job.salary_display}, {job.experience_display}. {job.vacancies > 0 ? `${job.vacancies} вакансий.` : ''} Откликнитесь!"
@@ -184,7 +184,7 @@
   <meta name="twitter:title" content="{job.title} - {job.company_name}" />
   <meta
     name="twitter:description"
-    content="{job.title} at {job.company_name} in {job.location_display}. {job.salary_display}, {job.experience_display}."
+    content="{job.title} в {job.company_name}, {job.location_display}. {job.salary_display}, {job.experience_display}."
   />
   {#if job.company_logo}
     <meta name="twitter:image" content="{job.company_logo}" />
@@ -195,7 +195,7 @@
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
     title: job.title,
-    description: job.description || `${job.title} at ${job.company_name}`,
+    description: job.description || `${job.title} в ${job.company_name}`,
     datePosted: job.published_on,
     validThrough: job.published_on
       ? new Date(new Date(job.published_on).getTime() + 30*24*60*60*1000).toISOString()
@@ -279,7 +279,7 @@
               {#if job.company_logo}
                 <img
                   src={job.company_logo}
-                  alt="{job.company_name} logo"
+                  alt="Логотип {job.company_name}"
                   class="w-16 h-16 rounded-lg object-cover bg-white border-2 border-white/20"
                 />
               {:else}
@@ -770,7 +770,7 @@
                   {#if relatedJob.company_logo}
                     <img
                       src={relatedJob.company_logo}
-                      alt="{relatedJob.company_name} logo"
+                      alt="Логотип {relatedJob.company_name}"
                       class="w-10 h-10 rounded object-cover border border-border"
                     />
                   {:else}

@@ -29,45 +29,52 @@
 		applied: string;
 	}
 
+	const statusLabels: Record<ApplicationStatus, string> = {
+		'Under Review': 'На рассмотрении',
+		Interview: 'Интервью',
+		Rejected: 'Отклонено',
+		Pending: 'Ожидает'
+	};
+
 	// Mock applications data
 	let applications = $state<Application[]>([
 		{
 			id: 1,
-			jobTitle: 'Frontend Developer',
+			jobTitle: 'Frontend-разработчик',
 			company: 'TechCorp',
 			companyLogo: null,
-			location: 'Bangalore',
-			type: 'Full-time',
+			location: 'Бангалор',
+			type: 'Полная занятость',
 			status: 'Under Review',
 			applied: '2025-04-15'
 		},
 		{
 			id: 2,
-			jobTitle: 'Backend Engineer',
+			jobTitle: 'Backend-инженер',
 			company: 'DataSoft',
 			companyLogo: null,
-			location: 'Remote',
-			type: 'Full-time',
+			location: 'Удалённо',
+			type: 'Полная занятость',
 			status: 'Interview',
 			applied: '2025-04-10'
 		},
 		{
 			id: 3,
-			jobTitle: 'Full Stack Developer',
+			jobTitle: 'Full Stack разработчик',
 			company: 'WebSolutions',
 			companyLogo: null,
-			location: 'Mumbai',
-			type: 'Contract',
+			location: 'Мумбаи',
+			type: 'Контракт',
 			status: 'Pending',
 			applied: '2025-04-08'
 		},
 		{
 			id: 4,
-			jobTitle: 'DevOps Engineer',
+			jobTitle: 'DevOps-инженер',
 			company: 'CloudTech',
 			companyLogo: null,
-			location: 'Hyderabad',
-			type: 'Full-time',
+			location: 'Хайдарабад',
+			type: 'Полная занятость',
 			status: 'Rejected',
 			applied: '2025-04-05'
 		}
@@ -127,7 +134,7 @@
 	}
 
 	function formatDate(dateString: string): string {
-		return new Date(dateString).toLocaleDateString('en-US', {
+		return new Date(dateString).toLocaleDateString('ru-RU', {
 			month: 'short',
 			day: 'numeric',
 			year: 'numeric'
@@ -150,7 +157,7 @@
 
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 relative">
 		<!-- Breadcrumb -->
-		<nav class="mb-6" aria-label="Breadcrumb">
+		<nav class="mb-6" aria-label="Навигация">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
 					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>
@@ -341,7 +348,7 @@
 									class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium {config.bgColor} {config.color} w-fit"
 								>
 									<StatusIcon size={14} />
-									{app.status}
+									{statusLabels[app.status]}
 								</span>
 
 								<!-- Applied Date -->

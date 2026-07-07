@@ -8,6 +8,8 @@
 import { error, redirect, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import type { JobUpdateData, JobFormMetadata, JobDetail } from '$lib/types';
+import { getApiBaseUrl } from '$lib/config/env';
+import { clearAuthCookies } from '$lib/server/auth';
 
 /**
  * Load function - runs on server before page renders
@@ -27,31 +29,29 @@ export const load: PageServerLoad = async ({ params, cookies, fetch, url }) => {
 	try {
 		// Fetch job details and form metadata in parallel
 		const [jobResponse, metadataResponse] = await Promise.all([
-			fetch(`http://localhost:8000/api/v1/recruiter/jobs/${jobId}/`),
-			fetch('http://localhost:8000/api/v1/recruiter/jobs/metadata/')
+			fetch(`${getApiBaseUrl()}/recruiter/jobs/${jobId}/`),
+			fetch(`${getApiBaseUrl()}/recruiter/jobs/metadata/`)
 		]);
 
 		// Handle job fetch errors
 		if (!jobResponse.ok) {
 			if (jobResponse.status === 401) {
-				cookies.delete('access_token', { path: '/' });
-				cookies.delete('refresh_token', { path: '/' });
+				clearAuthCookies(cookies);
 				throw redirect(302, '/login?redirect=' + encodeURIComponent(url.pathname));
 			}
 			if (jobResponse.status === 404) {
-				throw error(404, 'Job not found');
+				throw error(404, 'Вакансия не найдена');
 			}
-			throw error(jobResponse.status, `Failed to load job: ${jobResponse.statusText}`);
+			throw error(jobResponse.status, `Не удалось загрузить вакансию: ${jobResponse.statusText}`);
 		}
 
 		// Handle metadata fetch errors
 		if (!metadataResponse.ok) {
 			if (metadataResponse.status === 401) {
-				cookies.delete('access_token', { path: '/' });
-				cookies.delete('refresh_token', { path: '/' });
+				clearAuthCookies(cookies);
 				throw redirect(302, '/login?redirect=' + encodeURIComponent(url.pathname));
 			}
-			throw error(metadataResponse.status, `Failed to load form metadata: ${metadataResponse.statusText}`);
+			throw error(metadataResponse.status, `Не удалось загрузить метаданные формы: ${metadataResponse.statusText}`);
 		}
 
 		const job: JobDetail = await jobResponse.json();
@@ -59,7 +59,7 @@ export const load: PageServerLoad = async ({ params, cookies, fetch, url }) => {
 
 		// Prevent editing published jobs - redirect to jobs list
 		if (job.status === 'Live' || job.status === 'Disabled' || job.status === 'Expired') {
-			throw redirect(302, '/dashboard/jobs/?error=' + encodeURIComponent(`Cannot edit a job with status '${job.status}'. Only Draft jobs can be edited.`));
+			throw redirect(302, '/dashboard/jobs/?error=' + encodeURIComponent(`Невозможно редактировать вакансию со статусом «${job.status}». Редактировать можно только черновики.`));
 		}
 
 		return {
@@ -74,7 +74,7 @@ export const load: PageServerLoad = async ({ params, cookies, fetch, url }) => {
 			throw err;
 		}
 
-		throw error(500, err.message || 'Failed to load job data');
+		throw error(500, err.message || 'Не удалось загрузить данные вакансии');
 	}
 };
 
@@ -95,7 +95,7 @@ export const actions: Actions = {
 			console.log('Updating job data:', JSON.stringify(jobData, null, 2));
 
 			// Update job
-			const response = await fetch(`http://localhost:8000/api/v1/recruiter/jobs/${jobId}/update/`, {
+			const response = await fetch(`${getApiBaseUrl()}/recruiter/jobs/${jobId}/update/`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ export const actions: Actions = {
 				console.error('API Error Response:', errorData);
 
 				// Format error message
-				let errorMessage = 'Failed to save changes';
+				let errorMessage = 'Не удалось сохранить изменения';
 				if (errorData.error) {
 					errorMessage = errorData.error;
 				} else if (errorData.detail) {
@@ -134,13 +134,13 @@ export const actions: Actions = {
 
 			return {
 				success: true,
-				message: result.message || 'Job updated successfully',
+				message: result.message || 'Вакансия успешно обновлена',
 				jobId: result.job.id
 			};
 		} catch (err: any) {
 			console.error('Error updating job:', err);
 			return fail(400, {
-				error: err.message || 'Failed to update job',
+				error: err.message || 'Не удалось обновить вакансию',
 				values: Object.fromEntries(formData)
 			});
 		}
@@ -157,7 +157,7 @@ export const actions: Actions = {
 			const jobData = extractJobDataFromForm(formData);
 
 			// Step 1: Update job
-			const updateResponse = await fetch(`http://localhost:8000/api/v1/recruiter/jobs/${jobId}/update/`, {
+			const updateResponse = await fetch(`${getApiBaseUrl()}/recruiter/jobs/${jobId}/update/`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json'
@@ -168,7 +168,7 @@ export const actions: Actions = {
 			if (!updateResponse.ok) {
 				const errorData = await updateResponse.json().catch(() => ({}));
 				return fail(400, {
-					error: errorData.error || errorData.detail || 'Failed to update job',
+					error: errorData.error || errorData.detail || 'Не удалось обновить вакансию',
 					values: Object.fromEntries(formData)
 				});
 			}
@@ -178,7 +178,7 @@ export const actions: Actions = {
 			// Step 2: Publish the job if it's not already published
 			if (updateResult.job.status !== 'Live') {
 				const publishResponse = await fetch(
-					`http://localhost:8000/api/v1/recruiter/jobs/${jobId}/publish/`,
+					`${getApiBaseUrl()}/recruiter/jobs/${jobId}/publish/`,
 					{
 						method: 'POST',
 						headers: {
@@ -191,7 +191,7 @@ export const actions: Actions = {
 					// Job was updated but publish failed - return error
 					const errorData = await publishResponse.json().catch(() => ({}));
 					return fail(400, {
-						error: errorData.error || errorData.detail || 'Job was updated but failed to publish. Please try publishing from the job list.',
+						error: errorData.error || errorData.detail || 'Вакансия обновлена, но не удалось опубликовать. Попробуйте опубликовать из списка вакансий.',
 						values: Object.fromEntries(formData)
 					});
 				}
@@ -199,13 +199,13 @@ export const actions: Actions = {
 
 			return {
 				success: true,
-				message: 'Job updated and published successfully',
+				message: 'Вакансия успешно обновлена и опубликована',
 				jobId: jobId
 			};
 		} catch (err: any) {
 			console.error('Error publishing job:', err);
 			return fail(400, {
-				error: err.message || 'Failed to publish job',
+				error: err.message || 'Не удалось опубликовать вакансию',
 				values: Object.fromEntries(formData)
 			});
 		}

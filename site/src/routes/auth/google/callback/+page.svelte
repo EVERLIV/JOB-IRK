@@ -38,10 +38,13 @@
 		try {
 			const redirectUri = window.location.origin + '/auth/google/callback';
 
-			const response = await googleAuthCallback(code, redirectUri);
+			const state = $page.url.searchParams.get('state');
+			if (!state) {
+				throw new Error('Отсутствует параметр состояния OAuth.');
+			}
+			const response = await googleAuthCallback(code, redirectUri, state);
 
-			// Login user with tokens from response
-			authStore.login(response.user, response.access, response.refresh);
+			authStore.login(response.user);
 
 			status = 'success';
 			redirectPath = response.redirect_to || '/';
@@ -111,7 +114,7 @@
 						Авторизация прошла успешно.
 					</p>
 					<p class="text-sm text-gray-500 mt-4">
-						Перенаправление на {redirectPath}...
+						Перенаправление...
 					</p>
 				</div>
 			{:else}
@@ -133,7 +136,7 @@
 
 		<!-- Security Note -->
 		<div class="mt-6 text-center text-sm text-gray-500">
-			<p>🔒 Защищено шифрованием корпоративного уровня</p>
+			<p>Защищено шифрованием корпоративного уровня</p>
 		</div>
 	</div>
 </div>

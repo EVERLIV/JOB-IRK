@@ -83,7 +83,7 @@
 
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 relative">
 		<!-- Breadcrumb -->
-		<nav class="mb-5" aria-label="Breadcrumb">
+		<nav class="mb-5" aria-label="Навигация">
 			<ol class="flex items-center gap-2 text-sm text-gray-400">
 				<li>
 					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>

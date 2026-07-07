@@ -45,13 +45,13 @@
 	});
 
 	const industries = [
-		'Technology', 'Finance', 'Healthcare', 'Education', 'Retail',
-		'Manufacturing', 'Consulting', 'Media', 'Real Estate', 'Other'
+		'Технологии', 'Финансы', 'Здравоохранение', 'Образование', 'Розничная торговля',
+		'Производство', 'Консалтинг', 'Медиа', 'Недвижимость', 'Другое'
 	];
 
 	const companySizes = [
-		'1-10 employees', '11-50 employees', '51-200 employees',
-		'201-500 employees', '501-1000 employees', '1001-5000 employees', '5000+ employees'
+		'1–10 сотрудников', '11–50 сотрудников', '51–200 сотрудников',
+		'201–500 сотрудников', '501–1000 сотрудников', '1001–5000 сотрудников', '5000+ сотрудников'
 	];
 
 	function selectAccountType(type: 'recruiter' | 'company') {
@@ -80,13 +80,13 @@
 	}
 
 	const sizeMap: Record<string, string> = {
-		'1-10 employees': '1-10',
-		'11-50 employees': '11-20',
-		'51-200 employees': '50-200',
-		'201-500 employees': '200+',
-		'501-1000 employees': '200+',
-		'1001-5000 employees': '200+',
-		'5000+ employees': '200+'
+		'1–10 сотрудников': '1-10',
+		'11–50 сотрудников': '11-20',
+		'51–200 сотрудников': '50-200',
+		'201–500 сотрудников': '200+',
+		'501–1000 сотрудников': '200+',
+		'1001–5000 сотрудников': '200+',
+		'5000+ сотрудников': '200+'
 	};
 
 	function getTotalSteps(): number {
@@ -95,8 +95,8 @@
 </script>
 
 <svelte:head>
-	<title>Sign Up - PeelJobs Recruiter</title>
-	<meta name="description" content="Create your PeelJobs employer account and start hiring top talent today." />
+	<title>Регистрация — PeelJobs для рекрутеров</title>
+	<meta name="description" content="Создайте аккаунт работодателя PeelJobs и начните нанимать лучших специалистов уже сегодня." />
 </svelte:head>
 
 <div class="w-full">
@@ -105,10 +105,10 @@
 		<div class="space-y-8 lg:sticky lg:top-8 hidden lg:block">
 			<div>
 				<h1 class="text-3xl xl:text-4xl font-semibold text-black mb-4 leading-tight">
-					Join 10,000+ Companies Hiring with PeelJobs
+					Присоединяйтесь к 10 000+ компаний, нанимающих через PeelJobs
 				</h1>
 				<p class="text-base xl:text-lg text-muted leading-relaxed">
-					Access India's largest talent pool with 100k+ active job seekers. Post unlimited jobs for free and find the perfect candidates faster.
+					Получите доступ к крупнейшей базе талантов Индии с 100k+ активных соискателей. Размещайте неограниченное количество вакансий бесплатно и находите идеальных кандидатов быстрее.
 				</p>
 			</div>
 
@@ -116,19 +116,19 @@
 			<div class="grid grid-cols-2 gap-4">
 				<div class="bg-primary/5 border border-primary/20 rounded-lg p-5 text-center">
 					<div class="text-2xl font-semibold text-primary mb-1">100k+</div>
-					<p class="text-sm text-muted font-medium">Active Job Seekers</p>
+					<p class="text-sm text-muted font-medium">Активных соискателей</p>
 				</div>
 				<div class="bg-success-light border border-success/20 rounded-lg p-5 text-center">
 					<div class="text-2xl font-semibold text-success mb-1">1000+</div>
-					<p class="text-sm text-muted font-medium">Daily Applications</p>
+					<p class="text-sm text-muted font-medium">Заявок в день</p>
 				</div>
 				<div class="bg-primary/5 border border-primary/20 rounded-lg p-5 text-center">
 					<div class="text-2xl font-semibold text-primary mb-1">500+</div>
-					<p class="text-sm text-muted font-medium">Companies Trust Us</p>
+					<p class="text-sm text-muted font-medium">Компаний доверяют нам</p>
 				</div>
 				<div class="bg-warning-light border border-warning/20 rounded-lg p-5 text-center">
 					<div class="text-2xl font-semibold text-warning mb-1">24/7</div>
-					<p class="text-sm text-muted font-medium">Expert Support</p>
+					<p class="text-sm text-muted font-medium">Экспертная поддержка</p>
 				</div>
 			</div>
 
@@ -136,7 +136,7 @@
 			<Card padding="lg" class="shadow-md">
 				<h3 class="text-xl font-semibold text-black mb-6 flex items-center gap-2">
 					<Target class="w-5 h-5 text-warning" />
-					Why Recruiters Choose PeelJobs
+					Почему рекрутеры выбирают PeelJobs
 				</h3>
 				<div class="space-y-5">
 					<div class="flex items-start gap-4">
@@ -144,8 +144,8 @@
 							<Zap class="w-5 h-5 text-primary" />
 						</div>
 						<div>
-							<h4 class="font-medium text-black text-sm mb-0.5">Instant Job Posting</h4>
-							<p class="text-sm text-muted leading-relaxed">Post unlimited jobs for free and get applications within hours</p>
+							<h4 class="font-medium text-black text-sm mb-0.5">Мгновенная публикация вакансий</h4>
+							<p class="text-sm text-muted leading-relaxed">Размещайте неограниченное количество вакансий бесплатно и получайте отклики в течение нескольких часов</p>
 						</div>
 					</div>
 					<div class="flex items-start gap-4">
@@ -153,8 +153,8 @@
 							<CheckCircle class="w-5 h-5 text-success" />
 						</div>
 						<div>
-							<h4 class="font-medium text-black text-sm mb-0.5">Smart Matching</h4>
-							<p class="text-sm text-muted leading-relaxed">AI-powered system matches you with the most qualified candidates</p>
+							<h4 class="font-medium text-black text-sm mb-0.5">Умный подбор</h4>
+							<p class="text-sm text-muted leading-relaxed">ИИ-система подбирает наиболее квалифицированных кандидатов</p>
 						</div>
 					</div>
 					<div class="flex items-start gap-4">
@@ -162,8 +162,8 @@
 							<UserCheck class="w-5 h-5 text-primary" />
 						</div>
 						<div>
-							<h4 class="font-medium text-black text-sm mb-0.5">Quality Candidates</h4>
-							<p class="text-sm text-muted leading-relaxed">Access to verified profiles with detailed skills and experience</p>
+							<h4 class="font-medium text-black text-sm mb-0.5">Качественные кандидаты</h4>
+							<p class="text-sm text-muted leading-relaxed">Доступ к проверенным профилям с подробными навыками и опытом</p>
 						</div>
 					</div>
 					<div class="flex items-start gap-4">
@@ -171,8 +171,8 @@
 							<Headphones class="w-5 h-5 text-warning" />
 						</div>
 						<div>
-							<h4 class="font-medium text-black text-sm mb-0.5">Dedicated Support</h4>
-							<p class="text-sm text-muted leading-relaxed">24/7 customer support to help optimize your hiring process</p>
+							<h4 class="font-medium text-black text-sm mb-0.5">Персональная поддержка</h4>
+							<p class="text-sm text-muted leading-relaxed">Круглосуточная поддержка для оптимизации процесса найма</p>
 						</div>
 					</div>
 				</div>
@@ -186,13 +186,13 @@
 				{#if isInvitationFlow}
 					<Badge variant="primary" class="mb-4">
 						<Users class="w-4 h-4 mr-1" />
-						Team Invitation
+						Приглашение в команду
 					</Badge>
-					<h2 class="text-2xl font-semibold text-black">Join Your Team</h2>
-					<p class="text-muted mt-2">Complete your profile to join your company's team</p>
+					<h2 class="text-2xl font-semibold text-black">Присоединиться к команде</h2>
+					<p class="text-muted mt-2">Заполните профиль, чтобы присоединиться к команде компании</p>
 				{:else}
-					<h2 class="text-2xl font-semibold text-black">Create Employer Account</h2>
-					<p class="text-muted mt-2">Start hiring top talent today</p>
+					<h2 class="text-2xl font-semibold text-black">Создать аккаунт работодателя</h2>
+					<p class="text-muted mt-2">Начните нанимать лучших специалистов уже сегодня</p>
 				{/if}
 			</div>
 
@@ -221,13 +221,13 @@
 						<CheckCircle class="w-6 h-6 text-success" />
 					</div>
 					{#if isInvitationFlow}
-						<h3 class="text-xl font-semibold text-black mb-2">Welcome to the Team!</h3>
-						<p class="text-muted mb-4">Your account has been created successfully.</p>
-						<p class="text-sm text-muted">Redirecting to dashboard...</p>
+						<h3 class="text-xl font-semibold text-black mb-2">Добро пожаловать в команду!</h3>
+						<p class="text-muted mb-4">Ваш аккаунт успешно создан.</p>
+						<p class="text-sm text-muted">Перенаправление на панель управления...</p>
 					{:else}
-						<h3 class="text-xl font-semibold text-black mb-2">Registration Successful!</h3>
-						<p class="text-muted mb-4">Please check your email ({formData.email}) for a verification link.</p>
-						<p class="text-sm text-muted">Redirecting to verification page...</p>
+						<h3 class="text-xl font-semibold text-black mb-2">Регистрация успешно завершена!</h3>
+						<p class="text-muted mb-4">Проверьте электронную почту ({formData.email}) — мы отправили ссылку для подтверждения.</p>
+						<p class="text-sm text-muted">Перенаправление на страницу подтверждения...</p>
 					{/if}
 				</div>
 			{:else}
@@ -275,7 +275,7 @@
 					{#if step === 0 && !isInvitationFlow}
 						<!-- Step 0: Account Type Selection -->
 						<div class="space-y-4">
-							<h3 class="text-lg font-semibold text-black text-center mb-4">Choose Account Type</h3>
+							<h3 class="text-lg font-semibold text-black text-center mb-4">Выберите тип аккаунта</h3>
 
 							<div class="grid grid-cols-1 gap-3">
 								<button
@@ -288,22 +288,22 @@
 											<Building2 class="w-6 h-6 text-primary group-hover:text-white transition-colors" />
 										</div>
 										<div class="flex-1">
-											<h4 class="text-lg font-semibold text-black mb-1">Company Account</h4>
+											<h4 class="text-lg font-semibold text-black mb-1">Аккаунт компании</h4>
 											<p class="text-sm text-muted">
-												I'm registering on behalf of a company to post jobs and hire talent.
+												Я регистрируюсь от имени компании, чтобы размещать вакансии и нанимать сотрудников.
 											</p>
 											<ul class="mt-2 space-y-1 text-sm text-muted">
 												<li class="flex items-center gap-2">
 													<CheckCircle class="w-4 h-4 text-success" />
-													Post unlimited jobs
+													Неограниченное количество вакансий
 												</li>
 												<li class="flex items-center gap-2">
 													<CheckCircle class="w-4 h-4 text-success" />
-													Manage team members
+													Управление участниками команды
 												</li>
 												<li class="flex items-center gap-2">
 													<CheckCircle class="w-4 h-4 text-success" />
-													Company branding & profile
+													Брендинг и профиль компании
 												</li>
 											</ul>
 										</div>
@@ -320,22 +320,22 @@
 											<UserCircle class="w-6 h-6 text-primary group-hover:text-white transition-colors" />
 										</div>
 										<div class="flex-1">
-											<h4 class="text-lg font-semibold text-black mb-1">Independent Recruiter</h4>
+											<h4 class="text-lg font-semibold text-black mb-1">Независимый рекрутер</h4>
 											<p class="text-sm text-muted">
-												I'm an independent recruiter or consultant working with multiple companies.
+												Я независимый рекрутер или консультант, работающий с несколькими компаниями.
 											</p>
 											<ul class="mt-2 space-y-1 text-sm text-muted">
 												<li class="flex items-center gap-2">
 													<CheckCircle class="w-4 h-4 text-success" />
-													Post jobs for clients
+													Размещение вакансий для клиентов
 												</li>
 												<li class="flex items-center gap-2">
 													<CheckCircle class="w-4 h-4 text-success" />
-													Manage candidates
+													Управление кандидатами
 												</li>
 												<li class="flex items-center gap-2">
 													<CheckCircle class="w-4 h-4 text-success" />
-													Personal recruiter profile
+													Личный профиль рекрутера
 												</li>
 											</ul>
 										</div>
@@ -346,15 +346,15 @@
 					{:else if userType === 'company' && step === 1}
 						<!-- Company Step 1: Company Information -->
 						<div class="space-y-4">
-							<h3 class="text-lg font-semibold text-black mb-3">Company Information</h3>
+							<h3 class="text-lg font-semibold text-black mb-3">Информация о компании</h3>
 
-							<FormField label="Company Name" required>
+							<FormField label="Название компании" required>
 								<Input
 									type="text"
 									id="companyName"
 									bind:value={formData.companyName}
 									required
-									placeholder="Your Company Name"
+									placeholder="Название вашей компании"
 									size="lg"
 								>
 									{#snippet iconLeft()}
@@ -363,7 +363,7 @@
 								</Input>
 							</FormField>
 
-							<FormField label="Company Website" required hint="We'll verify your company website">
+							<FormField label="Сайт компании" required hint="Мы проверим сайт вашей компании">
 								<Input
 									type="url"
 									id="website"
@@ -378,28 +378,28 @@
 								</Input>
 							</FormField>
 
-							<FormField label="Industry" required>
+							<FormField label="Отрасль" required>
 								<select
 									id="industry"
 									bind:value={formData.industry}
 									required
 									class="w-full h-12 px-4 text-base border border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
 								>
-									<option value="">Select industry</option>
+									<option value="">Выберите отрасль</option>
 									{#each industries as industry}
 										<option value={industry}>{industry}</option>
 									{/each}
 								</select>
 							</FormField>
 
-							<FormField label="Company Size" required>
+							<FormField label="Размер компании" required>
 								<select
 									id="companySize"
 									bind:value={formData.companySize}
 									required
 									class="w-full h-12 px-4 text-base border border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
 								>
-									<option value="">Select company size</option>
+									<option value="">Выберите размер компании</option>
 									{#each companySizes as size}
 										<option value={size}>{size}</option>
 									{/each}
@@ -409,40 +409,40 @@
 					{:else if (userType === 'company' && step === 2) || (userType === 'recruiter' && step === 1) || (isInvitationFlow && step === 1)}
 						<!-- Personal Information Step -->
 						<div class="space-y-4">
-							<h3 class="text-lg font-semibold text-black mb-3">Your Information</h3>
+							<h3 class="text-lg font-semibold text-black mb-3">Ваши данные</h3>
 
 							<div class="grid grid-cols-2 gap-3">
-								<FormField label="First Name" required>
+								<FormField label="Имя" required>
 									<Input
 										type="text"
 										id="firstName"
 										bind:value={formData.firstName}
 										required
-										placeholder="John"
+										placeholder="Иван"
 										size="lg"
 									/>
 								</FormField>
 
-								<FormField label="Last Name" required>
+								<FormField label="Фамилия" required>
 									<Input
 										type="text"
 										id="lastName"
 										bind:value={formData.lastName}
 										required
-										placeholder="Doe"
+										placeholder="Иванов"
 										size="lg"
 									/>
 								</FormField>
 							</div>
 
 							{#if !isInvitationFlow}
-								<FormField label={userType === 'company' ? 'Work Email' : 'Email Address'} required hint={userType === 'company' ? 'Use your company email to verify your association' : undefined}>
+								<FormField label={userType === 'company' ? 'Рабочая электронная почта' : 'Электронная почта'} required hint={userType === 'company' ? 'Используйте корпоративную почту для подтверждения связи с компанией' : undefined}>
 									<Input
 										type="email"
 										id="email"
 										bind:value={formData.email}
 										required
-										placeholder={userType === 'company' ? 'john@company.com' : 'john@example.com'}
+										placeholder={userType === 'company' ? 'ivan@company.com' : 'ivan@example.com'}
 										size="lg"
 									>
 										{#snippet iconLeft()}
@@ -451,13 +451,13 @@
 									</Input>
 								</FormField>
 
-								<FormField label="Phone Number" required>
+								<FormField label="Номер телефона" required>
 									<Input
 										type="tel"
 										id="phone"
 										bind:value={formData.phone}
 										required
-										placeholder="+1 (555) 123-4567"
+										placeholder="+7 (999) 123-45-67"
 										size="lg"
 									>
 										{#snippet iconLeft()}
@@ -466,13 +466,13 @@
 									</Input>
 								</FormField>
 
-								<FormField label={userType === 'company' ? 'Your Job Title' : 'Professional Title'} required>
+								<FormField label={userType === 'company' ? 'Ваша должность' : 'Профессиональная должность'} required>
 									<Input
 										type="text"
 										id="jobTitle"
 										bind:value={formData.jobTitle}
 										required
-										placeholder={userType === 'company' ? 'HR Manager, Recruiter, etc.' : 'Senior Recruiter, Talent Acquisition Specialist, etc.'}
+										placeholder={userType === 'company' ? 'HR-менеджер, рекрутер и т. д.' : 'Старший рекрутер, специалист по подбору персонала и т. д.'}
 										size="lg"
 									/>
 								</FormField>
@@ -481,9 +481,9 @@
 					{:else if (userType === 'company' && step === 3) || (userType === 'recruiter' && step === 2) || (isInvitationFlow && step === 2)}
 						<!-- Final Step: Account Setup -->
 						<div class="space-y-4">
-							<h3 class="text-lg font-semibold text-black mb-3">{isInvitationFlow ? 'Set Your Password' : 'Create Your Account'}</h3>
+							<h3 class="text-lg font-semibold text-black mb-3">{isInvitationFlow ? 'Установите пароль' : 'Создайте аккаунт'}</h3>
 
-							<FormField label="Password" required hint="Must be at least 8 characters">
+							<FormField label="Пароль" required hint="Минимум 8 символов">
 								<div class="relative">
 									<Input
 										type={showPassword ? 'text' : 'password'}
@@ -491,7 +491,7 @@
 										name="password"
 										bind:value={formData.password}
 										required
-										placeholder="Create a strong password"
+										placeholder="Придумайте надёжный пароль"
 										size="lg"
 										class="pr-12"
 									>
@@ -503,7 +503,7 @@
 										type="button"
 										onclick={() => (showPassword = !showPassword)}
 										class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-black transition-colors"
-										aria-label={showPassword ? 'Hide password' : 'Show password'}
+										aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
 									>
 										{#if showPassword}
 											<EyeOff class="w-5 h-5" />
@@ -514,7 +514,7 @@
 								</div>
 							</FormField>
 
-							<FormField label="Confirm Password" required>
+							<FormField label="Подтверждение пароля" required>
 								<div class="relative">
 									<Input
 										type={showConfirmPassword ? 'text' : 'password'}
@@ -522,7 +522,7 @@
 										name="confirm_password"
 										bind:value={formData.confirmPassword}
 										required
-										placeholder="Re-enter your password"
+										placeholder="Повторите пароль"
 										size="lg"
 										class="pr-12"
 									>
@@ -534,7 +534,7 @@
 										type="button"
 										onclick={() => (showConfirmPassword = !showConfirmPassword)}
 										class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-black transition-colors"
-										aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+										aria-label={showConfirmPassword ? 'Скрыть пароль' : 'Показать пароль'}
 									>
 										{#if showConfirmPassword}
 											<EyeOff class="w-5 h-5" />
@@ -555,8 +555,8 @@
 											class="w-4 h-4 text-primary border-border rounded mt-0.5 focus:ring-primary/20"
 										/>
 										<span class="text-sm text-muted group-hover:text-black transition-colors">
-											I agree to the <a href="/terms/" class="text-primary hover:text-primary-hover">Terms of Service</a>
-											and <a href="/privacy/" class="text-primary hover:text-primary-hover">Privacy Policy</a>
+											Я принимаю <a href="/terms/" class="text-primary hover:text-primary-hover">Условия использования</a>
+											и <a href="/privacy/" class="text-primary hover:text-primary-hover">Политику конфиденциальности</a>
 										</span>
 									</label>
 
@@ -567,7 +567,7 @@
 											class="w-4 h-4 text-primary border-border rounded mt-0.5 focus:ring-primary/20"
 										/>
 										<span class="text-sm text-muted group-hover:text-black transition-colors">
-											Send me updates about hiring trends and platform features
+											Присылайте мне новости о трендах найма и возможностях платформы
 										</span>
 									</label>
 								</div>
@@ -579,19 +579,19 @@
 						<!-- Navigation Buttons -->
 						<div class="flex items-center justify-between mt-6 pt-6 border-t border-border">
 							<Button type="button" variant="secondary" onclick={prevStep}>
-								Back
+								Назад
 							</Button>
 
 							{#if (userType === 'company' && step < 3) || (userType === 'recruiter' && step < 2) || (isInvitationFlow && step < 2)}
 								<Button type="submit">
-									Continue
+									Продолжить
 								</Button>
 							{:else}
 								<Button type="submit" disabled={(!isInvitationFlow && !formData.agreeToTerms) || loading} {loading}>
 									{#if loading}
-										{isInvitationFlow ? 'Joining Team...' : 'Creating Account...'}
+										{isInvitationFlow ? 'Присоединение к команде...' : 'Создание аккаунта...'}
 									{:else}
-										{isInvitationFlow ? 'Join Team' : 'Create Account'}
+										{isInvitationFlow ? 'Присоединиться к команде' : 'Создать аккаунт'}
 									{/if}
 								</Button>
 							{/if}
@@ -602,8 +602,8 @@
 
 			<!-- Sign In Link -->
 			<p class="mt-6 text-center text-sm text-muted">
-				Already have an account?
-				<a href="/login/" class="font-medium text-primary hover:text-primary-hover transition-colors">Sign in</a>
+				Уже есть аккаунт?
+				<a href="/login/" class="font-medium text-primary hover:text-primary-hover transition-colors">Войти</a>
 			</p>
 
 			<!-- Trust Indicators -->
@@ -611,15 +611,15 @@
 				<div class="flex justify-center flex-wrap gap-4 text-xs text-muted">
 					<div class="flex items-center gap-1.5">
 						<Shield class="w-3.5 h-3.5" />
-						<span>SSL Encrypted</span>
+						<span>SSL-шифрование</span>
 					</div>
 					<div class="flex items-center gap-1.5">
 						<CheckCircle class="w-3.5 h-3.5" />
-						<span>GDPR Compliant</span>
+						<span>Соответствие GDPR</span>
 					</div>
 					<div class="flex items-center gap-1.5">
 						<Clock class="w-3.5 h-3.5" />
-						<span>24/7 Support</span>
+						<span>Поддержка 24/7</span>
 					</div>
 				</div>
 			</div>

@@ -176,7 +176,7 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Email подтверждён!
+            Электронная почта подтверждена!
           </h2>
 
           <p class="text-muted mb-6">
@@ -185,7 +185,7 @@
 
           <div class="bg-success-light rounded-lg p-4 mb-6">
             <p class="text-sm font-medium text-success mb-1">
-              Добро пожаловать в PeelJobs!
+              Добро пожаловать!
             </p>
             <p class="text-sm text-muted">
               Перенаправление на главную страницу...

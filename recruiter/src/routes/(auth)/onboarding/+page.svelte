@@ -56,8 +56,8 @@
 	});
 
 	const jobCategoryOptions = [
-		'Engineering', 'Product', 'Design', 'Marketing', 'Sales',
-		'Customer Success', 'Operations', 'Finance', 'HR', 'Other'
+		'Разработка', 'Продукт', 'Дизайн', 'Маркетинг', 'Продажи',
+		'Клиентский успех', 'Операции', 'Финансы', 'HR', 'Другое'
 	];
 
 	function nextStep() {
@@ -98,22 +98,22 @@
 </script>
 
 <svelte:head>
-	<title>Welcome - Setup Your Account</title>
-	<meta name="description" content="Complete your PeelJobs employer profile setup." />
+	<title>Добро пожаловать — настройка аккаунта</title>
+	<meta name="description" content="Завершите настройку профиля работодателя PeelJobs." />
 </svelte:head>
 
 <Card padding="lg" class="shadow-lg max-w-2xl mx-auto">
 	<!-- Header -->
 	<div class="text-center mb-8">
-		<h1 class="text-2xl font-semibold text-black">Welcome to PeelJobs!</h1>
-		<p class="text-muted mt-2">Let's set up your employer account in just a few steps</p>
+		<h1 class="text-2xl font-semibold text-black">Добро пожаловать в PeelJobs!</h1>
+		<p class="text-muted mt-2">Настройте аккаунт работодателя всего за несколько шагов</p>
 	</div>
 
 	<!-- Progress Bar -->
 	<div class="mb-8">
 		<div class="flex items-center justify-between mb-2">
-			<span class="text-sm font-medium text-black">Step {currentStep} of {totalSteps}</span>
-			<span class="text-sm text-muted">{Math.round((currentStep / totalSteps) * 100)}% complete</span>
+			<span class="text-sm font-medium text-black">Шаг {currentStep} из {totalSteps}</span>
+			<span class="text-sm text-muted">{Math.round((currentStep / totalSteps) * 100)}% завершено</span>
 		</div>
 		<div class="w-full bg-surface rounded-full h-2">
 			<div
@@ -156,16 +156,16 @@
 			<div class="space-y-6">
 				<h2 class="text-lg font-semibold text-black flex items-center gap-2">
 					<Building2 class="w-5 h-5 text-primary" />
-					Complete Your Company Profile
+					Заполните профиль компании
 				</h2>
 
 				<!-- Logo Upload -->
 				<div>
-					<label for="company-logo-upload" class="block text-sm font-medium text-black mb-3">Company Logo</label>
+					<label for="company-logo-upload" class="block text-sm font-medium text-black mb-3">Логотип компании</label>
 					<div class="flex items-center gap-6">
 						<div class="w-24 h-24 rounded-lg border-2 border-dashed border-border flex items-center justify-center bg-surface overflow-hidden">
 							{#if formData.logo}
-								<img src={formData.logo} alt="Company Logo" class="w-full h-full object-cover" />
+								<img src={formData.logo} alt="Логотип компании" class="w-full h-full object-cover" />
 							{:else}
 								<Building2 class="w-10 h-10 text-muted" />
 							{/if}
@@ -176,33 +176,33 @@
 								class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-sm font-medium text-black hover:bg-surface transition-colors cursor-pointer"
 							>
 								<Upload class="w-4 h-4" />
-								Upload Logo
+								Загрузить логотип
 								<input id="company-logo-upload" type="file" accept="image/*" onchange={handleLogoUpload} class="hidden" />
 							</label>
-							<p class="text-xs text-muted mt-2">PNG, JPG up to 2MB</p>
+							<p class="text-xs text-muted mt-2">PNG, JPG до 2 МБ</p>
 						</div>
 					</div>
 				</div>
 
 				<!-- About Company -->
-				<FormField label="About Your Company">
+				<FormField label="О компании">
 					<textarea
 						id="about"
 						bind:value={formData.about}
 						rows={4}
-						placeholder="Tell candidates about your company, culture, and mission..."
+						placeholder="Расскажите кандидатам о компании, культуре и миссии..."
 						class="w-full px-4 py-3 border border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
 					></textarea>
 				</FormField>
 
 				<!-- Additional Info -->
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<FormField label="Headquarters">
+					<FormField label="Штаб-квартира">
 						<Input
 							type="text"
 							id="headquarters"
 							bind:value={formData.headquarters}
-							placeholder="San Francisco, CA"
+							placeholder="Москва, Россия"
 							size="lg"
 						>
 							{#snippet iconLeft()}
@@ -211,7 +211,7 @@
 						</Input>
 					</FormField>
 
-					<FormField label="Founded Year">
+					<FormField label="Год основания">
 						<Input
 							type="text"
 							id="foundedYear"
@@ -227,15 +227,15 @@
 			<div class="space-y-6">
 				<h2 class="text-lg font-semibold text-black flex items-center gap-2">
 					<Users class="w-5 h-5 text-primary" />
-					Invite Your Team
+					Пригласите команду
 				</h2>
 
 				<p class="text-sm text-muted">
-					Collaborate with your team by inviting recruiters and hiring managers. You can skip this and add them later.
+					Работайте вместе с командой, приглашая рекрутеров и менеджеров по найму. Вы можете пропустить этот шаг и добавить их позже.
 				</p>
 
 				<div>
-					<label for="team-member-0" class="block text-sm font-medium text-black mb-3">Team Members</label>
+					<label for="team-member-0" class="block text-sm font-medium text-black mb-3">Участники команды</label>
 					<div class="space-y-3">
 						{#each formData.inviteEmails as email, index}
 							<div class="flex gap-2">
@@ -243,13 +243,13 @@
 									id="team-member-{index}"
 									type="email"
 									bind:value={formData.inviteEmails[index]}
-									placeholder="teammate@company.com"
+									placeholder="colleague@company.com"
 									size="lg"
 									class="flex-1"
 								/>
 								{#if formData.inviteEmails.length > 1}
 									<Button type="button" variant="ghost" onclick={() => removeEmailField(index)} class="text-error hover:bg-error-light">
-										Remove
+										Удалить
 									</Button>
 								{/if}
 							</div>
@@ -261,14 +261,14 @@
 						onclick={addEmailField}
 						class="mt-3 text-sm text-primary hover:text-primary-hover font-medium transition-colors"
 					>
-						+ Add another team member
+						+ Добавить ещё одного участника
 					</button>
 				</div>
 
 				<div class="bg-primary/5 border border-primary/20 rounded-lg p-4">
 					<p class="text-sm text-primary">
-						<strong>Tip:</strong> Invited team members will receive an email to join your company account
-						and can help manage jobs and applicants.
+						<strong>Совет:</strong> приглашённые участники получат письмо для присоединения к аккаунту компании
+						и смогут помогать управлять вакансиями и откликами.
 					</p>
 				</div>
 			</div>
@@ -277,13 +277,13 @@
 			<div class="space-y-6">
 				<h2 class="text-lg font-semibold text-black flex items-center gap-2">
 					<Target class="w-5 h-5 text-primary" />
-					Tell Us About Your Hiring Needs
+					Расскажите о ваших потребностях в найме
 				</h2>
 
 				<!-- Job Categories -->
 				<div>
 					<label for="job-categories" class="block text-sm font-medium text-black mb-3">
-						Which roles are you hiring for?
+						На какие должности вы нанимаете?
 					</label>
 					<div class="grid grid-cols-2 gap-3">
 						{#each jobCategoryOptions as category}
@@ -301,33 +301,33 @@
 				</div>
 
 				<!-- Hiring Goals -->
-				<FormField label="What are your hiring goals?">
+				<FormField label="Какие у вас цели найма?">
 					<select
 						id="hiringGoals"
 						bind:value={formData.hiringGoals}
 						class="w-full h-12 px-4 text-base border border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
 					>
-						<option value="">Select your goal</option>
-						<option value="growth">Growing the team</option>
-						<option value="replacement">Replacing departed employees</option>
-						<option value="expansion">Opening new positions</option>
-						<option value="seasonal">Seasonal hiring</option>
-						<option value="other">Other</option>
+						<option value="">Выберите цель</option>
+						<option value="growth">Расширение команды</option>
+						<option value="replacement">Замена уволившихся сотрудников</option>
+						<option value="expansion">Открытие новых позиций</option>
+						<option value="seasonal">Сезонный найм</option>
+						<option value="other">Другое</option>
 					</select>
 				</FormField>
 
 				<!-- Monthly Hires -->
-				<FormField label="How many people do you plan to hire per month?">
+				<FormField label="Сколько человек вы планируете нанимать в месяц?">
 					<select
 						id="monthlyHires"
 						bind:value={formData.monthlyHires}
 						class="w-full h-12 px-4 text-base border border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
 					>
-						<option value="">Select range</option>
-						<option value="1-5">1-5 people</option>
-						<option value="6-10">6-10 people</option>
-						<option value="11-20">11-20 people</option>
-						<option value="20+">20+ people</option>
+						<option value="">Выберите диапазон</option>
+						<option value="1-5">1–5 человек</option>
+						<option value="6-10">6–10 человек</option>
+						<option value="11-20">11–20 человек</option>
+						<option value="20+">20+ человек</option>
 					</select>
 				</FormField>
 			</div>
@@ -339,7 +339,7 @@
 				{#if currentStep > 1}
 					<Button type="button" variant="secondary" onclick={prevStep}>
 						<ChevronLeft class="w-4 h-4" />
-						Back
+						Назад
 					</Button>
 				{:else}
 					<button
@@ -347,22 +347,22 @@
 						onclick={handleSkip}
 						class="text-sm text-muted hover:text-black transition-colors"
 					>
-						Skip for now
+						Пропустить
 					</button>
 				{/if}
 			</div>
 
 			{#if currentStep < totalSteps}
 				<Button type="submit">
-					Continue
+					Продолжить
 					<ChevronRight class="w-4 h-4" />
 				</Button>
 			{:else}
 				<Button type="submit" {loading} disabled={loading}>
 					{#if loading}
-						Saving...
+						Сохранение...
 					{:else}
-						Complete Setup
+						Завершить настройку
 						<CheckCircle class="w-4 h-4" />
 					{/if}
 				</Button>

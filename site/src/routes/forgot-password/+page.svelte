@@ -1,5 +1,6 @@
 <script>
   import { Mail, ArrowLeft, CheckCircle, KeyRound } from '@lucide/svelte';
+  import { apiClient } from '$lib/api/client';
 
   let email = '';
   /** @type {Record<string, string>} */
@@ -19,7 +20,7 @@
     errors = {};
 
     if (!email.trim()) {
-      errors.email = 'Email обязателен';
+      errors.email = 'Эл. почта обязательна';
       return;
     }
 
@@ -31,12 +32,13 @@
     isLoading = true;
 
     try {
-      console.log('Password reset requested for:', email);
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await apiClient.post('/auth/forgot-password/', { email }, true);
       emailSent = true;
     } catch (error) {
       console.error('Password reset error:', error);
-      errors.submit = 'Не удалось отправить письмо для сброса. Попробуйте снова.';
+      errors.submit = error instanceof Error
+        ? error.message
+        : 'Не удалось отправить письмо для сброса. Попробуйте снова.';
     } finally {
       isLoading = false;
     }
@@ -95,7 +97,7 @@
                 id="email"
                 type="email"
                 bind:value={email}
-                placeholder="you@example.com"
+                placeholder="email@example.com"
                 class="w-full pl-11 pr-4 py-3 border rounded-lg bg-surface text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.email ? 'border-error' : 'border-border'}"
                 disabled={isLoading}
               />

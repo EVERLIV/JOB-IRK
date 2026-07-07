@@ -1,16 +1,17 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { getApiBaseUrl } from '$lib/config/env';
 
 export const load: PageServerLoad = async ({ fetch, cookies }) => {
 	try {
 		// Fetch dashboard stats with 30-day period for trends
-		const statsResponse = await fetch('http://localhost:8000/api/v1/recruiter/dashboard/stats/?period=30d');
+		const statsResponse = await fetch(`${getApiBaseUrl()}/recruiter/dashboard/stats/?period=30d`);
 
 		if (!statsResponse.ok) {
 			if (statsResponse.status === 401) {
 				throw redirect(302, '/login/');
 			}
-			console.error('Failed to fetch dashboard stats:', statsResponse.status);
+			console.error('Не удалось загрузить статистику панели:', statsResponse.status);
 			return {
 				stats: null,
 				pipeline: null,
@@ -34,7 +35,7 @@ export const load: PageServerLoad = async ({ fetch, cookies }) => {
 			stats: null,
 			pipeline: null,
 			recentJobs: [],
-			error: 'Failed to load dashboard data'
+			error: 'Не удалось загрузить данные панели управления'
 		};
 	}
 };

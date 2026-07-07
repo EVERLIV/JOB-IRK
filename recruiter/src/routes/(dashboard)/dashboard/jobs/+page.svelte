@@ -32,12 +32,34 @@
 	let submittingAction = $state<number | null>(null);
 
 	const filterOptions = [
-		{ value: 'all', label: 'All Jobs' },
-		{ value: 'Live', label: 'Active' },
-		{ value: 'Draft', label: 'Drafts' },
-		{ value: 'Disabled', label: 'Closed' },
-		{ value: 'Expired', label: 'Expired' }
+		{ value: 'all', label: 'Все вакансии' },
+		{ value: 'Live', label: 'Активные' },
+		{ value: 'Draft', label: 'Черновики' },
+		{ value: 'Disabled', label: 'Закрытые' },
+		{ value: 'Expired', label: 'Истекшие' }
 	];
+
+	function getJobStatusLabel(status: JobStatus): string {
+		const labels: Record<string, string> = {
+			Live: 'Активна',
+			Draft: 'Черновик',
+			Disabled: 'Закрыта',
+			Expired: 'Истекла'
+		};
+		return labels[status] || status;
+	}
+
+	function getJobTypeLabel(type: string): string {
+		const labels: Record<string, string> = {
+			'full-time': 'Полная занятость',
+			permanent: 'Постоянная',
+			contract: 'Контракт',
+			'part-time': 'Частичная занятость',
+			internship: 'Стажировка',
+			freelance: 'Фриланс'
+		};
+		return labels[type] || type;
+	}
 
 	// Update URL when filters change
 	function updateFilters() {
@@ -63,9 +85,9 @@
 	}
 
 	function formatDate(dateString?: string): string {
-		if (!dateString) return 'N/A';
+		if (!dateString) return 'Н/Д';
 		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+		return date.toLocaleDateString('ru-RU', { month: 'short', day: 'numeric', year: 'numeric' });
 	}
 
 	function getStatusVariant(status: JobStatus): 'success' | 'warning' | 'error' | 'neutral' {
@@ -84,7 +106,7 @@
 	}
 
 	async function handleDelete(jobId: number, jobTitle: string) {
-		if (!confirm(`Are you sure you want to delete "${jobTitle}"?`)) {
+		if (!confirm(`Вы уверены, что хотите удалить «${jobTitle}»?`)) {
 			return;
 		}
 
@@ -106,10 +128,10 @@
 				// Refresh the page data
 				await invalidateAll();
 			} else {
-				alert(result.data?.error || 'Failed to delete job');
+				alert(result.data?.error || 'Не удалось удалить вакансию');
 			}
 		} catch (err: any) {
-			alert(err.message || 'Failed to delete job');
+			alert(err.message || 'Не удалось удалить вакансию');
 		} finally {
 			submittingAction = null;
 		}
@@ -117,24 +139,24 @@
 </script>
 
 <svelte:head>
-	<title>Jobs - PeelJobs Recruiter</title>
+	<title>Вакансии - PeelJobs Recruiter</title>
 </svelte:head>
 
 <div class="space-y-6">
 	<!-- Header -->
 	<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 		<div>
-			<h1 class="text-2xl md:text-3xl font-bold text-black">Jobs</h1>
-			<p class="text-muted mt-1">Manage your job postings</p>
+			<h1 class="text-2xl md:text-3xl font-bold text-black">Вакансии</h1>
+			<p class="text-muted mt-1">Управление публикациями вакансий</p>
 		</div>
 		<div class="flex gap-3">
 			<Button href="/dashboard/jobs/inactive/" variant="secondary">
 				<Archive class="w-4 h-4" />
-				Inactive Jobs
+				Неактивные вакансии
 			</Button>
 			<Button href="/dashboard/jobs/new/">
 				<Plus class="w-4 h-4" />
-				Post New Job
+				Опубликовать вакансию
 			</Button>
 		</div>
 	</div>
@@ -149,7 +171,7 @@
 					type="text"
 					bind:value={searchQuery}
 					onchange={updateFilters}
-					placeholder="Search jobs by title..."
+					placeholder="Поиск по названию вакансии..."
 					class="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 				/>
 			</div>
@@ -174,7 +196,7 @@
 						type="button"
 						onclick={() => (viewMode = 'list')}
 						class="px-3 py-2 {viewMode === 'list' ? 'bg-primary/10 text-primary' : 'bg-white text-muted'} hover:bg-surface transition-colors"
-						aria-label="List view"
+						aria-label="Список"
 					>
 						<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
 							<path
@@ -188,7 +210,7 @@
 						type="button"
 						onclick={() => (viewMode = 'grid')}
 						class="px-3 py-2 {viewMode === 'grid' ? 'bg-primary/10 text-primary' : 'bg-white text-muted'} hover:bg-surface transition-colors"
-						aria-label="Grid view"
+						aria-label="Сетка"
 					>
 						<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
 							<path
@@ -205,15 +227,15 @@
 	{#if data.jobs.length === 0}
 		<Card padding="lg" class="text-center">
 			<Briefcase class="w-12 h-12 text-muted mx-auto mb-4" />
-			<h3 class="text-lg font-semibold text-black mb-2">No jobs found</h3>
+			<h3 class="text-lg font-semibold text-black mb-2">Вакансии не найдены</h3>
 			<p class="text-muted mb-6">
 				{searchQuery || selectedFilter !== 'all'
-					? 'Try adjusting your filters or search query'
-					: 'Get started by posting your first job'}
+					? 'Попробуйте изменить фильтры или поисковый запрос'
+					: 'Начните с публикации первой вакансии'}
 			</p>
 			<Button href="/dashboard/jobs/new/">
 				<Plus class="w-4 h-4" />
-				Post New Job
+				Опубликовать вакансию
 			</Button>
 		</Card>
 	{:else if viewMode === 'list'}
@@ -224,22 +246,22 @@
 					<thead class="bg-surface border-b border-border">
 						<tr>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Job Details
+								Детали вакансии
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Status
+								Статус
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Posted
+								Опубликовано
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Expires
+								Истекает
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Performance
+								Статистика
 							</th>
 							<th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
-								Actions
+								Действия
 							</th>
 						</tr>
 					</thead>
@@ -266,12 +288,12 @@
 													{job.location_display}
 												</span>
 												<span>•</span>
-												<span>{job.job_type}</span>
+												<span>{getJobTypeLabel(job.job_type)}</span>
 											</div>
 											{#if job.is_expiring_soon}
 												<span class="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-warning-light text-warning text-xs font-medium rounded">
 													<Calendar class="w-3 h-3" />
-													Expires in {job.days_until_expiry} days
+													Истекает через {job.days_until_expiry} дн.
 												</span>
 											{/if}
 										</div>
@@ -279,7 +301,7 @@
 								</td>
 								<td class="px-6 py-4">
 									<Badge variant={getStatusVariant(job.status)}>
-										{job.status}
+										{getJobStatusLabel(job.status)}
 									</Badge>
 								</td>
 								<td class="px-6 py-4 text-sm text-muted">
@@ -287,9 +309,9 @@
 								</td>
 								<td class="px-6 py-4 text-sm text-muted">
 									{#if job.days_until_expiry !== null && job.days_until_expiry !== undefined}
-										{job.days_until_expiry} days left
+										{job.days_until_expiry} дн. осталось
 									{:else}
-										Expired
+										Истекла
 									{/if}
 								</td>
 								<td class="px-6 py-4">
@@ -322,7 +344,7 @@
 													type="submit"
 													disabled={submittingAction === job.id}
 													class="p-2 text-success hover:bg-success-light rounded-lg transition-colors disabled:opacity-50"
-													title="Publish"
+													title="Опубликовать"
 												>
 													<Send class="w-4 h-4" />
 												</button>
@@ -341,7 +363,7 @@
 													type="submit"
 													disabled={submittingAction === job.id}
 													class="p-2 text-warning hover:bg-warning-light rounded-lg transition-colors disabled:opacity-50"
-													title="Close"
+													title="Закрыть"
 												>
 													<Archive class="w-4 h-4" />
 												</button>
@@ -351,7 +373,7 @@
 											<a
 												href="/dashboard/jobs/{job.id}/edit/"
 												class="p-2 text-muted hover:bg-surface rounded-lg transition-colors"
-												title="Edit"
+												title="Редактировать"
 											>
 												<Edit class="w-4 h-4" />
 											</a>
@@ -359,14 +381,14 @@
 										<a
 											href="/dashboard/jobs/{job.id}/"
 											class="p-2 text-muted hover:bg-surface rounded-lg transition-colors"
-											title="View"
+											title="Просмотр"
 										>
 											<ExternalLink class="w-4 h-4" />
 										</a>
 										<a
 											href="/dashboard/jobs/new/?copy_from={job.id}"
 											class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
-											title="Copy Job"
+											title="Копировать вакансию"
 										>
 											<Copy class="w-4 h-4" />
 										</a>
@@ -375,7 +397,7 @@
 												onclick={() => handleDelete(job.id, job.title)}
 												disabled={submittingAction === job.id}
 												class="p-2 text-error hover:bg-error-light rounded-lg transition-colors disabled:opacity-50"
-												title="Delete"
+												title="Удалить"
 											>
 												<XCircle class="w-4 h-4" />
 											</button>
@@ -398,7 +420,7 @@
 							<Briefcase class="w-6 h-6 text-primary" />
 						</div>
 						<Badge variant={getStatusVariant(job.status)}>
-							{job.status}
+							{getJobStatusLabel(job.status)}
 						</Badge>
 					</div>
 
@@ -418,7 +440,7 @@
 						</div>
 						<div class="flex items-center gap-2">
 							<Calendar class="w-4 h-4" />
-							Posted {job.time_ago}
+							Опубликовано {job.time_ago}
 						</div>
 					</div>
 
@@ -426,7 +448,7 @@
 						<div class="mb-4">
 							<span class="inline-flex items-center gap-1 px-2 py-1 bg-warning-light text-warning text-xs font-medium rounded">
 								<Calendar class="w-3 h-3" />
-								Expires in {job.days_until_expiry} days
+								Истекает через {job.days_until_expiry} дн.
 							</span>
 						</div>
 					{/if}
@@ -441,7 +463,7 @@
 							class="flex items-center gap-1 text-sm text-primary hover:text-primary-hover font-medium transition-colors"
 						>
 							<Users class="w-4 h-4" />
-							{job.applicants_count} applicants
+							{job.applicants_count} откликов
 						</a>
 					</div>
 
@@ -454,7 +476,7 @@
 									class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 bg-success rounded-full text-sm font-medium text-white hover:opacity-90 transition-opacity"
 								>
 									<Send class="w-4 h-4" />
-									Publish
+									Опубликовать
 								</button>
 							</form>
 						{:else if job.status === 'Live'}
@@ -465,18 +487,18 @@
 									class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 bg-warning rounded-full text-sm font-medium text-white hover:opacity-90 transition-opacity"
 								>
 									<Archive class="w-4 h-4" />
-									Close
+									Закрыть
 								</button>
 							</form>
 						{/if}
 						{#if job.status === 'Draft'}
 							<Button href="/dashboard/jobs/{job.id}/edit/" variant="secondary" size="sm" class="flex-1">
 								<Edit class="w-4 h-4" />
-								Edit
+								Редактировать
 							</Button>
 						{/if}
 						<Button href="/dashboard/jobs/{job.id}/" size="sm" class="flex-1">
-							View
+							Просмотр
 						</Button>
 					</div>
 				</Card>
@@ -489,7 +511,7 @@
 		<Card padding="md">
 			<div class="flex items-center justify-between">
 				<div class="text-sm text-muted">
-					Showing {data.jobs.length} of {data.count} jobs
+					Показано {data.jobs.length} из {data.count} вакансий
 				</div>
 				<div class="flex items-center gap-2">
 					<Button
@@ -498,16 +520,16 @@
 						onclick={() => goToPage(data.currentPage - 1)}
 						disabled={!data.previous}
 					>
-						Previous
+						Назад
 					</Button>
-					<span class="text-sm text-muted px-2">Page {data.currentPage}</span>
+					<span class="text-sm text-muted px-2">Страница {data.currentPage}</span>
 					<Button
 						variant="secondary"
 						size="sm"
 						onclick={() => goToPage(data.currentPage + 1)}
 						disabled={!data.next}
 					>
-						Next
+						Далее
 					</Button>
 				</div>
 			</div>

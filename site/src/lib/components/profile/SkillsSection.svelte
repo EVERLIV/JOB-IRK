@@ -507,7 +507,7 @@
 								type="text"
 								id="version"
 								bind:value={formData.version}
-								placeholder="e.g., 5.0, ES6, 3.x"
+								placeholder="напр., 5.0, ES6, 3.x"
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 							/>
 						</div>

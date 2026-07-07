@@ -1,10 +1,15 @@
 """
 Authentication Serializers for Job Seekers
 """
+from datetime import timedelta
+
+from django.conf import settings
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.utils.crypto import get_random_string
+from django.utils import timezone
 from peeldb.models import User, Google
 
 
@@ -65,7 +70,8 @@ class RegisterSerializer(serializers.Serializer):
             user_type='JS',  # Job Seeker
             is_active=False,  # Requires email verification
             email_verified=False,
-            activation_code=activation_code
+            activation_code=activation_code,
+            activation_code_created=timezone.now(),
         )
 
         return {
@@ -81,11 +87,43 @@ class VerifyEmailSerializer(serializers.Serializer):
     def validate_token(self, value):
         """Validate token and find user"""
         try:
-            user = User.objects.get(activation_code=value, is_active=False)
+            user = User.objects.get(
+                activation_code=value,
+                is_active=False,
+                user_type="JS",
+            )
+            created_at = user.activation_code_created or user.date_joined
+            max_age = timedelta(
+                hours=getattr(settings, "EMAIL_VERIFICATION_TOKEN_EXPIRY_HOURS", 48)
+            )
+            if timezone.now() > created_at + max_age:
+                raise User.DoesNotExist
             self.user = user
             return value
         except User.DoesNotExist:
             raise serializers.ValidationError("Invalid or expired verification token")
+
+
+class LoginSerializer(serializers.Serializer):
+    """Email/password login for job seekers."""
+
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        email = data.get("email", "").lower()
+        password = data.get("password")
+        user = authenticate(username=email, password=password)
+
+        if not user or user.user_type != "JS":
+            raise serializers.ValidationError("Invalid email or password")
+        if not user.is_active or not user.email_verified:
+            raise serializers.ValidationError(
+                "Please verify your email address before logging in."
+            )
+
+        data["user"] = user
+        return data
 
 
 class ResendVerificationSerializer(serializers.Serializer):
@@ -98,9 +136,9 @@ class ResendVerificationSerializer(serializers.Serializer):
         try:
             user = User.objects.get(email=email, is_active=False, user_type='JS')
             self.user = user
-            return email
         except User.DoesNotExist:
-            raise serializers.ValidationError("No unverified account found with this email")
+            pass
+        return email
 
 
 class ForgotPasswordSerializer(serializers.Serializer):
@@ -128,7 +166,23 @@ class ResetPasswordSerializer(serializers.Serializer):
     def validate_token(self, value):
         """Validate reset token"""
         try:
-            user = User.objects.get(activation_code=value, user_type='JS')
+            try:
+                user = User.objects.get(password_reset_token=value, user_type='JS')
+            except User.DoesNotExist:
+                user = User.objects.get(
+                    activation_code=value,
+                    user_type='JS',
+                    is_active=True,
+                    email_verified=True,
+                )
+            created_at = user.password_reset_token_created
+            if not created_at and user.password_reset_token != value:
+                created_at = user.activation_code_created or user.date_joined
+            max_age = timedelta(
+                hours=getattr(settings, "PASSWORD_RESET_TOKEN_EXPIRY_HOURS", 24)
+            )
+            if not created_at or timezone.now() > created_at + max_age:
+                raise User.DoesNotExist
             self.user = user
             return value
         except User.DoesNotExist:
@@ -156,6 +210,7 @@ class GoogleAuthSerializer(serializers.Serializer):
     redirect_uri = serializers.URLField(
         required=True, help_text="Frontend callback URL that was registered with Google"
     )
+    state = serializers.CharField(required=True, help_text="Signed OAuth state from google/url")
 
 
 class UserSerializer(serializers.ModelSerializer):
