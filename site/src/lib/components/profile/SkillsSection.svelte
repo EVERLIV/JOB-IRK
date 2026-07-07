@@ -38,10 +38,10 @@
 	};
 
 	const proficiencyLevels = [
-		{ value: 'Poor', label: 'Beginner', color: 'bg-error-50 text-error-700 border-error-200' },
-		{ value: 'Average', label: 'Intermediate', color: 'bg-warning-50 text-warning-700 border-warning-200' },
-		{ value: 'Good', label: 'Advanced', color: 'bg-primary-50 text-primary-700 border-primary-200' },
-		{ value: 'Expert', label: 'Expert', color: 'bg-success-50 text-success-700 border-success-200' }
+		{ value: 'Poor', label: 'Новичок', color: 'bg-error-50 text-error-700 border-error-200' },
+		{ value: 'Average', label: 'Средний', color: 'bg-warning-50 text-warning-700 border-warning-200' },
+		{ value: 'Good', label: 'Продвинутый', color: 'bg-primary-50 text-primary-700 border-primary-200' },
+		{ value: 'Expert', label: 'Эксперт', color: 'bg-success-50 text-success-700 border-success-200' }
 	];
 
 	onMount(async () => {
@@ -54,7 +54,7 @@
 			userSkills = await getMySkills();
 		} catch (err) {
 			console.error('Failed to load skills:', err);
-			toast.error('Failed to load skills');
+			toast.error('Не удалось загрузить навыки');
 		} finally {
 			loading = false;
 		}
@@ -130,17 +130,17 @@
 	async function handleSaveSkill() {
 		// Validation
 		if (!formData.skill) {
-			toast.error('Please select a skill');
+			toast.error('Пожалуйста, выберите навык');
 			return;
 		}
 
 		if (formData.year !== undefined && (formData.year < 0 || formData.year > 50)) {
-			toast.error('Years must be between 0 and 50');
+			toast.error('Количество лет должно быть от 0 до 50');
 			return;
 		}
 
 		if (formData.month !== undefined && (formData.month < 0 || formData.month > 11)) {
-			toast.error('Months must be between 0 and 11');
+			toast.error('Количество месяцев должно быть от 0 до 11');
 			return;
 		}
 
@@ -162,17 +162,17 @@
 			if (editingSkillId) {
 				// Update existing skill
 				await updateTechnicalSkill(editingSkillId, payload);
-				toast.success('Skill updated successfully!');
+				toast.success('Навык успешно обновлён!');
 			} else {
 				// Add new skill
 				await addTechnicalSkill(payload);
-				toast.success('Skill added successfully!');
+				toast.success('Навык успешно добавлен!');
 			}
 
 			await loadUserSkills();
 			closeForm();
 		} catch (err) {
-			const errorMessage = err instanceof Error ? err.message : 'Failed to save skill';
+			const errorMessage = err instanceof Error ? err.message : 'Не удалось сохранить навык';
 			toast.error(errorMessage);
 			console.error('Save skill error:', err);
 		} finally {
@@ -181,23 +181,23 @@
 	}
 
 	async function handleDeleteSkill(skillId: number, skillName: string) {
-		if (!confirm(`Are you sure you want to remove "${skillName}" from your profile?`)) {
+		if (!confirm(`Вы уверены, что хотите удалить "${skillName}" из профиля?`)) {
 			return;
 		}
 
 		try {
 			await deleteTechnicalSkill(skillId);
-			toast.success('Skill removed successfully!');
+			toast.success('Навык успешно удалён!');
 			await loadUserSkills();
 		} catch (err) {
-			const errorMessage = err instanceof Error ? err.message : 'Failed to delete skill';
+			const errorMessage = err instanceof Error ? err.message : 'Не удалось удалить навык';
 			toast.error(errorMessage);
 			console.error('Delete skill error:', err);
 		}
 	}
 
 	function formatExperience(year?: number, month?: number): string {
-		if (year === undefined && month === undefined) return 'Not specified';
+		if (year === undefined && month === undefined) return 'Не указано';
 		const years = year ? `${year}y` : '';
 		const months = month ? `${month}m` : '';
 		return [years, months].filter(Boolean).join(' ');
@@ -210,7 +210,7 @@
 
 	function getProficiencyLabel(proficiency?: string): string {
 		const level = proficiencyLevels.find((l) => l.value === proficiency);
-		return level?.label || proficiency || 'Not specified';
+		return level?.label || proficiency || 'Не указано';
 	}
 
 	// Search when user types
@@ -224,8 +224,8 @@
 				<Code size={20} class="text-primary-600" />
 			</div>
 			<div>
-				<h2 class="text-lg font-semibold text-gray-900">Technical Skills</h2>
-				<p class="text-sm text-gray-600">Showcase your expertise</p>
+				<h2 class="text-lg font-semibold text-gray-900">Технические навыки</h2>
+				<p class="text-sm text-gray-600">Продемонстрируйте вашу экспертность</p>
 			</div>
 		</div>
 		<button
@@ -234,7 +234,7 @@
 			class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1 text-sm"
 		>
 			<Plus size={18} />
-			<span class="hidden sm:inline">Add Skill</span>
+			<span class="hidden sm:inline">Добавить навык</span>
 		</button>
 	</div>
 
@@ -242,7 +242,7 @@
 	{#if loading}
 		<div class="flex flex-col items-center justify-center py-12">
 			<div class="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mb-4"></div>
-			<p class="text-gray-600">Loading skills...</p>
+			<p class="text-gray-600">Загрузка навыков...</p>
 		</div>
 	{:else if userSkills.length === 0 && !showAddForm}
 		<!-- Empty State -->
@@ -250,9 +250,9 @@
 			<div class="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
 				<Code size={36} class="text-gray-400" />
 			</div>
-			<h3 class="text-xl font-semibold text-gray-900 mb-2">No skills added yet</h3>
+			<h3 class="text-xl font-semibold text-gray-900 mb-2">Навыки ещё не добавлены</h3>
 			<p class="text-gray-600 mb-6 max-w-md mx-auto">
-				Add your technical skills to showcase your expertise and attract better job opportunities.
+				Добавьте ваши технические навыки, чтобы продемонстрировать экспертность и привлечь лучшие вакансии.
 			</p>
 			<button
 				type="button"
@@ -260,7 +260,7 @@
 				class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1"
 			>
 				<Plus size={18} />
-				<span>Add Your First Skill</span>
+				<span>Добавить первый навык</span>
 			</button>
 		</div>
 	{:else}
@@ -278,12 +278,12 @@
 								{#if skill.is_major}
 									<span class="inline-flex items-center gap-1 text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full border border-primary-200">
 										<Star size={10} class="fill-current" />
-										Major
+										Основной
 									</span>
 								{/if}
 							</h3>
 							{#if skill.version}
-								<p class="text-xs text-gray-500 mt-1">Version: {skill.version}</p>
+								<p class="text-xs text-gray-500 mt-1">Версия: {skill.version}</p>
 							{/if}
 						</div>
 						<div class="flex items-center gap-1">
@@ -291,7 +291,7 @@
 								type="button"
 								onclick={() => openEditForm(skill)}
 								class="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors"
-								title="Edit skill"
+								title="Редактировать навык"
 							>
 								<Pencil size={16} />
 							</button>
@@ -299,7 +299,7 @@
 								type="button"
 								onclick={() => handleDeleteSkill(skill.id, skill.skill.name)}
 								class="p-2 text-gray-400 hover:text-error-600 hover:bg-error-50 rounded-xl transition-colors"
-								title="Remove skill"
+								title="Удалить навык"
 							>
 								<Trash2 size={16} />
 							</button>
@@ -308,11 +308,11 @@
 
 					<div class="grid grid-cols-2 gap-3 text-sm">
 						<div>
-							<p class="text-gray-500 text-xs mb-1">Experience</p>
+							<p class="text-gray-500 text-xs mb-1">Опыт</p>
 							<p class="font-medium text-gray-900">{formatExperience(skill.year, skill.month)}</p>
 						</div>
 						<div>
-							<p class="text-gray-500 text-xs mb-1">Proficiency</p>
+							<p class="text-gray-500 text-xs mb-1">Уровень</p>
 							<span class="inline-block px-2.5 py-1 rounded-full text-xs font-medium border {getProficiencyColor(skill.proficiency)}">
 								{getProficiencyLabel(skill.proficiency)}
 							</span>
@@ -320,7 +320,7 @@
 					</div>
 
 					{#if skill.last_used}
-						<p class="text-xs text-gray-500 mt-3 pt-3 border-t border-gray-100">Last used: {skill.last_used}</p>
+						<p class="text-xs text-gray-500 mt-3 pt-3 border-t border-gray-100">Последнее использование: {skill.last_used}</p>
 					{/if}
 				</div>
 			{/each}
@@ -334,10 +334,10 @@
 				</div>
 				<div>
 					<h3 class="font-semibold text-gray-900 mb-1">
-						{userSkills.length} {userSkills.length === 1 ? 'Skill' : 'Skills'} Added
+						{userSkills.length} {userSkills.length === 1 ? 'Навык' : 'Навыка'} Добавлено
 					</h3>
 					<p class="text-sm text-gray-600">
-						Keep your skills up to date to attract better job opportunities and match with relevant positions.
+						Поддерживайте ваши навыки в актуальном состоянии, чтобы привлекать лучшие вакансии и соответствовать релевантным позициям.
 					</p>
 				</div>
 			</div>
@@ -359,7 +359,7 @@
 				onkeydown={(e) => e.key === 'Escape' && closeForm()}
 				role="button"
 				tabindex="-1"
-				aria-label="Close modal"
+				aria-label="Закрыть модальное окно"
 			></div>
 
 			<!-- Modal -->
@@ -374,7 +374,7 @@
 								<Code size={20} class="text-primary-600" />
 							</div>
 							<h3 class="text-lg font-semibold text-gray-900" id="modal-title">
-								{editingSkillId ? 'Edit Skill' : 'Add Skill'}
+								{editingSkillId ? 'Редактировать навык' : 'Добавить навык'}
 							</h3>
 						</div>
 						<button
@@ -391,7 +391,7 @@
 						<!-- Skill Search -->
 						<div class="relative">
 							<label for="skill_search" class="block text-sm font-medium text-gray-700 mb-2">
-								Skill Name <span class="text-error-500">*</span>
+								Название навыка <span class="text-error-500">*</span>
 							</label>
 							<div class="relative">
 								<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
@@ -402,7 +402,7 @@
 									id="skill_search"
 									bind:value={skillSearch}
 									onfocus={() => (showSearchDropdown = true)}
-									placeholder="Search for a skill (e.g., Python, Java, React)..."
+									placeholder="Поиск навыка (напр., Python, Java, React)..."
 									class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 									disabled={editingSkillId !== null}
 									autocomplete="off"
@@ -433,19 +433,19 @@
 								</div>
 							{:else if showSearchDropdown && skillSearch.length >= 2 && searchResults.length === 0 && !searchingSkills}
 								<div class="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-2xl shadow-xl p-4 text-center text-gray-500">
-									No skills found for "{skillSearch}"
+									Навыки по запросу "{skillSearch}" не найдены
 								</div>
 							{:else if showSearchDropdown && skillSearch.length < 2 && skillSearch.length > 0}
 								<div class="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-2xl shadow-xl p-4 text-center text-gray-500">
-									Type at least 2 characters to search
+									Введите минимум 2 символа для поиска
 								</div>
 							{/if}
 
 							{#if formData.skill}
-								<p class="mt-2 text-sm text-success-600 font-medium">✓ Selected: {formData.skillName}</p>
+								<p class="mt-2 text-sm text-success-600 font-medium">✓ Выбрано: {formData.skillName}</p>
 							{/if}
 							{#if editingSkillId}
-								<p class="mt-2 text-xs text-gray-500">Skill cannot be changed when editing</p>
+								<p class="mt-2 text-xs text-gray-500">Навык нельзя изменить при редактировании</p>
 							{/if}
 						</div>
 
@@ -453,7 +453,7 @@
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<div>
 								<label for="years" class="block text-sm font-medium text-gray-700 mb-2">
-									Years of Experience
+									Лет опыта
 								</label>
 								<input
 									type="number"
@@ -467,7 +467,7 @@
 							</div>
 							<div>
 								<label for="months" class="block text-sm font-medium text-gray-700 mb-2">
-									Months
+									Месяцы
 								</label>
 								<input
 									type="number"
@@ -484,14 +484,14 @@
 						<!-- Proficiency -->
 						<div>
 							<label for="proficiency" class="block text-sm font-medium text-gray-700 mb-2">
-								Proficiency Level
+								Уровень владения
 							</label>
 							<select
 								id="proficiency"
 								bind:value={formData.proficiency}
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none"
 							>
-								<option value="">Select proficiency</option>
+								<option value="">Выберите уровень</option>
 								{#each proficiencyLevels as level}
 									<option value={level.value}>{level.label}</option>
 								{/each}
@@ -501,7 +501,7 @@
 						<!-- Version -->
 						<div>
 							<label for="version" class="block text-sm font-medium text-gray-700 mb-2">
-								Version (Optional)
+								Версия (необязательно)
 							</label>
 							<input
 								type="text"
@@ -515,7 +515,7 @@
 						<!-- Last Used -->
 						<div>
 							<label for="last_used" class="block text-sm font-medium text-gray-700 mb-2">
-								Last Used (Optional)
+								Последнее использование (необязательно)
 							</label>
 							<input
 								type="date"
@@ -534,8 +534,8 @@
 									class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 								/>
 								<div>
-									<p class="font-medium text-gray-900">Major Skill</p>
-									<p class="text-sm text-gray-600">Mark this as one of your primary skills to highlight it on your profile</p>
+									<p class="font-medium text-gray-900">Основной навык</p>
+									<p class="text-sm text-gray-600">Отметьте как один из ваших главных навыков, чтобы выделить его в профиле</p>
 								</div>
 							</label>
 						</div>
@@ -548,7 +548,7 @@
 								class="px-5 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-full font-medium hover:bg-gray-50 transition-colors"
 								disabled={saving}
 							>
-								Cancel
+								Отмена
 							</button>
 							<button
 								type="submit"
@@ -557,10 +557,10 @@
 							>
 								{#if saving}
 									<Loader size={18} class="animate-spin" />
-									Saving...
+									Сохранение...
 								{:else}
 									<Save size={18} />
-									{editingSkillId ? 'Update Skill' : 'Add Skill'}
+									{editingSkillId ? 'Обновить навык' : 'Добавить навык'}
 								{/if}
 							</button>
 						</div>

@@ -189,7 +189,7 @@
               class="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-muted rounded-full hover:bg-surface hover:text-black transition-colors"
             >
               <Search size={16} />
-              <span>Find Jobs</span>
+              <span>Найти работу</span>
               <ChevronDown
                 size={14}
                 class="transition-transform {latestJobsDropdownOpen
@@ -215,7 +215,7 @@
                         <a
                           href="/jobs/"
                           class="font-semibold text-black hover:text-primary-600 text-sm"
-                          >Skills</a
+                          >Навыки</a
                         >
                       </div>
                       <ul class="space-y-0.5">
@@ -225,7 +225,7 @@
                               href="/jobs/?skills={skill.slug}"
                               class="block px-2 py-1.5 text-xs text-muted rounded hover:bg-primary-50 hover:text-primary-600 transition-colors"
                             >
-                              Jobs For {skill.name}
+                              Вакансии для {skill.name}
                             </a>
                           </li>
                         {/each}
@@ -243,7 +243,7 @@
                         <a
                           href="/jobs/"
                           class="font-semibold text-black hover:text-success-600 text-sm"
-                          >Industry</a
+                          >Отрасли</a
                         >
                       </div>
                       <ul class="space-y-0.5">
@@ -253,7 +253,7 @@
                               href="/jobs/?industry={industry.slug}"
                               class="block px-2 py-1.5 text-xs text-muted rounded hover:bg-success-light hover:text-success-600 transition-colors"
                             >
-                              Jobs For {industry.name}
+                              Вакансии в {industry.name}
                             </a>
                           </li>
                         {/each}
@@ -271,7 +271,7 @@
                         <a
                           href="/jobs/"
                           class="font-semibold text-black hover:text-warning-600 text-sm"
-                          >Location</a
+                          >Города</a
                         >
                       </div>
                       <ul class="space-y-0.5">
@@ -281,7 +281,7 @@
                               href="/jobs/?location={location.slug}"
                               class="block px-2 py-1.5 text-xs text-muted rounded hover:bg-warning-light hover:text-warning-600 transition-colors"
                             >
-                              Jobs in {location.name}
+                              Вакансии в {location.name}
                             </a>
                           </li>
                         {/each}
@@ -299,7 +299,7 @@
                         <a
                           href="/jobs/?job_type=internship"
                           class="font-semibold text-black hover:text-error-600 text-sm"
-                          >Internship</a
+                          >Стажировки</a
                         >
                       </div>
                       <ul class="space-y-0.5">
@@ -309,7 +309,7 @@
                               href="/jobs/?job_type=internship&location={city.slug}"
                               class="block px-2 py-1.5 text-xs text-muted rounded hover:bg-error-light hover:text-error-600 transition-colors"
                             >
-                              Internship in {city.name}
+                              Стажировка в {city.name}
                             </a>
                           </li>
                         {/each}
@@ -327,7 +327,7 @@
                         <a
                           href="/jobs/?fresher=true"
                           class="font-semibold text-black hover:text-primary-700 text-sm"
-                          >Fresher</a
+                          >Начинающим</a
                         >
                       </div>
                       <ul class="space-y-0.5">
@@ -337,7 +337,7 @@
                               href="/jobs/?fresher=true&skills={skill.slug}"
                               class="block px-2 py-1.5 text-xs text-muted rounded hover:bg-primary-100 hover:text-primary-700 transition-colors"
                             >
-                              {skill.name} Fresher Jobs
+                              {skill.name} — вакансии для начинающих
                             </a>
                           </li>
                         {/each}
@@ -355,14 +355,14 @@
                         class="flex items-center gap-1.5 px-3 py-1.5 bg-success-light text-success-600 rounded-full text-xs font-medium hover:bg-success-light/80 transition-colors"
                       >
                         <Home size={12} />
-                        Remote Jobs
+                        Удалённые вакансии
                       </a>
                     </div>
                     <a
                       href="/jobs/"
                       class="flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors text-sm"
                     >
-                      <span>View All Jobs</span>
+                      <span>Все вакансии</span>
                       <ChevronDown size={14} class="-rotate-90" />
                     </a>
                   </div>
@@ -375,26 +375,26 @@
             href="/jobs/?fresher=true"
             class="px-4 py-2 text-sm font-medium text-muted rounded-full hover:bg-surface hover:text-black transition-colors"
           >
-            Fresher Jobs
+            Начинающим
           </a>
           <a
             href="/jobs/?is_remote=true"
             class="px-4 py-2 text-sm font-medium text-muted rounded-full hover:bg-surface hover:text-black transition-colors"
           >
-            Remote Jobs
+            Удалённая работа
           </a>
           <a
             href="/jobs/?job_type=internship"
             class="px-4 py-2 text-sm font-medium text-muted rounded-full hover:bg-surface hover:text-black transition-colors"
           >
-            Internship
+            Стажировки
           </a>
           <a
             href="/companies/"
             class="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-muted rounded-full hover:bg-surface hover:text-black transition-colors"
           >
             <Building2 size={16} />
-            <span>Companies</span>
+            <span>Компании</span>
           </a>
         </div>
 
@@ -467,35 +467,35 @@
                       class="flex items-center gap-3 px-4 py-2.5 text-muted hover:bg-surface hover:text-black transition-colors"
                     >
                       <User size={18} />
-                      <span class="text-sm font-medium">My Profile</span>
+                      <span class="text-sm font-medium">Мой профиль</span>
                     </a>
                     <a
                       href="/applications/"
                       class="flex items-center gap-3 px-4 py-2.5 text-muted hover:bg-surface hover:text-black transition-colors"
                     >
                       <FileText size={18} />
-                      <span class="text-sm font-medium">My Applications</span>
+                      <span class="text-sm font-medium">Мои отклики</span>
                     </a>
                     <a
                       href="/saved/"
                       class="flex items-center gap-3 px-4 py-2.5 text-muted hover:bg-surface hover:text-black transition-colors"
                     >
                       <Bookmark size={18} />
-                      <span class="text-sm font-medium">Saved Jobs</span>
+                      <span class="text-sm font-medium">Сохранённые</span>
                     </a>
                     <a
                       href="/resume/"
                       class="flex items-center gap-3 px-4 py-2.5 text-muted hover:bg-surface hover:text-black transition-colors"
                     >
                       <FilePlus size={18} />
-                      <span class="text-sm font-medium">My Resumes</span>
+                      <span class="text-sm font-medium">Мои резюме</span>
                     </a>
                     <a
                       href="/messages/"
                       class="flex items-center gap-3 px-4 py-2.5 text-muted hover:bg-surface hover:text-black transition-colors"
                     >
                       <MessageSquare size={18} />
-                      <span class="text-sm font-medium">Messages</span>
+                      <span class="text-sm font-medium">Сообщения</span>
                     </a>
                   </div>
 
@@ -506,7 +506,7 @@
                       class="flex items-center gap-3 px-4 py-2.5 text-error-600 hover:bg-error-light transition-colors w-full"
                     >
                       <LogOut size={18} />
-                      <span class="text-sm font-medium">Sign out</span>
+                      <span class="text-sm font-medium">Выйти</span>
                     </button>
                   </div>
                 </div>
@@ -517,19 +517,19 @@
               href="/login/"
               class="px-4 py-2 text-sm font-semibold text-primary-600 rounded-full hover:bg-primary-50 transition-colors"
             >
-              Sign in
+              Войти
             </a>
             <a
               href="/register/"
               class="h-8 px-4 flex items-center text-sm font-semibold text-white bg-primary-600 rounded-full hover:bg-primary-700 transition-colors"
             >
-              Join now
+              Регистрация
             </a>
             <a
               href="/employer/"
               class="h-8 px-4 flex items-center text-sm font-semibold text-primary-600 border border-primary-600 rounded-full hover:bg-primary-50 transition-colors"
             >
-              For Employers
+              Работодателям
             </a>
           {/if}
         </div>
@@ -587,7 +587,7 @@
             <p
               class="text-xs font-semibold text-muted uppercase tracking-wider mb-3 px-2"
             >
-              Quick Access
+              Быстрый доступ
             </p>
             <div class="grid grid-cols-3 gap-2">
               <a
@@ -596,7 +596,7 @@
               >
                 <Search size={20} class="text-primary-600" />
                 <span class="text-xs font-medium text-primary-600"
-                  >All Jobs</span
+                  >Все вакансии</span
                 >
               </a>
               <a
@@ -604,7 +604,7 @@
                 class="flex flex-col items-center gap-2 p-4 bg-success-light rounded-lg hover:bg-success-light/80 transition-colors"
               >
                 <GraduationCap size={20} class="text-success-600" />
-                <span class="text-xs font-medium text-success-600">Fresher</span
+                <span class="text-xs font-medium text-success-600">Начинающим</span
                 >
               </a>
               <a
@@ -612,7 +612,7 @@
                 class="flex flex-col items-center gap-2 p-4 bg-warning-light rounded-lg hover:bg-warning-light/80 transition-colors"
               >
                 <Home size={20} class="text-warning-600" />
-                <span class="text-xs font-medium text-warning-600">Remote</span>
+                <span class="text-xs font-medium text-warning-600">Удалённая</span>
               </a>
             </div>
           </div>
@@ -624,14 +624,14 @@
               class="flex items-center gap-3 px-4 py-3 text-muted rounded-lg hover:bg-surface hover:text-black transition-colors"
             >
               <Users size={20} />
-              <span class="font-medium">Internships</span>
+              <span class="font-medium">Стажировки</span>
             </a>
             <a
               href="/companies/"
               class="flex items-center gap-3 px-4 py-3 text-muted rounded-lg hover:bg-surface hover:text-black transition-colors"
             >
               <Building2 size={20} />
-              <span class="font-medium">Companies</span>
+              <span class="font-medium">Компании</span>
             </a>
           </div>
 
@@ -641,7 +641,7 @@
               <p
                 class="text-xs font-semibold text-muted uppercase tracking-wider mb-3 px-2"
               >
-                My Account
+                Мой аккаунт
               </p>
               <div class="space-y-1">
                 <a
@@ -649,35 +649,35 @@
                   class="flex items-center gap-3 px-4 py-3 text-muted rounded-lg hover:bg-surface hover:text-black transition-colors"
                 >
                   <User size={20} />
-                  <span class="font-medium">My Profile</span>
+                  <span class="font-medium">Мой профиль</span>
                 </a>
                 <a
                   href="/applications/"
                   class="flex items-center gap-3 px-4 py-3 text-muted rounded-lg hover:bg-surface hover:text-black transition-colors"
                 >
                   <FileText size={20} />
-                  <span class="font-medium">My Applications</span>
+                  <span class="font-medium">Мои отклики</span>
                 </a>
                 <a
                   href="/saved/"
                   class="flex items-center gap-3 px-4 py-3 text-muted rounded-lg hover:bg-surface hover:text-black transition-colors"
                 >
                   <Bookmark size={20} />
-                  <span class="font-medium">Saved Jobs</span>
+                  <span class="font-medium">Сохранённые</span>
                 </a>
                 <a
                   href="/resume/"
                   class="flex items-center gap-3 px-4 py-3 text-muted rounded-lg hover:bg-surface hover:text-black transition-colors"
                 >
                   <FilePlus size={20} />
-                  <span class="font-medium">My Resumes</span>
+                  <span class="font-medium">Мои резюме</span>
                 </a>
                 <a
                   href="/messages/"
                   class="flex items-center gap-3 px-4 py-3 text-muted rounded-lg hover:bg-surface hover:text-black transition-colors"
                 >
                   <MessageSquare size={20} />
-                  <span class="font-medium">Messages</span>
+                  <span class="font-medium">Сообщения</span>
                 </a>
               </div>
 
@@ -686,7 +686,7 @@
                 class="flex items-center gap-3 px-4 py-3 mt-2 text-error-600 rounded-lg hover:bg-error-light transition-colors w-full"
               >
                 <LogOut size={20} />
-                <span class="font-medium">Sign out</span>
+                <span class="font-medium">Выйти</span>
               </button>
             </div>
           {:else}
@@ -695,19 +695,19 @@
                 href="/login/"
                 class="flex items-center justify-center w-full h-10 text-primary-600 font-semibold border border-primary-600 rounded-full hover:bg-primary-50 transition-colors"
               >
-                Sign in
+                Войти
               </a>
               <a
                 href="/register/"
                 class="flex items-center justify-center w-full h-10 text-white font-semibold bg-primary-600 rounded-full hover:bg-primary-700 transition-colors"
               >
-                Join now
+                Регистрация
               </a>
               <a
                 href="/employer/"
                 class="flex items-center justify-center w-full h-10 text-success-600 font-semibold border border-success-600 rounded-full hover:bg-success-light transition-colors"
               >
-                For Employers
+                Работодателям
               </a>
             </div>
           {/if}
@@ -735,14 +735,14 @@
             <span class="text-xl font-semibold">PeelJobs</span>
           </a>
           <p class="text-gray-400 text-sm leading-relaxed mb-5 max-w-sm">
-            India's trusted job platform connecting professionals with verified
-            opportunities at top companies.
+            Надёжная платформа для поиска работы, связывающая профессионалов
+            с проверенными вакансиями в ведущих компаниях.
           </p>
           <div class="flex items-center gap-2">
             <a
               href="https://x.com/peeljobs"
               class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"
-              aria-label="Follow us on Twitter"
+              aria-label="Мы в Twitter"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -751,7 +751,7 @@
             <a
               href="https://linkedin.com/company/peeljobs"
               class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"
-              aria-label="Follow us on LinkedIn"
+              aria-label="Мы в LinkedIn"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -760,7 +760,7 @@
             <a
               href="https://facebook.com/peeljobs"
               class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"
-              aria-label="Follow us on Facebook"
+              aria-label="Мы в Facebook"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -771,41 +771,41 @@
 
         <!-- For Job Seekers -->
         <div>
-          <h5 class="font-semibold text-white mb-4 text-sm">For Job Seekers</h5>
+          <h5 class="font-semibold text-white mb-4 text-sm">Соискателям</h5>
           <ul class="space-y-2.5">
             <li>
               <a
                 href="/jobs/"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Browse All Jobs</a
+                >Все вакансии</a
               >
             </li>
             <li>
               <a
                 href="/jobs/?fresher=true"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Fresher Jobs</a
+                >Начинающим</a
               >
             </li>
             <li>
               <a
                 href="/jobs/?is_remote=true"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Remote Jobs</a
+                >Удалённая работа</a
               >
             </li>
             <li>
               <a
                 href="/jobs/?job_type=internship"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Internships</a
+                >Стажировки</a
               >
             </li>
             <li>
               <a
                 href="/companies/"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Top Companies</a
+                >Лучшие компании</a
               >
             </li>
           </ul>
@@ -813,27 +813,27 @@
 
         <!-- For Employers -->
         <div>
-          <h5 class="font-semibold text-white mb-4 text-sm">For Employers</h5>
+          <h5 class="font-semibold text-white mb-4 text-sm">Работодателям</h5>
           <ul class="space-y-2.5">
             <li>
               <a
                 href="https://recruiter.peeljobs.com"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Post a Job</a
+                >Разместить вакансию</a
               >
             </li>
             <li>
               <a
                 href="https://recruiter.peeljobs.com/dashboard"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Employer Dashboard</a
+                >Кабинет работодателя</a
               >
             </li>
             <li>
               <a
                 href="/pricing/"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
-                >Pricing Plans</a
+                >Тарифы</a
               >
             </li>
           </ul>
@@ -841,7 +841,7 @@
 
         <!-- Contact Info -->
         <div>
-          <h5 class="font-semibold text-white mb-4 text-sm">Get in Touch</h5>
+          <h5 class="font-semibold text-white mb-4 text-sm">Связаться с нами</h5>
           <div class="space-y-3">
             <a
               href="mailto:peeljobs@micropyramid.com"
@@ -874,26 +874,26 @@
           class="flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p class="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} PeelJobs. All rights reserved.
+            &copy; {new Date().getFullYear()} PeelJobs. Все права защищены.
           </p>
           <div class="flex flex-wrap justify-center gap-6 text-sm">
             <a
               href="/about/"
-              class="text-gray-400 hover:text-white transition-colors">About</a
+              class="text-gray-400 hover:text-white transition-colors">О нас</a
             >
             <a
               href="/privacy/"
               class="text-gray-400 hover:text-white transition-colors"
-              >Privacy</a
+              >Конфиденциальность</a
             >
             <a
               href="/terms/"
-              class="text-gray-400 hover:text-white transition-colors">Terms</a
+              class="text-gray-400 hover:text-white transition-colors">Условия</a
             >
             <a
               href="/contact/"
               class="text-gray-400 hover:text-white transition-colors"
-              >Contact</a
+              >Контакты</a
             >
           </div>
         </div>

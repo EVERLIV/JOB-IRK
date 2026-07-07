@@ -82,7 +82,7 @@
 			institutes = instituteData;
 		} catch (error) {
 			console.error('Failed to load lookup data:', error);
-			toast.error('Failed to load form data. Please try again.');
+			toast.error('Не удалось загрузить данные формы. Попробуйте ещё раз.');
 		} finally {
 			loadingLookups = false;
 		}
@@ -180,27 +180,27 @@
 
 		// Validation
 		if (!isOtherInstitute && !formData.institute_id) {
-			toast.error('Please select an institute or choose "Other"');
+			toast.error('Пожалуйста, выберите учебное заведение или нажмите «Другое»');
 			return;
 		}
 
 		if (isOtherInstitute && !formData.custom_institute_name?.trim()) {
-			toast.error('Please enter your institute name');
+			toast.error('Пожалуйста, введите название учебного заведения');
 			return;
 		}
 
 		if (!formData.degree_id) {
-			toast.error('Please select a degree');
+			toast.error('Пожалуйста, выберите степень');
 			return;
 		}
 
 		if (!formData.from_date) {
-			toast.error('Please enter start date');
+			toast.error('Пожалуйста, введите дату начала');
 			return;
 		}
 
 		if (!formData.current_education && !formData.to_date) {
-			toast.error('Please enter end date or mark as current education');
+			toast.error('Пожалуйста, введите дату окончания или отметьте как текущее обучение');
 			return;
 		}
 
@@ -220,11 +220,11 @@
 			if (education) {
 				// Update existing education
 				await updateEducation(education.id, submitData);
-				toast.success('Education updated successfully!');
+				toast.success('Образование успешно обновлено!');
 			} else {
 				// Add new education
 				await addEducation(submitData);
-				toast.success('Education added successfully!');
+				toast.success('Образование успешно добавлено!');
 			}
 
 			onSuccess();
@@ -234,7 +234,7 @@
 			const errorMsg =
 				error?.response?.data?.detail ||
 				error?.response?.data?.error ||
-				'Failed to save education. Please try again.';
+				'Не удалось сохранить образование. Попробуйте ещё раз.';
 			toast.error(errorMsg);
 		} finally {
 			loading = false;
@@ -282,7 +282,7 @@
 			type="button"
 			class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity cursor-default animate-fade-in"
 			onclick={handleBackdropClick}
-			aria-label="Close modal"
+			aria-label="Закрыть модальное окно"
 			tabindex="-1"
 		></button>
 
@@ -298,7 +298,7 @@
 							<GraduationCap size={20} class="text-primary-600" />
 						</div>
 						<h3 class="text-lg font-semibold text-gray-900" id="modal-title">
-							{education ? 'Edit Education' : 'Add Education'}
+							{education ? 'Редактировать образование' : 'Добавить образование'}
 						</h3>
 					</div>
 					<button
@@ -315,7 +315,7 @@
 					<!-- Qualification Selection -->
 					<div>
 						<label for="qualification" class="block text-sm font-medium text-gray-700 mb-2">
-							Qualification Type <span class="text-error-500">*</span>
+							Тип квалификации <span class="text-error-500">*</span>
 						</label>
 						<select
 							id="qualification"
@@ -325,7 +325,7 @@
 							required
 							disabled={loadingLookups}
 						>
-							<option value={0}>Select qualification type...</option>
+							<option value={0}>Выберите тип квалификации...</option>
 							{#each qualifications as qual}
 								<option value={qual.id}>{qual.name}</option>
 							{/each}
@@ -335,7 +335,7 @@
 					<!-- Degree Selection -->
 					<div>
 						<label for="degree" class="block text-sm font-medium text-gray-700 mb-2">
-							Degree <span class="text-error-500">*</span>
+							Степень <span class="text-error-500">*</span>
 						</label>
 						<select
 							id="degree"
@@ -344,7 +344,7 @@
 							required
 							disabled={!selectedQualificationId || loadingLookups}
 						>
-							<option value={0}>Select degree...</option>
+							<option value={0}>Выберите степень...</option>
 							{#each filteredDegrees as degree}
 								<option value={degree.id}>
 									{degree.specialization} ({degree.degree_type})
@@ -352,14 +352,14 @@
 							{/each}
 						</select>
 						{#if !selectedQualificationId}
-							<p class="mt-2 text-xs text-gray-500">Please select qualification type first</p>
+							<p class="mt-2 text-xs text-gray-500">Сначала выберите тип квалификации</p>
 						{/if}
 					</div>
 
 					<!-- Institute Selection -->
 					<div>
 						<label for="institute" class="block text-sm font-medium text-gray-700 mb-2">
-							Institute <span class="text-error-500">*</span>
+							Учебное заведение <span class="text-error-500">*</span>
 						</label>
 
 						{#if !isOtherInstitute}
@@ -369,7 +369,7 @@
 								</span>
 								<input
 									type="text"
-									placeholder="Search institute..."
+									placeholder="Поиск учебного заведения..."
 									bind:value={instituteSearchQuery}
 									oninput={handleInstituteSearch}
 									class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
@@ -381,7 +381,7 @@
 								class="mt-3 w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none disabled:bg-gray-100 disabled:cursor-not-allowed"
 								disabled={loadingLookups || searchingInstitutes}
 							>
-								<option value={0}>Select institute...</option>
+								<option value={0}>Выберите учебное заведение...</option>
 								{#each institutes as institute}
 									<option value={institute.id}>
 										{institute.name} {institute.city_name ? `(${institute.city_name})` : ''}
@@ -393,14 +393,14 @@
 								onclick={() => { isOtherInstitute = true; formData.institute_id = 0; }}
 								class="mt-2 text-sm text-primary-600 hover:text-primary-700 font-medium"
 							>
-								Can't find your institute? Click here to enter manually
+								Не можете найти ваше учебное заведение? Нажмите, чтобы ввести вручную
 							</button>
 						{:else}
 							<input
 								type="text"
 								id="custom_institute"
 								bind:value={formData.custom_institute_name}
-								placeholder="Enter your institute name..."
+								placeholder="Введите название учебного заведения..."
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 							/>
 							<button
@@ -408,7 +408,7 @@
 								onclick={() => { isOtherInstitute = false; formData.custom_institute_name = ''; }}
 								class="mt-2 text-sm text-primary-600 hover:text-primary-700 font-medium"
 							>
-								← Back to search from list
+								← Назад к поиску в списке
 							</button>
 						{/if}
 					</div>
@@ -417,7 +417,7 @@
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label for="from_date" class="block text-sm font-medium text-gray-700 mb-2">
-								Start Date <span class="text-error-500">*</span>
+								Дата начала <span class="text-error-500">*</span>
 							</label>
 							<input
 								type="date"
@@ -430,7 +430,7 @@
 
 						<div>
 							<label for="to_date" class="block text-sm font-medium text-gray-700 mb-2">
-								End Date {#if !formData.current_education}<span class="text-error-500">*</span>{/if}
+								Дата окончания {#if !formData.current_education}<span class="text-error-500">*</span>{/if}
 							</label>
 							<input
 								type="date"
@@ -453,8 +453,8 @@
 								class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 							/>
 							<div>
-								<p class="font-medium text-gray-900">Currently pursuing</p>
-								<p class="text-sm text-gray-600">Check this if you are currently pursuing this education</p>
+								<p class="font-medium text-gray-900">В процессе обучения</p>
+								<p class="text-sm text-gray-600">Отметьте, если вы в настоящее время получаете это образование</p>
 							</div>
 						</label>
 					</div>
@@ -462,13 +462,13 @@
 					<!-- Score -->
 					<div>
 						<label for="score" class="block text-sm font-medium text-gray-700 mb-2">
-							Score / GPA
+							Оценка / GPA
 						</label>
 						<input
 							type="text"
 							id="score"
 							bind:value={formData.score}
-							placeholder="e.g., 8.5 GPA, 85%, First Class"
+							placeholder="напр., 8.5 GPA, 85%, Отлично"
 							class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 						/>
 					</div>
@@ -481,14 +481,14 @@
 							class="px-5 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-full font-medium hover:bg-gray-50 transition-colors"
 							disabled={loading}
 						>
-							Cancel
+							Отмена
 						</button>
 						<button
 							type="submit"
 							class="px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed elevation-1"
 							disabled={loading || loadingLookups}
 						>
-							{loading ? 'Saving...' : education ? 'Update Education' : 'Add Education'}
+							{loading ? 'Сохранение...' : education ? 'Обновить образование' : 'Добавить образование'}
 						</button>
 					</div>
 				</form>

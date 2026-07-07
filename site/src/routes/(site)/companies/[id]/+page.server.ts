@@ -49,7 +49,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 
     if (!companyResponse.ok) {
       if (companyResponse.status === 404) {
-        error(404, 'Company not found');
+        error(404, 'Компания не найдена');
       }
       throw new Error('Failed to fetch company');
     }
@@ -74,6 +74,6 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
     };
   } catch (err) {
     console.error('Error loading company:', err);
-    error(500, 'Failed to load company');
+    error(500, 'Не удалось загрузить информацию о компании');
   }
 };

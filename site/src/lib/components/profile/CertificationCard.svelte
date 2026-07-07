@@ -53,9 +53,9 @@
 						<div class="flex items-center gap-1.5">
 							<Calendar size={14} class="text-gray-400" />
 							<span>
-								{#if certification.issued_date}Issued {formatDate(certification.issued_date)}{/if}
+								{#if certification.issued_date}Выдан {formatDate(certification.issued_date)}{/if}
 								{#if certification.expiry_date && !certification.does_not_expire}
-									- Expires {formatDate(certification.expiry_date)}
+									- Истекает {formatDate(certification.expiry_date)}
 								{/if}
 							</span>
 						</div>
@@ -66,17 +66,17 @@
 					{#if certification.does_not_expire}
 						<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-success-50 text-success-700 border border-success-200">
 							<CheckCircle size={14} />
-							No Expiration
+							Без срока действия
 						</span>
 					{:else if isExpired()}
 						<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-error-50 text-error-700 border border-error-200">
 							<AlertCircle size={14} />
-							Expired
+							Истёк
 						</span>
 					{:else if certification.expiry_date}
 						<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-primary-50 text-primary-700 border border-primary-200">
 							<CheckCircle size={14} />
-							Valid
+							Действителен
 						</span>
 					{/if}
 
@@ -88,7 +88,7 @@
 							class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100 transition-colors"
 						>
 							<ExternalLink size={14} />
-							Verify
+							Проверить
 						</a>
 					{/if}
 				</div>
@@ -100,7 +100,7 @@
 				type="button"
 				onclick={() => onEdit(certification)}
 				class="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors"
-				aria-label="Edit certification"
+				aria-label="Редактировать сертификат"
 			>
 				<Pencil size={16} />
 			</button>
@@ -108,7 +108,7 @@
 				type="button"
 				onclick={() => onDelete(certification.id)}
 				class="p-2 text-gray-400 hover:text-error-600 hover:bg-error-50 rounded-xl transition-colors"
-				aria-label="Delete certification"
+				aria-label="Удалить сертификат"
 			>
 				<Trash2 size={16} />
 			</button>

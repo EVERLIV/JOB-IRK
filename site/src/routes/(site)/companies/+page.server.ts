@@ -75,7 +75,7 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
         industries: [],
       },
       initialParams: {},
-      error: 'Failed to load companies. Please try again later.',
+      error: 'Не удалось загрузить список компаний. Пожалуйста, попробуйте позже.',
     };
   }
 };

@@ -121,7 +121,7 @@
 	});
 
 	function handleWithdraw(appId: number) {
-		if (confirm('Are you sure you want to withdraw this application?')) {
+		if (confirm('Вы уверены, что хотите отозвать этот отклик?')) {
 			applications = applications.filter((app) => app.id !== appId);
 		}
 	}
@@ -136,8 +136,8 @@
 </script>
 
 <svelte:head>
-	<title>My Applications - PeelJobs</title>
-	<meta name="description" content="Track all your job applications in one place" />
+	<title>Мои отклики - PeelJobs</title>
+	<meta name="description" content="Отслеживайте все ваши отклики на вакансии в одном месте" />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -153,11 +153,11 @@
 		<nav class="mb-6" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Dashboard</a>
+					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Applications</span>
+					<span class="text-white font-medium">Отклики</span>
 				</li>
 			</ol>
 		</nav>
@@ -175,13 +175,13 @@
 						class="text-3xl lg:text-4xl font-semibold tracking-tight mb-1 animate-fade-in-up"
 						style="opacity: 0; animation-delay: 100ms;"
 					>
-						My Applications
+						Мои отклики
 					</h1>
 					<p
 						class="text-gray-300 animate-fade-in-up"
 						style="opacity: 0; animation-delay: 150ms;"
 					>
-						Track the status of all your job applications
+						Отслеживайте статус всех ваших откликов
 					</p>
 				</div>
 			</div>
@@ -192,11 +192,11 @@
 				style="opacity: 0; animation-delay: 200ms;"
 			>
 				<div class="bg-white/10 rounded-full px-4 py-2 backdrop-blur-sm">
-					<span class="text-sm text-gray-300">Total:</span>
+					<span class="text-sm text-gray-300">Всего:</span>
 					<span class="text-lg font-semibold ml-1">{stats.total}</span>
 				</div>
 				<div class="bg-success-light rounded-full px-4 py-2">
-					<span class="text-sm text-success">Interviews:</span>
+					<span class="text-sm text-success">Интервью:</span>
 					<span class="text-lg font-semibold ml-1">{stats.interview}</span>
 				</div>
 			</div>
@@ -221,7 +221,7 @@
 					<input
 						type="text"
 						bind:value={searchQuery}
-						placeholder="Search by job title or company..."
+						placeholder="Поиск по названию вакансии или компании..."
 						class="w-full pl-11 pr-4 py-3 border border-border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
 					/>
 				</div>
@@ -235,7 +235,7 @@
 							? 'bg-primary text-white shadow-sm'
 							: 'bg-gray-100 text-muted hover:bg-gray-200'}"
 					>
-						All
+						Все
 					</button>
 					<button
 						onclick={() => (filterStatus = 'Under Review')}
@@ -244,7 +244,7 @@
 							? 'bg-primary text-white shadow-sm'
 							: 'bg-gray-100 text-muted hover:bg-gray-200'}"
 					>
-						Under Review
+						На рассмотрении
 					</button>
 					<button
 						onclick={() => (filterStatus = 'Interview')}
@@ -253,7 +253,7 @@
 							? 'bg-primary text-white shadow-sm'
 							: 'bg-gray-100 text-muted hover:bg-gray-200'}"
 					>
-						Interview
+						Интервью
 					</button>
 					<button
 						onclick={() => (filterStatus = 'Pending')}
@@ -262,7 +262,7 @@
 							? 'bg-primary text-white shadow-sm'
 							: 'bg-gray-100 text-muted hover:bg-gray-200'}"
 					>
-						Pending
+						Ожидает
 					</button>
 				</div>
 			</div>
@@ -280,19 +280,19 @@
 					<Briefcase size={36} class="text-muted" />
 				</div>
 				<h3 class="text-xl font-semibold text-black mb-2">
-					{searchQuery || filterStatus !== 'All' ? 'No applications found' : 'No applications yet'}
+					{searchQuery || filterStatus !== 'All' ? 'Отклики не найдены' : 'Пока нет откликов'}
 				</h3>
 				<p class="text-muted mb-6 max-w-md mx-auto">
 					{searchQuery || filterStatus !== 'All'
-						? 'Try adjusting your search or filter to find what you are looking for.'
-						: 'Start exploring jobs and apply to positions that match your skills.'}
+						? 'Попробуйте изменить параметры поиска или фильтра.'
+						: 'Начните искать вакансии и откликайтесь на подходящие позиции.'}
 				</p>
 				<a
 					href="/jobs/"
 					class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-full hover:bg-primary-hover transition-colors shadow-sm"
 				>
 					<Search size={18} />
-					Browse Jobs
+					Искать вакансии
 				</a>
 			</div>
 		{:else}
@@ -347,7 +347,7 @@
 								<!-- Applied Date -->
 								<div class="flex items-center gap-1.5 text-sm text-muted">
 									<Calendar size={14} class="text-muted" />
-									<span>Applied {formatDate(app.applied)}</span>
+									<span>Отправлено {formatDate(app.applied)}</span>
 								</div>
 
 								<!-- Action Buttons -->
@@ -357,7 +357,7 @@
 										class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-primary border border-primary rounded-full hover:bg-primary/10 transition-colors"
 									>
 										<ExternalLink size={14} />
-										<span>View Job</span>
+										<span>Вакансия</span>
 									</a>
 									{#if app.status !== 'Rejected'}
 										<button
@@ -365,7 +365,7 @@
 											class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-error border border-error rounded-full hover:bg-error-light transition-colors"
 										>
 											<XCircle size={14} />
-											<span>Withdraw</span>
+											<span>Отозвать</span>
 										</button>
 									{/if}
 								</div>
@@ -389,15 +389,13 @@
 						<FileText size={22} class="text-primary" />
 					</div>
 					<div>
-						<h3 class="font-semibold text-black mb-1">Application Summary</h3>
+						<h3 class="font-semibold text-black mb-1">Сводка по откликам</h3>
 						<p class="text-sm text-muted">
-							You have {stats.total} application{stats.total !== 1 ? 's' : ''} in total.
+							У вас всего {stats.total} отклик{stats.total !== 1 ? 'ов' : ''}.
 							{#if stats.interview > 0}
-								Congratulations on {stats.interview} interview{stats.interview !== 1
-									? 's'
-									: ''} scheduled!
+								Поздравляем! Запланировано интервью: {stats.interview}!
 							{/if}
-							Keep your profile updated to increase your chances of getting hired.
+							Обновляйте профиль, чтобы повысить шансы на трудоустройство.
 						</p>
 					</div>
 				</div>

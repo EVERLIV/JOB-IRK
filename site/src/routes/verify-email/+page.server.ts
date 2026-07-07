@@ -50,12 +50,12 @@ export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
 			return {
 				status: 'success',
 				email: data.user?.email || email,
-				message: 'Email verified successfully'
+				message: 'Email подтверждён'
 			};
 		}
 
 		// Check if token expired
-		const errorMessage = data.token?.[0] || data.detail || 'Invalid verification token';
+		const errorMessage = data.token?.[0] || data.detail || 'Неверный токен подтверждения';
 		const isExpired = errorMessage.toLowerCase().includes('expired');
 
 		return {
@@ -68,7 +68,7 @@ export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
 		return {
 			status: 'error',
 			email,
-			message: 'Failed to verify email. Please try again.'
+			message: 'Не удалось подтвердить email. Пожалуйста, попробуйте снова.'
 		};
 	}
 };
@@ -81,7 +81,7 @@ export const actions: Actions = {
 		if (!email) {
 			return fail(400, {
 				success: false,
-				message: 'Email address is required'
+				message: 'Укажите email'
 			});
 		}
 
@@ -99,12 +99,12 @@ export const actions: Actions = {
 			if (response.ok && data.success) {
 				return {
 					success: true,
-					message: 'Verification email sent'
+					message: 'Письмо подтверждения отправлено'
 				};
 			}
 
 			// Extract error message
-			let errorMessage = 'Failed to send verification email';
+			let errorMessage = 'Не удалось отправить письмо подтверждения';
 			if (data.email) {
 				errorMessage = Array.isArray(data.email) ? data.email[0] : data.email;
 			} else if (data.detail) {
@@ -119,7 +119,7 @@ export const actions: Actions = {
 			console.error('Resend verification error:', error);
 			return fail(500, {
 				success: false,
-				message: 'Unable to connect to server. Please try again.'
+				message: 'Не удалось подключиться к серверу. Пожалуйста, попробуйте снова.'
 			});
 		}
 	}

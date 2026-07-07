@@ -25,9 +25,9 @@ from .auth_serializers import (
     GoogleCallbackSerializer,
     GoogleCompleteSerializer,
     UserSerializer,
-    AcceptInvitationSerializer,
     UpdateProfileSerializer
 )
+from .serializers import AcceptInvitationSerializer
 
 
 def get_tokens_for_user(user):

@@ -23,8 +23,8 @@
 			<User size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-lg font-semibold text-gray-900">Personal Information</h2>
-			<p class="text-sm text-gray-600">Your basic details</p>
+			<h2 class="text-lg font-semibold text-gray-900">Личные данные</h2>
+			<p class="text-sm text-gray-600">Ваши основные данные</p>
 		</div>
 	</div>
 
@@ -32,7 +32,7 @@
 		<!-- First Name -->
 		<div>
 			<label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">
-				First Name <span class="text-error-500">*</span>
+				Имя <span class="text-error-500">*</span>
 			</label>
 			<input
 				id="first_name"
@@ -49,7 +49,7 @@
 		<!-- Last Name -->
 		<div>
 			<label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">
-				Last Name <span class="text-error-500">*</span>
+				Фамилия <span class="text-error-500">*</span>
 			</label>
 			<input
 				id="last_name"
@@ -66,7 +66,7 @@
 		<!-- Email (Read-only) -->
 		<div>
 			<label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-				Email Address
+				Электронная почта
 			</label>
 			<div class="relative">
 				<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -76,13 +76,13 @@
 					{email}
 				</div>
 			</div>
-			<p class="mt-2 text-xs text-gray-500">Email cannot be changed</p>
+			<p class="mt-2 text-xs text-gray-500">Электронную почту нельзя изменить</p>
 		</div>
 
 		<!-- Mobile Number -->
 		<div>
 			<label for="mobile" class="block text-sm font-medium text-gray-700 mb-2">
-				Mobile Number
+				Мобильный номер
 			</label>
 			<div class="relative">
 				<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -104,7 +104,7 @@
 		<!-- Alternate Mobile Number -->
 		<div>
 			<label for="alternate_mobile" class="block text-sm font-medium text-gray-700 mb-2">
-				Alternate Mobile Number
+				Дополнительный мобильный номер
 			</label>
 			<div class="relative">
 				<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -125,22 +125,22 @@
 
 		<!-- Gender -->
 		<div>
-			<label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+			<label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Пол</label>
 			<select
 				id="gender"
 				bind:value={formData.gender}
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none"
 			>
-				<option value="">Select gender</option>
-				<option value="M">Male</option>
-				<option value="F">Female</option>
+				<option value="">Выберите пол</option>
+				<option value="M">Мужской</option>
+				<option value="F">Женский</option>
 			</select>
 		</div>
 
 		<!-- Date of Birth -->
 		<div>
 			<label for="dob" class="block text-sm font-medium text-gray-700 mb-2">
-				Date of Birth
+				Дата рождения
 			</label>
 			<div class="relative">
 				<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -158,29 +158,29 @@
 		<!-- Marital Status -->
 		<div>
 			<label for="marital_status" class="block text-sm font-medium text-gray-700 mb-2">
-				Marital Status
+				Семейное положение
 			</label>
 			<select
 				id="marital_status"
 				bind:value={formData.marital_status}
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none"
 			>
-				<option value="">Select status</option>
-				<option value="Single">Single</option>
-				<option value="Married">Married</option>
+				<option value="">Выберите статус</option>
+				<option value="Single">Не женат/Не замужем</option>
+				<option value="Married">Женат/Замужем</option>
 			</select>
 		</div>
 
 		<!-- Nationality -->
 		<div>
 			<label for="nationality" class="block text-sm font-medium text-gray-700 mb-2">
-				Nationality
+				Гражданство
 			</label>
 			<input
 				id="nationality"
 				type="text"
 				bind:value={formData.nationality}
-				placeholder="e.g., Indian"
+				placeholder="напр., Российское"
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 			/>
 		</div>

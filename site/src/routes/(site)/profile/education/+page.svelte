@@ -22,7 +22,7 @@
 			educationList = await getMyEducation();
 		} catch (error) {
 			console.error('Failed to load education:', error);
-			toast.error('Failed to load education details');
+			toast.error('Не удалось загрузить данные об образовании');
 		} finally {
 			loading = false;
 		}
@@ -39,17 +39,17 @@
 	}
 
 	async function handleDeleteEducation(id: number) {
-		if (!confirm('Are you sure you want to delete this education entry?')) {
+		if (!confirm('Вы уверены, что хотите удалить эту запись об образовании?')) {
 			return;
 		}
 
 		try {
 			await deleteEducation(id);
-			toast.success('Education deleted successfully!');
+			toast.success('Образование успешно удалено!');
 			await loadEducation();
 		} catch (error) {
 			console.error('Failed to delete education:', error);
-			toast.error('Failed to delete education. Please try again.');
+			toast.error('Не удалось удалить образование. Попробуйте ещё раз.');
 		}
 	}
 
@@ -64,8 +64,8 @@
 </script>
 
 <svelte:head>
-	<title>Education - Profile - PeelJobs</title>
-	<meta name="description" content="Manage your educational qualifications" />
+	<title>Образование - Профиль - PeelJobs</title>
+	<meta name="description" content="Управление вашим образованием" />
 </svelte:head>
 
 <!-- Header -->
@@ -76,8 +76,8 @@
 				<GraduationCap size={20} class="text-primary-600" />
 			</div>
 			<div>
-				<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Education</h2>
-				<p class="text-sm text-gray-600">Manage your educational qualifications</p>
+				<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Образование</h2>
+				<p class="text-sm text-gray-600">Управление вашим образованием</p>
 			</div>
 		</div>
 		<button
@@ -86,7 +86,7 @@
 			class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1 text-sm"
 		>
 			<Plus size={18} />
-			<span class="hidden sm:inline">Add Education</span>
+			<span class="hidden sm:inline">Добавить образование</span>
 		</button>
 	</div>
 </div>
@@ -100,7 +100,7 @@
 		<div
 			class="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"
 		></div>
-		<p class="text-gray-600">Loading education details...</p>
+		<p class="text-gray-600">Загрузка данных об образовании...</p>
 	</div>
 {:else if educationList.length === 0}
 	<!-- Empty State -->
@@ -113,10 +113,9 @@
 		>
 			<BookOpen size={36} class="text-gray-400" />
 		</div>
-		<h3 class="text-xl font-semibold text-gray-900 mb-2">No education added yet</h3>
+		<h3 class="text-xl font-semibold text-gray-900 mb-2">Образование ещё не добавлено</h3>
 		<p class="text-gray-600 mb-6 max-w-md mx-auto">
-			Add your educational qualifications to showcase your academic background to potential
-			employers.
+			Добавьте ваше образование, чтобы показать работодателям вашу академическую подготовку.
 		</p>
 		<button
 			type="button"
@@ -124,7 +123,7 @@
 			class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1"
 		>
 			<Plus size={18} />
-			<span>Add Your First Education</span>
+			<span>Добавить первое образование</span>
 		</button>
 	</div>
 {:else}
@@ -154,11 +153,10 @@
 			<div>
 				<h3 class="font-semibold text-gray-900 mb-1">
 					{educationList.length}
-					{educationList.length === 1 ? 'Qualification' : 'Qualifications'} Added
+					{educationList.length === 1 ? 'Квалификация' : 'Квалификации'} Добавлено
 				</h3>
 				<p class="text-sm text-gray-600">
-					Keep your education details updated to improve your profile visibility and attract better
-					job opportunities.
+					Держите данные об образовании в актуальном состоянии, чтобы повысить видимость профиля и привлечь лучшие вакансии.
 				</p>
 			</div>
 		</div>

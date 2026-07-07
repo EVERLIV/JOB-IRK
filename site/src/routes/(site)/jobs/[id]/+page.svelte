@@ -53,7 +53,7 @@
   // Handle save/unsave job
   async function handleSaveJob(): Promise<void> {
     if (!isAuthenticated) {
-      toast.info('Please login to save jobs');
+      toast.info('Войдите, чтобы сохранять вакансии');
       return;
     }
 
@@ -61,20 +61,20 @@
     try {
       if (isJobSaved) {
         await jobsApi.unsave(job.id);
-        toast.success('Job removed from saved list');
+        toast.success('Вакансия удалена из сохранённых');
       } else {
         await jobsApi.save(job.id);
-        toast.success('Job saved successfully');
+        toast.success('Вакансия сохранена');
       }
       await invalidateAll();
     } catch (error: any) {
       console.error('Error saving job:', error);
       const errorMessage = error?.message || error?.error || String(error);
       if (errorMessage.includes('already saved')) {
-        toast.info('Job is already saved');
+        toast.info('Вакансия уже сохранена');
         await invalidateAll();
       } else {
-        toast.error('Failed to save job. Please try again.');
+        toast.error('Не удалось сохранить вакансию. Попробуйте снова.');
       }
     } finally {
       isSaving = false;
@@ -88,11 +88,11 @@
       return;
     }
     if (isJobApplied) {
-      toast.info('You have already applied for this job');
+      toast.info('Вы уже откликнулись на эту вакансию');
       return;
     }
     if (!job.accepts_applications) {
-      toast.error('This job is no longer accepting applications');
+      toast.error('Эта вакансия больше не принимает отклики');
       return;
     }
     showApplyModal = true;
@@ -106,7 +106,7 @@
 
     const shareData = {
       title: `${job.title} at ${job.company_name}`,
-      text: `Check out this job: ${job.title} at ${job.company_name}`,
+      text: `Посмотрите вакансию: ${job.title} в ${job.company_name}`,
       url: window.location.href,
     };
 
@@ -118,7 +118,7 @@
       });
     } else if (navigator.clipboard) {
       void navigator.clipboard.writeText(shareData.url).then(() => {
-        toast.success('Link copied to clipboard!');
+        toast.success('Ссылка скопирована!');
       });
     }
   }
@@ -128,12 +128,12 @@
     isApplying = true;
     try {
       await jobsApi.apply(job.id);
-      toast.success('Application submitted successfully!');
+      toast.success('Отклик отправлен!');
       showApplyModal = false;
       await invalidateAll();
     } catch (error) {
       console.error('Error submitting application:', error);
-      toast.error('Failed to submit application. Please try again.');
+      toast.error('Не удалось отправить отклик. Попробуйте снова.');
     } finally {
       isApplying = false;
     }
@@ -153,7 +153,7 @@
   <title>{job.title} at {job.company_name} | PeelJobs</title>
   <meta
     name="description"
-    content="{job.title} at {job.company_name} in {job.location_display}. {job.salary_display}, {job.experience_display}. {job.vacancies > 0 ? `${job.vacancies} openings.` : ''} Apply now!"
+    content="{job.title} в {job.company_name}, {job.location_display}. {job.salary_display}, {job.experience_display}. {job.vacancies > 0 ? `${job.vacancies} вакансий.` : ''} Откликнитесь!"
   />
   <meta
     name="keywords"
@@ -164,7 +164,7 @@
       ...job.industries.map((i) => i.name),
       ...job.locations.map((l) => l.name),
       job.job_type,
-      'jobs'
+      'вакансии'
     ].join(', ')}"
   />
 
@@ -172,7 +172,7 @@
   <meta property="og:title" content="{job.title} - {job.company_name}" />
   <meta
     property="og:description"
-    content="{job.title} at {job.company_name} in {job.location_display}. {job.salary_display}, {job.experience_display}. Apply now!"
+    content="{job.title} в {job.company_name}, {job.location_display}. {job.salary_display}, {job.experience_display}. Откликнитесь!"
   />
   {#if job.company_logo}
     <meta property="og:image" content="{job.company_logo}" />
@@ -248,7 +248,7 @@
           class="inline-flex items-center gap-2 text-muted hover:text-primary-600 font-medium transition-colors group"
         >
           <ArrowLeft size={20} class="group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Jobs</span>
+          <span>Назад к вакансиям</span>
         </button>
 
         <!-- Desktop Share Button -->
@@ -257,7 +257,7 @@
           class="hidden md:flex items-center gap-2 px-4 py-2 text-muted hover:text-primary-600 hover:bg-primary-50 rounded-full font-medium transition-all"
         >
           <Share2 size={18} />
-          <span>Share</span>
+          <span>Поделиться</span>
         </button>
       </div>
     </div>
@@ -309,7 +309,7 @@
                   <MapPin size={18} class="text-primary-600" />
                 </div>
                 <div>
-                  <p class="text-xs text-muted">Location</p>
+                  <p class="text-xs text-muted">Город</p>
                   <p class="text-sm text-black font-medium">{job.location_display}</p>
                 </div>
               </div>
@@ -319,7 +319,7 @@
                   <DollarSign size={18} class="text-success-600" />
                 </div>
                 <div>
-                  <p class="text-xs text-muted">Salary</p>
+                  <p class="text-xs text-muted">Зарплата</p>
                   <p class="text-sm text-black font-medium">{job.salary_display}</p>
                 </div>
               </div>
@@ -329,7 +329,7 @@
                   <Briefcase size={18} class="text-warning-600" />
                 </div>
                 <div>
-                  <p class="text-xs text-muted">Job Type</p>
+                  <p class="text-xs text-muted">Тип занятости</p>
                   <p class="text-sm text-black font-medium">{job.job_type}</p>
                 </div>
               </div>
@@ -339,7 +339,7 @@
                   <Target size={18} class="text-purple-600" />
                 </div>
                 <div>
-                  <p class="text-xs text-muted">Experience</p>
+                  <p class="text-xs text-muted">Опыт</p>
                   <p class="text-sm text-black font-medium">{job.experience_display}</p>
                 </div>
               </div>
@@ -349,20 +349,20 @@
             <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-border">
               <div class="flex items-center gap-1.5 text-sm text-muted">
                 <Clock size={14} />
-                <span>Posted {job.time_ago}</span>
+                <span>Опубликовано {job.time_ago}</span>
               </div>
               {#if job.vacancies > 0}
                 <span class="w-1 h-1 rounded-full bg-border"></span>
                 <div class="flex items-center gap-1.5 text-sm text-muted">
                   <Briefcase size={14} />
-                  <span>{job.vacancies} opening{job.vacancies > 1 ? 's' : ''}</span>
+                  <span>{job.vacancies} ваканси{job.vacancies > 1 ? 'й' : 'я'}</span>
                 </div>
               {/if}
               {#if job.applicants_count > 0}
                 <span class="w-1 h-1 rounded-full bg-border"></span>
                 <div class="flex items-center gap-1.5 text-sm text-muted">
                   <Users size={14} />
-                  <span>{job.applicants_count} applicant{job.applicants_count > 1 ? 's' : ''}</span>
+                  <span>{job.applicants_count} откликнувшихс{job.applicants_count > 1 ? 'я' : 'ся'}</span>
                 </div>
               {/if}
             </div>
@@ -381,13 +381,13 @@
             >
               {#if isJobApplied}
                 <CheckCircle size={18} />
-                Applied
+                Отклик отправлен
               {:else if !job.accepts_applications}
                 <XCircle size={18} />
-                Closed
+                Закрыто
               {:else}
                 <Send size={18} />
-                Apply Now
+                Откликнуться
               {/if}
             </button>
             <button
@@ -422,9 +422,9 @@
                 <Info size={18} class="text-warning-600" />
               </div>
               <div>
-                <h3 class="font-semibold text-black mb-1">Applications Closed</h3>
+                <h3 class="font-semibold text-black mb-1">Приём откликов закрыт</h3>
                 <p class="text-sm text-muted">
-                  This job posting is no longer accepting new applications.
+                  Эта вакансия больше не принимает новые отклики.
                 </p>
               </div>
             </div>
@@ -436,7 +436,7 @@
           <div class="bg-white rounded-lg border border-border p-5 shadow-card">
             <h2 class="text-base font-semibold text-black mb-4 flex items-center gap-2">
               <Sparkles size={18} class="text-primary-600" />
-              Required Skills
+              Требуемые навыки
             </h2>
             <div class="flex flex-wrap gap-2">
               {#each job.skills as skill}
@@ -453,7 +453,7 @@
           <div class="bg-white rounded-lg border border-border p-5 shadow-card">
             <h2 class="text-base font-semibold text-black mb-4 flex items-center gap-2">
               <FileText size={18} class="text-primary-600" />
-              Job Description
+              Описание вакансии
             </h2>
             <div class="text-muted leading-relaxed whitespace-pre-line">{job.description}</div>
           </div>
@@ -464,7 +464,7 @@
           <div class="bg-white rounded-lg border border-border p-5 shadow-card">
             <h2 class="text-base font-semibold text-black mb-4 flex items-center gap-2">
               <GraduationCap size={18} class="text-primary-600" />
-              Education Requirements
+              Требования к образованию
             </h2>
             <div class="flex flex-wrap gap-2">
               {#each job.edu_qualification as edu}
@@ -481,14 +481,14 @@
           <div class="bg-warning-light/50 border border-warning-500/20 rounded-lg p-5">
             <h2 class="text-base font-semibold text-black mb-4 flex items-center gap-2">
               <CalendarDays size={18} class="text-warning-600" />
-              Walk-in Interview Details
+              Детали собеседования
             </h2>
             <div class="space-y-3">
               {#if job.walkin_from_date || job.walkin_to_date}
                 <div class="flex items-start gap-3">
                   <Calendar size={18} class="text-muted mt-0.5" />
                   <div>
-                    <p class="text-xs text-muted">Date</p>
+                    <p class="text-xs text-muted">Дата</p>
                     <p class="text-black font-medium">
                       {#if job.walkin_from_date}
                         {new Date(job.walkin_from_date).toLocaleDateString('en-IN', { dateStyle: 'medium' })}
@@ -504,7 +504,7 @@
                 <div class="flex items-start gap-3">
                   <Clock size={18} class="text-muted mt-0.5" />
                   <div>
-                    <p class="text-xs text-muted">Time</p>
+                    <p class="text-xs text-muted">Время</p>
                     <p class="text-black font-medium">{job.walkin_time}</p>
                   </div>
                 </div>
@@ -513,7 +513,7 @@
                 <div class="flex items-start gap-3">
                   <MapPin size={18} class="text-muted mt-0.5" />
                   <div>
-                    <p class="text-xs text-muted">Venue</p>
+                    <p class="text-xs text-muted">Место</p>
                     <p class="text-black font-medium">{job.company_address}</p>
                   </div>
                 </div>
@@ -522,7 +522,7 @@
                 <div class="flex items-start gap-3">
                   <Mail size={18} class="text-muted mt-0.5" />
                   <div>
-                    <p class="text-xs text-muted">Contact</p>
+                    <p class="text-xs text-muted">Контакт</p>
                     <p class="text-black font-medium">{job.walkin_contactinfo}</p>
                   </div>
                 </div>
@@ -536,15 +536,15 @@
           <div class="bg-primary-50/50 border border-primary-200 rounded-lg p-5">
             <h2 class="text-base font-semibold text-black mb-4 flex items-center gap-2">
               <Award size={18} class="text-primary-600" />
-              Government Job Details
+              Детали государственной вакансии
             </h2>
             <div class="space-y-3">
               {#if job.govt_job_type}
                 <div class="flex items-center gap-3 p-3 bg-white rounded-lg">
                   <Briefcase size={18} class="text-muted" />
                   <div>
-                    <p class="text-xs text-muted">Job Type</p>
-                    <p class="text-black font-medium">{job.govt_job_type} Government</p>
+                    <p class="text-xs text-muted">Тип занятости</p>
+                    <p class="text-black font-medium">{job.govt_job_type} Государственная</p>
                   </div>
                 </div>
               {/if}
@@ -552,7 +552,7 @@
                 <div class="flex items-center gap-3 p-3 bg-white rounded-lg">
                   <Banknote size={18} class="text-muted" />
                   <div>
-                    <p class="text-xs text-muted">Application Fee</p>
+                    <p class="text-xs text-muted">Сбор за заявку</p>
                     <p class="text-black font-medium">₹{job.application_fee}</p>
                   </div>
                 </div>
@@ -561,7 +561,7 @@
                 <div class="flex items-center gap-3 p-3 bg-white rounded-lg">
                   <Calendar size={18} class="text-muted" />
                   <div>
-                    <p class="text-xs text-muted">Application Period</p>
+                    <p class="text-xs text-muted">Период приёма заявок</p>
                     <p class="text-black font-medium">
                       {#if job.govt_from_date}
                         {new Date(job.govt_from_date).toLocaleDateString('en-IN', { dateStyle: 'medium' })}
@@ -577,7 +577,7 @@
                 <div class="flex items-center gap-3 p-3 bg-white rounded-lg">
                   <CalendarDays size={18} class="text-muted" />
                   <div>
-                    <p class="text-xs text-muted">Exam Date</p>
+                    <p class="text-xs text-muted">Дата экзамена</p>
                     <p class="text-black font-medium">
                       {new Date(job.govt_exam_date).toLocaleDateString('en-IN', { dateStyle: 'medium' })}
                     </p>
@@ -586,25 +586,25 @@
               {/if}
               {#if job.selection_process}
                 <div class="pt-3 border-t border-primary-200">
-                  <h3 class="font-semibold text-black mb-2">Selection Process</h3>
+                  <h3 class="font-semibold text-black mb-2">Процесс отбора</h3>
                   <p class="text-muted whitespace-pre-line">{job.selection_process}</p>
                 </div>
               {/if}
               {#if job.how_to_apply}
                 <div class="pt-3 border-t border-primary-200">
-                  <h3 class="font-semibold text-black mb-2">How to Apply</h3>
+                  <h3 class="font-semibold text-black mb-2">Как подать заявку</h3>
                   <p class="text-muted whitespace-pre-line">{job.how_to_apply}</p>
                 </div>
               {/if}
               {#if job.important_dates}
                 <div class="pt-3 border-t border-primary-200">
-                  <h3 class="font-semibold text-black mb-2">Important Dates</h3>
+                  <h3 class="font-semibold text-black mb-2">Важные даты</h3>
                   <p class="text-muted whitespace-pre-line">{job.important_dates}</p>
                 </div>
               {/if}
               {#if job.age_relaxation}
                 <div class="pt-3 border-t border-primary-200">
-                  <h3 class="font-semibold text-black mb-2">Age Relaxation</h3>
+                  <h3 class="font-semibold text-black mb-2">Возрастные льготы</h3>
                   <p class="text-muted whitespace-pre-line">{job.age_relaxation}</p>
                 </div>
               {/if}
@@ -617,7 +617,7 @@
           <div class="bg-white rounded-lg border border-border p-5 shadow-card">
             <h2 class="text-base font-semibold text-black mb-4 flex items-center gap-2">
               <Building2 size={18} class="text-primary-600" />
-              About {job.company.name}
+              О компании {job.company.name}
             </h2>
 
             {#if job.company_description}
@@ -631,7 +631,7 @@
                 <div class="flex items-start gap-3">
                   <MapPin size={18} class="text-muted mt-0.5" />
                   <div>
-                    <p class="text-xs text-muted">Address</p>
+                    <p class="text-xs text-muted">Адрес</p>
                     <p class="text-black">{job.company_address}</p>
                   </div>
                 </div>
@@ -640,7 +640,7 @@
                 <div class="flex items-start gap-3">
                   <Globe size={18} class="text-muted mt-0.5" />
                   <div>
-                    <p class="text-xs text-muted">Website</p>
+                    <p class="text-xs text-muted">Сайт</p>
                     <a
                       href={job.company_links}
                       target="_blank"
@@ -657,7 +657,7 @@
                 <div class="flex items-start gap-3">
                   <Mail size={18} class="text-muted mt-0.5" />
                   <div>
-                    <p class="text-xs text-muted">Email</p>
+                    <p class="text-xs text-muted">Эл. почта</p>
                     <a href="mailto:{job.company_emails}" class="text-primary-600 hover:text-primary-700 font-medium">
                       {job.company_emails}
                     </a>
@@ -676,7 +676,7 @@
           {#if job.applicants_count > 0}
             <div class="flex items-center justify-center gap-2 text-sm text-muted mb-4 pb-4 border-b border-border">
               <Users size={16} />
-              <span>{job.applicants_count} people have applied</span>
+              <span>{job.applicants_count} человек уже откликнулись</span>
             </div>
           {/if}
 
@@ -691,13 +691,13 @@
           >
             {#if isJobApplied}
               <CheckCircle size={18} />
-              Applied
+              Отклик отправлен
             {:else if !job.accepts_applications}
               <XCircle size={18} />
-              Applications Closed
+              Приём закрыт
             {:else}
               <Send size={18} />
-              Quick Apply
+              Быстрый отклик
             {/if}
           </button>
 
@@ -710,19 +710,19 @@
           >
             {#if isSaving}
               <div class="w-4 h-4 border-2 border-muted border-t-transparent rounded-full animate-spin"></div>
-              Saving...
+              Сохранение...
             {:else if isJobSaved}
               <BookmarkCheck size={16} />
-              Saved
+              Сохранено
             {:else}
               <Bookmark size={16} />
-              Save for Later
+              Сохранить
             {/if}
           </button>
 
           {#if job.accepts_applications && !isJobApplied}
             <p class="text-xs text-muted text-center mt-4">
-              Your profile will be shared with the employer
+              Ваш профиль будет передан работодателю
             </p>
           {/if}
         </div>
@@ -730,7 +730,7 @@
         <!-- Industries -->
         {#if job.industries && job.industries.length > 0}
           <div class="bg-white rounded-lg border border-border p-5 shadow-card">
-            <h3 class="text-sm font-semibold text-black mb-3">Industries</h3>
+            <h3 class="text-sm font-semibold text-black mb-3">Отрасли</h3>
             <div class="flex flex-wrap gap-2">
               {#each job.industries as industry}
                 <span class="px-3 py-1 bg-surface text-muted rounded text-sm font-medium">
@@ -747,12 +747,12 @@
     {#if relatedJobs.length > 0}
       <div class="mt-12">
         <div class="flex items-center justify-between mb-6">
-          <h2 class="text-xl font-semibold text-black">Similar Jobs</h2>
+          <h2 class="text-xl font-semibold text-black">Похожие вакансии</h2>
           <a
             href="/jobs/"
             class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors group"
           >
-            View All Jobs
+            Все вакансии
             <ChevronRight size={18} class="group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
@@ -762,7 +762,7 @@
             <a
               href="/jobs/{relatedJob.slug.replace(/^\/+/, '')}"
               class="group bg-white rounded-lg border border-border overflow-hidden hover:shadow-card-hover hover:border-primary-200 transition-all"
-              aria-label="View job {relatedJob.title} at {relatedJob.company_name}"
+              aria-label="Посмотреть вакансию {relatedJob.title} в {relatedJob.company_name}"
               style="animation: fade-in-up 0.4s ease forwards; animation-delay: {index * 50}ms; opacity: 0;"
             >
               <div class="p-4">
@@ -804,7 +804,7 @@
                   {relatedJob.time_ago}
                 </span>
                 <span class="text-sm font-semibold text-primary-600 flex items-center gap-1 group-hover:gap-2 transition-all">
-                  View
+                  Подробнее
                   <ChevronRight size={14} />
                 </span>
               </div>
@@ -829,26 +829,26 @@
     }}
     role="button"
     tabindex="0"
-    aria-label="Close apply modal"
+    aria-label="Закрыть окно отклика"
   >
     <div
       class="bg-white rounded-lg max-w-md w-full overflow-hidden shadow-modal animate-scale-in"
       role="dialog"
       aria-modal="true"
-      aria-label="Apply for job"
+      aria-label="Откликнуться на вакансию"
       tabindex="-1"
       onpointerdown={(event) => event.stopPropagation()}
     >
       <div class="p-5 border-b border-border">
-        <h3 class="text-lg font-semibold text-black">Apply for {job.title}</h3>
-        <p class="text-muted mt-1 text-sm">at {job.company_name}</p>
+        <h3 class="text-lg font-semibold text-black">Откликнуться на {job.title}</h3>
+        <p class="text-muted mt-1 text-sm">в {job.company_name}</p>
       </div>
 
       <div class="p-5">
         <div class="flex items-start gap-3 p-4 bg-primary-50 rounded-lg mb-5">
           <Info size={18} class="text-primary-600 flex-shrink-0 mt-0.5" />
           <p class="text-sm text-primary-700">
-            Your profile and resume will be sent to the employer for review.
+            Ваш профиль и резюме будут отправлены работодателю для рассмотрения.
           </p>
         </div>
 
@@ -858,7 +858,7 @@
             class="flex-1 h-10 px-5 border border-border rounded-full text-muted hover:bg-surface transition-colors font-semibold"
             disabled={isApplying}
           >
-            Cancel
+            Отмена
           </button>
           <button
             onclick={submitApplication}
@@ -867,10 +867,10 @@
           >
             {#if isApplying}
               <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              Applying...
+              Отправка...
             {:else}
               <Send size={16} />
-              Confirm
+              Подтвердить
             {/if}
           </button>
         </div>
@@ -892,13 +892,13 @@
     }}
     role="button"
     tabindex="0"
-    aria-label="Dismiss login prompt"
+    aria-label="Закрыть окно входа"
   >
     <div
       class="bg-white rounded-lg max-w-md w-full overflow-hidden shadow-modal animate-scale-in"
       role="dialog"
       aria-modal="true"
-      aria-label="Login required"
+      aria-label="Требуется вход"
       tabindex="-1"
       onpointerdown={(event) => event.stopPropagation()}
     >
@@ -906,21 +906,21 @@
         <div class="w-14 h-14 rounded-lg bg-primary-50 flex items-center justify-center mx-auto mb-4">
           <Users size={28} class="text-primary-600" />
         </div>
-        <h3 class="text-lg font-semibold text-black mb-2">Login Required</h3>
-        <p class="text-muted mb-5">Please login to apply for this job position.</p>
+        <h3 class="text-lg font-semibold text-black mb-2">Требуется вход</h3>
+        <p class="text-muted mb-5">Войдите, чтобы откликнуться на эту вакансию.</p>
 
         <div class="flex gap-3">
           <button
             onclick={() => (showLoginPrompt = false)}
             class="flex-1 h-10 px-5 border border-border rounded-full text-muted hover:bg-surface transition-colors font-semibold"
           >
-            Cancel
+            Отмена
           </button>
           <a
             href="/login/"
             class="flex-1 bg-primary-600 text-white h-10 px-5 rounded-full hover:bg-primary-700 transition-colors font-semibold flex items-center justify-center"
           >
-            Login
+            Войти
           </a>
         </div>
       </div>

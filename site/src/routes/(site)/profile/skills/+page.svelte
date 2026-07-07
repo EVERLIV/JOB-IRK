@@ -4,8 +4,8 @@
 </script>
 
 <svelte:head>
-	<title>Technical Skills - Profile - PeelJobs</title>
-	<meta name="description" content="Manage your technical skills and expertise" />
+	<title>Технические навыки - Профиль - PeelJobs</title>
+	<meta name="description" content="Управление вашими техническими навыками и экспертностью" />
 </svelte:head>
 
 <!-- Header -->
@@ -15,8 +15,8 @@
 			<Code size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Technical Skills</h2>
-			<p class="text-sm text-gray-600">Manage your technical skills and expertise</p>
+		<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Технические навыки</h2>
+		<p class="text-sm text-gray-600">Управление вашими техническими навыками и экспертностью</p>
 		</div>
 	</div>
 </div>

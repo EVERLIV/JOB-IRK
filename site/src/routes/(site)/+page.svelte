@@ -49,10 +49,10 @@
   const featuredJobs = $derived(data.featuredJobs);
 
   const jobTypes = [
-    { id: "full-time", label: "Full Time", icon: Briefcase },
-    { id: "internship", label: "Internship", icon: GraduationCap },
-    { id: "remote", label: "Remote", icon: Home },
-    { id: "fresher", label: "Fresher", icon: Rocket },
+    { id: "full-time", label: "Полная занятость", icon: Briefcase },
+    { id: "internship", label: "Стажировка", icon: GraduationCap },
+    { id: "remote", label: "Удалённая", icon: Home },
+    { id: "fresher", label: "Начинающим", icon: Rocket },
   ];
 
   onMount(() => {
@@ -149,18 +149,18 @@
 
   // Stats for social proof
   const stats = [
-    { value: "50K+", label: "Active Jobs", icon: Briefcase },
-    { value: "10K+", label: "Companies", icon: Building2 },
-    { value: "1M+", label: "Job Seekers", icon: Users },
-    { value: "95%", label: "Success Rate", icon: TrendingUp },
+    { value: "50K+", label: "Вакансий", icon: Briefcase },
+    { value: "10K+", label: "Компаний", icon: Building2 },
+    { value: "1M+", label: "Соискателей", icon: Users },
+    { value: "95%", label: "Успешных трудоустройств", icon: TrendingUp },
   ];
 </script>
 
 <svelte:head>
-  <title>PeelJobs - Find Your Dream Job | India's Smart Job Platform</title>
+  <title>PeelJobs — Найдите работу мечты | Умная платформа для поиска работы</title>
   <meta
     name="description"
-    content="Discover thousands of job opportunities across India. PeelJobs connects talented professionals with top companies using intelligent job matching."
+    content="Тысячи вакансий по всей Индии. PeelJobs связывает талантливых профессионалов с ведущими компаниями с помощью умного подбора."
   />
 </svelte:head>
 
@@ -183,7 +183,7 @@
               class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"
             ></span>
           </span>
-          <span>50,000+ Jobs Available</span>
+          <span>50 000+ вакансий</span>
         </div>
 
         <!-- Headline -->
@@ -192,13 +192,13 @@
             class="block text-3xl md:text-4xl lg:text-5xl font-semibold text-black tracking-tight leading-tight hero-fade-in"
             style="--delay: 100ms;"
           >
-            Find your next
+            Найдите новую
           </span>
           <span
             class="block text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-600 tracking-tight leading-tight hero-fade-in"
             style="--delay: 150ms;"
           >
-            career opportunity
+            карьерную возможность
           </span>
         </h1>
 
@@ -207,9 +207,9 @@
           class="text-lg text-muted leading-relaxed mb-8 hero-fade-in"
           style="--delay: 200ms;"
         >
-          Join over <span class="font-semibold text-black"
-            >1 million professionals</span
-          > who use PeelJobs to discover verified opportunities at India's top companies.
+          Присоединяйтесь к <span class="font-semibold text-black"
+            >1 миллиону профессионалов</span
+          >, которые используют PeelJobs для поиска проверенных вакансий в ведущих компаниях Индии.
         </p>
 
         <!-- Trust Badges -->
@@ -219,15 +219,15 @@
         >
           <div class="flex items-center gap-2 text-sm text-muted">
             <BadgeCheck size={18} class="text-success-500" />
-            <span>Verified Jobs</span>
+            <span>Проверенные вакансии</span>
           </div>
           <div class="flex items-center gap-2 text-sm text-muted">
             <Shield size={18} class="text-primary-600" />
-            <span>Safe & Secure</span>
+            <span>Безопасно</span>
           </div>
           <div class="flex items-center gap-2 text-sm text-muted">
             <Zap size={18} class="text-warning-500" />
-            <span>Quick Apply</span>
+            <span>Быстрый отклик</span>
           </div>
         </div>
 
@@ -259,8 +259,8 @@
               <Search size={20} class="text-white" />
             </div>
             <div>
-              <h2 class="text-lg font-semibold text-black">Search Jobs</h2>
-              <p class="text-sm text-muted">Find your perfect match</p>
+              <h2 class="text-lg font-semibold text-black">Поиск вакансий</h2>
+              <p class="text-sm text-muted">Найдите идеальную работу</p>
             </div>
           </div>
 
@@ -271,11 +271,11 @@
               <label
                 for="job-search"
                 class="block text-sm font-medium text-black mb-2"
-                >Job title or skill</label
+                >Должность или навык</label
               >
               <Autocomplete
                 id="job-search"
-                placeholder="e.g. Python Developer, React, Sales"
+                placeholder="напр. Python Developer, React, Продажи"
                 bind:value={jobKeyword}
                 icon={Briefcase}
                 suggestions={skillSuggestions}
@@ -293,11 +293,11 @@
               <label
                 for="location-search"
                 class="block text-sm font-medium text-black mb-2"
-                >Location</label
+                >Город</label
               >
               <Autocomplete
                 id="location-search"
-                placeholder="e.g. Bangalore, Mumbai, Remote"
+                placeholder="напр. Bangalore, Mumbai, Удалённо"
                 bind:value={location}
                 icon={MapPin}
                 suggestions={locationSuggestions}
@@ -315,7 +315,7 @@
           <div class="mb-6">
             <!-- svelte-ignore a11y_label_has_associated_control -->
             <label class="block text-sm font-medium text-black mb-3"
-              >Job type</label
+              >Тип занятости</label
             >
             <div class="flex flex-wrap gap-2">
               {#each jobTypes as jobType}
@@ -341,14 +341,14 @@
             class="w-full h-12 flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-full transition-colors"
           >
             <Search size={20} />
-            <span>Search Jobs</span>
+            <span>Найти вакансии</span>
           </button>
 
           <!-- Popular Searches -->
           <div class="mt-5 pt-5 border-t border-border">
-            <p class="text-xs text-muted mb-2">Popular:</p>
+            <p class="text-xs text-muted mb-2">Популярные:</p>
             <div class="flex flex-wrap gap-2">
-              {#each ["Python Developer", "React", "Bangalore", "Remote", "Fresher"] as term}
+              {#each ["Python Developer", "React", "Bangalore", "Remote", "Начинающим"] as term}
                 <a
                   href="/jobs/?search={encodeURIComponent(term)}"
                   class="px-3 py-1 bg-surface text-muted hover:text-primary-600 hover:bg-primary-50 rounded-full text-xs font-medium transition-colors"
@@ -371,14 +371,14 @@
       class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8"
     >
       <div>
-        <h2 class="text-2xl font-semibold text-black">Browse by category</h2>
-        <p class="text-muted mt-1">Explore opportunities in your industry</p>
+        <h2 class="text-2xl font-semibold text-black">Вакансии по отраслям</h2>
+        <p class="text-muted mt-1">Исследуйте возможности в вашей сфере</p>
       </div>
       <a
         href="/jobs/"
         class="inline-flex items-center gap-1 text-primary-600 font-semibold hover:text-primary-700 hover:underline transition-colors"
       >
-        View all jobs
+        Все вакансии
         <ArrowRight size={16} />
       </a>
     </div>
@@ -414,8 +414,8 @@
       class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8"
     >
       <div>
-        <h2 class="text-2xl font-semibold text-black">Jobs by location</h2>
-        <p class="text-muted mt-1">Find opportunities in your city</p>
+        <h2 class="text-2xl font-semibold text-black">Вакансии по городам</h2>
+        <p class="text-muted mt-1">Найдите работу в вашем городе</p>
       </div>
     </div>
 
@@ -447,10 +447,10 @@
   <div class="max-w-7xl mx-auto px-4 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-2xl lg:text-3xl font-semibold text-white mb-3">
-        Why choose PeelJobs?
+        Почему PeelJobs?
       </h2>
       <p class="text-gray-400 max-w-xl mx-auto">
-        Built for job seekers who want results, not hassles.
+        Создано для тех, кто ищет результаты, а не сложности.
       </p>
     </div>
 
@@ -462,10 +462,10 @@
         >
           <Brain size={24} class="text-primary-400" />
         </div>
-        <h3 class="text-lg font-semibold text-white mb-2">Smart Matching</h3>
+        <h3 class="text-lg font-semibold text-white mb-2">Умный подбор</h3>
         <p class="text-gray-400 text-sm leading-relaxed">
-          Our algorithms analyze your profile to show jobs that match your
-          skills and experience.
+          Наши алгоритмы анализируют ваш профиль и показывают вакансии,
+          соответствующие вашим навыкам и опыту.
         </p>
       </div>
 
@@ -477,11 +477,11 @@
           <Shield size={24} class="text-success-500" />
         </div>
         <h3 class="text-lg font-semibold text-white mb-2">
-          Verified Companies
+          Проверенные компании
         </h3>
         <p class="text-gray-400 text-sm leading-relaxed">
-          Every employer is vetted to ensure you're applying to legitimate
-          opportunities.
+          Каждый работодатель проходит проверку, чтобы вы откликались
+          только на реальные вакансии.
         </p>
       </div>
 
@@ -492,10 +492,10 @@
         >
           <Zap size={24} class="text-warning-500" />
         </div>
-        <h3 class="text-lg font-semibold text-white mb-2">Quick Apply</h3>
+        <h3 class="text-lg font-semibold text-white mb-2">Быстрый отклик</h3>
         <p class="text-gray-400 text-sm leading-relaxed">
-          Apply to multiple jobs in minutes with our streamlined one-click
-          application.
+          Откликайтесь на вакансии за минуты с помощью удобной системы
+          подачи заявлений в один клик.
         </p>
       </div>
     </div>
@@ -513,16 +513,16 @@
           class="inline-flex items-center gap-2 px-3 py-1 bg-success-light text-success-600 rounded-full text-sm font-medium mb-2"
         >
           <TrendingUp size={14} />
-          <span>Latest Openings</span>
+          <span>Свежие вакансии</span>
         </div>
-        <h2 class="text-2xl font-semibold text-black">Featured jobs</h2>
-        <p class="text-muted mt-1">Fresh opportunities from top companies</p>
+        <h2 class="text-2xl font-semibold text-black">Избранные вакансии</h2>
+        <p class="text-muted mt-1">Новые возможности от лучших компаний</p>
       </div>
       <a
         href="/jobs/"
         class="inline-flex items-center gap-2 h-10 px-5 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-colors"
       >
-        View all jobs
+        Все вакансии
         <ArrowRight size={16} />
       </a>
     </div>
@@ -603,7 +603,7 @@
             <span
               class="text-sm font-semibold text-primary-600 flex items-center gap-1 group-hover:gap-2 transition-all"
             >
-              View
+              Подробнее
               <ChevronRight size={14} />
             </span>
           </div>
@@ -620,16 +620,16 @@
       class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-white/90 text-sm font-medium mb-6"
     >
       <Star size={14} />
-      <span>Join 1M+ professionals</span>
+      <span>Присоединяйтесь к 1M+ профессионалов</span>
     </div>
 
     <h2 class="text-2xl lg:text-3xl font-semibold text-white mb-4">
-      Ready to take the next step?
+      Готовы сделать следующий шаг?
     </h2>
 
     <p class="text-primary-100 mb-8 max-w-lg mx-auto">
-      Create your free profile and get matched with opportunities that align
-      with your skills and goals.
+      Создайте бесплатный профиль и получите доступ к вакансиям,
+      которые соответствуют вашим навыкам и целям.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-3 justify-center">
@@ -638,13 +638,13 @@
         class="inline-flex items-center justify-center gap-2 h-12 px-8 bg-white text-primary-600 font-semibold rounded-full hover:bg-gray-50 transition-colors"
       >
         <CheckCircle2 size={18} />
-        Get started free
+        Начать бесплатно
       </a>
       <a
         href="/jobs/"
         class="inline-flex items-center justify-center h-12 px-8 text-white font-semibold rounded-full border border-white/30 hover:bg-white/10 transition-colors"
       >
-        Browse jobs
+        Смотреть вакансии
       </a>
     </div>
   </div>

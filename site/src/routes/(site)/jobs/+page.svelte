@@ -371,24 +371,24 @@
     if (salaryMin !== null || salaryMax !== null) {
       const min = salaryMin !== null ? `${salaryMin}L` : '0';
       const max = salaryMax !== null ? `${salaryMax}L` : '∞';
-      chips.push({ label: `Salary: ${min} - ${max}`, value: 'salary', type: 'salary' });
+      chips.push({ label: `Зарплата: ${min} - ${max}`, value: 'salary', type: 'salary' });
     }
 
     // Experience chip
     if (experienceMin > 0 || experienceMax < 20) {
       const min = experienceMin > 0 ? `${experienceMin}` : '0';
       const max = experienceMax < 20 ? `${experienceMax}` : '20+';
-      chips.push({ label: `Experience: ${min} - ${max} years`, value: 'experience', type: 'experience' });
+      chips.push({ label: `Опыт: ${min} - ${max} лет`, value: 'experience', type: 'experience' });
     }
 
     // Remote chip
     if (isRemote) {
-      chips.push({ label: 'Remote Only', value: 'remote', type: 'remote' });
+      chips.push({ label: 'Только удалённая', value: 'remote', type: 'remote' });
     }
 
     // Fresher chip
     if (isFresher) {
-      chips.push({ label: 'Fresher Jobs', value: 'fresher', type: 'fresher' });
+      chips.push({ label: 'Для начинающих', value: 'fresher', type: 'fresher' });
     }
 
     return chips;
@@ -459,10 +459,10 @@
     try {
       if (wasSaved) {
         await jobsApi.unsave(jobId);
-        toast.success('Job removed from saved');
+        toast.success('Вакансия удалена из сохранённых');
       } else {
         await jobsApi.save(jobId);
-        toast.success('Job saved!');
+        toast.success('Вакансия сохранена!');
       }
 
       // Update the job in the data (trigger reactivity)
@@ -470,7 +470,7 @@
       jobs = jobs.map(j => j.id === jobId ? { ...j, is_saved: !wasSaved } : j);
     } catch (err) {
       console.error('Failed to save job:', err);
-      toast.error('Please login to save jobs');
+      toast.error('Войдите, чтобы сохранять вакансии');
     }
   }
 
@@ -514,8 +514,8 @@
 </script>
 
 <svelte:head>
-  <title>Find Jobs - PeelJobs</title>
-  <meta name="description" content="Discover your dream job with PeelJobs. Browse thousands of job opportunities with advanced filters for location, skills, salary, and more." />
+  <title>Поиск вакансий - PeelJobs</title>
+  <meta name="description" content="Найдите работу мечты с PeelJobs. Просматривайте тысячи вакансий с расширенными фильтрами по городу, навыкам, зарплате и другим параметрам." />
 </svelte:head>
 
 <div class="min-h-screen bg-surface-50">
@@ -524,8 +524,8 @@
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-semibold text-black">Find jobs</h1>
-          <p class="text-muted text-sm mt-1">{totalJobs.toLocaleString()} opportunities available</p>
+          <h1 class="text-2xl font-semibold text-black">Поиск вакансий</h1>
+          <p class="text-muted text-sm mt-1">{totalJobs.toLocaleString()} вакансий доступно</p>
         </div>
         <!-- Search Input -->
         <div class="relative flex-1 max-w-md">
@@ -535,7 +535,7 @@
           <input
             type="text"
             bind:value={searchTerm}
-            placeholder="Search jobs by title, skill, or company..."
+            placeholder="Поиск по названию, навыку или компании..."
             class="w-full pl-11 pr-4 h-10 bg-surface border border-border rounded-lg text-black placeholder-muted focus:bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-600/10 transition-all outline-none text-sm"
           />
         </div>
@@ -551,7 +551,7 @@
         class="flex items-center gap-2 h-10 px-4 bg-white border border-border rounded-full text-black font-medium hover:bg-surface transition-colors"
       >
         <SlidersHorizontal size={18} />
-        {showFiltersMobile ? 'Hide Filters' : 'Filters'}
+        {showFiltersMobile ? 'Скрыть фильтры' : 'Фильтры'}
         {#if activeFilterCount > 0}
           <span class="bg-primary-600 text-white text-xs px-2 py-0.5 rounded-full">{activeFilterCount}</span>
         {/if}
@@ -566,14 +566,14 @@
           <div class="flex justify-between items-center px-4 py-3 border-b border-border">
             <h2 class="text-sm font-semibold text-black flex items-center gap-2">
               <Filter size={16} class="text-primary-600" />
-              Filters
+              Фильтры
             </h2>
             {#if hasActiveFilters}
               <button
                 onclick={resetFilters}
                 class="text-xs text-primary-600 hover:text-primary-700 font-semibold hover:underline"
               >
-                Clear all
+                Сбросить все
               </button>
             {/if}
           </div>
@@ -582,7 +582,7 @@
             <!-- Location Filter -->
             {#if locationOptions.length > 0}
               <FilterSection
-                title="Location"
+                title="Город"
                 icon={MapPin}
                 options={locationOptions}
                 showMoreButton={locationOptions.length > 5}
@@ -594,7 +594,7 @@
             <!-- Skills Filter -->
             {#if skillOptions.length > 0}
               <FilterSection
-                title="Skills"
+                title="Навыки"
                 icon={Briefcase}
                 options={skillOptions}
                 showMoreButton={skillOptions.length > 5}
@@ -606,7 +606,7 @@
             <!-- Industry Filter -->
             {#if industryOptions.length > 0}
               <FilterSection
-                title="Industry"
+                title="Отрасль"
                 icon={Factory}
                 options={industryOptions}
                 showMoreButton={industryOptions.length > 5}
@@ -618,7 +618,7 @@
             <!-- Education Filter -->
             {#if educationOptions.length > 0}
               <FilterSection
-                title="Education"
+                title="Образование"
                 icon={GraduationCap}
                 options={educationOptions}
                 showMoreButton={educationOptions.length > 5}
@@ -630,7 +630,7 @@
             <!-- Job Type Filter -->
             {#if jobTypeOptions.length > 0}
               <CollapsibleFilterSection
-                title="Job Type"
+                title="Тип занятости"
                 hasActiveFilter={jobTypeOptions.some(opt => opt.checked)}
               >
                 <div class="space-y-1">
@@ -652,12 +652,12 @@
 
             <!-- Salary Range -->
             <CollapsibleFilterSection
-              title="Salary (LPA)"
+              title="Зарплата (LPA)"
               hasActiveFilter={salaryMin !== null || salaryMax !== null}
             >
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <label for="salary-min" class="block text-xs text-muted mb-1">Min</label>
+                  <label for="salary-min" class="block text-xs text-muted mb-1">От</label>
                   <input
                     id="salary-min"
                     type="number"
@@ -667,7 +667,7 @@
                   />
                 </div>
                 <div>
-                  <label for="salary-max" class="block text-xs text-muted mb-1">Max</label>
+                  <label for="salary-max" class="block text-xs text-muted mb-1">До</label>
                   <input
                     id="salary-max"
                     type="number"
@@ -681,13 +681,13 @@
 
             <!-- Experience Range -->
             <CollapsibleFilterSection
-              title="Experience"
+              title="Опыт"
               hasActiveFilter={experienceMin > 0 || experienceMax < 20}
             >
               <div class="space-y-4">
                 <div class="flex justify-between text-xs">
-                  <span class="px-2 py-1 bg-primary-50 text-primary-600 rounded font-medium">{experienceMin} yr{experienceMin !== 1 ? 's' : ''}</span>
-                  <span class="px-2 py-1 bg-primary-50 text-primary-600 rounded font-medium">{experienceMax === 20 ? '20+' : experienceMax} yr{experienceMax !== 1 ? 's' : ''}</span>
+                  <span class="px-2 py-1 bg-primary-50 text-primary-600 rounded font-medium">{experienceMin} г.{experienceMin !== 1 ? '' : ''}</span>
+                  <span class="px-2 py-1 bg-primary-50 text-primary-600 rounded font-medium">{experienceMax === 20 ? '20+' : experienceMax} г.{experienceMax !== 1 ? '' : ''}</span>
                 </div>
                 <div class="space-y-2">
                   <input
@@ -710,7 +710,7 @@
 
             <!-- Remote Toggle -->
             <CollapsibleFilterSection
-              title="Work Mode"
+              title="Режим работы"
               hasActiveFilter={isRemote}
             >
               <label class="flex items-center gap-3 cursor-pointer py-2 px-2 rounded-lg hover:bg-surface transition-colors">
@@ -719,7 +719,7 @@
                   bind:checked={isRemote}
                   class="w-4 h-4 rounded border-border text-primary-600 focus:ring-primary-600 cursor-pointer"
                 />
-                <span class="text-sm text-black">Remote Only</span>
+                <span class="text-sm text-black">Только удалённая</span>
               </label>
             </CollapsibleFilterSection>
           </div>
@@ -741,13 +741,13 @@
             <div class="w-14 h-14 rounded-lg bg-error-light flex items-center justify-center mx-auto mb-4">
               <X size={24} class="text-error-600" />
             </div>
-            <h3 class="text-lg font-semibold text-black mb-2">Something went wrong</h3>
+            <h3 class="text-lg font-semibold text-black mb-2">Что-то пошло не так</h3>
             <p class="text-muted mb-6">{error}</p>
             <button
               onclick={() => window.location.reload()}
               class="h-10 px-6 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold transition-colors"
             >
-              Try Again
+              Попробовать снова
             </button>
           </div>
         {:else if jobs.length > 0}
@@ -761,7 +761,7 @@
                 <a
                   href="/jobs/{job.slug.replace(/^\/+/, '')}"
                   class="block p-4 lg:p-5"
-                  aria-label="View details for {job.title} at {job.company_name}"
+                  aria-label="Подробнее о {job.title} в {job.company_name}"
                 >
                   <div class="flex gap-4">
                     <!-- Company Logo -->
@@ -786,7 +786,7 @@
                           {job.title}
                         </h3>
                         {#if !job.accepts_applications}
-                          <span class="flex-shrink-0 px-2 py-0.5 text-xs font-medium bg-surface text-muted rounded">Closed</span>
+                          <span class="flex-shrink-0 px-2 py-0.5 text-xs font-medium bg-surface text-muted rounded">Закрыто</span>
                         {/if}
                       </div>
 
@@ -823,11 +823,11 @@
                           </span>
                           <span class="flex items-center gap-1">
                             <Users size={12} />
-                            {job.applicants_count} applicants
+                            {job.applicants_count} откликнувшихся
                           </span>
                         </div>
                         <span class="hidden sm:flex items-center gap-1 text-sm font-semibold text-primary-600 group-hover:gap-2 transition-all">
-                          View
+                          Подробнее
                           <ChevronRight size={14} />
                         </span>
                       </div>
@@ -844,7 +844,7 @@
                     saveJob(job.id);
                   }}
                   class="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-surface text-muted hover:text-primary-600 transition-all {job.is_saved ? 'text-primary-600 bg-primary-50' : ''}"
-                  aria-label="Save {job.title}"
+                  aria-label="Сохранить {job.title}"
                 >
                   <Bookmark size={18} class={job.is_saved ? 'fill-current' : ''} />
                 </button>
@@ -862,7 +862,7 @@
                   class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-muted rounded-lg hover:bg-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft size={16} />
-                  <span class="hidden sm:inline">Prev</span>
+                  <span class="hidden sm:inline">Назад</span>
                 </button>
 
                 <div class="flex gap-0.5 px-1">
@@ -881,7 +881,7 @@
                   disabled={currentPage === totalPages}
                   class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-muted rounded-lg hover:bg-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <span class="hidden sm:inline">Next</span>
+                  <span class="hidden sm:inline">Далее</span>
                   <ChevronRight size={16} />
                 </button>
               </div>
@@ -893,15 +893,15 @@
             <div class="w-16 h-16 rounded-lg bg-primary-50 flex items-center justify-center mx-auto mb-5">
               <Search size={28} class="text-primary-600" />
             </div>
-            <h3 class="text-lg font-semibold text-black mb-2">No jobs found</h3>
+            <h3 class="text-lg font-semibold text-black mb-2">Вакансии не найдены</h3>
             <p class="text-muted mb-6 max-w-sm mx-auto">
-              We couldn't find any jobs matching your criteria. Try adjusting your filters.
+              Не удалось найти вакансии по вашим критериям. Попробуйте изменить фильтры.
             </p>
             <button
               onclick={resetFilters}
               class="h-10 px-6 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold transition-colors"
             >
-              Clear All Filters
+              Сбросить все фильтры
             </button>
           </div>
         {/if}
@@ -912,7 +912,7 @@
 
 <!-- Modals -->
 <FilterModal
-  title="Locations"
+  title="Города"
   options={locationOptions}
   bind:isOpen={showLocationModal}
   onClose={() => showLocationModal = false}
@@ -922,7 +922,7 @@
 />
 
 <FilterModal
-  title="Skills"
+  title="Навыки"
   options={skillOptions}
   bind:isOpen={showSkillsModal}
   onClose={() => showSkillsModal = false}
@@ -932,7 +932,7 @@
 />
 
 <FilterModal
-  title="Industries"
+  title="Отрасли"
   options={industryOptions}
   bind:isOpen={showIndustryModal}
   onClose={() => showIndustryModal = false}
@@ -942,7 +942,7 @@
 />
 
 <FilterModal
-  title="Education"
+  title="Образование"
   options={educationOptions}
   bind:isOpen={showEducationModal}
   onClose={() => showEducationModal = false}

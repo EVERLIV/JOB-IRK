@@ -147,17 +147,17 @@
 
 		// Validation
 		if (!formData.name.trim()) {
-			toast.error('Please enter project name');
+			toast.error('Пожалуйста, введите название проекта');
 			return;
 		}
 
 		if (!formData.description.trim()) {
-			toast.error('Please enter project description');
+			toast.error('Пожалуйста, введите описание проекта');
 			return;
 		}
 
 		if (formData.skill_ids.length === 0) {
-			toast.error('Please add at least one skill');
+			toast.error('Пожалуйста, добавьте хотя бы один навык');
 			return;
 		}
 
@@ -179,11 +179,11 @@
 			if (project) {
 				// Update existing project
 				await updateProject(project.id, submitData);
-				toast.success('Project updated successfully!');
+				toast.success('Проект успешно обновлён!');
 			} else {
 				// Add new project
 				await addProject(submitData);
-				toast.success('Project added successfully!');
+				toast.success('Проект успешно добавлен!');
 			}
 
 			onSuccess();
@@ -193,7 +193,7 @@
 			const errorMsg =
 				error?.response?.data?.detail ||
 				error?.response?.data?.error ||
-				'Failed to save project. Please try again.';
+				'Не удалось сохранить проект. Попробуйте ещё раз.';
 			toast.error(errorMsg);
 		} finally {
 			loading = false;
@@ -244,7 +244,7 @@
 			type="button"
 			class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity cursor-default animate-fade-in"
 			onclick={handleBackdropClick}
-			aria-label="Close modal"
+			aria-label="Закрыть модальное окно"
 			tabindex="-1"
 		></button>
 
@@ -260,7 +260,7 @@
 							<Rocket size={20} class="text-primary-600" />
 						</div>
 						<h3 class="text-lg font-semibold text-gray-900" id="modal-title">
-							{project ? 'Edit Project' : 'Add Project'}
+							{project ? 'Редактировать проект' : 'Добавить проект'}
 						</h3>
 					</div>
 					<button
@@ -277,13 +277,13 @@
 					<!-- Project Name -->
 					<div>
 						<label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-							Project Name <span class="text-error-500">*</span>
+							Название проекта <span class="text-error-500">*</span>
 						</label>
 						<input
 							type="text"
 							id="name"
 							bind:value={formData.name}
-							placeholder="e.g., E-commerce Platform"
+							placeholder="напр., Платформа электронной коммерции"
 							class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 							required
 						/>
@@ -292,12 +292,12 @@
 					<!-- Description -->
 					<div>
 						<label for="description" class="block text-sm font-medium text-gray-700 mb-2">
-							Description <span class="text-error-500">*</span>
+							Описание <span class="text-error-500">*</span>
 						</label>
 						<textarea
 							id="description"
 							bind:value={formData.description}
-							placeholder="Describe your project, your responsibilities, and key achievements..."
+							placeholder="Опишите ваш проект, ваши обязанности и ключевые достижения..."
 							rows="4"
 							class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none resize-none"
 							required
@@ -307,7 +307,7 @@
 					<!-- Skills -->
 					<div>
 						<label for="project-skill-search" class="block text-sm font-medium text-gray-700 mb-2">
-							Technologies Used <span class="text-error-500">*</span>
+							Использованные технологии <span class="text-error-500">*</span>
 						</label>
 
 						<!-- Selected Skills -->
@@ -322,7 +322,7 @@
 											type="button"
 											onclick={() => removeSkill(skill.id)}
 											class="hover:text-primary-900 transition-colors"
-											aria-label="Remove skill"
+											aria-label="Удалить навык"
 										>
 											<Trash2 size={14} />
 										</button>
@@ -339,7 +339,7 @@
 							<input
 								type="text"
 								id="project-skill-search"
-								placeholder="Search technologies (e.g., React, Python, AWS)..."
+								placeholder="Поиск технологий (напр., React, Python, AWS)..."
 								bind:value={skillSearchQuery}
 								oninput={handleSkillSearch}
 								class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
@@ -369,20 +369,20 @@
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label for="role" class="block text-sm font-medium text-gray-700 mb-2">
-								Your Role
+								Ваша роль
 							</label>
 							<input
 								type="text"
 								id="role"
 								bind:value={formData.role}
-								placeholder="e.g., Full Stack Developer"
+								placeholder="напр., Full Stack разработчик"
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 							/>
 						</div>
 
 						<div>
 							<label for="size" class="block text-sm font-medium text-gray-700 mb-2">
-								Team Size
+								Размер команды
 							</label>
 							<input
 								type="number"
@@ -399,7 +399,7 @@
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label for="from_date" class="block text-sm font-medium text-gray-700 mb-2">
-								Start Date
+								Дата начала
 							</label>
 							<input
 								type="date"
@@ -411,7 +411,7 @@
 
 						<div>
 							<label for="to_date" class="block text-sm font-medium text-gray-700 mb-2">
-								End Date
+								Дата окончания
 							</label>
 							<input
 								type="date"
@@ -419,14 +419,14 @@
 								bind:value={formData.to_date}
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 							/>
-							<p class="mt-2 text-xs text-gray-500">Leave blank if ongoing</p>
+							<p class="mt-2 text-xs text-gray-500">Оставьте пустым, если продолжается</p>
 						</div>
 					</div>
 
 					<!-- Location -->
 					<div>
 						<label for="location" class="block text-sm font-medium text-gray-700 mb-2">
-							Project Location
+							Местоположение проекта
 						</label>
 						<div class="relative">
 							<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -434,7 +434,7 @@
 							</span>
 							<input
 								type="text"
-								placeholder="Search city..."
+								placeholder="Поиск города..."
 								bind:value={citySearchQuery}
 								oninput={handleCitySearch}
 								class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
@@ -447,7 +447,7 @@
 								bind:value={formData.location_id}
 								class="mt-3 w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none"
 							>
-								<option value={undefined}>Select location...</option>
+								<option value={undefined}>Выберите местоположение...</option>
 								{#each cities as city}
 									<option value={city.id}>
 										{city.name}, {city.state_name}
@@ -465,14 +465,14 @@
 							class="px-5 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-full font-medium hover:bg-gray-50 transition-colors"
 							disabled={loading}
 						>
-							Cancel
+							Отмена
 						</button>
 						<button
 							type="submit"
 							class="px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed elevation-1"
 							disabled={loading}
 						>
-							{loading ? 'Saving...' : project ? 'Update Project' : 'Add Project'}
+							{loading ? 'Сохранение...' : project ? 'Обновить проект' : 'Добавить проект'}
 						</button>
 					</div>
 				</form>

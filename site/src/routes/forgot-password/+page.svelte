@@ -19,12 +19,12 @@
     errors = {};
 
     if (!email.trim()) {
-      errors.email = 'Email is required';
+      errors.email = 'Email обязателен';
       return;
     }
 
     if (!validateEmail(email)) {
-      errors.email = 'Please enter a valid email address';
+      errors.email = 'Введите корректный email';
       return;
     }
 
@@ -36,7 +36,7 @@
       emailSent = true;
     } catch (error) {
       console.error('Password reset error:', error);
-      errors.submit = 'Failed to send reset email. Please try again.';
+      errors.submit = 'Не удалось отправить письмо для сброса. Попробуйте снова.';
     } finally {
       isLoading = false;
     }
@@ -50,8 +50,8 @@
 </script>
 
 <svelte:head>
-  <title>Forgot Password - PeelJobs</title>
-  <meta name="description" content="Reset your PeelJobs account password" />
+  <title>Восстановление пароля - PeelJobs</title>
+  <meta name="description" content="Сбросьте пароль от аккаунта PeelJobs" />
 </svelte:head>
 
 <div class="min-h-screen bg-surface flex items-center justify-center p-6">
@@ -75,17 +75,17 @@
             <KeyRound size={32} class="text-primary" />
           </div>
           <h1 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-2">
-            Forgot Password?
+            Забыли пароль?
           </h1>
           <p class="text-muted">
-            No worries! Enter your email and we'll send you reset instructions.
+            Не волнуйтесь! Введите email и мы отправим инструкции для сброса.
           </p>
         </div>
 
         <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="space-y-5">
           <div>
             <label for="email" class="block text-sm font-medium text-muted mb-2">
-              Email Address
+              Электронная почта
             </label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -121,9 +121,9 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Sending...
+              Отправка...
             {:else}
-              Send Reset Link
+              Отправить ссылку для сброса
             {/if}
           </button>
         </form>
@@ -131,7 +131,7 @@
         <div class="mt-6 text-center">
           <a href="/login/" class="inline-flex items-center gap-2 text-primary hover:text-primary font-medium text-sm transition-colors">
             <ArrowLeft size={16} />
-            Back to Sign In
+            Вернуться к входу
           </a>
         </div>
 
@@ -143,11 +143,11 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Check Your Email
+            Проверьте почту
           </h2>
 
           <p class="text-muted mb-2">
-            We've sent password reset instructions to
+            Мы отправили инструкции для сброса пароля на
           </p>
           <p class="text-primary font-medium mb-6">
             {email}
@@ -155,20 +155,20 @@
 
           <div class="bg-primary/10 rounded-xl p-4 mb-6 text-left">
             <p class="text-sm font-medium text-black mb-2">
-              Didn't receive the email?
+              Не получили письмо?
             </p>
             <ul class="text-sm text-muted space-y-1">
               <li class="flex items-start gap-2">
                 <span class="text-primary">•</span>
-                Check your spam/junk folder
+                Проверьте папку со спамом
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-primary">•</span>
-                Make sure the email address is correct
+                Убедитесь, что email указан верно
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-primary">•</span>
-                Wait a few minutes and check again
+                Подождите несколько минут и проверьте снова
               </li>
             </ul>
           </div>
@@ -178,7 +178,7 @@
             onclick={handleResend}
             class="w-full px-5 py-3 border border-primary text-primary font-medium rounded-full hover:bg-primary/10 transition-all mb-4"
           >
-            Try Another Email
+            Попробовать другой email
           </button>
 
           <a
@@ -186,7 +186,7 @@
             class="inline-flex items-center gap-2 text-muted hover:text-primary font-medium text-sm transition-colors"
           >
             <ArrowLeft size={16} />
-            Back to Sign In
+            Вернуться к входу
           </a>
         </div>
       {/if}
@@ -195,8 +195,8 @@
     <!-- Help Link -->
     <div class="mt-8 text-center animate-fade-in" style="opacity: 0; animation-delay: 200ms; animation-fill-mode: forwards;">
       <p class="text-sm text-muted">
-        Need help?{' '}
-        <a href="/contact/" class="text-primary hover:text-primary font-medium">Contact Support</a>
+        Нужна помощь?{' '}
+        <a href="/contact/" class="text-primary hover:text-primary font-medium">Связаться с поддержкой</a>
       </p>
     </div>
   </div>

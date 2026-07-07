@@ -52,15 +52,15 @@
     let isValid = true;
 
     if (!password) {
-      errors.password = 'Password is required';
+      errors.password = 'Пароль обязателен';
       isValid = false;
     } else if (!validatePassword(password)) {
-      errors.password = 'Password must be at least 8 characters with uppercase, lowercase, and number';
+      errors.password = 'Пароль должен содержать не менее 8 символов, включая заглавные и строчные буквы, а также цифры';
       isValid = false;
     }
 
     if (password !== confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
+      errors.confirmPassword = 'Пароли не совпадают';
       isValid = false;
     }
 
@@ -84,7 +84,7 @@
       }, 3000);
     } catch (error) {
       console.error('Password reset error:', error);
-      errors.submit = 'Failed to reset password. Please try again or request a new reset link.';
+      errors.submit = 'Не удалось сбросить пароль. Попробуйте снова или запросите новую ссылку для сброса.';
     } finally {
       isLoading = false;
     }
@@ -106,13 +106,13 @@
     !validatePassword(password) ? 2 :
     3;
 
-  $: passwordStrengthText = ['', 'Weak', 'Fair', 'Strong'][passwordStrength];
+  $: passwordStrengthText = ['', 'Слабый', 'Средний', 'Надёжный'][passwordStrength];
   $: passwordStrengthColor = ['bg-border', 'bg-error', 'bg-warning', 'bg-success'][passwordStrength];
 </script>
 
 <svelte:head>
-  <title>Reset Password - PeelJobs</title>
-  <meta name="description" content="Reset your PeelJobs account password" />
+  <title>Сброс пароля - PeelJobs</title>
+  <meta name="description" content="Сбросьте пароль от аккаунта PeelJobs" />
 </svelte:head>
 
 <div class="min-h-screen bg-surface flex items-center justify-center p-6">
@@ -137,23 +137,23 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Invalid or Expired Link
+            Недействительная или устаревшая ссылка
           </h2>
 
           <p class="text-muted mb-6">
-            This password reset link is invalid or has expired. Please request a new one.
+            Эта ссылка для сброса пароля недействительна или устарела. Запросите новую.
           </p>
 
           <a
             href="/forgot-password/"
             class="inline-block w-full px-5 py-3.5 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-all shadow-sm hover:shadow-md text-center"
           >
-            Request New Link
+            Запросить новую ссылку
           </a>
 
           <div class="mt-6">
             <a href="/login/" class="text-muted hover:text-primary font-medium text-sm transition-colors">
-              Back to Sign In
+              Вернуться к входу
             </a>
           </div>
         </div>
@@ -166,16 +166,16 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Password Reset Successful!
+            Пароль успешно сброшен!
           </h2>
 
           <p class="text-muted mb-6">
-            Your password has been successfully reset. You can now sign in with your new password.
+            Ваш пароль успешно сброшен. Теперь вы можете войти с новым паролем.
           </p>
 
           <div class="bg-primary/10 rounded-xl p-4 mb-6">
             <p class="text-sm text-muted">
-              Redirecting you to sign in page in a few seconds...
+              Перенаправление на страницу входа через несколько секунд...
             </p>
           </div>
 
@@ -183,7 +183,7 @@
             href="/login/"
             class="inline-block w-full px-5 py-3.5 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-all shadow-sm hover:shadow-md text-center"
           >
-            Continue to Sign In
+            Перейти ко входу
           </a>
         </div>
 
@@ -194,10 +194,10 @@
             <ShieldCheck size={32} class="text-primary" />
           </div>
           <h1 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-2">
-            Reset Your Password
+            Сбросьте пароль
           </h1>
           <p class="text-muted">
-            Enter your new password below
+            Введите новый пароль ниже
           </p>
         </div>
 
@@ -205,7 +205,7 @@
           <!-- New Password -->
           <div>
             <label for="password" class="block text-sm font-medium text-muted mb-2">
-              New Password
+              Новый пароль
             </label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -215,7 +215,7 @@
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 bind:value={password}
-                placeholder="Create a strong password"
+                placeholder="Создайте надёжный пароль"
                 class="w-full pl-11 pr-12 py-3 border rounded-lg bg-surface text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.password ? 'border-error' : 'border-border'}"
                 disabled={isLoading}
               />
@@ -235,7 +235,7 @@
             {#if password.length > 0}
               <div class="mt-3">
                 <div class="flex items-center justify-between mb-1.5">
-                  <span class="text-xs text-muted">Password strength</span>
+                  <span class="text-xs text-muted">Надёжность пароля</span>
                   <span class="text-xs font-medium {passwordStrength === 1 ? 'text-error' : passwordStrength === 2 ? 'text-warning' : passwordStrength === 3 ? 'text-success' : 'text-muted'}">
                     {passwordStrengthText}
                   </span>
@@ -252,7 +252,7 @@
               <p class="mt-1.5 text-sm text-error">{errors.password}</p>
             {:else}
               <p class="mt-1.5 text-xs text-muted">
-                At least 8 characters with uppercase, lowercase, and number
+                Не менее 8 символов, включая заглавные, строчные буквы и цифры
               </p>
             {/if}
           </div>
@@ -260,7 +260,7 @@
           <!-- Confirm Password -->
           <div>
             <label for="confirmPassword" class="block text-sm font-medium text-muted mb-2">
-              Confirm New Password
+              Подтвердите пароль
             </label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -270,7 +270,7 @@
                 id="confirmPassword"
                 type={showConfirmPassword ? 'text' : 'password'}
                 bind:value={confirmPassword}
-                placeholder="Confirm your password"
+                placeholder="Подтвердите пароль"
                 class="w-full pl-11 pr-12 py-3 border rounded-lg bg-surface text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.confirmPassword ? 'border-error' : 'border-border'}"
                 disabled={isLoading}
               />
@@ -307,16 +307,16 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Resetting Password...
+              Сброс пароля...
             {:else}
-              Reset Password
+              Сбросить пароль
             {/if}
           </button>
         </form>
 
         <div class="mt-6 text-center">
           <a href="/login/" class="text-muted hover:text-primary font-medium text-sm transition-colors">
-            Remember your password? Sign In
+            Вспомнили пароль? Войти
           </a>
         </div>
       {/if}

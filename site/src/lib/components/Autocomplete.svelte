@@ -2,7 +2,7 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import { X, Loader2 } from '@lucide/svelte';
 
-  export let placeholder: string = 'Type to search...';
+  export let placeholder: string = 'Начните вводить...';
   export let value: string = '';
   export let icon: any = null;
   export let id: string = '';
@@ -136,7 +136,7 @@
         type="button"
         onclick={handleClear}
         class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
-        aria-label="Clear input"
+        aria-label="Очистить"
       >
         <X size={18} />
       </button>
@@ -149,7 +149,7 @@
       {#if loading}
         <div class="px-4 py-4 flex items-center justify-center gap-2 text-gray-500">
           <Loader2 size={18} class="animate-spin text-primary-600" />
-          <span class="text-sm">Searching...</span>
+          <span class="text-sm">Поиск...</span>
         </div>
       {:else if suggestions.length > 0}
         <ul class="py-2 max-h-64 overflow-y-auto">
@@ -165,7 +165,7 @@
                 </span>
                 {#if showJobCount && suggestion.jobs_count !== undefined}
                   <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
-                    {suggestion.jobs_count} jobs
+                    {suggestion.jobs_count} вакансий
                   </span>
                 {/if}
               </button>

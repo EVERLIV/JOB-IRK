@@ -203,7 +203,7 @@
 						</div>
 						<div class="flex items-center gap-1.5" aria-label="Join date">
 							<Calendar size={16} class="text-gray-400" />
-							<span>Joined {profile.joinDate}</span>
+							<span>Присоединился {profile.joinDate}</span>
 						</div>
 					</div>
 
@@ -252,10 +252,10 @@
 								type="button"
 								onclick={openContactModal}
 								class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1"
-								aria-label="Contact {profile.name}"
+								aria-label="Связаться с {profile.name}"
 							>
 								<Mail size={16} />
-								Contact
+								Контакты
 							</button>
 						{/if}
 
@@ -264,10 +264,10 @@
 								type="button"
 								onclick={downloadResume}
 								class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 text-white rounded-full font-medium hover:bg-white/20 transition-colors"
-								aria-label="Download {profile.name}'s resume"
+								aria-label="Скачать резюме {profile.name}"
 							>
 								<Download size={16} />
-								Resume
+								Резюме
 							</button>
 						{/if}
 					</div>
@@ -298,9 +298,9 @@
 					<div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
 						<Award size={20} class="text-primary-600" />
 					</div>
-					<h3 class="text-lg font-semibold text-gray-900">Skills</h3>
+					<h3 class="text-lg font-semibold text-gray-900">Навыки</h3>
 				</div>
-				<div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+				<div class="flex flex-wrap gap-2" role="list" aria-label="Навыки">
 					{#each profile.skills as skill}
 						<span
 							class="px-3 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium"
@@ -321,9 +321,9 @@
 					<div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
 						<Briefcase size={20} class="text-primary-600" />
 					</div>
-					<h3 class="text-lg font-semibold text-gray-900">Experience</h3>
+					<h3 class="text-lg font-semibold text-gray-900">Опыт</h3>
 				</div>
-				<div class="space-y-6" role="list" aria-label="Work experience">
+				<div class="space-y-6" role="list" aria-label="Опыт работы">
 					{#each profile.experience as job, i}
 						<div class="relative pl-6" role="listitem">
 							<!-- Timeline -->
@@ -357,9 +357,9 @@
 					<div class="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center">
 						<GraduationCap size={20} class="text-green-600" />
 					</div>
-					<h3 class="text-lg font-semibold text-gray-900">Education</h3>
+					<h3 class="text-lg font-semibold text-gray-900">Образование</h3>
 				</div>
-				<div class="space-y-6" role="list" aria-label="Education">
+				<div class="space-y-6" role="list" aria-label="Образование">
 					{#each profile.education as edu, i}
 						<div class="relative pl-6" role="listitem">
 							<!-- Timeline -->
@@ -404,7 +404,7 @@
 					closeContactModal();
 				}
 			}}
-			aria-label="Close contact modal"
+			aria-label="Закрыть модальное окно контактов"
 		></button>
 		<div
 			class="relative bg-white rounded-2xl elevation-3 max-w-md w-full animate-fade-in-up"
@@ -416,7 +416,7 @@
 			<!-- Modal Header -->
 			<div class="flex items-center justify-between p-5 lg:p-6 border-b border-gray-100">
 				<h4 id="contact-modal-title" class="text-xl font-semibold text-gray-900">
-					Contact {profile.name}
+					Связаться с {profile.name}
 				</h4>
 				<button
 					type="button"
@@ -437,28 +437,28 @@
 				<div class="space-y-4">
 					<div>
 						<label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-2">
-							Subject
+							Тема
 						</label>
 						<input
 							id="contact-subject"
 							type="text"
 							bind:value={contactSubject}
 							class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-							placeholder="Job Opportunity"
+							placeholder="Вакансия"
 							required
 						/>
 					</div>
 
 					<div>
 						<label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">
-							Message
+							Сообщение
 						</label>
 						<textarea
 							id="contact-message"
 							bind:value={contactMessage}
 							rows="4"
 							class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
-							placeholder="Hi {profile.name.split(' ')[0]}, I came across your profile and would like to discuss a potential opportunity..."
+							placeholder="Здравствуйте, {profile.name.split(' ')[0]}! Я ознакомился(лась) с вашим профилем и хотел(а) бы обсудить возможное предложение..."
 							required
 						></textarea>
 					</div>
@@ -470,14 +470,14 @@
 						onclick={closeContactModal}
 						class="px-5 py-2.5 border border-gray-200 text-gray-700 hover:bg-gray-50 font-medium rounded-full transition-colors"
 					>
-						Cancel
+						Отмена
 					</button>
 					<button
 						type="submit"
 						class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1"
 					>
 						<Mail size={16} />
-						Send Message
+						Отправить сообщение
 					</button>
 				</div>
 			</form>

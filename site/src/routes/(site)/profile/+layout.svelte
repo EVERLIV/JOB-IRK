@@ -21,40 +21,40 @@
 
 	const tabs: Tab[] = [
 		{
-			name: 'Profile',
+			name: 'Профиль',
 			href: '/profile/',
 			icon: User,
-			description: 'Personal information'
+			description: 'Личные данные'
 		},
 		{
-			name: 'Education',
+			name: 'Образование',
 			href: '/profile/education/',
 			icon: GraduationCap,
-			description: 'Educational background'
+			description: 'Учебное прошлое'
 		},
 		{
-			name: 'Skills',
+			name: 'Навыки',
 			href: '/profile/skills/',
 			icon: Code,
-			description: 'Technical skills'
+			description: 'Технические навыки'
 		},
 		{
-			name: 'Employment',
+			name: 'Опыт работы',
 			href: '/profile/employment/',
 			icon: Briefcase,
-			description: 'Work history'
+			description: 'История работы'
 		},
 		{
-			name: 'Projects',
+			name: 'Проекты',
 			href: '/profile/projects/',
 			icon: FolderOpen,
-			description: 'Project portfolio'
+			description: 'Портфолио проектов'
 		},
 		{
-			name: 'Certifications',
+			name: 'Сертификаты',
 			href: '/profile/certifications/',
 			icon: Award,
-			description: 'Professional certifications'
+			description: 'Профессиональные сертификаты'
 		}
 	];
 
@@ -86,11 +86,11 @@
 		<nav class="mb-5" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-gray-400">
 				<li>
-					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Dashboard</a>
+					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Profile</span>
+					<span class="text-white font-medium">Профиль</span>
 				</li>
 			</ol>
 		</nav>
@@ -107,10 +107,10 @@
 					class="text-2xl lg:text-3xl font-semibold tracking-tight mb-1 animate-fade-in-up"
 					style="opacity: 0; animation-delay: 100ms; animation-fill-mode: forwards;"
 				>
-					My Profile
+					Мой профиль
 				</h1>
 				<p class="text-gray-400 animate-fade-in-up" style="opacity: 0; animation-delay: 150ms; animation-fill-mode: forwards;">
-					Manage your profile and professional information
+					Управление профилем и профессиональной информацией
 				</p>
 			</div>
 		</div>
@@ -122,7 +122,7 @@
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<!-- Mobile: Dropdown -->
 		<div class="block lg:hidden py-4">
-			<label for="profile-tab-select" class="sr-only">Select a tab</label>
+			<label for="profile-tab-select" class="sr-only">Выберите вкладку</label>
 			<select
 				id="profile-tab-select"
 				onchange={handleTabChange}
@@ -138,7 +138,7 @@
 		</div>
 
 		<!-- Desktop: Horizontal Tabs -->
-		<nav class="hidden lg:flex items-center gap-1 overflow-x-auto py-1" aria-label="Profile sections">
+		<nav class="hidden lg:flex items-center gap-1 overflow-x-auto py-1" aria-label="Разделы профиля">
 			{#each tabs as tab}
 				{@const active = isActive(tab.href)}
 				<a

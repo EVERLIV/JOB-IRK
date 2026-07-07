@@ -52,24 +52,24 @@
   const userTypes = [
     {
       id: 'jobseeker',
-      title: 'Job Seeker',
-      description: 'Looking for your next career opportunity',
+      title: 'Соискатель',
+      description: 'Ищете новые карьерные возможности',
       icon: UserCircle,
       benefits: [
-        { icon: Briefcase, text: 'Browse thousands of jobs' },
-        { icon: Target, text: 'Get personalized recommendations' },
-        { icon: TrendingUp, text: 'Track your applications' }
+        { icon: Briefcase, text: 'Тысячи вакансий' },
+        { icon: Target, text: 'Персональные рекомендации' },
+        { icon: TrendingUp, text: 'Отслеживание откликов' }
       ]
     },
     {
       id: 'recruiter',
-      title: 'Recruiter',
-      description: 'Hire top talent for your organization',
+      title: 'Рекрутер',
+      description: 'Нанимайте лучших специалистов',
       icon: Building2,
       benefits: [
-        { icon: Users, text: 'Access qualified candidates' },
-        { icon: Target, text: 'Post unlimited listings' },
-        { icon: TrendingUp, text: 'Build employer brand' }
+        { icon: Users, text: 'Доступ к кандидатам' },
+        { icon: Target, text: 'Неограниченные публикации' },
+        { icon: TrendingUp, text: 'Бренд работодателя' }
       ],
       externalUrl: `${RECRUITER_URL}/signup/`
     }
@@ -117,33 +117,33 @@
     let isValid = true;
 
     if (!fullName.trim()) {
-      errors.fullName = 'Full name is required';
+      errors.fullName = 'Укажите ФИО';
       isValid = false;
     }
 
     if (!email.trim()) {
-      errors.email = 'Email is required';
+      errors.email = 'Укажите email';
       isValid = false;
     } else if (!validateEmail(email)) {
-      errors.email = 'Please enter a valid email address';
+      errors.email = 'Введите корректный email';
       isValid = false;
     }
 
     if (!password) {
-      errors.password = 'Password is required';
+      errors.password = 'Укажите пароль';
       isValid = false;
     } else if (!validatePassword(password)) {
-      errors.password = 'Password must be at least 8 characters with uppercase, lowercase, and number';
+      errors.password = 'Минимум 8 символов: заглавная, строчная буква и цифра';
       isValid = false;
     }
 
     if (password !== confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
+      errors.confirmPassword = 'Пароли не совпадают';
       isValid = false;
     }
 
     if (!acceptTerms) {
-      errors.terms = 'You must accept the terms and conditions';
+      errors.terms = 'Необходимо принять условия';
       isValid = false;
     }
 
@@ -168,7 +168,7 @@
       window.location.href = `/auth/${provider}?userType=${userType}`;
     } catch (error) {
       console.error('OAuth error:', error);
-      errors.submit = 'OAuth login failed. Please try again.';
+      errors.submit = 'Ошибка входа через соцсеть. Попробуйте снова.';
       isLoading = false;
     }
   }
@@ -191,13 +191,13 @@
     3
   );
 
-  let passwordStrengthText = $derived(['', 'Weak', 'Fair', 'Strong'][passwordStrength]);
+  let passwordStrengthText = $derived(['', 'Слабый', 'Средний', 'Надёжный'][passwordStrength]);
   let passwordStrengthColor = $derived(['bg-border', 'bg-error', 'bg-warning', 'bg-success'][passwordStrength]);
 </script>
 
 <svelte:head>
-  <title>Sign Up - PeelJobs</title>
-  <meta name="description" content="Create your PeelJobs account and start your journey to finding the perfect job or hiring top talent." />
+  <title>Регистрация - PeelJobs</title>
+  <meta name="description" content="Создайте аккаунт на PeelJobs и начните поиск идеальной работы или найм лучших специалистов." />
 </svelte:head>
 
 <div class="min-h-screen flex">
@@ -220,10 +220,10 @@
 
       <!-- Main Heading -->
       <h1 class="text-3xl xl:text-4xl font-semibold text-white leading-tight mb-4">
-        Take the next step in your career journey
+        Сделайте следующий шаг в карьере
       </h1>
       <p class="text-lg text-gray-400 mb-12">
-        Join millions of professionals finding their dream jobs every day.
+        Присоединяйтесь к миллионам профессионалов, которые каждый день находят работу мечты.
       </p>
 
       <!-- Features -->
@@ -233,8 +233,8 @@
             <Briefcase class="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h3 class="text-white font-medium mb-1">50,000+ Active Jobs</h3>
-            <p class="text-gray-400 text-sm">New opportunities added every day from top companies</p>
+            <h3 class="text-white font-medium mb-1">50 000+ активных вакансий</h3>
+            <p class="text-gray-400 text-sm">Новые возможности каждый день от ведущих компаний</p>
           </div>
         </div>
 
@@ -243,8 +243,8 @@
             <Shield class="w-5 h-5 text-success" />
           </div>
           <div>
-            <h3 class="text-white font-medium mb-1">Verified Employers</h3>
-            <p class="text-gray-400 text-sm">All companies are verified for your safety</p>
+            <h3 class="text-white font-medium mb-1">Проверенные работодатели</h3>
+            <p class="text-gray-400 text-sm">Все компании проверены для вашей безопасности</p>
           </div>
         </div>
 
@@ -253,8 +253,8 @@
             <Zap class="w-5 h-5 text-warning" />
           </div>
           <div>
-            <h3 class="text-white font-medium mb-1">Quick Apply</h3>
-            <p class="text-gray-400 text-sm">Apply to jobs with just one click</p>
+            <h3 class="text-white font-medium mb-1">Быстрый отклик</h3>
+            <p class="text-gray-400 text-sm">Откликайтесь на вакансии в один клик</p>
           </div>
         </div>
       </div>
@@ -273,8 +273,8 @@
           <span class="text-lg font-semibold text-black">PeelJobs</span>
         </a>
         <div class="text-sm text-muted ml-auto">
-          Already have an account?{' '}
-          <a href="/login/" class="text-primary hover:text-primary-hover font-medium">Sign in</a>
+          Уже есть аккаунт?{' '}
+          <a href="/login/" class="text-primary hover:text-primary-hover font-medium">Войти</a>
         </div>
       </div>
     </header>
@@ -286,10 +286,10 @@
           <div class="animate-fade-in-up" style="opacity: 0; animation-fill-mode: forwards;">
             <div class="text-center mb-10">
               <h1 class="text-2xl font-semibold text-black mb-2">
-                Join PeelJobs Today
+                Присоединяйтесь к PeelJobs
               </h1>
               <p class="text-muted">
-                Choose how you'd like to get started
+                Выберите, как вы хотите начать
               </p>
             </div>
 
@@ -337,15 +337,15 @@
               <div class="flex items-center justify-center gap-6 text-xs text-muted">
                 <div class="flex items-center gap-1.5">
                   <Check class="w-4 h-4 text-success" />
-                  <span>Free to use</span>
+                  <span>Бесплатно</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                   <Shield class="w-4 h-4 text-primary" />
-                  <span>Secure & private</span>
+                  <span>Безопасно и конфиденциально</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                   <Users class="w-4 h-4 text-muted" />
-                  <span>1M+ users</span>
+                  <span>1M+ пользователей</span>
                 </div>
               </div>
             </div>
@@ -362,7 +362,7 @@
                 class="inline-flex items-center gap-2 text-sm text-muted hover:text-primary font-medium mb-6 transition-colors"
               >
                 <ArrowLeft class="w-4 h-4" />
-                Change account type
+                Изменить тип аккаунта
               </button>
 
               <div class="flex items-center gap-4">
@@ -371,10 +371,10 @@
                 </div>
                 <div>
                   <h2 class="text-2xl font-semibold text-black">
-                    Create Account
+                    Создать аккаунт
                   </h2>
                   <p class="text-sm text-muted">
-                    Start your job search today
+                    Начните поиск работы сегодня
                   </p>
                 </div>
               </div>
@@ -394,7 +394,7 @@
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
-                <span>Continue with Google</span>
+                <span>Продолжить через Google</span>
               </button>
             </div>
 
@@ -403,7 +403,7 @@
                 <div class="w-full border-t border-border"></div>
               </div>
               <div class="relative flex justify-center">
-                <span class="px-4 bg-white text-sm text-muted">Or register with email</span>
+                <span class="px-4 bg-white text-sm text-muted">Или зарегистрируйтесь по email</span>
               </div>
             </div>
 
@@ -435,7 +435,7 @@
               <!-- Full Name -->
               <div>
                 <label for="fullName" class="block text-sm font-medium text-black mb-2">
-                  Full Name
+                  ФИО
                 </label>
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -445,7 +445,7 @@
                     id="fullName"
                     type="text"
                     bind:value={fullName}
-                    placeholder="John Doe"
+                    placeholder="Иван Иванов"
                     class="w-full h-12 pl-10 pr-4 border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.fullName ? 'border-error' : 'border-border'}"
                   />
                 </div>
@@ -457,7 +457,7 @@
               <!-- Email -->
               <div>
                 <label for="email" class="block text-sm font-medium text-black mb-2">
-                  Email Address
+                  Электронная почта
                 </label>
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -479,7 +479,7 @@
               <!-- Password -->
               <div>
                 <label for="password" class="block text-sm font-medium text-black mb-2">
-                  Password
+                  Пароль
                 </label>
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -489,7 +489,7 @@
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     bind:value={password}
-                    placeholder="Create a strong password"
+                    placeholder="Придумайте надёжный пароль"
                     class="w-full h-12 pl-10 pr-12 border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.password ? 'border-error' : 'border-border'}"
                   />
                   <button
@@ -508,7 +508,7 @@
                 {#if password.length > 0}
                   <div class="mt-3">
                     <div class="flex items-center justify-between mb-1.5">
-                      <span class="text-xs text-muted">Password strength</span>
+                      <span class="text-xs text-muted">Надёжность пароля</span>
                       <span class="text-xs font-medium {passwordStrength === 1 ? 'text-error' : passwordStrength === 2 ? 'text-warning' : passwordStrength === 3 ? 'text-success' : 'text-muted'}">
                         {passwordStrengthText}
                       </span>
@@ -525,7 +525,7 @@
                   <p class="mt-1.5 text-sm text-error">{errors.password}</p>
                 {:else}
                   <p class="mt-1.5 text-xs text-muted">
-                    At least 8 characters with uppercase, lowercase, and number
+                    Минимум 8 символов: заглавная, строчная буква и цифра
                   </p>
                 {/if}
               </div>
@@ -533,7 +533,7 @@
               <!-- Confirm Password -->
               <div>
                 <label for="confirmPassword" class="block text-sm font-medium text-black mb-2">
-                  Confirm Password
+                  Подтвердите пароль
                 </label>
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -543,7 +543,7 @@
                     id="confirmPassword"
                     type={showConfirmPassword ? 'text' : 'password'}
                     bind:value={confirmPassword}
-                    placeholder="Confirm your password"
+                    placeholder="Повторите пароль"
                     class="w-full h-12 pl-10 pr-12 border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.confirmPassword ? 'border-error' : 'border-border'}"
                   />
                   <button
@@ -572,10 +572,10 @@
                     class="mt-0.5 w-4 h-4 text-primary border-border rounded focus:ring-primary"
                   />
                   <span class="text-sm text-muted">
-                    I agree to the{' '}
-                    <a href="/terms/" target="_blank" class="text-primary hover:text-primary-hover font-medium">Terms of Service</a>
-                    {' '}and{' '}
-                    <a href="/privacy/" target="_blank" class="text-primary hover:text-primary-hover font-medium">Privacy Policy</a>
+                    Я принимаю{' '}
+                    <a href="/terms/" target="_blank" class="text-primary hover:text-primary-hover font-medium">Условия использования</a>
+                    {' '}и{' '}
+                    <a href="/privacy/" target="_blank" class="text-primary hover:text-primary-hover font-medium">Политику конфиденциальности</a>
                   </span>
                 </label>
                 {#if errors.terms}
@@ -601,9 +601,9 @@
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Creating Account...
+                  Создание аккаунта...
                 {:else}
-                  Create Account
+                  Создать аккаунт
                 {/if}
               </button>
             </form>
@@ -611,8 +611,8 @@
             <!-- Sign In Link -->
             <div class="mt-6 text-center">
               <p class="text-sm text-muted">
-                Already have an account?{' '}
-                <a href="/login/" class="text-primary hover:text-primary-hover font-medium">Sign in</a>
+                Уже есть аккаунт?{' '}
+                <a href="/login/" class="text-primary hover:text-primary-hover font-medium">Войти</a>
               </p>
             </div>
           </div>

@@ -65,7 +65,7 @@
 			<button
 				onclick={() => toast.dismiss(toastItem.id)}
 				class="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
-				aria-label="Dismiss"
+				aria-label="Закрыть"
 			>
 				<X class="w-4 h-4" />
 			</button>

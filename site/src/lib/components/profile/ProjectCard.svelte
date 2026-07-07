@@ -36,11 +36,11 @@
 		const remainingMonths = months % 12;
 
 		if (years > 0 && remainingMonths > 0) {
-			return `${years} year${years > 1 ? 's' : ''} ${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+			return `${years} г. ${remainingMonths} мес.`;
 		} else if (years > 0) {
-			return `${years} year${years > 1 ? 's' : ''}`;
+			return `${years} г.`;
 		} else if (months > 0) {
-			return `${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+			return `${remainingMonths} мес.`;
 		}
 		return null;
 	}
@@ -82,7 +82,7 @@
 					{#if project.size}
 						<div class="flex items-center gap-1.5 text-gray-600">
 							<Users size={14} class="text-gray-400" />
-							<span>Team of {project.size}</span>
+							<span>Команда из {project.size} человек</span>
 						</div>
 					{/if}
 				</div>
@@ -95,7 +95,7 @@
 							<span>
 								{formatDate(project.from_date)} - {project.to_date
 									? formatDate(project.to_date)
-									: 'Present'}
+									: 'Настоящее время'}
 							</span>
 						</div>
 						{#if calculateDuration()}
@@ -134,7 +134,7 @@
 				type="button"
 				onclick={() => onEdit(project)}
 				class="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors"
-				aria-label="Edit project"
+				aria-label="Редактировать проект"
 			>
 				<Pencil size={16} />
 			</button>
@@ -142,7 +142,7 @@
 				type="button"
 				onclick={() => onDelete(project.id)}
 				class="p-2 text-gray-400 hover:text-error-600 hover:bg-error-50 rounded-xl transition-colors"
-				aria-label="Delete project"
+				aria-label="Удалить проект"
 			>
 				<Trash2 size={16} />
 			</button>

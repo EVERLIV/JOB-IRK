@@ -10,18 +10,18 @@
 	}
 
 	const sections: Section[] = [
-		{ id: 'introduction', title: 'Introduction', icon: Shield },
-		{ id: 'cookies', title: 'Cookies and Tracking', icon: Cookie },
-		{ id: 'third-party', title: 'Third Party Services', icon: Globe },
-		{ id: 'consent', title: 'Your Consent', icon: UserCheck },
-		{ id: 'security', title: 'Information Security', icon: Lock },
-		{ id: 'updating', title: 'Updating Information', icon: Database },
-		{ id: 'children', title: 'Children', icon: Users },
-		{ id: 'sharing', title: 'Information Sharing', icon: Eye },
-		{ id: 'confidentiality', title: 'Confidentiality', icon: Shield },
-		{ id: 'changes', title: 'Policy Changes', icon: Bell },
-		{ id: 'disclaimer', title: 'Disclaimer', icon: AlertTriangle },
-		{ id: 'contact', title: 'Contact Information', icon: MessageCircle }
+		{ id: 'introduction', title: 'Введение', icon: Shield },
+		{ id: 'cookies', title: 'Куки и отслеживание', icon: Cookie },
+		{ id: 'third-party', title: 'Сторонние сервисы', icon: Globe },
+		{ id: 'consent', title: 'Ваше согласие', icon: UserCheck },
+		{ id: 'security', title: 'Информационная безопасность', icon: Lock },
+		{ id: 'updating', title: 'Обновление информации', icon: Database },
+		{ id: 'children', title: 'Дети', icon: Users },
+		{ id: 'sharing', title: 'Передача информации', icon: Eye },
+		{ id: 'confidentiality', title: 'Конфиденциальность', icon: Shield },
+		{ id: 'changes', title: 'Изменения политики', icon: Bell },
+		{ id: 'disclaimer', title: 'Отказ от ответственности', icon: AlertTriangle },
+		{ id: 'contact', title: 'Контактная информация', icon: MessageCircle }
 	];
 
 	function scrollToSection(id: string): void {
@@ -33,23 +33,23 @@
 </script>
 
 <svelte:head>
-	<title>Privacy Policy - PeelJobs | How We Protect Your Data</title>
+	<title>Политика конфиденциальности - PeelJobs | Как мы защищаем ваши данные</title>
 	<meta
 		name="description"
-		content="PeelJobs privacy policy explains how we collect, use, and protect your personal information. Learn about our commitment to data security, cookies, third-party services, and your privacy rights."
+		content="Политика конфиденциальности PeelJobs объясняет, как мы собираем, используем и защищаем вашу личную информацию. Узнайте о нашей приверженности безопасности данных, куки, сторонних сервисах и ваших правах на конфиденциальность."
 	/>
 	<link rel="canonical" href="https://peeljobs.com/privacy/" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Privacy Policy - PeelJobs" />
-	<meta property="og:description" content="Learn how PeelJobs protects your privacy and personal information." />
+	<meta property="og:title" content="Политика конфиденциальности - PeelJobs" />
+	<meta property="og:description" content="Узнайте, как PeelJobs защищает вашу конфиденциальность и личную информацию." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://peeljobs.com/privacy/" />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Privacy Policy - PeelJobs" />
-	<meta name="twitter:description" content="Our commitment to protecting your privacy and data." />
+	<meta name="twitter:title" content="Политика конфиденциальности - PeelJobs" />
+	<meta name="twitter:description" content="Наша приверженность защите вашей конфиденциальности и данных." />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -65,11 +65,11 @@
 		<nav class="mb-8" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/" class="hover:text-white transition-colors">Home</a>
+					<a href="/" class="hover:text-white transition-colors">Главная</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Privacy Policy</span>
+					<span class="text-white font-medium">Политика конфиденциальности</span>
 				</li>
 			</ol>
 		</nav>
@@ -79,12 +79,12 @@
 				<Shield size={40} class="text-primary" />
 			</div>
 			<h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms;">
-				Privacy Policy
+				Политика конфиденциальности
 			</h1>
 			<p class="text-lg md:text-xl text-gray-300 mb-4 animate-fade-in-up" style="opacity: 0; animation-delay: 200ms;">
-				Your privacy is important to us. Learn how we collect, use, and protect your personal information.
+				Ваша конфиденциальность важна для нас. Узнайте, как мы собираем, используем и защищаем вашу личную информацию.
 			</p>
-			<p class="text-sm text-muted animate-fade-in-up" style="opacity: 0; animation-delay: 300ms;">Last Updated: {lastUpdated}</p>
+			<p class="text-sm text-muted animate-fade-in-up" style="opacity: 0; animation-delay: 300ms;">Обновлено: {lastUpdated}</p>
 		</div>
 	</div>
 </section>
@@ -99,23 +99,23 @@
 						<Shield size={24} class="text-primary" />
 					</div>
 					<div>
-						<h2 class="text-xl font-semibold text-black mb-3">Privacy at a Glance</h2>
+						<h2 class="text-xl font-semibold text-black mb-3">Конфиденциальность вкратце</h2>
 						<ul class="space-y-2 text-muted">
 							<li class="flex items-center gap-2">
 								<Lock size={16} class="text-primary flex-shrink-0" />
-								We use industry-standard encryption to protect your data
+								Мы используем шифрование по отраслевым стандартам для защиты ваших данных
 							</li>
 							<li class="flex items-center gap-2">
 								<Eye size={16} class="text-primary flex-shrink-0" />
-								We don't sell your personal information to third parties
+								Мы не продаём вашу личную информацию третьим лицам
 							</li>
 							<li class="flex items-center gap-2">
 								<UserCheck size={16} class="text-primary flex-shrink-0" />
-								You control what information is visible on your profile
+								Вы контролируете, какая информация видна в вашем профиле
 							</li>
 							<li class="flex items-center gap-2">
 								<Database size={16} class="text-primary flex-shrink-0" />
-								You can request deletion of your data at any time
+								Вы можете запросить удаление ваших данных в любое время
 							</li>
 						</ul>
 					</div>
@@ -132,7 +132,7 @@
 			<!-- Sticky Sidebar -->
 			<div class="lg:col-span-1 hidden lg:block">
 				<div class="bg-surface rounded-lg p-6 border border-border sticky top-6">
-					<h2 class="text-lg font-semibold text-black mb-5">Table of Contents</h2>
+					<h2 class="text-lg font-semibold text-black mb-5">Содержание</h2>
 					<nav class="space-y-1">
 						{#each sections as section}
 							<button
@@ -156,20 +156,20 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Shield size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">1. Introduction</h2>
+							<h2 class="text-2xl font-semibold text-black">1. Введение</h2>
 						</div>
 						<div class="space-y-4 text-muted leading-relaxed">
 							<p>
-								At PeelJobs, we are committed to respecting your online privacy and recognize your need
-								for appropriate protection and management of any personally identifiable information
-								("Personal Information") you share with us.
+								В PeelJobs мы стремимся уважать вашу конфиденциальность в интернете и признаём вашу потребность
+								в надлежащей защите и управлении любой лично идентифицирующей информацией
+								(«Личная информация»), которой вы делитесь с нами.
 							</p>
 							<p>
-								"Personal Information" means any information that may be used to identify an individual,
-								including, but not limited to, a first and last name, a home or other physical address
-								and an email address or other contact information, whether at work or at home. In
-								general, you can visit PeelJobs without telling us who you are or revealing any Personal
-								Information about yourself.
+								«Личная информация» означает любую информацию, которая может быть использована для идентификации
+								лица, включая, помимо прочего, имя и фамилию, домашний или иной физический адрес
+								и адрес электронной почты или иную контактную информацию, как на работе, так и дома. Как правило,
+								вы можете посещать PeelJobs, не сообщая нам, кто вы, и не раскрывая никакой Личной
+								информации о себе.
 							</p>
 						</div>
 					</article>
@@ -180,29 +180,29 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Cookie size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">2. Cookies and Tracking Technologies</h2>
+							<h2 class="text-2xl font-semibold text-black">2. Куки и технологии отслеживания</h2>
 						</div>
 						<div class="bg-surface rounded-lg p-6 border border-border">
 							<div class="space-y-4 text-muted leading-relaxed">
 								<p>
-									Some of our web pages utilize "cookies" and other tracking technologies. A
-									"cookie" is a small text file that may be used, for example, to collect
-									information about website activity. Some cookies and other technologies may serve
-									to recall Personal Information previously indicated by a web user.
+									Некоторые из наших веб-страниц используют «куки» и другие технологии отслеживания. «Куки» — это
+									небольшой текстовый файл, который может использоваться, например, для сбора
+									информации о активности на сайте. Некоторые куки и другие технологии могут служить
+									для сохранения Личной информации, ранее указанной пользователем.
 								</p>
 								<p>
-									Most browsers allow you to control cookies, including whether or not to accept
-									them and how to remove them. You may set most browsers to notify you if you
-									receive a cookie, or you may choose to block cookies with your browser, but please
-									note that if you choose to erase or block your cookies, you will need to re-enter
-									your original user ID and password to gain access to certain parts of the website.
+									Большинство браузеров позволяют управлять куки, в том числе принимать их или нет
+									и как их удалять. Вы можете настроить большинство браузеров на уведомление при
+									получении куки или заблокировать куки в браузере, но обратите внимание,
+									что если вы решите удалить или заблокировать куки, вам потребуется заново ввести
+									исходный идентификатор пользователя и пароль для доступа к определённым частям сайта.
 								</p>
 								<p>
-									Tracking technologies may record information such as Internet domain and host
-									names; Internet protocol (IP) addresses; browser software and operating system
-									types; clickstream patterns; and dates and times that our site is accessed. Our
-									use of cookies and other tracking technologies allows us to improve our website
-									and your web experience.
+									Технологии отслеживания могут записывать такую информацию, как интернет-домены и имена
+									хостов; интернет-протокол (IP) адреса; программное обеспечение браузера и тип
+									операционной системы; паттерны кликов; даты и время доступа к нашему сайту. Наше
+									использование куки и других технологий отслеживания позволяет нам улучшить наш сайт
+									и ваш опыт взаимодействия с ним.
 								</p>
 							</div>
 						</div>
@@ -214,21 +214,20 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Globe size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">3. Third Party Services</h2>
+							<h2 class="text-2xl font-semibold text-black">3. Сторонние сервисы</h2>
 						</div>
 						<div class="space-y-4 text-muted leading-relaxed">
 							<p>
-								Third parties provide certain services available on PeelJobs. We may provide
-								information, including Personal Information, that we collect to third-party service
-								providers to help us deliver programs, products, information, and services. Service
-								providers are also an important means by which we maintain our website and mailing
-								lists.
+								Третьи лица предоставляют определённые сервисы, доступные на PeelJobs. Мы можем предоставлять
+								информацию, включая Личную информацию, которую мы собираем, сторонним поставщикам
+								услуг, чтобы помочь нам в реализации программ, продуктов, информации и сервисов. Поставщики
+								услуг также являются важным средством поддержки нашего сайта и списков рассылки.
 							</p>
 							<p>
-								We will take reasonable steps to ensure that these third-party service providers are
-								obligated to protect Personal Information on our behalf. We do not intend to transfer
-								Personal Information without your consent to third parties who are not bound to act on
-								our behalf unless such transfer is legally required.
+								Мы предпримем разумные шаги для обеспечения того, чтобы эти сторонние поставщики услуг
+								были обязаны защищать Личную информацию от нашего имени. Мы не намерены передавать
+								Личную информацию без вашего согласия третьим лицам, не связанным обязательствами
+								действовать от нашего имени, если только такая передача не требуется по закону.
 							</p>
 						</div>
 					</article>
@@ -239,13 +238,13 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<UserCheck size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">4. Your Consent</h2>
+							<h2 class="text-2xl font-semibold text-black">4. Ваше согласие</h2>
 						</div>
 						<div class="bg-primary/10 rounded-lg p-6 border border-primary/20">
 							<p class="text-muted leading-relaxed">
-								By using this website, you consent to the terms of our Privacy Policy and to our
-								processing of Personal Information for the purposes given above as well as those
-								explained where we collect Personal Information on the web.
+								Используя этот сайт, вы соглашаетесь с условиями нашей Политики конфиденциальности и с нашей
+								обработкой Личной информации в целях, указанных выше, а также в тех, которые
+								разъясняются в местах сбора Личной информации на сайте.
 							</p>
 						</div>
 					</article>
@@ -256,19 +255,19 @@
 							<div class="w-12 h-12 bg-success-light rounded-xl flex items-center justify-center">
 								<Lock size={24} class="text-success" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">5. Information Security</h2>
+							<h2 class="text-2xl font-semibold text-black">5. Информационная безопасность</h2>
 						</div>
 						<div class="bg-success-light rounded-lg p-6 border border-success/20">
 							<ul class="space-y-4 text-muted">
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-success rounded-full mt-2 flex-shrink-0"></div>
-									<span>We take appropriate security measures to protect against unauthorized access to or
-									unauthorized alteration, disclosure or destruction of data.</span>
+									<span>Мы принимаем соответствующие меры безопасности для защиты от несанкционированного доступа или
+									несанкционированного изменения, раскрытия или уничтожения данных.</span>
 								</li>
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-success rounded-full mt-2 flex-shrink-0"></div>
-									<span>We restrict access to your personally identifying information to employees who need
-									to know that information in order to operate, develop or improve our services.</span>
+									<span>Мы ограничиваем доступ к вашей лично идентифицирующей информации для сотрудников, которым
+									необходимо знать эту информацию для работы, развития или улучшения наших сервисов.</span>
 								</li>
 							</ul>
 						</div>
@@ -280,12 +279,12 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Database size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">6. Updating Your Information</h2>
+							<h2 class="text-2xl font-semibold text-black">6. Обновление вашей информации</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							We provide mechanisms for updating and correcting your personally identifying
-							information for many of our services. For more information, please see the help
-							documentation for each service.
+							Мы предоставляем механизмы для обновления и исправления вашей лично идентифицирующей
+							информации для многих наших сервисов. Для получения дополнительной информации, пожалуйста,
+							обратитесь к справочной документации для каждого сервиса.
 						</p>
 					</article>
 
@@ -295,11 +294,11 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Users size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">7. Children</h2>
+							<h2 class="text-2xl font-semibold text-black">7. Дети</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							PeelJobs will not contact children under age 13 about special offers or for marketing
-							purposes without a parent's permission.
+							PeelJobs не будет связываться с детьми до 13 лет по поводу специальных предложений или
+							в маркетинговых целях без разрешения родителя.
 						</p>
 					</article>
 
@@ -309,44 +308,44 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Eye size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">8. Information Sharing and Disclosure</h2>
+							<h2 class="text-2xl font-semibold text-black">8. Передача и раскрытие информации</h2>
 						</div>
 						<div class="bg-surface rounded-lg p-6 border border-border mb-6">
 							<p class="font-semibold text-black mb-4">
-								PeelJobs does not rent, sell, or share personal information about you with other
-								people (save with your consent) or non-affiliated companies except to provide products
-								or services you've requested, when we have your permission, or under the following
-								circumstances:
+								PeelJobs не сдаёт в аренду, не продаёт и не передаёт личную информацию о вас другим
+								людям (за исключением случаев с вашего согласия) или неаффилированным компаниям, кроме как для предоставления
+								продуктов или услуг, которые вы запрашивали, когда у нас есть ваше разрешение, или при следующих
+								обстоятельствах:
 							</p>
 							<ol class="space-y-3 text-muted list-decimal list-inside">
 								<li>
-									We provide the information to trusted partners who work on behalf of or with
-									PeelJobs under confidentiality agreements.
+									Мы предоставляем информацию доверенным партнёрам, которые работают от имени или совместно с
+									PeelJobs в рамках соглашений о конфиденциальности.
 								</li>
 								<li>
-									We respond to subpoenas, court orders, or legal process, or to establish or
-									exercise our legal rights or defend against legal claims.
+									Мы отвечаем на повестки, судебные приказы или правовые процедуры, а также для установления или
+									осуществления наших законных прав или защиты от юридических претензий.
 								</li>
 								<li>
-									We believe it is necessary to share information in order to investigate, prevent, or
-									take action regarding illegal activities, suspected fraud, or violations of our terms
-									of use.
+									Мы считаем необходимым поделиться информацией для расследования, предотвращения или
+									принятия мер в отношении незаконной деятельности, предполагаемого мошенничества или нарушений наших условий
+									использования.
 								</li>
 								<li>
-									We transfer information about you if PeelJobs is acquired by or merged with another
-									company.
+									Мы передаём информацию о вас, если PeelJobs приобретается или сливается с другой
+									компанией.
 								</li>
 							</ol>
 						</div>
 						<ul class="space-y-3 text-muted">
 							<li class="flex items-start gap-3">
 								<div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-								<span>PeelJobs does not provide any personal information to advertisers when you interact
-								with or view a targeted ad.</span>
+								<span>PeelJobs не предоставляет никакой личной информации рекламодателям, когда вы взаимодействуете
+								с целевой рекламой или просматриваете её.</span>
 							</li>
 							<li class="flex items-start gap-3">
 								<div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-								<span>Our advertisers include financial service providers and non-financial companies.</span>
+								<span>Наши рекламодатели включают поставщиков финансовых услуг и нефинансовые компании.</span>
 							</li>
 						</ul>
 					</article>
@@ -357,18 +356,18 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Shield size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">9. Confidentiality and Security</h2>
+							<h2 class="text-2xl font-semibold text-black">9. Конфиденциальность и безопасность</h2>
 						</div>
 						<ul class="space-y-3 text-muted leading-relaxed">
 							<li class="flex items-start gap-3">
 								<div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-								<span>We limit access to personal information about you to employees who we believe reasonably
-								need to come into contact with that information.</span>
+								<span>Мы ограничиваем доступ к личной информации о вас для сотрудников, которые, по нашему разумному
+								убеждению, должны иметь контакт с этой информацией.</span>
 							</li>
 							<li class="flex items-start gap-3">
 								<div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-								<span>We have physical, electronic, and procedural safeguards that comply with Indian laws to
-								protect personal information about you.</span>
+								<span>Мы имеем физические, электронные и процедурные меры защиты, соответствующие индийским законам,
+								для защиты личной информации о вас.</span>
 							</li>
 						</ul>
 					</article>
@@ -379,12 +378,12 @@
 							<div class="w-12 h-12 bg-warning-light rounded-xl flex items-center justify-center">
 								<Bell size={24} class="text-warning" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">10. Changes to This Privacy Policy</h2>
+							<h2 class="text-2xl font-semibold text-black">10. Изменения в данной Политике конфиденциальности</h2>
 						</div>
 						<div class="bg-warning-light rounded-lg p-6 border border-warning/20">
 							<p class="text-muted leading-relaxed">
-								PeelJobs reserves the right to update, change or modify this policy at any time. The
-								policy shall come into effect from the date of such update, change or modification.
+								PeelJobs оставляет за собой право обновлять, изменять или модифицировать данную политику в любое время.
+								Политика вступает в силу с даты такого обновления, изменения или модификации.
 							</p>
 						</div>
 					</article>
@@ -395,19 +394,19 @@
 							<div class="w-12 h-12 bg-error-light rounded-xl flex items-center justify-center">
 								<AlertTriangle size={24} class="text-error" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">11. Disclaimer</h2>
+							<h2 class="text-2xl font-semibold text-black">11. Отказ от ответственности</h2>
 						</div>
 						<div class="bg-error-light rounded-lg p-6 border border-error/20">
 							<div class="space-y-4 text-muted leading-relaxed">
 								<p>
-									PeelJobs does not store or keep credit card data in a location that is accessible via
-									the Internet. Once a credit card transaction has been completed, all credit card data
-									is moved offline to ensure maximum security.
+									PeelJobs не хранит данные кредитных карт в месте, доступном через
+									Интернет. После завершения транзакции по кредитной карте все данные
+									кредитной карты перемещаются в офлайн для обеспечения максимальной безопасности.
 								</p>
 								<p class="font-semibold text-black">
-									PeelJobs shall not be liable for any loss or damage sustained by reason of any
-									disclosure of any information concerning the user's account and/or information
-									relating to online transactions using credit cards/debit cards.
+									PeelJobs не несёт ответственности за любые убытки или ущерб, причинённые в результате
+									раскрытия любой информации о счёте пользователя и/или информации,
+									относящейся к онлайн-транзакциям с использованием кредитных/дебетовых карт.
 								</p>
 							</div>
 						</div>
@@ -419,35 +418,35 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<MessageCircle size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">12. Contact Information</h2>
+							<h2 class="text-2xl font-semibold text-black">12. Контактная информация</h2>
 						</div>
 						<div class="bg-surface rounded-lg p-6 border border-border">
 							<p class="text-muted leading-relaxed mb-4">
-								PeelJobs welcomes your comments regarding this privacy statement. Should there be any
-								concerns about contravention of this Privacy Policy, we will employ all commercially
-								reasonable efforts to address the same.
+								PeelJobs приветствует ваши комментарии относительно данного заявления о конфиденциальности. Если у вас
+								возникнут опасения по поводу нарушения данной Политики конфиденциальности, мы приложим все коммерчески
+								разумные усилия для их устранения.
 							</p>
 							<a
 								href="/contact/"
 								class="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-medium"
 							>
-								Contact Us
+								Связаться с нами
 								<ArrowRight size={16} />
 							</a>
 							<p class="text-sm text-muted mt-4">
-								<strong>Note:</strong> The terms in this agreement may be changed by PeelJobs at any time.
-								PeelJobs is free to offer its services to any client/prospective client without restriction.
+								<strong>Примечание:</strong> Условия данного соглашения могут быть изменены PeelJobs в любое время.
+								PeelJobs вправе предлагать свои услуги любому клиенту/потенциальному клиенту без ограничений.
 							</p>
 						</div>
 					</article>
 
 					<!-- Acknowledgment -->
 					<div class="bg-primary/10 rounded-lg p-6 mt-10 border border-primary/20">
-						<h3 class="font-semibold text-primary mb-2">Your Consent</h3>
+						<h3 class="font-semibold text-primary mb-2">Ваше согласие</h3>
 						<p class="text-primary/80">
-							By using PeelJobs, you acknowledge that you have read and understood this Privacy Policy
-							and consent to the collection, use, and disclosure of your information as described
-							herein.
+							Используя PeelJobs, вы подтверждаете, что прочитали и поняли данную Политику конфиденциальности
+							и соглашаетесь на сбор, использование и раскрытие вашей информации, как описано
+							здесь.
 						</p>
 					</div>
 				</div>
@@ -460,15 +459,15 @@
 <section class="py-12 lg:py-16 bg-[#1D2226] text-white">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 text-center">
 		<div class="max-w-2xl mx-auto">
-			<h2 class="text-2xl font-semibold tracking-tight mb-4">Have Questions About Your Privacy?</h2>
+			<h2 class="text-2xl font-semibold tracking-tight mb-4">Есть вопросы о вашей конфиденциальности?</h2>
 			<p class="text-gray-300 mb-8">
-				We're here to help. Reach out to our team for any privacy-related questions or concerns.
+				Мы здесь, чтобы помочь. Обратитесь к нашей команде с любыми вопросами или опасениями, связанными с конфиденциальностью.
 			</p>
 			<a
 				href="/contact/"
 				class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm"
 			>
-				Contact Support
+				Связаться с поддержкой
 				<ArrowRight size={18} />
 			</a>
 		</div>

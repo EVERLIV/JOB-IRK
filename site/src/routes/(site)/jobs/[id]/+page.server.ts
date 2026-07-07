@@ -26,7 +26,7 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
 
     if (!jobResponse.ok) {
       throw error(jobResponse.status === 404 ? 404 : 500, {
-        message: jobResponse.status === 404 ? 'Job not found' : 'Failed to load job details',
+        message: jobResponse.status === 404 ? 'Вакансия не найдена' : 'Не удалось загрузить информацию о вакансии',
       });
     }
 
@@ -48,7 +48,7 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     }
 
     throw error(500, {
-      message: 'Failed to load job details',
+      message: 'Не удалось загрузить информацию о вакансии',
     });
   }
 };

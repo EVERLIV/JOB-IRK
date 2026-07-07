@@ -30,13 +30,13 @@
 	let expandedFaqId = $state<number | null>(null);
 
 	const categories: Category[] = [
-		{ id: 'all', name: 'All Topics', icon: HelpCircle },
-		{ id: 'getting_started', name: 'Getting Started', icon: Book },
-		{ id: 'account', name: 'Account & Profile', icon: UserCircle },
-		{ id: 'job_search', name: 'Job Search', icon: Search },
-		{ id: 'applications', name: 'Applications', icon: Briefcase },
-		{ id: 'privacy', name: 'Privacy & Security', icon: Shield },
-		{ id: 'technical', name: 'Technical Issues', icon: Settings }
+		{ id: 'all', name: 'Все темы', icon: HelpCircle },
+		{ id: 'getting_started', name: 'Начало работы', icon: Book },
+		{ id: 'account', name: 'Аккаунт и профиль', icon: UserCircle },
+		{ id: 'job_search', name: 'Поиск вакансий', icon: Search },
+		{ id: 'applications', name: 'Отклики', icon: Briefcase },
+		{ id: 'privacy', name: 'Приватность и безопасность', icon: Shield },
+		{ id: 'technical', name: 'Технические проблемы', icon: Settings }
 	];
 
 	const faqs: FaqItem[] = [
@@ -44,159 +44,159 @@
 		{
 			id: 1,
 			category: 'getting_started',
-			question: 'How do I create an account on PeelJobs?',
-			answer: "To create an account, click on \"Register\" in the top right corner of the homepage. You can sign up using your email address or use Google/Facebook OAuth for quick registration. Fill in your basic details, verify your email, and you're ready to start your job search!"
+			question: 'Как создать аккаунт на PeelJobs?',
+			answer: 'Чтобы создать аккаунт, нажмите «Регистрация» в правом верхнем углу главной страницы. Вы можете зарегистрироваться используя свой email или Google/Facebook для быстрой регистрации. Заполните основные данные, подтвердите свой email, и вы готовы начать поиск вакансий!'
 		},
 		{
 			id: 2,
 			category: 'getting_started',
-			question: 'Is PeelJobs free to use for job seekers?',
-			answer: 'Yes! PeelJobs is completely free for job seekers. You can create an account, search for jobs, apply to unlimited positions, and use all our features without any charges.'
+			question: 'Бесплатно ли PeelJobs для соискателей?',
+			answer: 'Да! PeelJobs полностью бесплатен для соискателей. Вы можете создать аккаунт, искать вакансии, откликаться на неограниченное количество позиций и использовать все наши функции без каких-либо платежей.'
 		},
 		{
 			id: 3,
 			category: 'getting_started',
-			question: 'What are the benefits of creating a profile?',
-			answer: 'Creating a profile allows you to save jobs, apply quickly with your saved resume, track application status, receive personalized job recommendations, and get notified when new jobs matching your preferences are posted.'
+			question: 'Какие преимущества даёт создание профиля?',
+			answer: 'Создание профиля позволяет вам сохранять вакансии, быстро откликаться с сохранённым резюме, отслеживать статус откликов, получать персонализированные рекомендации вакансий и уведомления о новых вакансиях, соответствующих вашим предпочтениям.'
 		},
 
 		// Account & Profile
 		{
 			id: 4,
 			category: 'account',
-			question: 'How do I update my profile information?',
-			answer: 'Navigate to your profile by clicking on your name in the top right corner, then select "Profile". You can edit your personal information, add work experience, education, skills, and upload your resume. Make sure to save your changes!'
+			question: 'Как обновить информацию в профиле?',
+			answer: 'Перейдите в свой профиль, нажав на своё имя в правом верхнем углу, затем выберите «Профиль». Вы можете изменить личную информацию, добавить опыт работы, образование, навыки и загрузить резюме. Обязательно сохраните изменения!'
 		},
 		{
 			id: 5,
 			category: 'account',
-			question: 'How do I change my password?',
-			answer: 'Go to Settings > Password from your account menu. Enter your current password, then your new password twice to confirm. Your password must be at least 8 characters and include uppercase, lowercase, and numbers.'
+			question: 'Как изменить пароль?',
+			answer: 'Перейдите в Настройки > Пароль из меню аккаунта. Введите текущий пароль, затем новый пароль дважды для подтверждения. Пароль должен содержать не менее 8 символов и включать заглавные и строчные буквы, а также цифры.'
 		},
 		{
 			id: 6,
 			category: 'account',
-			question: 'Can I delete my account?',
-			answer: 'Yes, you can delete your account by going to Settings > Privacy and scrolling to the bottom. Please note that account deletion is permanent and all your data, applications, and saved jobs will be permanently removed.'
+			question: 'Можно ли удалить аккаунт?',
+			answer: 'Да, вы можете удалить аккаунт, перейдя в Настройки > Приватность и прокрутив вниз. Обратите внимание, что удаление аккаунта необратимо, и все ваши данные, отклики и сохранённые вакансии будут удалены навсегда.'
 		},
 		{
 			id: 7,
 			category: 'account',
-			question: 'How do I upload or update my resume?',
-			answer: 'Visit the Profile page and scroll to the Resume section. Click "Upload Resume" to add a new PDF resume (max 5MB). You can upload multiple resumes and set one as default for quick applications.'
+			question: 'Как загрузить или обновить резюме?',
+			answer: 'Перейдите на страницу Профиля и прокрутите до раздела Резюме. Нажмите «Загрузить резюме», чтобы добавить новое PDF-резюме (максимум 5 МБ). Вы можете загрузить несколько резюме и установить одно как основное для быстрых откликов.'
 		},
 
 		// Job Search
 		{
 			id: 8,
 			category: 'job_search',
-			question: 'How do I search for jobs?',
-			answer: "Use the search bar on the homepage or visit the Jobs page. You can search by keywords (job title, skills, company), location, and apply filters for job type, salary range, experience level, and more. Advanced filters help you find exactly what you're looking for."
+			question: 'Как искать вакансии?',
+			answer: 'Используйте строку поиска на главной странице или перейдите на страницу Вакансий. Вы можете искать по ключевым словам (название должности, навыки, компания), местоположению и применять фильтры по типу вакансии, уровню зарплаты, опыту и другим параметрам. Расширенные фильтры помогут найти именно то, что вы ищете.'
 		},
 		{
 			id: 9,
 			category: 'job_search',
-			question: 'How do I save a job to apply later?',
-			answer: 'Click the bookmark/star icon on any job listing to save it for later. Access all your saved jobs from your dashboard or the "Saved Jobs" page in your account menu.'
+			question: 'Как сохранить вакансию для отклика позже?',
+			answer: 'Нажмите на значок закладки/звезды в любом списке вакансий, чтобы сохранить её на потом. Доступ ко всем сохранённым вакансиям можно получить из панели управления или со страницы «Сохранённые вакансии» в меню аккаунта.'
 		},
 		{
 			id: 10,
 			category: 'job_search',
-			question: 'What are job alerts and how do I set them up?',
-			answer: 'Job alerts notify you when new jobs matching your criteria are posted. Go to Settings > Job Alerts to create custom alerts based on keywords, location, job type, and salary. Choose how often you want to receive notifications (instant, daily, or weekly).'
+			question: 'Что такое уведомления о вакансиях и как их настроить?',
+			answer: 'Уведомления о вакансиях оповещают вас, когда публикуются новые вакансии, соответствующие вашим критериям. Перейдите в Настройки > Уведомления о вакансиях, чтобы создать пользовательские уведомления по ключевым словам, местоположению, типу вакансии и зарплате. Выберите частоту получения уведомлений (мгновенно, ежедневно или еженедельно).'
 		},
 		{
 			id: 11,
 			category: 'job_search',
-			question: 'How does the job matching algorithm work?',
-			answer: 'Our AI-powered matching system analyzes your profile, skills, experience, and preferences to recommend jobs that best fit your qualifications. The more complete your profile, the better the matches!'
+			question: 'Как работает алгоритм подбора вакансий?',
+			answer: 'Наша система подбора на базе ИИ анализирует ваш профиль, навыки, опыт и предпочтения, чтобы рекомендовать вакансии, наиболее подходящие вашей квалификации. Чем полнее ваш профиль, тем точнее рекомендации!'
 		},
 
 		// Applications
 		{
 			id: 12,
 			category: 'applications',
-			question: 'How do I apply for a job?',
-			answer: 'Click on any job listing to view details, then click "Apply Now". You\'ll need to select a resume and optionally add a cover letter. Review your application and submit. You can track all your applications from your dashboard.'
+			question: 'Как откликнуться на вакансию?',
+			answer: 'Нажмите на любую вакансию, чтобы увидеть подробности, затем нажмите «Откликнуться». Вам нужно выбрать резюме и при необходимости добавить сопроводительное письмо. Проверьте свой отклик и отправьте. Вы можете отслеживать все отклики из панели управления.'
 		},
 		{
 			id: 13,
 			category: 'applications',
-			question: 'Can I withdraw an application?',
-			answer: 'Currently, once an application is submitted, it cannot be withdrawn through the platform. However, you can contact the recruiter directly through our messaging system to withdraw your application.'
+			question: 'Можно ли отозвать отклик?',
+			answer: 'В настоящее время после отправки отклика его нельзя отозвать через платформу. Однако вы можете связаться с рекрутером напрямую через нашу систему сообщений, чтобы отозвать свой отклик.'
 		},
 		{
 			id: 14,
 			category: 'applications',
-			question: 'How can I track my application status?',
-			answer: 'Visit the "Applications" page from your dashboard to see all your submitted applications. Each application shows its current status (Under Review, Shortlisted, Interview Scheduled, etc.) and timeline.'
+			question: 'Как отследить статус моего отклика?',
+			answer: 'Перейдите на страницу «Отклики» из панели управления, чтобы увидеть все отправленные отклики. Каждый отклик показывает текущий статус (На рассмотрении, В шортлисте, Назначено интервью и т.д.) и хронологию.'
 		},
 		{
 			id: 15,
 			category: 'applications',
-			question: 'Why was my application rejected?',
-			answer: "Application decisions are made by employers based on their specific requirements. While we don't have access to their decision criteria, you can message the recruiter for feedback or continue applying to other positions that match your profile."
+			question: 'Почему мой отклик был отклонён?',
+			answer: 'Решения по откликам принимаются работодателями на основе их конкретных требований. Хотя у нас нет доступа к их критериям отбора, вы можете написать рекрутеру для получения обратной связи или продолжить откликаться на другие позиции, соответствующие вашему профилю.'
 		},
 
 		// Privacy & Security
 		{
 			id: 16,
 			category: 'privacy',
-			question: 'How is my personal data protected?',
-			answer: 'We use industry-standard encryption and security measures to protect your data. Your information is never shared with third parties without your explicit consent. Read our Privacy Policy for complete details.'
+			question: 'Как защищены мои персональные данные?',
+			answer: 'Мы используем отраслевые стандарты шифрования и меры безопасности для защиты ваших данных. Ваша информация никогда не передаётся третьим лицам без вашего явного согласия. Прочитайте нашу Политику конфиденциальности для подробной информации.'
 		},
 		{
 			id: 17,
 			category: 'privacy',
-			question: 'Can I control who sees my profile?',
-			answer: 'Yes! Go to Settings > Privacy to control your profile visibility. You can choose to make it public, visible only to verified recruiters, or completely private. You can also control individual elements like contact information visibility.'
+			question: 'Могу ли я контролировать, кто видит мой профиль?',
+			answer: 'Да! Перейдите в Настройки > Приватность, чтобы управлять видимостью профиля. Вы можете сделать его публичным, видимым только для проверенных рекрутеров или полностью приватным. Вы также можете управлять отдельными элементами, такими как видимость контактной информации.'
 		},
 		{
 			id: 18,
 			category: 'privacy',
-			question: 'How do I report a suspicious job posting?',
-			answer: "If you encounter a suspicious job posting, click the \"Report\" button on the job detail page. Provide details about why you think it's suspicious. Our team reviews all reports within 24 hours."
+			question: 'Как сообщить о подозрительной вакансии?',
+			answer: 'Если вы обнаружили подозрительную вакансию, нажмите кнопку «Пожаловаться» на странице вакансии. Укажите подробности о том, почему вы считаете её подозрительной. Наша команда рассматривает все жалобы в течение 24 часов.'
 		},
 
 		// Technical Issues
 		{
 			id: 19,
 			category: 'technical',
-			question: 'The website is not loading properly. What should I do?',
-			answer: "Try clearing your browser cache and cookies, or use a different browser. Make sure you're using an updated browser version. If the issue persists, contact our support team with details about your browser and operating system."
+			question: 'Сайт загружается некорректно. Что делать?',
+			answer: 'Попробуйте очистить кэш и файлы cookie браузера или используйте другой браузер. Убедитесь, что вы используете обновлённую версию браузера. Если проблема сохраняется, обратитесь в нашу службу поддержки с указанием вашего браузера и операционной системы.'
 		},
 		{
 			id: 20,
 			category: 'technical',
-			question: "I'm not receiving email notifications. How do I fix this?",
-			answer: 'Check your spam/junk folder for emails from PeelJobs. Add support@peeljobs.com to your contacts. Also verify that email notifications are enabled in Settings > Notifications. If issues persist, contact support.'
+			question: 'Я не получаю email-уведомления. Как это исправить?',
+			answer: 'Проверьте папку со спамом на наличие писем от PeelJobs. Добавьте support@peeljobs.com в контакты. Также убедитесь, что email-уведомления включены в Настройки > Уведомления. Если проблема сохраняется, обратитесь в поддержку.'
 		},
 		{
 			id: 21,
 			category: 'technical',
-			question: 'My resume upload is failing. What formats are supported?',
-			answer: 'We currently support PDF format only. Your resume must be under 5MB in size. Make sure your PDF is not password-protected. If you continue to experience issues, try converting your resume to PDF using a different tool.'
+			question: 'Загрузка резюме не удаётся. Какие форматы поддерживаются?',
+			answer: 'В настоящее время мы поддерживаем только формат PDF. Размер резюме не должен превышать 5 МБ. Убедитесь, что ваш PDF не защищён паролем. Если проблемы продолжаются, попробуйте конвертировать резюме в PDF с помощью другого инструмента.'
 		}
 	];
 
 	const popularArticles: Article[] = [
 		{
-			title: 'How to Create a Winning Resume',
-			description: 'Tips and best practices for crafting a resume that stands out',
-			category: 'Getting Started',
-			readTime: '5 min read'
+			title: 'Как создать успешное резюме',
+			description: 'Советы и лучшие практики для создания выдающегося резюме',
+			category: 'Начало работы',
+			readTime: '5 мин чтения'
 		},
 		{
-			title: 'Interview Preparation Guide',
-			description: 'Complete guide to preparing for your job interviews',
-			category: 'Job Search',
-			readTime: '8 min read'
+			title: 'Руководство по подготовке к интервью',
+			description: 'Полное руководство по подготовке к собеседованиям',
+			category: 'Поиск вакансий',
+			readTime: '8 мин чтения'
 		},
 		{
-			title: 'Understanding Application Status',
-			description: 'What each application status means and what to expect',
-			category: 'Applications',
-			readTime: '3 min read'
+			title: 'Понимание статуса отклика',
+			description: 'Что означает каждый статус отклика и чего ожидать',
+			category: 'Отклики',
+			readTime: '3 мин чтения'
 		}
 	];
 
@@ -222,8 +222,8 @@
 </script>
 
 <svelte:head>
-	<title>Help Center - PeelJobs | Find Answers to Your Questions</title>
-	<meta name="description" content="Find answers to common questions about using PeelJobs. Learn how to search for jobs, create your profile, apply to positions, and more." />
+	<title>Помощь - PeelJobs | Найдите ответы на ваши вопросы</title>
+	<meta name="description" content="Найдите ответы на частые вопросы об использовании PeelJobs. Узнайте, как искать вакансии, создавать профиль, откликаться на позиции и многое другое." />
 	<link rel="canonical" href="https://peeljobs.com/help/" />
 </svelte:head>
 
@@ -240,11 +240,11 @@
 		<nav class="mb-8" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/" class="hover:text-white transition-colors">Home</a>
+					<a href="/" class="hover:text-white transition-colors">Главная</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Help Center</span>
+					<span class="text-white font-medium">Помощь</span>
 				</li>
 			</ol>
 		</nav>
@@ -253,8 +253,8 @@
 			<div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-8 animate-fade-in-up" style="opacity: 0;">
 				<HelpCircle size={40} class="text-primary" />
 			</div>
-			<h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms;">How Can We Help?</h1>
-			<p class="text-lg md:text-xl text-gray-300 mb-10 animate-fade-in-up" style="opacity: 0; animation-delay: 200ms;">Search our knowledge base for quick answers to your questions</p>
+			<h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms;">Чем мы можем помочь?</h1>
+			<p class="text-lg md:text-xl text-gray-300 mb-10 animate-fade-in-up" style="opacity: 0; animation-delay: 200ms;">Ищите в нашей базе знаний быстрые ответы на ваши вопросы</p>
 
 			<!-- Search Bar -->
 			<div class="relative max-w-2xl mx-auto animate-fade-in-up" style="opacity: 0; animation-delay: 300ms;">
@@ -264,7 +264,7 @@
 				<input
 					type="text"
 					bind:value={searchQuery}
-					placeholder="Search for help articles, FAQs..."
+					placeholder="Поиск статей помощи, частых вопросов..."
 					class="w-full pl-14 pr-5 py-4 bg-white text-black rounded-full focus:outline-none focus:ring-4 focus:ring-primary/30 text-base placeholder-muted shadow-md"
 				/>
 			</div>
@@ -279,8 +279,8 @@
 			<div class="max-w-6xl mx-auto">
 				<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
 					<div>
-						<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight">Popular Articles</h2>
-						<p class="text-muted mt-2">Quick guides to get you started</p>
+						<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight">Популярные статьи</h2>
+						<p class="text-muted mt-2">Быстрые руководства для начала работы</p>
 					</div>
 				</div>
 
@@ -310,7 +310,7 @@
 		<div class="max-w-6xl mx-auto">
 			<!-- Category Filters -->
 			<div class="mb-10">
-				<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-6">Browse by Category</h2>
+				<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-6">По категориям</h2>
 
 				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
 					{#each categories as category, i}
@@ -331,8 +331,8 @@
 			{#if searchQuery !== ''}
 				<div class="mb-6">
 					<p class="text-muted">
-						Found <span class="font-semibold text-black">{filteredFaqs().length}</span>
-						result{filteredFaqs().length !== 1 ? 's' : ''} for "{searchQuery}"
+						Найдено <span class="font-semibold text-black">{filteredFaqs().length}</span>
+						результат{filteredFaqs().length !== 1 ? 'ов' : ''} для "{searchQuery}"
 					</p>
 				</div>
 			{/if}
@@ -368,8 +368,8 @@
 					<div class="w-16 h-16 bg-surface rounded-full flex items-center justify-center mx-auto mb-4">
 						<Search size={32} class="text-muted" />
 					</div>
-					<h2 class="text-2xl font-semibold text-black mb-2">No Results Found</h2>
-					<p class="text-muted mb-6">We couldn't find any FAQs matching your search. Try different keywords or browse by category.</p>
+					<h2 class="text-2xl font-semibold text-black mb-2">Ничего не найдено</h2>
+					<p class="text-muted mb-6">Мы не нашли частых вопросов по вашему запросу. Попробуйте другие ключевые слова или выберите категорию.</p>
 					<button
 						onclick={() => {
 							searchQuery = '';
@@ -377,7 +377,7 @@
 						}}
 						class="px-6 py-2.5 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-colors"
 					>
-						Clear Search
+						Сбросить поиск
 					</button>
 				</div>
 			{/if}
@@ -392,24 +392,24 @@
 			<div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
 				<MessageCircle size={32} class="text-primary" />
 			</div>
-			<h2 class="text-2xl lg:text-3xl font-semibold tracking-tight mb-4">Still Need Help?</h2>
-			<p class="text-lg text-gray-300 mb-8">Can't find what you're looking for? Our support team is here to help.</p>
+			<h2 class="text-2xl lg:text-3xl font-semibold tracking-tight mb-4">Нужна ещё помощь?</h2>
+			<p class="text-lg text-gray-300 mb-8">Не нашли, что искали? Наша команда поддержки готова помочь.</p>
 			<div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
 				<a href="/contact/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm">
-					Contact Support
+					Связаться с поддержкой
 					<ArrowRight size={18} />
 				</a>
 				<a
 					href="mailto:support@peeljobs.com"
 					class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 text-white font-medium rounded-full hover:bg-white/20 transition-colors border border-white/20"
 				>
-					Email Us
+					Написать нам
 				</a>
 			</div>
 
 			<div class="pt-8 border-t border-white/10">
 				<p class="text-muted">
-					<span class="font-medium text-gray-300">Response Time:</span> We typically respond within 24 hours during business days
+					<span class="font-medium text-gray-300">Время ответа:</span> Обычно мы отвечаем в течение 24 часов в рабочие дни
 				</p>
 			</div>
 		</div>

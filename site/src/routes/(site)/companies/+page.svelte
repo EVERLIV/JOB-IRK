@@ -277,8 +277,8 @@
 </script>
 
 <svelte:head>
-  <title>Top Companies Hiring in India - PeelJobs</title>
-  <meta name="description" content="Discover top companies hiring in India. Browse {totalCompanies.toLocaleString()} companies by industry, location, and company type." />
+  <title>Лучшие компании India - PeelJobs</title>
+  <meta name="description" content="Откройте для себя лучшие компании, нанимающие в India. Просматривайте {totalCompanies.toLocaleString()} компаний по отраслям, местоположению и типу." />
 </svelte:head>
 
 <div class="min-h-screen bg-surface">
@@ -294,15 +294,15 @@
       <div class="text-center max-w-3xl mx-auto">
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 border border-primary/30 rounded-full text-white/80 text-sm font-medium mb-6 animate-fade-in-down" style="opacity: 0; animation-delay: 100ms; animation-fill-mode: forwards;">
           <Sparkles class="w-4 h-4" />
-          <span>{totalCompanies.toLocaleString()} Companies Listed</span>
+          <span>{totalCompanies.toLocaleString()} компаний в каталоге</span>
         </div>
 
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-white tracking-tight mb-4 animate-fade-in-up" style="opacity: 0; animation-delay: 200ms; animation-fill-mode: forwards;">
-          Discover Top Companies
+          Откройте для себя лучшие компании
         </h1>
 
         <p class="text-lg text-gray-400 animate-fade-in-up" style="opacity: 0; animation-delay: 300ms; animation-fill-mode: forwards;">
-          Explore companies hiring now and find your perfect workplace
+          Исследуйте компании, которые сейчас нанимают, и найдите идеальное место работы
         </p>
       </div>
     </div>
@@ -316,14 +316,14 @@
         class="flex items-center gap-2 h-10 px-4 bg-primary hover:bg-primary-hover rounded-full text-white font-medium transition-colors shadow-sm"
       >
         <SlidersHorizontal class="w-5 h-5" />
-        {showFiltersMobile ? 'Hide Filters' : 'Filters'}
+        {showFiltersMobile ? 'Скрыть фильтры' : 'Фильтры'}
         {#if activeFilterCount > 0}
           <span class="bg-white text-primary text-xs px-2 py-0.5 rounded-full font-semibold">{activeFilterCount}</span>
         {/if}
       </button>
       <div class="flex items-center gap-2 text-sm text-muted">
         <TrendingUp class="w-4 h-4 text-primary" />
-        <span class="font-medium text-black">{totalCompanies.toLocaleString()}</span> companies
+        <span class="font-medium text-black">{totalCompanies.toLocaleString()}</span> компаний
       </div>
     </div>
 
@@ -337,14 +337,14 @@
               <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Filter class="w-4 h-4 text-primary" />
               </div>
-              Filters
+              Фильтры
             </h2>
             {#if hasActiveFilters}
               <button
                 onclick={clearAllFilters}
                 class="text-sm text-primary hover:text-primary-hover font-medium px-3 py-1 rounded-full hover:bg-primary/5 transition-colors"
               >
-                Clear ({activeFilterCount})
+                Сбросить ({activeFilterCount})
               </button>
             {/if}
           </div>
@@ -353,7 +353,7 @@
             <!-- Company Type Filter -->
             {#if companyTypeOptions.length > 0}
               <CollapsibleFilterSection
-                title="Company Type"
+                title="Тип компании"
                 hasActiveFilter={companyTypeOptions.some(opt => opt.checked)}
               >
                 <div class="space-y-1">
@@ -378,7 +378,7 @@
             <!-- Location Filter -->
             {#if locationOptions.length > 0}
               <CollapsibleFilterSection
-                title="Location"
+                title="Местоположение"
                 hasActiveFilter={locationOptions.some(opt => opt.checked)}
               >
                 <!-- Search box -->
@@ -389,7 +389,7 @@
                   <input
                     type="text"
                     bind:value={locationSearchTerm}
-                    placeholder="Search location..."
+                    placeholder="Поиск местоположения..."
                     class="w-full h-8 pl-9 pr-3 bg-surface border border-border rounded-lg focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm text-black placeholder-muted transition-all outline-none"
                   />
                 </div>
@@ -411,7 +411,7 @@
                 </div>
                 {#if filteredLocationOptions.length > 10}
                   <p class="mt-2 text-xs text-muted">
-                    Use search to find more locations
+                    Используйте поиск для поиска других местоположений
                   </p>
                 {/if}
               </CollapsibleFilterSection>
@@ -420,7 +420,7 @@
             <!-- Industry Filter -->
             {#if industryOptions.length > 0}
               <CollapsibleFilterSection
-                title="Industry"
+                title="Отрасль"
                 hasActiveFilter={industryOptions.some(opt => opt.checked)}
               >
                 <!-- Search box -->
@@ -431,7 +431,7 @@
                   <input
                     type="text"
                     bind:value={industrySearchTerm}
-                    placeholder="Search industry..."
+                    placeholder="Поиск отрасли..."
                     class="w-full h-8 pl-9 pr-3 bg-surface border border-border rounded-lg focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm text-black placeholder-muted transition-all outline-none"
                   />
                 </div>
@@ -453,7 +453,7 @@
                 </div>
                 {#if filteredIndustryOptions.length > 10}
                   <p class="mt-2 text-xs text-muted">
-                    Use search to find more industries
+                    Используйте поиск для поиска других отраслей
                   </p>
                 {/if}
               </CollapsibleFilterSection>
@@ -462,7 +462,7 @@
             <!-- Company Size Filter -->
             {#if sizeOptions.length > 0}
               <CollapsibleFilterSection
-                title="Company Size"
+                title="Размер компании"
                 hasActiveFilter={sizeOptions.some(opt => opt.checked)}
               >
                 <div class="space-y-1">
@@ -492,8 +492,8 @@
         <!-- Results Header -->
         <div class="hidden lg:flex justify-between items-center mb-6">
           <h2 class="text-xl font-semibold text-black flex items-center gap-3">
-            Companies
-            <span class="text-sm font-normal text-muted">({totalCompanies.toLocaleString()} results)</span>
+            Компании
+            <span class="text-sm font-normal text-muted">({totalCompanies.toLocaleString()} результатов)</span>
           </h2>
         </div>
 
@@ -513,7 +513,7 @@
               onclick={clearAllFilters}
               class="text-sm text-muted hover:text-black font-medium px-2 py-1"
             >
-              Clear all
+              Сбросить все
             </button>
           </div>
         {/if}
@@ -524,13 +524,13 @@
             <div class="w-16 h-16 rounded-lg bg-error-light flex items-center justify-center mx-auto mb-4">
               <X class="w-8 h-8 text-error" />
             </div>
-            <h3 class="text-xl font-semibold text-black mb-2">Something went wrong</h3>
+            <h3 class="text-xl font-semibold text-black mb-2">Что-то пошло не так</h3>
             <p class="text-muted mb-6">{error}</p>
             <button
               onclick={() => window.location.reload()}
               class="h-10 px-6 bg-primary hover:bg-primary-hover text-white rounded-full font-medium transition-colors shadow-sm"
             >
-              Try Again
+              Попробовать снова
             </button>
           </div>
         {:else if companies.length > 0}
@@ -624,7 +624,7 @@
                   class="flex items-center gap-1 h-10 px-4 text-sm font-medium text-black rounded-lg hover:bg-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft class="w-4 h-4" />
-                  <span class="hidden sm:inline">Previous</span>
+                  <span class="hidden sm:inline">Назад</span>
                 </button>
 
                 <div class="flex gap-1 px-2">
@@ -643,14 +643,14 @@
                   disabled={currentPage === totalPages}
                   class="flex items-center gap-1 h-10 px-4 text-sm font-medium text-black rounded-lg hover:bg-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <span class="hidden sm:inline">Next</span>
+                  <span class="hidden sm:inline">Далее</span>
                   <ChevronRight class="w-4 h-4" />
                 </button>
               </div>
             </div>
 
             <div class="mt-4 text-center text-sm text-muted">
-              Page {currentPage} of {totalPages}
+              Страница {currentPage} из {totalPages}
             </div>
           {/if}
         {:else}
@@ -659,15 +659,15 @@
             <div class="w-20 h-20 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-6">
               <Building2 class="w-10 h-10 text-primary" />
             </div>
-            <h3 class="text-xl font-semibold text-black mb-2">No Companies Found</h3>
+            <h3 class="text-xl font-semibold text-black mb-2">Компании не найдены</h3>
             <p class="text-muted mb-8 max-w-md mx-auto">
-              We couldn't find any companies matching your criteria. Try adjusting your filters.
+              Не удалось найти компании по вашему запросу. Попробуйте изменить фильтры.
             </p>
             <button
               onclick={clearAllFilters}
               class="h-10 px-6 bg-primary hover:bg-primary-hover text-white rounded-full font-medium transition-colors shadow-sm hover:shadow-md"
             >
-              Clear All Filters
+              Сбросить все фильтры
             </button>
           </div>
         {/if}

@@ -22,7 +22,7 @@
 			certificationList = await getMyCertifications();
 		} catch (error) {
 			console.error('Failed to load certifications:', error);
-			toast.error('Failed to load certifications');
+			toast.error('Не удалось загрузить сертификаты');
 		} finally {
 			loading = false;
 		}
@@ -39,17 +39,17 @@
 	}
 
 	async function handleDeleteCertification(id: number) {
-		if (!confirm('Are you sure you want to delete this certification?')) {
+		if (!confirm('Вы уверены, что хотите удалить этот сертификат?')) {
 			return;
 		}
 
 		try {
 			await deleteCertification(id);
-			toast.success('Certification deleted successfully!');
+			toast.success('Сертификат успешно удалён!');
 			await loadCertifications();
 		} catch (error) {
 			console.error('Failed to delete certification:', error);
-			toast.error('Failed to delete certification');
+			toast.error('Не удалось удалить сертификат');
 		}
 	}
 
@@ -64,8 +64,8 @@
 </script>
 
 <svelte:head>
-	<title>Certifications - Profile - PeelJobs</title>
-	<meta name="description" content="Manage your professional certifications" />
+	<title>Сертификаты - Профиль - PeelJobs</title>
+	<meta name="description" content="Управление вашими профессиональными сертификатами" />
 </svelte:head>
 
 <!-- Header -->
@@ -76,8 +76,8 @@
 				<Award size={20} class="text-primary-600" />
 			</div>
 			<div>
-				<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Certifications</h2>
-				<p class="text-sm text-gray-600">Manage your professional certifications</p>
+				<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Сертификаты</h2>
+				<p class="text-sm text-gray-600">Управление вашими профессиональными сертификатами</p>
 			</div>
 		</div>
 		<button
@@ -86,7 +86,7 @@
 			class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1 text-sm"
 		>
 			<Plus size={18} />
-			<span class="hidden sm:inline">Add Certification</span>
+			<span class="hidden sm:inline">Добавить сертификат</span>
 		</button>
 	</div>
 </div>
@@ -100,7 +100,7 @@
 		<div
 			class="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"
 		></div>
-		<p class="text-gray-600">Loading certifications...</p>
+		<p class="text-gray-600">Загрузка сертификатов...</p>
 	</div>
 {:else if certificationList.length === 0}
 	<!-- Empty State -->
@@ -113,10 +113,9 @@
 		>
 			<FileText size={36} class="text-gray-400" />
 		</div>
-		<h3 class="text-xl font-semibold text-gray-900 mb-2">No certifications added yet</h3>
+		<h3 class="text-xl font-semibold text-gray-900 mb-2">Сертификаты ещё не добавлены</h3>
 		<p class="text-gray-600 mb-6 max-w-md mx-auto">
-			Add your professional certifications to stand out to recruiters and demonstrate your
-			expertise.
+			Добавьте ваши профессиональные сертификаты, чтобы выделиться перед рекрутерами и подтвердить вашу экспертность.
 		</p>
 		<button
 			type="button"
@@ -124,7 +123,7 @@
 			class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1"
 		>
 			<Plus size={18} />
-			<span>Add Your First Certification</span>
+			<span>Добавить первый сертификат</span>
 		</button>
 	</div>
 {:else}
@@ -158,11 +157,10 @@
 			<div>
 				<h3 class="font-semibold text-gray-900 mb-1">
 					{certificationList.length}
-					{certificationList.length === 1 ? 'Certification' : 'Certifications'} Added
+					{certificationList.length === 1 ? 'Сертификат' : 'Сертификата'} Добавлено
 				</h3>
 				<p class="text-sm text-gray-600">
-					Professional certifications validate your skills and make your profile more attractive to
-					employers.
+					Профессиональные сертификаты подтверждают ваши навыки и делают ваш профиль более привлекательным для работодателей.
 				</p>
 			</div>
 		</div>

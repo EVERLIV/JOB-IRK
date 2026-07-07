@@ -250,8 +250,8 @@
 		const diffMs = now.getTime() - date.getTime();
 		const diffDays = Math.floor(diffMs / 86400000);
 
-		if (diffDays === 0) return 'Today';
-		if (diffDays === 1) return 'Yesterday';
+		if (diffDays === 0) return 'Сегодня';
+		if (diffDays === 1) return 'Вчера';
 		if (diffDays < 7) return date.toLocaleDateString('en-US', { weekday: 'long' });
 
 		return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -291,8 +291,8 @@
 </script>
 
 <svelte:head>
-	<title>{conversation?.recruiter.name || 'Conversation'} - Messages - PeelJobs</title>
-	<meta name="description" content="Chat with {conversation?.recruiter.name || 'recruiter'}" />
+	<title>{conversation?.recruiter.name || 'Разговор'} - Сообщения - PeelJobs</title>
+	<meta name="description" content="Чат с {conversation?.recruiter.name || 'рекрутером'}" />
 </svelte:head>
 
 {#if conversation}
@@ -306,7 +306,7 @@
 						<button
 							onclick={goBack}
 							class="p-2 hover:bg-gray-100 rounded-xl transition-colors flex-shrink-0"
-							title="Back to messages"
+							title="Назад к сообщениям"
 						>
 							<ArrowLeft size={22} class="text-gray-600" />
 						</button>
@@ -329,9 +329,9 @@
 							<p class="text-sm text-gray-500 truncate">
 								{conversation.recruiter.position} at {conversation.recruiter.company}
 								{#if conversation.recruiter.online}
-									<span class="text-success-600">• Online</span>
+									<span class="text-success-600">• В сети</span>
 								{:else}
-									<span class="text-gray-400">• Offline</span>
+									<span class="text-gray-400">• Не в сети</span>
 								{/if}
 							</p>
 						</div>
@@ -342,14 +342,14 @@
 						<button
 							onclick={() => makeCall('voice')}
 							class="p-2.5 hover:bg-gray-100 rounded-xl transition-colors"
-							title="Voice call"
+							title="Аудиозвонок"
 						>
 							<Phone size={18} class="text-gray-600" />
 						</button>
 						<button
 							onclick={() => makeCall('video')}
 							class="p-2.5 hover:bg-gray-100 rounded-xl transition-colors"
-							title="Video call"
+							title="Видеозвонок"
 						>
 							<Video size={18} class="text-gray-600" />
 						</button>
@@ -358,7 +358,7 @@
 							class="p-2.5 hover:bg-gray-100 rounded-xl transition-colors {showRecruiterInfo
 								? 'bg-primary-50 text-primary-600'
 								: ''}"
-							title="Conversation info"
+							title="Информация о разговоре"
 						>
 							<Info size={18} class={showRecruiterInfo ? 'text-primary-600' : 'text-gray-600'} />
 						</button>
@@ -450,7 +450,7 @@
 									class="flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-xl transition-colors text-sm font-medium"
 								>
 									<File size={16} />
-									File
+									Файл
 								</button>
 								<button
 									onclick={() => (showAttachmentMenu = false)}
@@ -472,7 +472,7 @@
 								<textarea
 									bind:value={messageText}
 									onkeypress={handleKeyPress}
-									placeholder="Type your message..."
+									placeholder="Введите сообщение..."
 									rows="1"
 									class="w-full px-4 py-3 pr-20 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 resize-none transition-all outline-none text-gray-900 placeholder-gray-500"
 									style="min-height: 48px; max-height: 120px;"
@@ -483,14 +483,14 @@
 										type="button"
 										onclick={() => (showAttachmentMenu = !showAttachmentMenu)}
 										class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-										title="Attach file"
+										title="Прикрепить файл"
 									>
 										<Paperclip size={18} />
 									</button>
 									<button
 										type="button"
 										class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-										title="Add emoji"
+										title="Добавить эмодзи"
 									>
 										<Smile size={18} />
 									</button>
@@ -501,14 +501,14 @@
 								type="submit"
 								disabled={!messageText.trim()}
 								class="bg-primary-600 hover:bg-primary-700 text-white font-medium p-3.5 rounded-2xl transition-colors elevation-1 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
-								title="Send message"
+								title="Отправить сообщение"
 							>
 								<Send size={20} />
 							</button>
 						</form>
 
 						<p class="text-xs text-gray-500 mt-2 text-center">
-							Press Enter to send, Shift+Enter for new line
+							Нажмите Enter для отправки, Shift+Enter для новой строки
 						</p>
 					</div>
 				</div>
@@ -521,7 +521,7 @@
 				>
 					<div class="p-6">
 						<div class="flex items-center justify-between mb-6">
-							<h3 class="text-lg font-semibold text-gray-900">Conversation Info</h3>
+							<h3 class="text-lg font-semibold text-gray-900">Информация о разговоре</h3>
 							<button
 								onclick={() => (showRecruiterInfo = false)}
 								class="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
@@ -545,24 +545,24 @@
 									class="inline-flex items-center gap-1.5 mt-3 text-sm text-success-600 bg-success-500/10 px-3 py-1 rounded-full"
 								>
 									<span class="w-2 h-2 bg-success-500 rounded-full"></span>
-									Online
+									В сети
 								</span>
 							{:else}
 								<span
 									class="inline-flex items-center gap-1.5 mt-3 text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full"
 								>
 									<span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-									Offline
+									Не в сети
 								</span>
 							{/if}
 						</div>
 
 						<!-- Contact Info -->
 						<div class="space-y-4 mb-6 pb-6 border-b border-gray-200">
-							<h4 class="font-medium text-gray-900 text-sm">Contact Information</h4>
+							<h4 class="font-medium text-gray-900 text-sm">Контактная информация</h4>
 							<div class="space-y-3">
 								<div>
-									<p class="text-xs text-gray-500 mb-1">Email</p>
+									<p class="text-xs text-gray-500 mb-1">Эл. почта</p>
 									<a
 										href="mailto:{conversation.recruiter.email}"
 										class="text-sm text-primary-600 hover:underline flex items-center gap-1.5"
@@ -572,7 +572,7 @@
 									</a>
 								</div>
 								<div>
-									<p class="text-xs text-gray-500 mb-1">Phone</p>
+									<p class="text-xs text-gray-500 mb-1">Телефон</p>
 									<a
 										href="tel:{conversation.recruiter.phone}"
 										class="text-sm text-primary-600 hover:underline flex items-center gap-1.5"
@@ -586,7 +586,7 @@
 
 						<!-- Job Info -->
 						<div class="space-y-4">
-							<h4 class="font-medium text-gray-900 text-sm">Related Job</h4>
+							<h4 class="font-medium text-gray-900 text-sm">Связанная вакансия</h4>
 							<a
 								href="/jobs/{conversation.jobId}/"
 								class="block p-4 bg-primary-50 hover:bg-primary-100 border border-primary-200 rounded-2xl transition-colors"
@@ -594,7 +594,7 @@
 								<p class="font-semibold text-gray-900 mb-1">{conversation.jobTitle}</p>
 								<p class="text-sm text-gray-600">{conversation.recruiter.company}</p>
 								<p class="text-xs text-primary-600 mt-2 flex items-center gap-1">
-									View job details
+									Просмотреть вакансию
 									<ExternalLink size={12} />
 								</p>
 							</a>
@@ -619,13 +619,13 @@
 						showRecruiterInfo = false;
 					}
 				}}
-				aria-label="Close recruiter info"
+				aria-label="Закрыть информацию о рекрутере"
 			></button>
 			<div
 				class="relative bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 max-h-[80vh] overflow-y-auto animate-fade-in-up"
 				role="dialog"
 				aria-modal="true"
-				aria-label="Recruiter information"
+				aria-label="Информация о рекрутере"
 				tabindex="-1"
 				onpointerdown={(event) => event.stopPropagation()}
 			>
@@ -710,7 +710,7 @@
 			<div
 				class="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"
 			></div>
-			<p class="text-gray-500">Loading conversation...</p>
+			<p class="text-gray-500">Загрузка разговора...</p>
 		</div>
 	</div>
 {/if}

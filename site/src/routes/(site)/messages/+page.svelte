@@ -168,7 +168,7 @@
 	function deleteConversation(id: number, event: MouseEvent): void {
 		event.stopPropagation();
 		if (
-			confirm('Are you sure you want to delete this conversation? This action cannot be undone.')
+			confirm('Вы уверены, что хотите удалить этот разговор? Это действие нельзя отменить.')
 		) {
 			conversations = conversations.filter((conversation) => conversation.id !== id);
 		}
@@ -182,19 +182,19 @@
 		const diffHours = Math.floor(diffMs / 3600000);
 		const diffDays = Math.floor(diffMs / 86400000);
 
-		if (diffMins < 1) return 'Just now';
-		if (diffMins < 60) return `${diffMins}m ago`;
-		if (diffHours < 24) return `${diffHours}h ago`;
-		if (diffDays === 1) return 'Yesterday';
-		if (diffDays < 7) return `${diffDays}d ago`;
+		if (diffMins < 1) return 'Только что';
+		if (diffMins < 60) return `${diffMins} мин. назад`;
+		if (diffHours < 24) return `${diffHours} ч. назад`;
+		if (diffDays === 1) return 'Вчера';
+		if (diffDays < 7) return `${diffDays} дн. назад`;
 
 		return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 	}
 </script>
 
 <svelte:head>
-	<title>Messages - PeelJobs</title>
-	<meta name="description" content="Chat with recruiters and hiring managers" />
+	<title>Сообщения - PeelJobs</title>
+	<meta name="description" content="Общайтесь с рекрутерами и HR-менеджерами" />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -210,11 +210,11 @@
 		<nav class="mb-6" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Dashboard</a>
+					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Messages</span>
+					<span class="text-white font-medium">Сообщения</span>
 				</li>
 			</ol>
 		</nav>
@@ -232,15 +232,15 @@
 						class="text-3xl lg:text-4xl font-semibold tracking-tight mb-1 animate-fade-in-up"
 						style="opacity: 0; animation-delay: 100ms;"
 					>
-						Messages
+						Сообщения
 					</h1>
 					<p
 						class="text-gray-300 animate-fade-in-up"
 						style="opacity: 0; animation-delay: 150ms;"
 					>
 						{totalUnread > 0
-							? `${totalUnread} unread message${totalUnread > 1 ? 's' : ''}`
-							: 'All caught up!'}
+							? `${totalUnread} непрочитанн${totalUnread > 1 ? 'ых' : 'ое'} сообщени${totalUnread > 1 ? 'й' : 'е'}`
+							: 'Всё прочитано!'}
 					</p>
 				</div>
 			</div>
@@ -256,7 +256,7 @@
 						? 'bg-white text-black'
 						: 'bg-white/10 text-white hover:bg-white/20'}"
 				>
-					All
+					Все
 				</button>
 				<button
 					onclick={() => (filterType = 'unread')}
@@ -265,7 +265,7 @@
 						? 'bg-white text-black'
 						: 'bg-white/10 text-white hover:bg-white/20'}"
 				>
-					Unread
+					Непрочитанные
 					{#if totalUnread > 0}
 						<span
 							class="text-xs px-2 py-0.5 rounded-full {filterType === 'unread'
@@ -282,7 +282,7 @@
 						: 'bg-white/10 text-white hover:bg-white/20'}"
 				>
 					<Star size={14} />
-					Starred
+					Избранные
 				</button>
 				<button
 					onclick={() => (filterType = 'archived')}
@@ -292,7 +292,7 @@
 						: 'bg-white/10 text-white hover:bg-white/20'}"
 				>
 					<Archive size={14} />
-					Archived
+					Архив
 				</button>
 			</div>
 		</div>
@@ -314,7 +314,7 @@
 					? 'bg-primary text-white shadow-sm'
 					: 'bg-white text-muted'}"
 			>
-				All
+				Все
 			</button>
 			<button
 				onclick={() => (filterType = 'unread')}
@@ -323,7 +323,7 @@
 					? 'bg-primary text-white shadow-sm'
 					: 'bg-white text-muted'}"
 			>
-				Unread
+				Непрочитанные
 				{#if totalUnread > 0}
 					<span
 						class="text-xs px-2 py-0.5 rounded-full {filterType === 'unread'
@@ -366,7 +366,7 @@
 				<input
 					type="text"
 					bind:value={searchQuery}
-					placeholder="Search conversations by name, company, job title, or message..."
+					placeholder="Поиск по имени, компании, вакансии или сообщению..."
 					class="w-full pl-11 pr-4 py-3 border border-border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
 				/>
 			</div>
@@ -457,7 +457,7 @@
 
 							<p class="text-sm text-muted line-clamp-1">
 								{#if conversation.lastMessageSender === 'me'}
-									<span class="text-muted font-medium">You: </span>
+									<span class="text-muted font-medium">Вы: </span>
 								{/if}
 								{conversation.lastMessage}
 							</p>
@@ -470,7 +470,7 @@
 							<button
 								onclick={(e) => toggleStar(conversation.id, e)}
 								class="p-2 hover:bg-gray-100 rounded-xl transition-colors"
-								title={conversation.starred ? 'Unstar' : 'Star'}
+								title={conversation.starred ? 'Убрать из избранного' : 'В избранное'}
 							>
 								<Star
 									size={16}
@@ -483,7 +483,7 @@
 								<button
 									onclick={(e) => archiveConversation(conversation.id, e)}
 									class="p-2 hover:bg-gray-100 rounded-xl transition-colors"
-									title="Archive"
+									title="В архив"
 								>
 									<Archive size={16} class="text-muted" />
 								</button>
@@ -491,7 +491,7 @@
 							<button
 								onclick={(e) => deleteConversation(conversation.id, e)}
 								class="p-2 hover:bg-error-light rounded-xl transition-colors"
-								title="Delete"
+								title="Удалить"
 							>
 								<Trash2 size={16} class="text-error" />
 							</button>
@@ -526,28 +526,28 @@
 				</div>
 				<h3 class="text-xl font-semibold text-black mb-2">
 					{#if filterType === 'archived'}
-						No Archived Conversations
+						Нет архивных разговоров
 					{:else if filterType === 'starred'}
-						No Starred Conversations
+						Нет избранных разговоров
 					{:else if filterType === 'unread'}
-						No Unread Messages
+						Нет непрочитанных сообщений
 					{:else if searchQuery}
-						No Conversations Found
+						Разговоры не найдены
 					{:else}
-						No Messages Yet
+						Пока нет сообщений
 					{/if}
 				</h3>
 				<p class="text-muted max-w-md mx-auto">
 					{#if searchQuery}
-						Try adjusting your search terms or filters
+						Попробуйте изменить параметры поиска или фильтры
 					{:else if filterType === 'all'}
-						Your conversations with recruiters will appear here
+						Здесь будут отображаться ваши разговоры с рекрутерами
 					{:else if filterType === 'archived'}
-						Archived conversations will appear here
+						Архивные разговоры будут отображаться здесь
 					{:else if filterType === 'starred'}
-						Star important conversations to find them here
+						Добавляйте важные разговоры в избранное
 					{:else if filterType === 'unread'}
-						You're all caught up!
+						Всё прочитано!
 					{/if}
 				</p>
 			</div>
@@ -566,10 +566,10 @@
 						<MessageSquare size={22} class="text-primary" />
 					</div>
 					<div>
-						<h3 class="font-semibold text-black mb-1">Stay Responsive</h3>
+						<h3 class="font-semibold text-black mb-1">Будьте на связи</h3>
 						<p class="text-sm text-muted">
-							Quick responses to recruiters can improve your chances. Try to reply within 24-48
-							hours to keep the conversation going and make a great impression.
+							Быстрые ответы рекрутерам повышают ваши шансы. Старайтесь отвечать в течение 24-48
+							часов, чтобы поддерживать диалог и производить хорошее впечатление.
 						</p>
 					</div>
 				</div>

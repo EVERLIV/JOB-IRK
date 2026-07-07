@@ -195,15 +195,15 @@
 			<MapPin size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-lg font-semibold text-gray-900">Location Preferences</h2>
-			<p class="text-sm text-gray-600">Your location and preferred work cities</p>
+			<h2 class="text-lg font-semibold text-gray-900">Предпочтения по локации</h2>
+			<p class="text-sm text-gray-600">Ваше местоположение и предпочтительные города для работы</p>
 		</div>
 	</div>
 
 	<div class="grid md:grid-cols-2 gap-5">
 		<!-- Country -->
 		<div>
-			<label for="country" class="block text-sm font-medium text-gray-700 mb-2"> Country </label>
+			<label for="country" class="block text-sm font-medium text-gray-700 mb-2"> Страна </label>
 			<select
 				id="country"
 				bind:value={selectedCountryId}
@@ -211,7 +211,7 @@
 				disabled={loadingCountries}
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none disabled:bg-gray-100 disabled:cursor-not-allowed"
 			>
-				<option value={undefined}>Select Country</option>
+				<option value={undefined}>Выберите страну</option>
 				{#each countries as country}
 					<option value={country.id}>{country.name}</option>
 				{/each}
@@ -220,7 +220,7 @@
 
 		<!-- State -->
 		<div>
-			<label for="state" class="block text-sm font-medium text-gray-700 mb-2"> State </label>
+			<label for="state" class="block text-sm font-medium text-gray-700 mb-2"> Регион </label>
 			<select
 				id="state"
 				bind:value={selectedStateId}
@@ -229,7 +229,7 @@
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none disabled:bg-gray-100 disabled:cursor-not-allowed"
 			>
 				<option value={undefined}>
-					{selectedCountryId ? 'Select State' : 'Select Country first'}
+					{selectedCountryId ? 'Выберите регион' : 'Сначала выберите страну'}
 				</option>
 				{#each states as state}
 					<option value={state.id}>{state.name}</option>
@@ -239,7 +239,7 @@
 
 		<!-- City -->
 		<div>
-			<label for="city" class="block text-sm font-medium text-gray-700 mb-2"> City </label>
+			<label for="city" class="block text-sm font-medium text-gray-700 mb-2"> Город </label>
 			<select
 				id="city"
 				bind:value={selectedCityId}
@@ -247,7 +247,7 @@
 				disabled={!selectedStateId || loadingCities}
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none disabled:bg-gray-100 disabled:cursor-not-allowed"
 			>
-				<option value={undefined}>{selectedStateId ? 'Select City' : 'Select State first'}</option>
+				<option value={undefined}>{selectedStateId ? 'Выберите город' : 'Сначала выберите регион'}</option>
 				{#each cities as city}
 					<option value={city.id}>{city.name}</option>
 				{/each}
@@ -257,7 +257,7 @@
 		<!-- Current City -->
 		<div>
 			<label for="current_city" class="block text-sm font-medium text-gray-700 mb-2">
-				Current City
+				Текущий город
 			</label>
 			<select
 				id="current_city"
@@ -266,7 +266,7 @@
 				disabled={!selectedStateId || loadingCities}
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none appearance-none disabled:bg-gray-100 disabled:cursor-not-allowed"
 			>
-				<option value={undefined}>{selectedStateId ? 'Select Current City' : 'Select State first'}</option>
+				<option value={undefined}>{selectedStateId ? 'Выберите текущий город' : 'Сначала выберите регион'}</option>
 				{#each cities as city}
 					<option value={city.id}>{city.name}</option>
 				{/each}
@@ -276,7 +276,7 @@
 		<!-- Preferred Cities (multi-select with search) -->
 		<div class="md:col-span-2">
 			<label for="preferred_cities" class="block text-sm font-medium text-gray-700 mb-2">
-				Preferred Cities (Search and Select Multiple)
+				Предпочтительные города (поиск и выбор нескольких)
 			</label>
 
 			<!-- Selected cities display -->
@@ -307,7 +307,7 @@
 					bind:value={preferredCitySearch}
 					onfocus={() => (showPreferredCityDropdown = true)}
 					onblur={() => setTimeout(() => (showPreferredCityDropdown = false), 200)}
-					placeholder="Search cities... (type at least 2 characters)"
+					placeholder="Поиск городов... (введите минимум 2 символа)"
 					class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 				/>
 
@@ -344,7 +344,7 @@
 			</div>
 
 			<p class="mt-2 text-xs text-gray-500">
-				Search for cities you're willing to work in. You can select multiple cities.
+				Ищите города, в которых вы готовы работать. Вы можете выбрать несколько городов.
 			</p>
 		</div>
 	</div>

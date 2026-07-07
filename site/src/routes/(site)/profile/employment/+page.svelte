@@ -4,8 +4,8 @@
 </script>
 
 <svelte:head>
-	<title>Employment History - Profile - PeelJobs</title>
-	<meta name="description" content="Track your professional work experience" />
+	<title>Опыт работы - Профиль - PeelJobs</title>
+	<meta name="description" content="Отслеживание вашего профессионального опыта работы" />
 </svelte:head>
 
 <!-- Header -->
@@ -15,8 +15,8 @@
 			<Briefcase size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Employment History</h2>
-			<p class="text-sm text-gray-600">Track your professional work experience</p>
+		<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Опыт работы</h2>
+		<p class="text-sm text-gray-600">Отслеживание вашего профессионального опыта работы</p>
 		</div>
 	</div>
 </div>

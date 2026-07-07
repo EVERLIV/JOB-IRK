@@ -16,13 +16,13 @@
 
 		// Validate file type
 		if (!file.type.startsWith('image/')) {
-			toast.error('Please select an image file');
+			toast.error('Пожалуйста, выберите файл изображения');
 			return;
 		}
 
 		// Validate file size (5MB max)
 		if (file.size > 5 * 1024 * 1024) {
-			toast.error('Image size must not exceed 5MB');
+			toast.error('Размер изображения не должен превышать 5МБ');
 			return;
 		}
 
@@ -34,7 +34,7 @@
 			// Reload profile to get updated picture URL
 			await onUploadComplete();
 		} catch (err) {
-			const errorMessage = err instanceof Error ? err.message : 'Failed to upload profile picture';
+			const errorMessage = err instanceof Error ? err.message : 'Не удалось загрузить фото профиля';
 			toast.error(errorMessage);
 			console.error('Profile pic upload error:', err);
 		} finally {
@@ -49,8 +49,8 @@
 			<Camera size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-lg font-semibold text-gray-900">Profile Picture</h2>
-			<p class="text-sm text-gray-600">Your profile photo</p>
+			<h2 class="text-lg font-semibold text-gray-900">Фото профиля</h2>
+			<p class="text-sm text-gray-600">Ваше фото профиля</p>
 		</div>
 	</div>
 
@@ -59,7 +59,7 @@
 			{#if profilePicUrl || photo}
 				<img
 					src={profilePicUrl || photo}
-					alt="Profile"
+					alt="Профиль"
 					class="w-24 h-24 rounded-2xl object-cover border-2 border-gray-100 elevation-1"
 				/>
 			{:else}
@@ -89,13 +89,13 @@
 				{#if uploadingPic}
 					<span class="flex items-center gap-2">
 						<Loader size={16} class="animate-spin text-primary-600" />
-						Uploading...
+						Загрузка...
 					</span>
 				{:else}
-					JPG, JPEG or PNG (max 5MB)
+					JPG, JPEG или PNG (макс. 5МБ)
 				{/if}
 			</p>
-			<p class="mt-1 text-xs text-gray-500">Click the camera icon to upload</p>
+			<p class="mt-1 text-xs text-gray-500">Нажмите на иконку камеры для загрузки</p>
 		</div>
 	</div>
 </div>

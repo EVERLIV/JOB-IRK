@@ -152,7 +152,7 @@ export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
         currentPage: params.page || 1,
         filterOptions: null,
         initialParams: params,
-        error: 'Failed to load jobs. Please try again later.',
+        error: 'Не удалось загрузить вакансии. Пожалуйста, попробуйте позже.',
       };
     }
 
@@ -190,7 +190,7 @@ export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
       currentPage: params.page || 1,
       filterOptions: null,
       initialParams: params,
-      error: 'An unexpected error occurred. Please try again later.',
+      error: 'Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже.',
     };
   }
 };

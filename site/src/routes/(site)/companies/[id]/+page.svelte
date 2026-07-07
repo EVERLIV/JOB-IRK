@@ -36,9 +36,9 @@
   function toggleFollow() {
     isFollowing = !isFollowing;
     if (isFollowing) {
-      toast.success('Following ' + company.name);
+      toast.success('Подписка на ' + company.name);
     } else {
-      toast.info('Unfollowed ' + company.name);
+      toast.info('Отписка от ' + company.name);
     }
     // TODO: Implement API call to follow/unfollow company
   }
@@ -70,17 +70,17 @@
       });
     } else if (navigator.clipboard) {
       void navigator.clipboard.writeText(shareData.url).then(() => {
-        toast.success('Link copied to clipboard!');
+        toast.success('Ссылка скопирована в буфер обмена!');
       });
     }
   }
 
   // Company stats
   const stats = $derived([
-    { label: 'Open Positions', value: jobs.length.toString(), icon: Briefcase },
-    { label: 'Company Type', value: company.company_type || 'N/A', icon: Building2 },
-    { label: 'Company Size', value: company.size || 'N/A', icon: Users },
-    { label: 'Industry', value: company.industry?.name || 'N/A', icon: Factory }
+    { label: 'Открытые вакансии', value: jobs.length.toString(), icon: Briefcase },
+    { label: 'Тип компании', value: company.company_type || 'Н/A', icon: Building2 },
+    { label: 'Размер компании', value: company.size || 'N/A', icon: Users },
+    { label: 'Отрасль', value: company.industry?.name || 'N/A', icon: Factory }
   ]);
 </script>
 
@@ -136,7 +136,7 @@
           class="inline-flex items-center gap-2 text-muted hover:text-primary font-medium transition-colors group"
         >
           <ArrowLeft class="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Companies</span>
+          <span>Назад к компаниям</span>
         </button>
 
         <!-- Desktop Share Button -->
@@ -145,7 +145,7 @@
           class="hidden md:flex items-center gap-2 h-10 px-4 text-muted hover:text-primary hover:bg-primary/5 rounded-full font-medium transition-all"
         >
           <Share2 class="w-5 h-5" />
-          <span>Share</span>
+          <span>Поделиться</span>
         </button>
       </div>
     </div>
@@ -211,7 +211,7 @@
                   : 'bg-primary text-white hover:bg-primary-hover'}"
               >
                 <Heart class="w-5 h-5 {isFollowing ? 'fill-current' : ''}" />
-                {isFollowing ? 'Following' : 'Follow'}
+                {isFollowing ? 'Подписка' : 'Подписаться'}
               </button>
               <button
                 onclick={handleShare}
@@ -261,7 +261,7 @@
           >
             <h2 class="text-lg font-semibold text-black mb-4 flex items-center gap-2">
               <FileText class="w-5 h-5 text-primary" />
-              About {company.name}
+              О {company.name}
             </h2>
             <p class="text-muted leading-relaxed whitespace-pre-line">
               {company.profile}
@@ -277,7 +277,7 @@
           >
             <h2 class="text-lg font-semibold text-black mb-4 flex items-center gap-2">
               <Target class="w-5 h-5 text-primary" />
-              Nature of Business
+              Сфера деятельности
             </h2>
             <div class="flex flex-wrap gap-2">
               {#each company.nature_of_business as business}
@@ -297,11 +297,11 @@
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-lg font-semibold text-black flex items-center gap-2">
               <Sparkles class="w-5 h-5 text-primary" />
-              Open Positions
+              Открытые вакансии
             </h2>
             {#if jobs.length > 0}
               <span class="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                {jobs.length} {jobs.length === 1 ? 'Job' : 'Jobs'}
+                {jobs.length} {jobs.length === 1 ? 'вакансия' : 'вакансий'}
               </span>
             {/if}
           </div>
@@ -349,7 +349,7 @@
                       {job.time_ago}
                     </span>
                     <span class="text-primary font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                      View Job
+                      Вакансия
                       <ChevronRight class="w-4 h-4" />
                     </span>
                   </div>
@@ -363,7 +363,7 @@
                   href="/jobs/?company={company.slug}"
                   class="inline-flex items-center gap-2 h-10 px-6 bg-primary/10 text-primary font-medium rounded-full hover:bg-primary/20 transition-colors"
                 >
-                  View All Open Positions
+                  Все открытые вакансии
                   <ChevronRight class="w-5 h-5" />
                 </a>
               </div>
@@ -373,9 +373,9 @@
               <div class="w-16 h-16 rounded-lg bg-surface flex items-center justify-center mx-auto mb-4">
                 <Briefcase class="w-8 h-8 text-muted" />
               </div>
-              <h3 class="text-lg font-semibold text-black mb-2">No Open Positions</h3>
+              <h3 class="text-lg font-semibold text-black mb-2">Нет открытых вакансий</h3>
               <p class="text-muted">
-                This company doesn't have any open positions at the moment.
+                На данный момент у этой компании нет открытых вакансий.
               </p>
             </div>
           {/if}
@@ -390,7 +390,7 @@
             class="bg-white rounded-lg shadow-sm border border-border p-6 animate-fade-in-up"
             style="opacity: 0; animation-delay: 150ms; animation-fill-mode: forwards;"
           >
-            <h3 class="text-base font-semibold text-black mb-4">Company Information</h3>
+            <h3 class="text-base font-semibold text-black mb-4">Информация о компании</h3>
 
             <div class="space-y-4">
               {#if company.industry?.name}
@@ -399,7 +399,7 @@
                     <Factory class="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p class="text-xs text-muted font-medium mb-0.5">Industry</p>
+                    <p class="text-xs text-muted font-medium mb-0.5">Отрасль</p>
                     <p class="text-sm text-black font-medium">{company.industry.name}</p>
                   </div>
                 </div>
@@ -411,7 +411,7 @@
                     <Building2 class="w-5 h-5 text-muted" />
                   </div>
                   <div>
-                    <p class="text-xs text-muted font-medium mb-0.5">Company Type</p>
+                    <p class="text-xs text-muted font-medium mb-0.5">Тип компании</p>
                     <p class="text-sm text-black font-medium">{company.company_type}</p>
                   </div>
                 </div>
@@ -423,8 +423,8 @@
                     <Users class="w-5 h-5 text-purple-600" />
                   </div>
                   <div>
-                    <p class="text-xs text-muted font-medium mb-0.5">Company Size</p>
-                    <p class="text-sm text-black font-medium">{company.size} employees</p>
+                    <p class="text-xs text-muted font-medium mb-0.5">Размер компании</p>
+                    <p class="text-sm text-black font-medium">{company.size} сотрудников</p>
                   </div>
                 </div>
               {/if}
@@ -435,7 +435,7 @@
                     <MapPin class="w-5 h-5 text-warning" />
                   </div>
                   <div>
-                    <p class="text-xs text-muted font-medium mb-0.5">Location</p>
+                    <p class="text-xs text-muted font-medium mb-0.5">Местоположение</p>
                     <p class="text-sm text-black">{company.address}</p>
                   </div>
                 </div>
@@ -449,7 +449,7 @@
               class="bg-white rounded-lg shadow-sm border border-border p-6 animate-fade-in-up"
               style="opacity: 0; animation-delay: 200ms; animation-fill-mode: forwards;"
             >
-              <h3 class="text-base font-semibold text-black mb-4">Contact</h3>
+              <h3 class="text-base font-semibold text-black mb-4">Контакты</h3>
 
               <div class="space-y-3">
                 {#if company.website}
@@ -460,7 +460,7 @@
                     class="flex items-center gap-3 p-3 rounded-lg bg-surface hover:bg-primary/10 text-muted hover:text-primary transition-colors group"
                   >
                     <Globe class="w-5 h-5" />
-                    <span class="text-sm font-medium flex-1 truncate">Visit Website</span>
+                    <span class="text-sm font-medium flex-1 truncate">Сайт компании</span>
                     <ExternalLink class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 {/if}
@@ -499,16 +499,16 @@
               </div>
 
               <div class="relative">
-                <h3 class="text-lg font-semibold text-white mb-2">Interested in joining?</h3>
+                <h3 class="text-lg font-semibold text-white mb-2">Хотите присоединиться?</h3>
                 <p class="text-sm text-gray-400 mb-5">
-                  Explore open positions and find your perfect role at {company.name}.
+                  Исследуйте открытые вакансии и найдите идеальную роль в {company.name}.
                 </p>
                 <a
                   href="#open-positions"
                   onclick={(e) => { e.preventDefault(); document.querySelector('.lg\\:col-span-2 > div:last-child')?.scrollIntoView({ behavior: 'smooth' }); }}
                   class="block w-full h-10 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors text-center shadow-sm flex items-center justify-center"
                 >
-                  View Open Positions
+                  Открытые вакансии
                 </a>
               </div>
             </div>

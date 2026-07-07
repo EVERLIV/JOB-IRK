@@ -79,7 +79,7 @@
 				relocation: profile.relocation || false
 			};
 		} catch (err) {
-			const errorMessage = err instanceof Error ? err.message : 'Failed to load profile';
+			const errorMessage = err instanceof Error ? err.message : 'Не удалось загрузить профиль';
 			toast.error(errorMessage);
 			console.error('Profile load error:', err);
 		} finally {
@@ -93,19 +93,19 @@
 			validationErrors = {};
 
 			if (!formData.first_name.trim()) {
-				validationErrors.first_name = 'First name is required';
+				validationErrors.first_name = 'Имя обязательно';
 			}
 			if (!formData.last_name.trim()) {
-				validationErrors.last_name = 'Last name is required';
+				validationErrors.last_name = 'Фамилия обязательна';
 			}
 			if (formData.mobile && !/^\+?[\d\s\-()]+$/.test(formData.mobile)) {
-				validationErrors.mobile = 'Invalid phone number format';
+				validationErrors.mobile = 'Неверный формат номера телефона';
 			}
 			if (formData.alternate_mobile && !/^\+?[\d\s\-()]+$/.test(formData.alternate_mobile)) {
-				validationErrors.alternate_mobile = 'Invalid phone number format';
+				validationErrors.alternate_mobile = 'Неверный формат номера телефона';
 			}
 			if (formData.pincode && !/^\d{6}$/.test(formData.pincode)) {
-				validationErrors.pincode = 'PIN code must be 6 digits';
+				validationErrors.pincode = 'PIN-код должен содержать 6 цифр';
 			}
 
 			if (Object.keys(validationErrors).length > 0) {
@@ -161,9 +161,9 @@
 				profile_completion_percentage: profile.profile_completion_percentage
 			});
 
-			toast.success('Profile updated successfully!');
+			toast.success('Профиль успешно обновлён!');
 		} catch (err) {
-			const errorMessage = err instanceof Error ? err.message : 'Failed to update profile';
+			const errorMessage = err instanceof Error ? err.message : 'Не удалось обновить профиль';
 			toast.error(errorMessage);
 			console.error('Profile update error:', err);
 		} finally {
@@ -173,8 +173,8 @@
 </script>
 
 <svelte:head>
-	<title>Personal Information - Profile - PeelJobs</title>
-	<meta name="description" content="Manage your personal information and preferences" />
+	<title>Личные данные - Профиль - PeelJobs</title>
+	<meta name="description" content="Управление личными данными и предпочтениями" />
 </svelte:head>
 
 <!-- Header -->
@@ -184,8 +184,8 @@
 			<User size={20} class="text-primary" />
 		</div>
 		<div>
-			<h2 class="text-xl lg:text-2xl font-semibold text-black">Personal Information</h2>
-			<p class="text-sm text-muted">Manage your personal information and preferences</p>
+			<h2 class="text-xl lg:text-2xl font-semibold text-black">Личные данные</h2>
+			<p class="text-sm text-muted">Управление личными данными и предпочтениями</p>
 		</div>
 	</div>
 </div>
@@ -199,7 +199,7 @@
 		<div
 			class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"
 		></div>
-		<p class="text-muted">Loading your profile...</p>
+		<p class="text-muted">Загрузка профиля...</p>
 	</div>
 {:else if profile}
 	<!-- Profile Completion Card -->
@@ -216,9 +216,9 @@
 						<Sparkles size={24} class="text-primary" />
 					</div>
 					<div>
-						<h3 class="text-lg font-semibold text-black mb-1">Complete Your Profile</h3>
+						<h3 class="text-lg font-semibold text-black mb-1">Заполните профиль</h3>
 						<p class="text-sm text-muted">
-							A complete profile gets 3x more views from recruiters
+							Полный профиль получает в 3 раза больше просмотров от рекрутеров
 						</p>
 					</div>
 				</div>
@@ -226,7 +226,7 @@
 				<div class="flex items-center gap-4 lg:gap-6">
 					<div class="flex-1 lg:w-48">
 						<div class="flex justify-between text-sm mb-2">
-							<span class="text-muted">Progress</span>
+							<span class="text-muted">Прогресс</span>
 							<span class="font-semibold text-primary"
 								>{profile.profile_completion_percentage}%</span
 							>
@@ -307,10 +307,10 @@
 			>
 				{#if saving}
 					<Loader size={20} class="animate-spin" />
-					Saving...
+					Сохранение...
 				{:else}
 					<Save size={20} />
-					Save Profile
+					Сохранить профиль
 				{/if}
 			</button>
 		</div>

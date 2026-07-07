@@ -39,43 +39,43 @@
 	let submitSuccess = $state(false);
 
 	const categories = [
-		{ value: 'general', label: 'General Inquiry' },
-		{ value: 'support', label: 'Technical Support' },
-		{ value: 'job_seeker', label: 'Job Seeker Help' },
-		{ value: 'employer', label: 'Employer/Recruiter' },
-		{ value: 'partnership', label: 'Partnership Opportunities' },
-		{ value: 'feedback', label: 'Feedback & Suggestions' }
+		{ value: 'general', label: 'Общий вопрос' },
+		{ value: 'support', label: 'Техническая поддержка' },
+		{ value: 'job_seeker', label: 'Помощь соискателям' },
+		{ value: 'employer', label: 'Работодателям/Рекрутерам' },
+		{ value: 'partnership', label: 'Партнёрство' },
+		{ value: 'feedback', label: 'Обратная связь и предложения' }
 	];
 
 	const contactInfo = [
 		{
 			icon: Mail,
-			title: 'Email Us',
+			title: 'Эл. почта',
 			details: 'peeljobs@micropyramid.com',
 			link: 'mailto:peeljobs@micropyramid.com',
-			description: 'Send us an email anytime'
+			description: 'Напишите нам в любое время'
 		},
 		{
 			icon: MapPin,
-			title: 'Office Location',
+			title: 'Офис',
 			details: 'Hyderabad, Telangana, India',
 			link: null,
-			description: 'Head Office'
+			description: 'Главный офис'
 		}
 	];
 
 	const faqs = [
 		{
-			question: 'How quickly will I get a response?',
-			answer: 'We typically respond to all inquiries within 24 hours during business days.'
+			question: 'Как быстро я получу ответ?',
+			answer: 'Обычно мы отвечаем на все обращения в течение 24 часов в рабочие дни.'
 		},
 		{
-			question: 'Is PeelJobs really free?',
-			answer: 'Yes! PeelJobs is completely free for both job seekers and employers. No hidden fees, ever.'
+			question: 'PeelJobs действительно бесплатный?',
+			answer: 'Да! PeelJobs полностью бесплатен как для соискателей, так и для работодателей. Никаких скрытых платежей.'
 		},
 		{
-			question: 'Can I visit your office?',
-			answer: 'Yes, but we recommend scheduling an appointment in advance by contacting us first.'
+			question: 'Могу ли я посетить ваш офис?',
+			answer: 'Да, но рекомендуем заранее записаться на приём, связавшись с нами.'
 		}
 	];
 
@@ -84,33 +84,33 @@
 		let isValid = true;
 
 		if (!formData.firstName.trim()) {
-			errors.firstName = 'First name is required';
+			errors.firstName = 'Укажите имя';
 			isValid = false;
 		}
 
 		if (!formData.email.trim()) {
-			errors.email = 'Email is required';
+			errors.email = 'Укажите email';
 			isValid = false;
 		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-			errors.email = 'Please enter a valid email address';
+			errors.email = 'Введите корректный email';
 			isValid = false;
 		}
 
 		if (formData.phone && !/^\d{10,12}$/.test(formData.phone.replace(/\s/g, ''))) {
-			errors.phone = 'Please enter a valid phone number (10-12 digits)';
+			errors.phone = 'Введите корректный номер телефона (10-12 цифр)';
 			isValid = false;
 		}
 
 		if (!formData.subject.trim()) {
-			errors.subject = 'Subject is required';
+			errors.subject = 'Укажите тему';
 			isValid = false;
 		}
 
 		if (!formData.message.trim()) {
-			errors.message = 'Message is required';
+			errors.message = 'Введите сообщение';
 			isValid = false;
 		} else if (formData.message.trim().length < 10) {
-			errors.message = 'Message must be at least 10 characters';
+			errors.message = 'Сообщение должно содержать не менее 10 символов';
 			isValid = false;
 		}
 
@@ -142,7 +142,7 @@
 			const response = await submitContactForm(requestData);
 
 			submitSuccess = true;
-			toast.success("Message sent successfully! We'll get back to you within 24 hours.");
+			toast.success("Сообщение отправлено! Мы ответим в течение 24 часов.");
 
 			formData = { ...initialFormData };
 
@@ -159,11 +159,11 @@
 				if (error.details.subject) errors.subject = error.details.subject[0];
 				if (error.details.comment) errors.message = error.details.comment[0];
 
-				errors.submit = 'Please fix the errors above and try again.';
-				toast.error('Please check the form for errors');
+				errors.submit = 'Исправьте ошибки выше и попробуйте снова.';
+				toast.error('Проверьте форму на наличие ошибок');
 			} else {
-				errors.submit = 'Failed to send message. Please try again or email us directly at peeljobs@micropyramid.com';
-				toast.error('Failed to send message. Please try again.');
+				errors.submit = 'Не удалось отправить сообщение. Попробуйте снова или напишите нам на peeljobs@micropyramid.com';
+				toast.error('Не удалось отправить сообщение. Попробуйте снова.');
 			}
 		} finally {
 			isSubmitting = false;
@@ -172,20 +172,20 @@
 </script>
 
 <svelte:head>
-	<title>Contact Us - PeelJobs | Get in Touch with Our Support Team</title>
-	<meta name="description" content="Have questions or need help? Contact the PeelJobs support team. We're here to assist job seekers and employers with our free job portal platform." />
+	<title>Связаться с нами - PeelJobs | Свяжитесь с нашей командой поддержки</title>
+	<meta name="description" content="Есть вопросы или нужна помощь? Свяжитесь с командой поддержки PeelJobs. Мы помогаем соискателям и работодателям на нашей бесплатной платформе." />
 	<link rel="canonical" href="https://peeljobs.com/contact/" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Contact PeelJobs Support - We're Here to Help" />
-	<meta property="og:description" content="Get in touch with our team for any questions about our free job portal." />
+	<meta property="og:title" content="Связаться с поддержкой PeelJobs - Мы готовы помочь" />
+	<meta property="og:description" content="Свяжитесь с нашей командой по любым вопросам о нашей бесплатной платформе." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://peeljobs.com/contact/" />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Contact PeelJobs" />
-	<meta name="twitter:description" content="Reach out to our support team for assistance." />
+	<meta name="twitter:title" content="Связаться с PeelJobs" />
+	<meta name="twitter:description" content="Обратитесь к нашей команде поддержки за помощью." />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -201,11 +201,11 @@
 		<nav class="mb-8" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/" class="hover:text-white transition-colors">Home</a>
+					<a href="/" class="hover:text-white transition-colors">Главная</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Contact Us</span>
+					<span class="text-white font-medium">Связаться с нами</span>
 				</li>
 			</ol>
 		</nav>
@@ -215,10 +215,10 @@
 				<Mail size={40} class="text-primary" />
 			</div>
 			<h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms;">
-				Get In Touch
+				Свяжитесь с нами
 			</h1>
 			<p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in-up" style="opacity: 0; animation-delay: 200ms;">
-				Have a question or need assistance? Our support team is here to help you. We typically respond within 24 hours.
+				Есть вопросы или нужна помощь? Наша команда поддержки готова помочь. Обычно мы отвечаем в течение 24 часов.
 			</p>
 		</div>
 	</div>
@@ -264,8 +264,8 @@
 			<div class="lg:col-span-2">
 				<div class="bg-white rounded-lg p-6 lg:p-8 shadow-sm border border-border">
 					<div class="mb-8">
-						<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-2">Send Us a Message</h2>
-						<p class="text-muted">Fill out the form below and our team will get back to you within 24 hours</p>
+						<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-2">Отправить сообщение</h2>
+						<p class="text-muted">Заполните форму ниже, и наша команда ответит в течение 24 часов</p>
 					</div>
 
 					{#if submitSuccess}
@@ -274,8 +274,8 @@
 								<CheckCircle size={16} class="text-success" />
 							</div>
 							<div>
-								<p class="text-success font-medium">Message sent successfully!</p>
-								<p class="text-sm text-success/80 mt-1">Thank you for contacting us. We'll respond within 24 hours.</p>
+								<p class="text-success font-medium">Сообщение успешно отправлено!</p>
+								<p class="text-sm text-success/80 mt-1">Спасибо за обращение. Мы ответим в течение 24 часов.</p>
 							</div>
 						</div>
 					{/if}
@@ -286,7 +286,7 @@
 							<!-- First Name -->
 							<div>
 								<label for="firstName" class="block text-sm font-medium text-muted mb-2">
-									First Name <span class="text-error">*</span>
+									Имя <span class="text-error">*</span>
 								</label>
 								<input
 									id="firstName"
@@ -304,7 +304,7 @@
 							<!-- Last Name -->
 							<div>
 								<label for="lastName" class="block text-sm font-medium text-muted mb-2">
-									Last Name
+									Фамилия
 								</label>
 								<input
 									id="lastName"
@@ -322,7 +322,7 @@
 							<!-- Email -->
 							<div>
 								<label for="email" class="block text-sm font-medium text-muted mb-2">
-									Email Address <span class="text-error">*</span>
+									Email <span class="text-error">*</span>
 								</label>
 								<input
 									id="email"
@@ -340,7 +340,7 @@
 							<!-- Phone -->
 							<div>
 								<label for="phone" class="block text-sm font-medium text-muted mb-2">
-									Phone Number
+									Телефон
 								</label>
 								<input
 									id="phone"
@@ -353,7 +353,7 @@
 								{#if errors.phone}
 									<p class="mt-1.5 text-sm text-error">{errors.phone}</p>
 								{:else}
-									<p class="mt-1.5 text-xs text-muted">Optional (10-12 digits)</p>
+									<p class="mt-1.5 text-xs text-muted">Необязательно (10-12 цифр)</p>
 								{/if}
 							</div>
 						</div>
@@ -361,7 +361,7 @@
 						<!-- Category -->
 						<div>
 							<label for="category" class="block text-sm font-medium text-muted mb-2">
-								Category
+								Категория
 							</label>
 							<select
 								id="category"
@@ -378,13 +378,13 @@
 						<!-- Subject -->
 						<div>
 							<label for="subject" class="block text-sm font-medium text-muted mb-2">
-								Subject <span class="text-error">*</span>
+								Тема <span class="text-error">*</span>
 							</label>
 							<input
 								id="subject"
 								type="text"
 								bind:value={formData.subject}
-								placeholder="What is this regarding?"
+								placeholder="О чём вы хотите написать?"
 								class="w-full px-4 py-3 border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none {errors.subject ? 'border-error' : 'border-border'}"
 								disabled={isSubmitting}
 							/>
@@ -396,12 +396,12 @@
 						<!-- Message -->
 						<div>
 							<label for="message" class="block text-sm font-medium text-muted mb-2">
-								Message <span class="text-error">*</span>
+								Сообщение <span class="text-error">*</span>
 							</label>
 							<textarea
 								id="message"
 								bind:value={formData.message}
-								placeholder="Tell us more about your inquiry..."
+								placeholder="Расскажите подробнее о вашем обращении..."
 								rows="6"
 								class="w-full px-4 py-3 border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none {errors.message ? 'border-error' : 'border-border'}"
 								disabled={isSubmitting}
@@ -409,7 +409,7 @@
 							{#if errors.message}
 								<p class="mt-1.5 text-sm text-error">{errors.message}</p>
 							{:else}
-								<p class="mt-1.5 text-xs text-muted">Minimum 10 characters</p>
+								<p class="mt-1.5 text-xs text-muted">Минимум 10 символов</p>
 							{/if}
 						</div>
 
@@ -432,10 +432,10 @@
 									<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 									<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
 								</svg>
-								Sending...
+								Отправка...
 							{:else}
 								<Send size={18} />
-								Send Message
+								Отправить сообщение
 							{/if}
 						</button>
 					</form>
@@ -450,24 +450,24 @@
 						<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
 							<Clock size={20} class="text-primary" />
 						</div>
-						<h3 class="text-lg font-semibold text-black">Business Hours</h3>
+						<h3 class="text-lg font-semibold text-black">Часы работы</h3>
 					</div>
 
 					<div class="space-y-3">
 						<div class="flex justify-between items-center py-2 border-b border-border">
-							<span class="text-sm text-muted">Monday - Friday</span>
-							<span class="text-sm font-medium text-black">9:00 AM - 6:00 PM</span>
+							<span class="text-sm text-muted">Понедельник - Пятница</span>
+							<span class="text-sm font-medium text-black">9:00 - 18:00</span>
 						</div>
 						<div class="flex justify-between items-center py-2">
-							<span class="text-sm text-muted">Saturday & Sunday</span>
-							<span class="text-sm font-medium text-error">Closed</span>
+							<span class="text-sm text-muted">Суббота и Воскресенье</span>
+							<span class="text-sm font-medium text-error">Выходной</span>
 						</div>
 					</div>
 
 					<div class="mt-4 pt-4 border-t border-border">
 						<p class="text-xs text-muted flex items-center gap-2">
 							<Clock size={12} />
-							Indian Standard Time (IST)
+							Индийское стандартное время (IST)
 						</p>
 					</div>
 				</div>
@@ -478,18 +478,18 @@
 						<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-sm">
 							<HelpCircle size={20} class="text-white" />
 						</div>
-						<h3 class="text-lg font-semibold text-black">Need Quick Help?</h3>
+						<h3 class="text-lg font-semibold text-black">Нужна быстрая помощь?</h3>
 					</div>
 
 					<p class="text-sm text-muted mb-5 leading-relaxed">
-						Check out our help center for instant answers to common questions about jobs and applications.
+						Посетите наш центр помощи для мгновенных ответов на частые вопросы о вакансиях и откликах.
 					</p>
 
 					<a
 						href="/help/"
 						class="flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-colors shadow-sm"
 					>
-						Visit Help Center
+						Центр помощи
 						<ArrowRight size={16} />
 					</a>
 				</div>
@@ -500,7 +500,7 @@
 						<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
 							<MessageCircle size={20} class="text-primary" />
 						</div>
-						<h3 class="text-lg font-semibold text-black">Quick FAQs</h3>
+						<h3 class="text-lg font-semibold text-black">Быстрые вопросы</h3>
 					</div>
 
 					<div class="space-y-4">
@@ -516,7 +516,7 @@
 						href="/help/"
 						class="inline-flex items-center gap-1.5 text-primary hover:text-primary-hover font-medium text-sm mt-5 group"
 					>
-						View all FAQs
+						Все вопросы
 						<ArrowRight size={14} class="group-hover:translate-x-1 transition-transform" />
 					</a>
 				</div>
@@ -531,8 +531,8 @@
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<div class="max-w-5xl mx-auto">
 			<div class="text-center mb-10 lg:mb-12">
-				<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Other Ways to Reach Us</h2>
-				<p class="text-base lg:text-lg text-muted">Choose the method that works best for you</p>
+				<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Другие способы связи</h2>
+				<p class="text-base lg:text-lg text-muted">Выберите удобный для вас способ</p>
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -541,10 +541,10 @@
 						<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
 							<Mail size={24} class="text-primary group-hover:text-white transition-colors" />
 						</div>
-						<h3 class="text-xl font-semibold text-black">For Job Seekers</h3>
+						<h3 class="text-xl font-semibold text-black">Для соискателей</h3>
 					</div>
 					<p class="text-muted mb-5 leading-relaxed">
-						Having trouble with your account, applications, or job search? Our support team is ready to assist you.
+						Возникли проблемы с аккаунтом, откликами или поиском работы? Наша команда поддержки готова помочь.
 					</p>
 					<a
 						href="mailto:peeljobs@micropyramid.com"
@@ -560,10 +560,10 @@
 						<div class="w-12 h-12 rounded-xl bg-success-light flex items-center justify-center group-hover:bg-success transition-colors">
 							<Mail size={24} class="text-success group-hover:text-white transition-colors" />
 						</div>
-						<h3 class="text-xl font-semibold text-black">For Employers</h3>
+						<h3 class="text-xl font-semibold text-black">Для работодателей</h3>
 					</div>
 					<p class="text-muted mb-5 leading-relaxed">
-						Questions about posting jobs or managing applicants? We're here to help you find the right talent!
+						Вопросы о публикации вакансий или управлении кандидатами? Мы поможем вам найти подходящих специалистов!
 					</p>
 					<a
 						href="mailto:peeljobs@micropyramid.com"

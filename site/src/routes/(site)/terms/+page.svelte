@@ -10,17 +10,17 @@
 	}
 
 	const sections: Section[] = [
-		{ id: 'introduction', title: 'Introduction', icon: FileText },
-		{ id: 'employer-eligibility', title: 'Employer Eligibility', icon: Building2 },
-		{ id: 'subscription-terms', title: 'Subscription Terms', icon: Scale },
-		{ id: 'employer-conduct', title: 'Employer Conduct', icon: Building2 },
-		{ id: 'prohibited-employer', title: 'Prohibited Employer Conduct', icon: Ban },
-		{ id: 'user-conduct', title: 'User Conduct', icon: Users },
-		{ id: 'registration', title: 'Registration & Password', icon: Key },
-		{ id: 'profile', title: 'Profile Management', icon: UserCircle },
-		{ id: 'prohibited-users', title: 'Prohibited User Conduct', icon: Ban },
-		{ id: 'rights', title: 'Reservation of Rights', icon: Shield },
-		{ id: 'revisions', title: 'Revisions', icon: RefreshCw }
+		{ id: 'introduction', title: 'Введение', icon: FileText },
+		{ id: 'employer-eligibility', title: 'Право работодателя', icon: Building2 },
+		{ id: 'subscription-terms', title: 'Условия подписки', icon: Scale },
+		{ id: 'employer-conduct', title: 'Поведение работодателя', icon: Building2 },
+		{ id: 'prohibited-employer', title: 'Запрещённое поведение работодателя', icon: Ban },
+		{ id: 'user-conduct', title: 'Поведение пользователя', icon: Users },
+		{ id: 'registration', title: 'Регистрация и пароль', icon: Key },
+		{ id: 'profile', title: 'Управление профилем', icon: UserCircle },
+		{ id: 'prohibited-users', title: 'Запрещённое поведение пользователя', icon: Ban },
+		{ id: 'rights', title: 'Ограничение прав', icon: Shield },
+		{ id: 'revisions', title: 'Изменения', icon: RefreshCw }
 	];
 
 	function scrollToSection(id: string): void {
@@ -32,23 +32,23 @@
 </script>
 
 <svelte:head>
-	<title>Terms & Conditions - PeelJobs | User Agreement and Acceptable Use Policy</title>
+	<title>Условия использования - PeelJobs | Пользовательское соглашение и правила использования</title>
 	<meta
 		name="description"
-		content="Read PeelJobs' Terms of Service, user agreement, and acceptable use policy. Understand your rights and responsibilities when using our free job portal platform for job seekers and employers."
+		content="Ознакомьтесь с Условиями использования PeelJobs, пользовательским соглашением и правилами использования. Понимайте свои права и обязанности при использовании нашей бесплатной платформы для поиска работы для соискателей и работодателей."
 	/>
 	<link rel="canonical" href="https://peeljobs.com/terms/" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Terms & Conditions - PeelJobs" />
-	<meta property="og:description" content="User agreement and terms of service for using PeelJobs platform." />
+	<meta property="og:title" content="Условия использования - PeelJobs" />
+	<meta property="og:description" content="Пользовательское соглашение и условия использования платформы PeelJobs." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://peeljobs.com/terms/" />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Terms & Conditions - PeelJobs" />
-	<meta name="twitter:description" content="Our terms of service and user agreement." />
+	<meta name="twitter:title" content="Условия использования - PeelJobs" />
+	<meta name="twitter:description" content="Наши условия использования и пользовательское соглашение." />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -64,11 +64,11 @@
 		<nav class="mb-8" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/" class="hover:text-white transition-colors">Home</a>
+					<a href="/" class="hover:text-white transition-colors">Главная</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Terms & Conditions</span>
+					<span class="text-white font-medium">Условия использования</span>
 				</li>
 			</ol>
 		</nav>
@@ -78,12 +78,12 @@
 				<FileText size={40} class="text-primary" />
 			</div>
 			<h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms;">
-				Terms & Conditions
+				Условия использования
 			</h1>
 			<p class="text-lg md:text-xl text-gray-300 mb-4 animate-fade-in-up" style="opacity: 0; animation-delay: 200ms;">
-				User Agreement and Acceptable Use Policy
+				Пользовательское соглашение и правила использования
 			</p>
-			<p class="text-sm text-muted animate-fade-in-up" style="opacity: 0; animation-delay: 300ms;">Last Updated: {lastUpdated}</p>
+			<p class="text-sm text-muted animate-fade-in-up" style="opacity: 0; animation-delay: 300ms;">Обновлено: {lastUpdated}</p>
 		</div>
 	</div>
 </section>
@@ -98,23 +98,23 @@
 						<AlertCircle size={24} class="text-warning" />
 					</div>
 					<div>
-						<h2 class="text-xl font-semibold text-black mb-3">Important Notice</h2>
+						<h2 class="text-xl font-semibold text-black mb-3">Важное уведомление</h2>
 						<div class="space-y-4 text-muted leading-relaxed">
 							<p>
-								This Terms of Use & Subscriber Agreement is a legally binding agreement between
-								Peeljobs.com, Employer (including employers, recruiting firms, staffing agencies, and
-								recruiters) and Job Candidate/User of this website, including all information,
-								products, services, software, databases, and website available from Peeljobs.com.
+								Данное Соглашение об использовании и подписке является юридически обязывающим соглашением между
+								Peeljobs.com, Работодателем (включая работодателей, кадровые агентства, агентства по подбору персонала и
+								рекрутерами) и Кандидатом/Пользователем данного сайта, включая всю информацию,
+								продукты, услуги, программное обеспечение, базы данных и сайт, доступные на Peeljobs.com.
 							</p>
 							<p>
-								By accessing information on Peeljobs.com, User acknowledges that he/she has read,
-								understood and agrees to comply with the terms of this Agreement. By using
-								Peeljobs.com as a Job Candidate, Employer, and/or submitting any content, User
-								agrees to be bound by and comply with this Agreement. You understand and agree that
-								Peeljobs.com is provided to you on an <span class="font-semibold">AS IS</span> and
-								<span class="font-semibold">AS AVAILABLE</span> basis. Peeljobs.com reserves the right
-								to modify, suspend or discontinue the System with or without notice at any time and without
-								any liability to you.
+								Получая доступ к информации на Peeljobs.com, Пользователь подтверждает, что он/она прочитал,
+								понял и соглашается соблюдать условия данного Соглашения. Используя
+								Peeljobs.com в качестве Кандидата, Работодателя и/или отправляя какой-либо контент, Пользователь
+								соглашается соблюдать и выполнять данное Соглашение. Вы понимаете и соглашаетесь с тем, что
+								Peeljobs.com предоставляется вам на условиях <span class="font-semibold">«КАК ЕСТЬ»</span> и
+								<span class="font-semibold">«КАК ДОСТУПНО»</span>. Peeljobs.com оставляет за собой
+								право изменять, приостанавливать или прекращать работу Системы с уведомлением или без него в любое время
+								без какой-либо ответственности перед вами.
 							</p>
 						</div>
 					</div>
@@ -131,7 +131,7 @@
 			<!-- Sticky Sidebar -->
 			<div class="lg:col-span-1 hidden lg:block">
 				<div class="bg-surface rounded-lg p-6 border border-border sticky top-6">
-					<h2 class="text-lg font-semibold text-black mb-5">Table of Contents</h2>
+					<h2 class="text-lg font-semibold text-black mb-5">Содержание</h2>
 					<nav class="space-y-1">
 						{#each sections as section}
 							<button
@@ -156,7 +156,7 @@
 							<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-sm">
 								<Building2 size={20} class="text-white" />
 							</div>
-							<h2 class="text-xl lg:text-2xl font-semibold text-black">Terms Applicable to Employers</h2>
+							<h2 class="text-xl lg:text-2xl font-semibold text-black">Условия для работодателей</h2>
 						</div>
 					</div>
 
@@ -166,13 +166,13 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Building2 size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Eligible Subscribers of PeelJobs</h2>
+							<h2 class="text-2xl font-semibold text-black">Допустимые подписчики PeelJobs</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							PeelJobs reserves the right to determine, in its sole discretion, whether a firm
-							meets the eligibility requirements for subscriptions. PeelJobs asks for company's
-							social pages information to display your job posting on your social pages which we
-							think is amazing as it maximizes the reach of your jobs post.
+							PeelJobs оставляет за собой право по своему усмотрению определять, соответствует ли фирма
+							требованиям для подписки. PeelJobs запрашивает информацию о социальных страницах компании
+							для отображения вашей вакансии на ваших социальных страницах, что, по нашему мнению,
+							замечательно, так как это максимизирует охват вашей публикации вакансий.
 						</p>
 					</article>
 
@@ -182,17 +182,17 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Scale size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Subscription Terms</h2>
+							<h2 class="text-2xl font-semibold text-black">Условия подписки</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							All subscription offers are made to eligible, qualified, Employers. As the expiration
-							date of an Employer's subscription term approaches, the Employer may be invoiced for a
-							new subscription term. If the invoice is paid, the subscription and its associated
-							benefits will continue; otherwise, the subscription will become inactive on its
-							expiration date. When a subscription becomes inactive, all features, services, and
-							benefits of the subscription cease. These may include but are not limited to: jobs
-							entered in the System, distribution of jobs, web pages maintained by the System,
-							resume-forwarding services.
+							Все предложения подписки предоставляются правомочным, квалифицированным Работодателям. По мере приближения
+							даты окончания срока подписки Работодателя, Работодателю может быть выставлен счёт на
+							новый срок подписки. Если счёт оплачивается, подписка и связанные с ней
+							преимущества продолжатся; в противном случае подписка станет неактивной по истечении
+							её срока действия. Когда подписка становится неактивной, все функции, услуги и
+							преимущества подписки прекращаются. Они могут включать, помимо прочего: вакансии,
+							внесённые в Систему, распространение вакансий, веб-страницы, поддерживаемые Системой,
+							услуги пересылки резюме.
 						</p>
 					</article>
 
@@ -202,29 +202,30 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Building2 size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Employer Conduct</h2>
+							<h2 class="text-2xl font-semibold text-black">Поведение работодателя</h2>
 						</div>
 						<div class="space-y-4 text-muted leading-relaxed">
 							<p>
-								Employer agrees that all the information accessed by Employer will be used only to
-								allow the Employer to use the services offered by PeelJobs. Employers seeking to
-								fill open, verifiable job positions on behalf of their client or vendor companies may
-								use the System only for lawful purposes.
+								Работодатель соглашается с тем, что вся информация, к которой Работодатель получает доступ, будет использоваться только
+								для того, чтобы позволить Работодателю использовать услуги, предлагаемые PeelJobs. Работодатели, стремящиеся
+								заполнить открытые, проверяемые должности от имени своих клиентских или поставщик компаний, могут
+								использовать Систему только в законных целях.
 							</p>
 							<p>
-								Employers shall upload in the System only genuine, verifiable employment
-								advertisements from Employer's company or from verifiable companies with which
-								Employer has a direct, explicit, agency relationship. Each Employer shall be
-								responsible for the accuracy, timeliness, and completeness of any employment
-								advertisements or candidate profiles its users place in the System.
+								Работодатели должны загружать в Систему только подлинные, проверяемые объявления
+								о вакансиях от компании Работодателя или от проверяемых компаний, с которыми
+								у Работодателя есть прямые, явные агентские отношения. Каждый Работодатель несёт
+								ответственность за точность, актуальность и полноту любых объявлений
+								о вакансиях или профилей кандидатов, которые его пользователи размещают в Системе.
 							</p>
 							<p>
-								Employer represents, warrants and covenants that any information or materials
-								uploaded to the System by Employer for use in connection with the System will not
-								violate any laws or regulations or third-party proprietary rights, including, without
-								limitation, copyright, trademark, obscenity, rights of publicity or privacy, and
-								defamation laws. Employer hereby grants PeelJobs a non-exclusive, worldwide,
-								royalty-free license to use these materials and to hyperlink to Employer's website.
+								Работодатель заявляет, гарантирует и обязуется, что любая информация или материалы,
+								загруженные в Систему Работодателем для использования в связи с Системой, не будут
+								нарушать какие-либо законы или правила или права третьих лиц на интеллектуальную собственность, включая,
+								без ограничений, авторское право, товарные знаки, непристойность, права на известность
+								или неприкосновенность частной жизни и законы о клевете. Работодатель настоящим предоставляет PeelJobs
+								неисключительную, всемирную, безвозмездную лицензию на использование этих материалов и создание
+								гиперссылок на сайт Работодателя.
 							</p>
 						</div>
 					</article>
@@ -235,61 +236,60 @@
 							<div class="w-12 h-12 bg-error-light rounded-xl flex items-center justify-center">
 								<Ban size={24} class="text-error" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Specific Prohibited Conduct of Employers</h2>
+							<h2 class="text-2xl font-semibold text-black">Запрещённое поведение работодателей</h2>
 						</div>
-						<p class="text-muted mb-6">Prohibited Uses of the System include:</p>
+						<p class="text-muted mb-6">Запрещённое использование Системы включает:</p>
 
 						<div class="space-y-4">
 							<div class="bg-surface rounded-lg p-5 border border-border">
 								<h4 class="font-semibold text-black mb-2 flex items-center gap-2">
 									<Key size={16} class="text-error" />
-									Password Sharing
+									Передача пароля
 								</h4>
 								<p class="text-sm text-muted leading-relaxed">
-									Use of the System is limited to registered and authorized account holders.
-									Employers can modify the profile and change the authorized person anytime during the
-									valid subscription period. The sharing of passwords or login information is
-									forbidden. Violation of this prohibition will result in an immediate cancellation,
-									without refund, of any remaining portion of the subscription amount.
+									Использование Системы ограничено зарегистрированными и авторизованными владельцами учётных записей.
+									Работодатели могут изменить профиль и сменить авторизованное лицо в любое время в течение
+									действительного периода подписки. Передача паролей или логин-информации запрещена.
+									Нарушение данного запрета приведёт к немедленной отмене,
+									без возврата средств, любой оставшейся части суммы подписки.
 								</p>
 							</div>
 
 							<div class="bg-surface rounded-lg p-5 border border-border">
 								<h4 class="font-semibold text-black mb-2 flex items-center gap-2">
 									<Scale size={16} class="text-error" />
-									Commercial Use of System
+									Коммерческое использование системы
 								</h4>
 								<p class="text-sm text-muted leading-relaxed">
-									The reselling of any part of the System or the services or benefits provided by the
-									System is expressly forbidden. All usage of the System must be contracted directly
-									via PeelJobs or one of our authorized affiliates. Reselling of the PeelJobs
-									System or any of its components without prior, written permission from PeelJobs will
-									result in an immediate cancellation, without refund, of any remaining portion of the
-									subscription amount.
+									Перепродажа любой части Системы или услуг или преимуществ, предоставляемых
+									Системой, строго запрещена. Все использование Системы должно быть заключено
+									напрямую через PeelJobs или одного из наших авторизованных партнёров. Перепродажа Системы
+									PeelJobs или любого из её компонентов без предварительного письменного разрешения от PeelJobs
+									приведёт к немедленной отмене без возврата средств любой оставшейся части суммы подписки.
 								</p>
 							</div>
 
 							<div class="bg-surface rounded-lg p-5 border border-border">
 								<h4 class="font-semibold text-black mb-2 flex items-center gap-2">
 									<Shield size={16} class="text-error" />
-									Automatic Searching & Robots
+									Автоматический поиск и роботы
 								</h4>
 								<p class="text-sm text-muted leading-relaxed">
-									An Employer shall not use or attempt to use any engine, software, tool, agent, or
-									other device or mechanism (including browsers, spiders, robots, avatars, or
-									intelligent agents) to navigate or search the System.
+									Работодатель не должен использовать или пытаться использовать какой-либо движок, программное обеспечение, инструмент, агент
+									или иное устройство или механизм (включая браузеры, пауки, роботы, аватары или
+									интеллектуальные агенты) для навигации или поиска в Системе.
 								</p>
 							</div>
 
 							<div class="bg-surface rounded-lg p-5 border border-border">
 								<h4 class="font-semibold text-black mb-2 flex items-center gap-2">
 									<Ban size={16} class="text-error" />
-									Multiple or Duplicate Postings
+									Множественные или дублирующиеся публикации
 								</h4>
 								<p class="text-sm text-muted leading-relaxed">
-									An Employer shall not post duplicate positions, multiple positions within one
-									advertisement, or copy (plagiarize) other employment advertisements or candidate
-									profiles.
+									Работодатель не должен публиковать дублирующиеся должности, несколько должностей в одном
+									объявлении или копировать (плагиатить) другие объявления о вакансиях или профили
+									кандидатов.
 								</p>
 							</div>
 						</div>
@@ -301,7 +301,7 @@
 							<div class="w-10 h-10 bg-success rounded-xl flex items-center justify-center shadow-sm">
 								<Users size={20} class="text-white" />
 							</div>
-							<h2 class="text-xl lg:text-2xl font-semibold text-black">Terms Applicable to All Users</h2>
+							<h2 class="text-xl lg:text-2xl font-semibold text-black">Условия для всех пользователей</h2>
 						</div>
 					</div>
 
@@ -311,15 +311,15 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Users size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">User Conduct</h2>
+							<h2 class="text-2xl font-semibold text-black">Поведение пользователя</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							You must be 18 years of age or older to visit or use PeelJobs in any manner. By
-							visiting PeelJobs or accepting these Terms of Use, You represent and warrant to the
-							Company that You are 18 years of age or older, and that You have the right, authority
-							and capacity to use the Web Site and agree to and abide by these Terms of Use. You also
-							represent and warrant to the Company that You will use PeelJobs in a manner
-							consistent with any and all applicable laws and regulations.
+							Вам должно быть не менее 18 лет, чтобы посещать или использовать PeelJobs каким-либо образом. Посещая
+							PeelJobs или принимая данные Условия использования, Вы заявляете и гарантируете
+							Компании, что Вам не менее 18 лет, и что Вы имеете право, полномочия
+							и дееспособность использовать Веб-сайт и соглашаться соблюдать данные Условия использования. Вы также
+							заявляете и гарантируете Компании, что будете использовать PeelJobs способом,
+							соответствующим всем применимым законам и правилам.
 						</p>
 					</article>
 
@@ -329,17 +329,17 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Key size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Registration and Password</h2>
+							<h2 class="text-2xl font-semibold text-black">Регистрация и пароль</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							You are responsible for maintaining the confidentiality of your account access
-							information and passwords. You shall be responsible for all uses of your Web Site
-							registrations and passwords, whether or not authorized by You. You are not authorized to
-							share your password or other account access information with any other party, temporarily
-							or permanently, and breach of this obligation may tantamount to disabling the
-							PeelJobs account and PeelJobs Services. You agree to immediately notify the Company
-							of any unauthorized use of your Account, and passwords. You will receive job posting
-							mail and other promotional mails to your inbox when you register with PeelJobs.
+							Вы несёте ответственность за сохранение конфиденциальности информации о доступе к вашей учётной записи
+							и паролей. Вы несёте ответственность за любое использование ваших регистраций
+							на Веб-сайте и паролей, авторизованы ли они Вами или нет. Вы не имеете права
+							передавать свой пароль или иную информацию о доступе к учётной записи какой-либо другой стороне, временно
+							или постоянно, и нарушение данного обязательства может привести к отключению
+							учётной записи PeelJobs и сервисов PeelJobs. Вы соглашаетесь немедленно уведомить Компанию
+							о любом несанкционированном использовании вашей Учётной записи и паролей. При регистрации на PeelJobs
+							вы будете получать рассылки о вакансиях и другие рекламные письма на ваш почтовый ящик.
 						</p>
 					</article>
 
@@ -349,35 +349,35 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<UserCircle size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Profile Management</h2>
+							<h2 class="text-2xl font-semibold text-black">Управление профилем</h2>
 						</div>
 						<div class="space-y-4 text-muted leading-relaxed">
 							<p>
-								Any Profile/Resume You submit must be accurate and describe You, an individual person.
-								The Profile requires standard fields to be completed.
+								Любой Профиль/Резюме, которое Вы отправляете, должен быть точным и описывать Вас, как конкретное лицо.
+								Профиль требует заполнения стандартных полей.
 							</p>
 							<p>
-								You acknowledge and agree that You are solely responsible for the form, content and
-								accuracy of any resume or material contained therein placed by You on PeelJobs.
+								Вы подтверждаете и соглашаетесь с тем, что Вы несёте единоличную ответственность за форму, содержание и
+								точность любого резюме или материала, содержащегося в нём, размещённого Вами на PeelJobs.
 							</p>
 							<p>
-								PeelJobs reserves the right to offer third party services and products to You
-								based on the preferences that You identify in Your registration and at any time
-								thereafter or you have agreed to receive, such offers may be made by PeelJobs or
-								by third parties.
+								PeelJobs оставляет за собой право предлагать Вам сторонние услуги и продукты
+								на основе предпочтений, которые Вы указываете при регистрации, и в любое время
+								после неё, или на которые Вы согласились получать; такие предложения могут быть сделаны PeelJobs
+								или третьими лицами.
 							</p>
 							<p>
-								You understand and acknowledge that You have no ownership rights in Your account and
-								that if You cancel/terminate Your PeelJobs account, all Your account information from
-								PeelJobs, including resumes, Profiles, cover letters, saved jobs, questionnaires
-								will be marked as deleted in and may be deleted from our databases. Information may
-								continue to be available for some period of time because of delays in propagating such
-								deletion through PeelJobs's web servers. In addition, third parties may retain saved
-								copies of Your Information.
+								Вы понимаете и подтверждаете, что не имеете никаких прав собственности на Вашу учётную запись и
+								что если Вы отмените/прекратите свою учётную запись PeelJobs, вся Ваша информация
+								из PeelJobs, включая резюме, Профили, сопроводительные письма, сохранённые вакансии, анкеты,
+								будет отмечена как удалённая и может быть удалена из наших баз данных. Информация может
+								продолжать быть доступной в течение некоторого времени из-за задержек в распространении
+								такого удаления через веб-серверы PeelJobs. Кроме того, третьи лица могут сохранять
+								копии Вашей Информации.
 							</p>
 							<p>
-								PeelJobs reserves the right to delete Your account and all of Your Information
-								after a significant duration of inactivity.
+								PeelJobs оставляет за собой право удалить Вашу учётную запись и всю Вашу Информацию
+								после значительного периода неактивности.
 							</p>
 						</div>
 					</article>
@@ -388,41 +388,41 @@
 							<div class="w-12 h-12 bg-error-light rounded-xl flex items-center justify-center">
 								<Ban size={24} class="text-error" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Specific Prohibited Conduct of Users</h2>
+							<h2 class="text-2xl font-semibold text-black">Запрещённое поведение пользователей</h2>
 						</div>
-						<p class="text-muted mb-4">Prohibited Uses of the System include:</p>
+						<p class="text-muted mb-4">Запрещённое использование Системы включает:</p>
 						<div class="bg-error-light rounded-lg p-6 border border-error/20">
 							<ul class="space-y-3 text-muted">
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-error rounded-full mt-2 flex-shrink-0"></div>
-									<span>Post any resume or apply for any job on behalf of another party</span>
+									<span>Размещать чьё-либо резюме или подавать заявку на вакансию от имени другого лица</span>
 								</li>
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-error rounded-full mt-2 flex-shrink-0"></div>
-									<span>Set more than one copy of the same resume to public at any one time</span>
+									<span>Устанавливать более одной копии одного и того же резюме в публичный доступ одновременно</span>
 								</li>
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-error rounded-full mt-2 flex-shrink-0"></div>
-									<span>Post or submit to PeelJobs any incomplete, false or inaccurate biographical
-									information or information which is not your own</span>
+									<span>Публиковать или отправлять на PeelJobs неполную, ложную или неточную биографическую
+									информацию или информацию, не являющуюся вашей</span>
 								</li>
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-error rounded-full mt-2 flex-shrink-0"></div>
-									<span>Delete or revise any material posted by any other person or entity</span>
+									<span>Удалять или изменять любой материал, опубликованный другим лицом или организацией</span>
 								</li>
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-error rounded-full mt-2 flex-shrink-0"></div>
-									<span>Take any action that imposes an unreasonable or disproportionately large load on
-									PeelJobs's infrastructure</span>
+									<span>Предпринимать действия, создающие неразумную или непропорционально большую нагрузку на
+									инфраструктуру PeelJobs</span>
 								</li>
 								<li class="flex items-start gap-3">
 									<div class="w-2 h-2 bg-error rounded-full mt-2 flex-shrink-0"></div>
-									<span>Use PeelJobs Services for any unlawful purpose or any illegal activity, or post
-									or submit any content, resume that is defamatory, libelous, implicitly or explicitly
-									offensive, vulgar, obscene, threatening, abusive, hateful, racist, discriminatory, of
-									a menacing character or likely to cause annoyance, inconvenience, embarrassment,
-									anxiety or could cause harassment to any person or include any links to pornographic,
-									indecent or sexually explicit material of any kind</span>
+									<span>Использовать сервисы PeelJobs для незаконных целей или любой незаконной деятельности, или публиковать
+									или отправлять любой контент, резюме, которые являются клеветническими, диффамационными, неявно или явно
+									оскорбительными, вульгарными, непристойными, угрожающими, оскорбительными, разжигающими ненависть, расистскими,
+									дискриминационными, имеющими угрожающий характер или способными вызвать раздражение, неудобство, смущение,
+									тревогу или способные причинить преследование любому лицу, а также включать ссылки на порнографический,
+									непристойный или сексуально откровенный материал любого рода</span>
 								</li>
 							</ul>
 						</div>
@@ -434,10 +434,10 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<Shield size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Reservation of Rights</h2>
+							<h2 class="text-2xl font-semibold text-black">Ограничение прав</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							Any rights not expressly granted herein are reserved.
+							Все права, прямо не предоставленные здесь, защищены.
 						</p>
 					</article>
 
@@ -447,12 +447,12 @@
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
 								<RefreshCw size={24} class="text-primary" />
 							</div>
-							<h2 class="text-2xl font-semibold text-black">Revisions</h2>
+							<h2 class="text-2xl font-semibold text-black">Изменения</h2>
 						</div>
 						<p class="text-muted leading-relaxed">
-							PeelJobs may revise these Terms at any time by posting an updated version to
-							https://www.peeljobs.com. You should visit this page periodically to review the most
-							current Agreement because it is binding on Users.
+							PeelJobs может изменять данные Условия в любое время, публикуя обновлённую версию на
+							https://www.peeljobs.com. Вам следует периодически посещать эту страницу, чтобы ознакомиться с
+							действующим Соглашением, так как оно является обязательным для Пользователей.
 						</p>
 					</article>
 
@@ -463,15 +463,15 @@
 								<MessageCircle size={24} class="text-white" />
 							</div>
 							<div>
-								<h3 class="text-lg font-semibold text-black mb-2">Questions?</h3>
+								<h3 class="text-lg font-semibold text-black mb-2">Вопросы?</h3>
 								<p class="text-muted mb-4">
-									For any questions, or legal concerns, please email Support at PeelJobs.
+									По любым вопросам или юридическим опасениям, пожалуйста, напишите в службу поддержки PeelJobs.
 								</p>
 								<a
 									href="/contact/"
 									class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-colors shadow-sm"
 								>
-									Contact Support
+									Связаться с поддержкой
 									<ArrowRight size={16} />
 								</a>
 							</div>
@@ -487,15 +487,15 @@
 <section class="py-12 lg:py-16 bg-[#1D2226] text-white">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 text-center">
 		<div class="max-w-2xl mx-auto">
-			<h2 class="text-2xl font-semibold tracking-tight mb-4">Have Questions About Our Terms?</h2>
+			<h2 class="text-2xl font-semibold tracking-tight mb-4">Есть вопросы об условиях?</h2>
 			<p class="text-gray-300 mb-8">
-				We're here to help. Reach out to our team for any questions or clarifications about our terms of service.
+				Мы здесь, чтобы помочь. Обратитесь к нашей команде с любыми вопросами или уточнениями об условиях использования.
 			</p>
 			<a
 				href="/contact/"
 				class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm"
 			>
-				Contact Support
+				Связаться с поддержкой
 				<ArrowRight size={18} />
 			</a>
 		</div>

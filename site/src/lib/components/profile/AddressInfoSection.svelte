@@ -25,8 +25,8 @@
 			<MapPin size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-lg font-semibold text-gray-900">Address Information</h2>
-			<p class="text-sm text-gray-600">Your residential details</p>
+			<h2 class="text-lg font-semibold text-gray-900">Адрес</h2>
+			<p class="text-sm text-gray-600">Ваши данные о проживании</p>
 		</div>
 	</div>
 
@@ -34,13 +34,13 @@
 		<!-- Current Address -->
 		<div class="md:col-span-2">
 			<label for="address" class="block text-sm font-medium text-gray-700 mb-2">
-				Current Address
+				Текущий адрес
 			</label>
 			<textarea
 				id="address"
 				bind:value={formData.address}
 				rows="3"
-				placeholder="Enter your current residential address..."
+				placeholder="Введите ваш текущий адрес проживания..."
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none resize-none"
 			></textarea>
 		</div>
@@ -49,7 +49,7 @@
 		<div class="md:col-span-2">
 			<div class="flex items-center justify-between mb-2">
 				<label for="permanent_address" class="block text-sm font-medium text-gray-700">
-					Permanent Address
+					Постоянный адрес
 				</label>
 				<label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
 					<input
@@ -58,14 +58,14 @@
 						onchange={handleSameAsCurrentAddress}
 						class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 					/>
-					Same as current address
+					Совпадает с текущим адресом
 				</label>
 			</div>
 			<textarea
 				id="permanent_address"
 				bind:value={formData.permanent_address}
 				rows="3"
-				placeholder="Enter your permanent address..."
+				placeholder="Введите ваш постоянный адрес..."
 				disabled={sameAsPermanent}
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
 			></textarea>
@@ -74,7 +74,7 @@
 		<!-- PIN Code -->
 		<div>
 			<label for="pincode" class="block text-sm font-medium text-gray-700 mb-2">
-				PIN Code
+				PIN-код
 			</label>
 			<input
 				id="pincode"

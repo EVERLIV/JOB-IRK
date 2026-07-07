@@ -27,7 +27,7 @@
 		// No authorization code
 		if (!code) {
 			status = 'error';
-			errorMessage = 'No authorization code received from Google.';
+			errorMessage = 'Код авторизации от Google не получен.';
 			setTimeout(() => {
 				goto('/login?error=no_code');
 			}, 3000);
@@ -52,7 +52,7 @@
 			}, 1500);
 		} catch (err) {
 			status = 'error';
-			errorMessage = err instanceof Error ? err.message : 'Authentication failed. Please try again.';
+			errorMessage = err instanceof Error ? err.message : 'Ошибка авторизации. Попробуйте снова.';
 
 			setTimeout(() => {
 				goto('/login?error=auth_failed');
@@ -62,21 +62,21 @@
 
 	function getOAuthErrorMessage(error: string): string {
 		const errorMessages: Record<string, string> = {
-			access_denied: 'You denied access. Please try again and authorize the application.',
-			invalid_request: 'Invalid request. Please try again.',
-			unauthorized_client: 'App is not authorized. Please contact support.',
-			unsupported_response_type: 'Configuration error. Please contact support.',
-			invalid_scope: 'Invalid permissions requested. Please contact support.',
-			server_error: 'Google server error. Please try again later.',
-			temporarily_unavailable: 'Service temporarily unavailable. Please try again later.'
+			access_denied: 'Вы отказали в доступе. Попробуйте снова и авторизуйте приложение.',
+			invalid_request: 'Недействительный запрос. Попробуйте снова.',
+			unauthorized_client: 'Приложение не авторизовано. Обратитесь в поддержку.',
+			unsupported_response_type: 'Ошибка конфигурации. Обратитесь в поддержку.',
+			invalid_scope: 'Запрошены недействительные разрешения. Обратитесь в поддержку.',
+			server_error: 'Ошибка сервера Google. Попробуйте позже.',
+			temporarily_unavailable: 'Сервис временно недоступен. Попробуйте позже.'
 		};
 
-		return errorMessages[error] || 'Authentication error occurred. Please try again.';
+		return errorMessages[error] || 'Произошла ошибка авторизации. Попробуйте снова.';
 	}
 </script>
 
 <svelte:head>
-	<title>Authenticating - PeelJobs</title>
+	<title>Авторизация - PeelJobs</title>
 </svelte:head>
 
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
@@ -88,9 +88,9 @@
 					<div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
 						<Loader2 class="w-8 h-8 text-blue-600 animate-spin" />
 					</div>
-					<h2 class="text-2xl font-semibold text-gray-900 mb-2">Authenticating...</h2>
+					<h2 class="text-2xl font-semibold text-gray-900 mb-2">Авторизация...</h2>
 					<p class="text-gray-600">
-						Please wait while we securely log you in with Google.
+						Пожалуйста, подождите, пока мы безопасно выполняем вход через Google.
 					</p>
 					<div class="mt-6 flex justify-center">
 						<div class="flex space-x-2">
@@ -106,12 +106,12 @@
 					<div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
 						<CheckCircle2 class="w-8 h-8 text-green-600" />
 					</div>
-					<h2 class="text-2xl font-semibold text-gray-900 mb-2">Success!</h2>
+					<h2 class="text-2xl font-semibold text-gray-900 mb-2">Успешно!</h2>
 					<p class="text-gray-600">
-						You've been authenticated successfully.
+						Авторизация прошла успешно.
 					</p>
 					<p class="text-sm text-gray-500 mt-4">
-						Redirecting you to {redirectPath}...
+						Перенаправление на {redirectPath}...
 					</p>
 				</div>
 			{:else}
@@ -120,12 +120,12 @@
 					<div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6">
 						<AlertCircle class="w-8 h-8 text-red-600" />
 					</div>
-					<h2 class="text-2xl font-semibold text-gray-900 mb-2">Authentication Failed</h2>
+					<h2 class="text-2xl font-semibold text-gray-900 mb-2">Ошибка авторизации</h2>
 					<p class="text-gray-600 mb-4">
 						{errorMessage}
 					</p>
 					<p class="text-sm text-gray-500">
-						Redirecting you back to login page...
+						Перенаправление на страницу входа...
 					</p>
 				</div>
 			{/if}
@@ -133,7 +133,7 @@
 
 		<!-- Security Note -->
 		<div class="mt-6 text-center text-sm text-gray-500">
-			<p>🔒 Secured with enterprise-grade encryption</p>
+			<p>🔒 Защищено шифрованием корпоративного уровня</p>
 		</div>
 	</div>
 </div>

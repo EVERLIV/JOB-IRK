@@ -39,7 +39,7 @@
 			employmentHistory = await getMyEmploymentHistory();
 		} catch (err) {
 			console.error('Failed to load employment history:', err);
-			toast.error('Failed to load employment history');
+			toast.error('Не удалось загрузить историю работы');
 		} finally {
 			loading = false;
 		}
@@ -90,27 +90,27 @@
 	async function handleSaveEmployment() {
 		// Validation
 		if (!formData.company.trim()) {
-			toast.error('Company name is required');
+			toast.error('Название компании обязательно');
 			return;
 		}
 
 		if (!formData.designation.trim()) {
-			toast.error('Designation is required');
+			toast.error('Должность обязательна');
 			return;
 		}
 
 		if (!formData.from_date) {
-			toast.error('Start date is required');
+			toast.error('Дата начала обязательна');
 			return;
 		}
 
 		if (!formData.current_job && !formData.to_date) {
-			toast.error('End date is required for past jobs');
+			toast.error('Дата окончания обязательна для прошлых мест работы');
 			return;
 		}
 
 		if (!formData.job_profile.trim()) {
-			toast.error('Job profile/description is required');
+			toast.error('Описание должности обязательно');
 			return;
 		}
 
@@ -133,17 +133,17 @@
 			if (editingEmploymentId) {
 				// Update existing employment
 				await updateEmploymentHistory(editingEmploymentId, payload);
-				toast.success('Employment record updated successfully!');
+				toast.success('Запись о работе успешно обновлена!');
 			} else {
 				// Add new employment
 				await addEmploymentHistory(payload);
-				toast.success('Employment record added successfully!');
+				toast.success('Запись о работе успешно добавлена!');
 			}
 
 			await loadEmploymentHistory();
 			closeForm();
 		} catch (err) {
-			const errorMessage = err instanceof Error ? err.message : 'Failed to save employment record';
+			const errorMessage = err instanceof Error ? err.message : 'Не удалось сохранить запись о работе';
 			toast.error(errorMessage);
 			console.error('Save employment error:', err);
 		} finally {
@@ -152,23 +152,23 @@
 	}
 
 	async function handleDeleteEmployment(employmentId: number, company: string) {
-		if (!confirm(`Are you sure you want to remove your employment at "${company}"?`)) {
+		if (!confirm(`Вы уверены, что хотите удалить запись о работе в "${company}"?`)) {
 			return;
 		}
 
 		try {
 			await deleteEmploymentHistory(employmentId);
-			toast.success('Employment record removed successfully!');
+			toast.success('Запись о работе успешно удалена!');
 			await loadEmploymentHistory();
 		} catch (err) {
-			const errorMessage = err instanceof Error ? err.message : 'Failed to delete employment record';
+			const errorMessage = err instanceof Error ? err.message : 'Не удалось удалить запись о работе';
 			toast.error(errorMessage);
 			console.error('Delete employment error:', err);
 		}
 	}
 
 	function formatDate(dateString?: string): string {
-		if (!dateString) return 'Present';
+		if (!dateString) return 'Настоящее время';
 		const date = new Date(dateString);
 		return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 	}
@@ -186,8 +186,8 @@
 				<Briefcase size={20} class="text-primary-600" />
 			</div>
 			<div>
-				<h2 class="text-lg font-semibold text-gray-900">Employment History</h2>
-				<p class="text-sm text-gray-600">Your work experience</p>
+				<h2 class="text-lg font-semibold text-gray-900">Опыт работы</h2>
+				<p class="text-sm text-gray-600">Ваш опыт работы</p>
 			</div>
 		</div>
 		<button
@@ -196,7 +196,7 @@
 			class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1 text-sm"
 		>
 			<Plus size={18} />
-			<span class="hidden sm:inline">Add Experience</span>
+			<span class="hidden sm:inline">Добавить опыт</span>
 		</button>
 	</div>
 
@@ -204,7 +204,7 @@
 	{#if loading}
 		<div class="flex flex-col items-center justify-center py-12">
 			<div class="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mb-4"></div>
-			<p class="text-gray-600">Loading employment history...</p>
+			<p class="text-gray-600">Загрузка истории работы...</p>
 		</div>
 	{:else if employmentHistory.length === 0 && !showAddForm}
 		<!-- Empty State -->
@@ -212,9 +212,9 @@
 			<div class="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
 				<Briefcase size={36} class="text-gray-400" />
 			</div>
-			<h3 class="text-xl font-semibold text-gray-900 mb-2">No employment history added yet</h3>
+			<h3 class="text-xl font-semibold text-gray-900 mb-2">История работы ещё не добавлена</h3>
 			<p class="text-gray-600 mb-6 max-w-md mx-auto">
-				Add your work experience to showcase your professional background to potential employers.
+				Добавьте ваш опыт работы, чтобы продемонстрировать профессиональное прошлое потенциальным работодателям.
 			</p>
 			<button
 				type="button"
@@ -222,7 +222,7 @@
 				class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1"
 			>
 				<Plus size={18} />
-				<span>Add Your First Job</span>
+				<span>Добавить первую работу</span>
 			</button>
 		</div>
 	{:else}
@@ -247,7 +247,7 @@
 									{employment.designation}
 									{#if employment.current_job}
 										<span class="text-xs bg-success-50 text-success-700 px-2.5 py-1 rounded-full border border-success-200">
-											Current
+											Текущая
 										</span>
 									{/if}
 								</h3>
@@ -268,7 +268,7 @@
 									type="button"
 									onclick={() => openEditForm(employment)}
 									class="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors"
-									title="Edit employment"
+									title="Редактировать запись"
 								>
 									<Pencil size={16} />
 								</button>
@@ -276,7 +276,7 @@
 									type="button"
 									onclick={() => handleDeleteEmployment(employment.id, employment.company)}
 									class="p-2 text-gray-400 hover:text-error-600 hover:bg-error-50 rounded-xl transition-colors"
-									title="Remove employment"
+									title="Удалить запись"
 								>
 									<Trash2 size={16} />
 								</button>
@@ -300,10 +300,10 @@
 				</div>
 				<div>
 					<h3 class="font-semibold text-gray-900 mb-1">
-						{employmentHistory.length} {employmentHistory.length === 1 ? 'Position' : 'Positions'} Added
+						{employmentHistory.length} {employmentHistory.length === 1 ? 'Позиция' : 'Позиции'} Добавлено
 					</h3>
 					<p class="text-sm text-gray-600">
-						Keep your employment history updated to showcase your career progression to recruiters.
+						Поддерживайте историю работы в актуальном состоянии, чтобы продемонстрировать рекрутерам ваш карьерный рост.
 					</p>
 				</div>
 			</div>
@@ -325,7 +325,7 @@
 				onkeydown={(e) => e.key === 'Escape' && closeForm()}
 				role="button"
 				tabindex="-1"
-				aria-label="Close modal"
+				aria-label="Закрыть модальное окно"
 			></div>
 
 			<!-- Modal -->
@@ -340,7 +340,7 @@
 								<Briefcase size={20} class="text-primary-600" />
 							</div>
 							<h3 class="text-lg font-semibold text-gray-900" id="modal-title">
-								{editingEmploymentId ? 'Edit Employment' : 'Add Employment'}
+								{editingEmploymentId ? 'Редактировать запись' : 'Добавить запись'}
 							</h3>
 						</div>
 						<button
@@ -357,13 +357,13 @@
 						<!-- Company Name -->
 						<div>
 							<label for="company" class="block text-sm font-medium text-gray-700 mb-2">
-								Company Name <span class="text-error-500">*</span>
+								Название компании <span class="text-error-500">*</span>
 							</label>
 							<input
 								type="text"
 								id="company"
 								bind:value={formData.company}
-								placeholder="e.g., Google, Microsoft"
+								placeholder="напр., Google, Microsoft"
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 							/>
 						</div>
@@ -371,13 +371,13 @@
 						<!-- Designation -->
 						<div>
 							<label for="designation" class="block text-sm font-medium text-gray-700 mb-2">
-								Designation/Job Title <span class="text-error-500">*</span>
+								Должность <span class="text-error-500">*</span>
 							</label>
 							<input
 								type="text"
 								id="designation"
 								bind:value={formData.designation}
-								placeholder="e.g., Senior Software Engineer"
+								placeholder="напр., Старший инженер-программист"
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 							/>
 						</div>
@@ -386,7 +386,7 @@
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<div>
 								<label for="from_date" class="block text-sm font-medium text-gray-700 mb-2">
-									Start Date <span class="text-error-500">*</span>
+									Дата начала <span class="text-error-500">*</span>
 								</label>
 								<input
 									type="date"
@@ -397,7 +397,7 @@
 							</div>
 							<div>
 								<label for="to_date" class="block text-sm font-medium text-gray-700 mb-2">
-									End Date {#if !formData.current_job}<span class="text-error-500">*</span>{/if}
+									Дата окончания {#if !formData.current_job}<span class="text-error-500">*</span>{/if}
 								</label>
 								<input
 									type="date"
@@ -419,8 +419,8 @@
 									class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 								/>
 								<div>
-									<p class="font-medium text-gray-900">I currently work here</p>
-									<p class="text-sm text-gray-600">Check this if this is your current job</p>
+									<p class="font-medium text-gray-900">Я работаю здесь в настоящее время</p>
+									<p class="text-sm text-gray-600">Отметьте, если это ваша текущая работа</p>
 								</div>
 							</label>
 						</div>
@@ -428,17 +428,17 @@
 						<!-- Job Profile/Description -->
 						<div>
 							<label for="job_profile" class="block text-sm font-medium text-gray-700 mb-2">
-								Job Profile/Description <span class="text-error-500">*</span>
+								Описание должности <span class="text-error-500">*</span>
 							</label>
 							<textarea
 								id="job_profile"
 								bind:value={formData.job_profile}
 								rows="5"
-								placeholder="Describe your key responsibilities, achievements, and projects..."
+								placeholder="Опишите ваши основные обязанности, достижения и проекты..."
 								class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none resize-none"
 							></textarea>
 							<p class="mt-2 text-xs text-gray-500">
-								Include your main responsibilities, achievements, and technologies used
+								Включите ваши основные обязанности, достижения и использованные технологии
 							</p>
 						</div>
 
@@ -450,7 +450,7 @@
 								class="px-5 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-full font-medium hover:bg-gray-50 transition-colors"
 								disabled={saving}
 							>
-								Cancel
+								Отмена
 							</button>
 							<button
 								type="submit"
@@ -459,10 +459,10 @@
 							>
 								{#if saving}
 									<Loader size={18} class="animate-spin" />
-									Saving...
+									Сохранение...
 								{:else}
 									<Save size={18} />
-									{editingEmploymentId ? 'Update Employment' : 'Add Employment'}
+									{editingEmploymentId ? 'Обновить запись' : 'Добавить запись'}
 								{/if}
 							</button>
 						</div>

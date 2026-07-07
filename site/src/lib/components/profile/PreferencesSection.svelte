@@ -18,8 +18,8 @@
 			<Settings size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-lg font-semibold text-gray-900">Job Preferences</h2>
-			<p class="text-sm text-gray-600">Your job search preferences and settings</p>
+			<h2 class="text-lg font-semibold text-gray-900">Предпочтения</h2>
+			<p class="text-sm text-gray-600">Настройки и предпочтения поиска работы</p>
 		</div>
 	</div>
 
@@ -33,8 +33,8 @@
 					class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 				/>
 				<div>
-					<p class="font-medium text-gray-900">Open to Relocation</p>
-					<p class="text-sm text-gray-600">Willing to relocate for the right opportunity</p>
+					<p class="font-medium text-gray-900">Открыт к релокации</p>
+					<p class="text-sm text-gray-600">Готовы переехать для подходящей возможности</p>
 				</div>
 			</label>
 		</div>
@@ -48,8 +48,8 @@
 					class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 				/>
 				<div>
-					<p class="font-medium text-gray-900">Actively Looking for Jobs</p>
-					<p class="text-sm text-gray-600">Currently searching for new opportunities</p>
+					<p class="font-medium text-gray-900">Активно ищу работу</p>
+					<p class="text-sm text-gray-600">В настоящее время ищу новые возможности</p>
 				</div>
 			</label>
 		</div>
@@ -63,8 +63,8 @@
 					class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 				/>
 				<div>
-					<p class="font-medium text-gray-900">Open to Offers</p>
-					<p class="text-sm text-gray-600">Open to hearing about new opportunities</p>
+					<p class="font-medium text-gray-900">Открыт к предложениям</p>
+					<p class="text-sm text-gray-600">Открыт к обсуждению новых возможностей</p>
 				</div>
 			</label>
 		</div>
@@ -78,8 +78,8 @@
 					class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 				/>
 				<div>
-					<p class="font-medium text-gray-900">Email Notifications</p>
-					<p class="text-sm text-gray-600">Receive job alerts and updates via email</p>
+					<p class="font-medium text-gray-900">Уведомления по email</p>
+					<p class="text-sm text-gray-600">Получайте вакансии и обновления по электронной почте</p>
 				</div>
 			</label>
 		</div>
@@ -93,8 +93,8 @@
 					class="w-5 h-5 mt-0.5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
 				/>
 				<div>
-					<p class="font-medium text-gray-900">Show Email to Recruiters</p>
-					<p class="text-sm text-gray-600">Allow recruiters to see your email address</p>
+					<p class="font-medium text-gray-900">Показывать email рекрутерам</p>
+					<p class="text-sm text-gray-600">Разрешить рекрутерам видеть ваш адрес электронной почты</p>
 				</div>
 			</label>
 		</div>

@@ -90,11 +90,11 @@
       <div class="p-6 border-b border-gray-100 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <h2 id="modal-title" class="text-xl font-semibold text-gray-900">
-            Select {title}
+            Выбрать {title}
           </h2>
           {#if selectedCount > 0}
             <span class="bg-primary-50 text-primary-700 text-sm px-3 py-1 rounded-full font-medium">
-              {selectedCount} selected
+              {selectedCount} выбрано
             </span>
           {/if}
         </div>
@@ -102,7 +102,7 @@
           type="button"
           onclick={handleClose}
           class="p-2 hover:bg-gray-100 rounded-full transition-colors"
-          aria-label="Close modal"
+          aria-label="Закрыть модальное окно"
         >
           <X class="w-5 h-5 text-gray-500" />
         </button>
@@ -117,7 +117,7 @@
           <input
             type="text"
             bind:value={searchTerm}
-            placeholder="Search {title.toLowerCase()}..."
+            placeholder="Поиск {title.toLowerCase()}..."
             class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
           />
         </div>
@@ -136,7 +136,7 @@
                 checked={option.checked}
                 onchange={() => handleToggle(option.value)}
                 class="w-4 h-4 text-primary-600 rounded-lg border-gray-300 focus:ring-primary-500 focus:ring-2"
-                aria-label="Filter by {option.name}"
+                aria-label="Фильтровать по {option.name}"
               />
               <span class="text-gray-700 flex-1 {option.checked ? 'text-primary-700 font-medium' : ''}">{option.name}</span>
               <span class="text-gray-400 text-xs font-medium">({option.count.toLocaleString()})</span>
@@ -149,8 +149,8 @@
             <div class="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-4">
               <Search class="w-8 h-8 text-gray-400" />
             </div>
-            <p class="text-gray-600 font-medium">No {title.toLowerCase()} found</p>
-            <p class="text-gray-500 text-sm mt-1">Try a different search term</p>
+            <p class="text-gray-600 font-medium">Ничего не найдено</p>
+            <p class="text-gray-500 text-sm mt-1">Попробуйте другой поисковый запрос</p>
           </div>
         {/if}
       </div>
@@ -162,14 +162,14 @@
           onclick={handleClose}
           class="flex-1 px-6 py-3 border border-gray-200 text-gray-700 rounded-full hover:bg-white hover:border-gray-300 transition-all font-medium"
         >
-          Cancel
+          Отмена
         </button>
         <button
           type="button"
           onclick={handleApply}
           class="flex-1 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-full transition-colors font-medium elevation-1 hover:elevation-2"
         >
-          Apply Filters
+          Применить
         </button>
       </div>
     </div>

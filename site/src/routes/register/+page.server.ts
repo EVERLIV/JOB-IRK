@@ -19,7 +19,7 @@ export const actions: Actions = {
 		// Validate required fields
 		if (!email || !password || !confirm_password || !first_name) {
 			return fail(400, {
-				message: 'Please fill in all required fields',
+				message: 'Заполните все обязательные поля',
 				email
 			});
 		}
@@ -27,7 +27,7 @@ export const actions: Actions = {
 		// Validate passwords match
 		if (password !== confirm_password) {
 			return fail(400, {
-				message: 'Passwords do not match',
+				message: 'Пароли не совпадают',
 				email
 			});
 		}
@@ -51,7 +51,7 @@ export const actions: Actions = {
 
 			if (!response.ok) {
 				// Extract error message from API response
-				let errorMessage = 'Registration failed. Please try again.';
+				let errorMessage = 'Ошибка регистрации. Пожалуйста, попробуйте снова.';
 
 				if (data.email) {
 					errorMessage = Array.isArray(data.email) ? data.email[0] : data.email;
@@ -83,7 +83,7 @@ export const actions: Actions = {
 		} catch (error) {
 			console.error('Registration error:', error);
 			return fail(500, {
-				message: 'Unable to connect to server. Please try again.',
+				message: 'Не удалось подключиться к серверу. Пожалуйста, попробуйте снова.',
 				email
 			});
 		}

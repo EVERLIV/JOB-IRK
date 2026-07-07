@@ -34,11 +34,11 @@
 		const remainingMonths = months % 12;
 
 		if (years > 0 && remainingMonths > 0) {
-			return `${years} year${years > 1 ? 's' : ''} ${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+			return `${years} г. ${remainingMonths} мес.`;
 		} else if (years > 0) {
-			return `${years} year${years > 1 ? 's' : ''}`;
+			return `${years} г.`;
 		} else {
-			return `${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+			return `${remainingMonths} мес.`;
 		}
 	}
 </script>
@@ -90,7 +90,7 @@
 					<Calendar size={14} class="text-gray-400" />
 					<span>
 						{formatDate(education.from_date)} - {education.current_education
-							? 'Present'
+							? 'Настоящее время'
 							: formatDate(education.to_date)}
 					</span>
 				</div>
@@ -104,7 +104,7 @@
 			{#if education.score}
 				<div class="mt-3 flex items-center gap-1.5 text-xs md:text-sm text-gray-600 pl-0 md:pl-13">
 					<Award size={14} class="text-gray-400" />
-					<span>Score: <span class="font-medium text-gray-900">{education.score}</span></span>
+					<span>Оценка: <span class="font-medium text-gray-900">{education.score}</span></span>
 				</div>
 			{/if}
 
@@ -112,7 +112,7 @@
 			{#if education.current_education}
 				<div class="mt-3 pl-0 md:pl-13">
 					<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-50 text-primary-700 border border-primary-200">
-						Currently Pursuing
+						В процессе обучения
 					</span>
 				</div>
 			{/if}
@@ -124,7 +124,7 @@
 				type="button"
 				onclick={() => onEdit(education)}
 				class="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors"
-				aria-label="Edit education"
+				aria-label="Редактировать образование"
 			>
 				<Pencil size={16} />
 			</button>
@@ -132,7 +132,7 @@
 				type="button"
 				onclick={() => onDelete(education.id)}
 				class="p-2 text-gray-400 hover:text-error-600 hover:bg-error-50 rounded-xl transition-colors"
-				aria-label="Delete education"
+				aria-label="Удалить образование"
 			>
 				<Trash2 size={16} />
 			</button>

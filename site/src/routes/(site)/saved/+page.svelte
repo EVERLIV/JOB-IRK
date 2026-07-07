@@ -86,15 +86,15 @@
 	);
 
 	function handleRemove(jobId: number) {
-		if (confirm('Are you sure you want to remove this job from your saved list?')) {
+		if (confirm('Вы уверены, что хотите удалить эту вакансию из сохранённых?')) {
 			savedJobs = savedJobs.filter((job) => job.id !== jobId);
 		}
 	}
 </script>
 
 <svelte:head>
-	<title>Saved Jobs - PeelJobs</title>
-	<meta name="description" content="View all your saved jobs in one place" />
+	<title>Сохранённые вакансии - PeelJobs</title>
+	<meta name="description" content="Просматривайте все сохранённые вакансии в одном месте" />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -110,11 +110,11 @@
 		<nav class="mb-6" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Dashboard</a>
+					<a href="/jobseeker-dashboard/" class="hover:text-white transition-colors">Панель управления</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Saved Jobs</span>
+					<span class="text-white font-medium">Сохранённые вакансии</span>
 				</li>
 			</ol>
 		</nav>
@@ -132,13 +132,13 @@
 						class="text-3xl lg:text-4xl font-semibold tracking-tight mb-1 animate-fade-in-up"
 						style="opacity: 0; animation-delay: 100ms;"
 					>
-						Saved Jobs
+						Сохранённые вакансии
 					</h1>
 					<p
 						class="text-gray-300 animate-fade-in-up"
 						style="opacity: 0; animation-delay: 150ms;"
 					>
-						Keep track of jobs you're interested in
+						Отслеживайте интересные вам вакансии
 					</p>
 				</div>
 			</div>
@@ -149,7 +149,7 @@
 				style="opacity: 0; animation-delay: 200ms;"
 			>
 				<div class="bg-white/10 rounded-full px-4 py-2 backdrop-blur-sm">
-					<span class="text-sm text-gray-300">Saved:</span>
+					<span class="text-sm text-gray-300">Сохранено:</span>
 					<span class="text-lg font-semibold ml-1">{savedJobs.length}</span>
 				</div>
 			</div>
@@ -172,7 +172,7 @@
 				<input
 					type="text"
 					bind:value={searchQuery}
-					placeholder="Search saved jobs by title, company, or location..."
+					placeholder="Поиск сохранённых вакансий по названию, компании или месту..."
 					class="w-full pl-11 pr-4 py-3 border border-border rounded-xl bg-gray-50 text-black placeholder-muted focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
 				/>
 			</div>
@@ -190,19 +190,19 @@
 					<Heart size={36} class="text-muted" />
 				</div>
 				<h3 class="text-xl font-semibold text-black mb-2">
-					{searchQuery ? 'No jobs found' : 'No saved jobs yet'}
+					{searchQuery ? 'Вакансии не найдены' : 'Нет сохранённых вакансий'}
 				</h3>
 				<p class="text-muted mb-6 max-w-md mx-auto">
 					{searchQuery
-						? 'Try adjusting your search to find what you are looking for.'
-						: 'Browse jobs and save the ones you are interested in to review later.'}
+						? 'Попробуйте изменить параметры поиска.'
+						: 'Просматривайте вакансии и сохраняйте интересные, чтобы вернуться к ним позже.'}
 				</p>
 				<a
 					href="/jobs/"
 					class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-full hover:bg-primary-hover transition-colors shadow-sm"
 				>
 					<Search size={18} />
-					Browse Jobs
+					Искать вакансии
 				</a>
 			</div>
 		{:else}
@@ -231,7 +231,7 @@
 									<button
 										onclick={() => handleRemove(job.id)}
 										class="p-1.5 text-muted hover:text-error hover:bg-error-light rounded-lg transition-colors flex-shrink-0"
-										title="Remove from saved"
+										title="Убрать из сохранённых"
 									>
 										<Trash2 size={16} />
 									</button>
@@ -262,7 +262,7 @@
 									</span>
 									<span class="text-xs text-muted flex items-center gap-1">
 										<Clock size={12} />
-										Posted {job.posted}
+										Опубликовано {job.posted}
 									</span>
 								</div>
 
@@ -284,12 +284,12 @@
 										class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary-hover transition-colors"
 									>
 										<ExternalLink size={14} />
-										View Job
+										Вакансия
 									</a>
 									<button
 										class="px-4 py-2.5 text-sm font-medium text-primary border border-primary rounded-full hover:bg-primary/10 transition-colors"
 									>
-										Apply Now
+										Откликнуться
 									</button>
 								</div>
 							</div>
@@ -313,11 +313,11 @@
 					</div>
 					<div>
 						<h3 class="font-semibold text-black mb-1">
-							{savedJobs.length} Job{savedJobs.length !== 1 ? 's' : ''} Saved
+							Сохранено вакансий: {savedJobs.length}
 						</h3>
 						<p class="text-sm text-muted">
-							Don't miss out! Apply to your saved jobs before the deadlines.
-							Jobs with upcoming deadlines are highlighted for your convenience.
+							Не упустите возможность! Откликайтесь на сохранённые вакансии до истечения сроков.
+							Вакансии с приближающимися сроками выделены для вашего удобства.
 						</p>
 					</div>
 				</div>

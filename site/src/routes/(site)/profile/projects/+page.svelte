@@ -22,7 +22,7 @@
 			projectList = await getMyProjects();
 		} catch (error) {
 			console.error('Failed to load projects:', error);
-			toast.error('Failed to load projects');
+			toast.error('Не удалось загрузить проекты');
 		} finally {
 			loading = false;
 		}
@@ -39,17 +39,17 @@
 	}
 
 	async function handleDeleteProject(id: number) {
-		if (!confirm('Are you sure you want to delete this project?')) {
+		if (!confirm('Вы уверены, что хотите удалить этот проект?')) {
 			return;
 		}
 
 		try {
 			await deleteProject(id);
-			toast.success('Project deleted successfully!');
+			toast.success('Проект успешно удалён!');
 			await loadProjects();
 		} catch (error) {
 			console.error('Failed to delete project:', error);
-			toast.error('Failed to delete project. Please try again.');
+			toast.error('Не удалось удалить проект. Попробуйте ещё раз.');
 		}
 	}
 
@@ -64,8 +64,8 @@
 </script>
 
 <svelte:head>
-	<title>Projects - Profile - PeelJobs</title>
-	<meta name="description" content="Showcase your portfolio and accomplishments" />
+	<title>Проекты - Профиль - PeelJobs</title>
+	<meta name="description" content="Продемонстрируйте ваше портфолио и достижения" />
 </svelte:head>
 
 <!-- Header -->
@@ -76,8 +76,8 @@
 				<FolderOpen size={20} class="text-primary-600" />
 			</div>
 			<div>
-				<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Projects</h2>
-				<p class="text-sm text-gray-600">Showcase your portfolio and accomplishments</p>
+				<h2 class="text-xl lg:text-2xl font-bold text-gray-900">Проекты</h2>
+				<p class="text-sm text-gray-600">Продемонстрируйте ваше портфолио и достижения</p>
 			</div>
 		</div>
 		<button
@@ -86,7 +86,7 @@
 			class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1 text-sm"
 		>
 			<Plus size={18} />
-			<span class="hidden sm:inline">Add Project</span>
+			<span class="hidden sm:inline">Добавить проект</span>
 		</button>
 	</div>
 </div>
@@ -100,7 +100,7 @@
 		<div
 			class="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"
 		></div>
-		<p class="text-gray-600">Loading projects...</p>
+		<p class="text-gray-600">Загрузка проектов...</p>
 	</div>
 {:else if projectList.length === 0}
 	<!-- Empty State -->
@@ -113,10 +113,9 @@
 		>
 			<FolderOpen size={36} class="text-gray-400" />
 		</div>
-		<h3 class="text-xl font-semibold text-gray-900 mb-2">No projects added yet</h3>
+		<h3 class="text-xl font-semibold text-gray-900 mb-2">Проекты ещё не добавлены</h3>
 		<p class="text-gray-600 mb-6 max-w-md mx-auto">
-			Add projects to showcase your work, skills, and achievements. Projects help recruiters
-			understand your practical experience.
+			Добавьте проекты, чтобы продемонстрировать вашу работу, навыки и достижения. Проекты помогают рекрутерам понять ваш практический опыт.
 		</p>
 		<button
 			type="button"
@@ -124,7 +123,7 @@
 			class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors elevation-1"
 		>
 			<Plus size={18} />
-			<span>Add Your First Project</span>
+			<span>Добавить первый проект</span>
 		</button>
 	</div>
 {:else}
@@ -153,11 +152,10 @@
 			</div>
 			<div>
 				<h3 class="font-semibold text-gray-900 mb-1">
-					{projectList.length} {projectList.length === 1 ? 'Project' : 'Projects'} Showcased
+					{projectList.length} {projectList.length === 1 ? 'Проект' : 'Проекта'} в портфолио
 				</h3>
 				<p class="text-sm text-gray-600">
-					Your projects demonstrate your skills and experience to potential employers. Keep them
-					updated with your latest work!
+					Ваши проекты демонстрируют ваши навыки и опыт потенциальным работодателям. Обновляйте их вашей последней работой!
 				</p>
 			</div>
 		</div>

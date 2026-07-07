@@ -36,7 +36,7 @@
   <div class="flex flex-wrap items-center gap-2 mb-6 p-4 bg-surface-50 border border-gray-100 rounded-2xl">
     <div class="flex items-center gap-2 text-sm font-medium text-gray-600 mr-2">
       <SlidersHorizontal class="w-4 h-4" />
-      <span>Filters:</span>
+      <span>Фильтры:</span>
     </div>
 
     {#each chips as chip (chip.type + chip.value)}
@@ -57,7 +57,7 @@
         class="ml-auto inline-flex items-center gap-1.5 px-4 py-1.5 bg-gray-900 hover:bg-gray-800 text-white rounded-full text-sm font-medium transition-colors"
       >
         <X class="w-4 h-4" />
-        Clear All
+        Сбросить
       </button>
     {/if}
   </div>

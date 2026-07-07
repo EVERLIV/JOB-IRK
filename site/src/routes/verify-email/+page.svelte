@@ -49,8 +49,8 @@
 </script>
 
 <svelte:head>
-  <title>Verify Email - PeelJobs</title>
-  <meta name="description" content="Verify your PeelJobs email address" />
+  <title>Подтверждение email - PeelJobs</title>
+  <meta name="description" content="Подтвердите ваш email на PeelJobs" />
 </svelte:head>
 
 <div class="min-h-screen bg-surface flex items-center justify-center p-6">
@@ -75,11 +75,11 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Verifying Your Email
+            Подтверждение email
           </h2>
 
           <p class="text-muted mb-6">
-            Please wait while we verify your email address...
+            Пожалуйста, подождите, пока мы подтверждаем ваш email...
           </p>
 
           <div class="flex justify-center gap-1">
@@ -100,17 +100,17 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Check Your Email
+            Проверьте почту
           </h2>
 
           <p class="text-muted mb-6">
-            We've sent a verification link to your email address. Please click the link to verify your account.
+            Мы отправили ссылку для подтверждения на ваш email. Нажмите на ссылку, чтобы подтвердить аккаунт.
           </p>
 
           {#if email}
             <div class="bg-primary/10 rounded-xl p-4 mb-6">
               <p class="text-sm text-muted mb-1">
-                Verification email sent to:
+                Письмо для подтверждения отправлено на:
               </p>
               <p class="text-primary font-medium">
                 {email}
@@ -122,7 +122,7 @@
             <div class="p-4 bg-success-light border border-success/20 rounded-lg mb-4 animate-scale-in">
               <div class="flex items-center gap-2 text-success">
                 <CheckCircle size={16} />
-                <span class="text-sm font-medium">Verification email sent! Check your inbox.</span>
+                <span class="text-sm font-medium">Письмо для подтверждения отправлено! Проверьте почту.</span>
               </div>
             </div>
           {/if}
@@ -155,16 +155,16 @@
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Sending...
+                Отправка...
               {:else}
                 <RefreshCw size={18} />
-                Resend Verification Email
+                Отправить повторно
               {/if}
             </button>
           </form>
 
           <p class="text-sm text-muted">
-            Didn't receive the email? Check your spam folder or request a new verification link above.
+            Не получили письмо? Проверьте папку со спамом или запросите новую ссылку для подтверждения выше.
           </p>
         </div>
 
@@ -176,19 +176,19 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Email Verified!
+            Email подтверждён!
           </h2>
 
           <p class="text-muted mb-6">
-            Your email has been verified. You can now access all features of PeelJobs.
+            Ваш email подтверждён. Теперь вам доступен весь функционал PeelJobs.
           </p>
 
           <div class="bg-success-light rounded-lg p-4 mb-6">
             <p class="text-sm font-medium text-success mb-1">
-              Welcome to PeelJobs!
+              Добро пожаловать в PeelJobs!
             </p>
             <p class="text-sm text-muted">
-              Redirecting you to home page...
+              Перенаправление на главную страницу...
             </p>
           </div>
 
@@ -196,7 +196,7 @@
             href="/"
             class="inline-block w-full px-5 py-3.5 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-all shadow-sm hover:shadow-md text-center"
           >
-            Go to Home
+            На главную
           </a>
         </div>
 
@@ -208,17 +208,17 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Link Expired
+            Ссылка устарела
           </h2>
 
           <p class="text-muted mb-6">
-            This verification link has expired. Don't worry, we can send you a new one!
+            Ссылка для подтверждения устарела. Не волнуйтесь, мы можем отправить новую!
           </p>
 
           {#if email}
             <div class="bg-primary/10 rounded-xl p-4 mb-6 text-left">
               <p class="text-sm text-muted mb-1">
-                Sending verification email to:
+                Отправка письма для подтверждения на:
               </p>
               <p class="text-primary font-medium">
                 {email}
@@ -230,7 +230,7 @@
             <div class="p-4 bg-success-light border border-success/20 rounded-lg mb-4 animate-scale-in">
               <div class="flex items-center gap-2 text-success">
                 <CheckCircle size={16} />
-                <span class="text-sm font-medium">Verification email sent! Check your inbox.</span>
+                <span class="text-sm font-medium">Письмо для подтверждения отправлено! Проверьте почту.</span>
               </div>
             </div>
           {/if}
@@ -263,16 +263,16 @@
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Sending...
+                Отправка...
               {:else}
                 <RefreshCw size={18} />
-                Resend Verification Email
+                Отправить повторно
               {/if}
             </button>
           </form>
 
           <a href="/login/" class="text-muted hover:text-primary font-medium text-sm transition-colors">
-            Back to Sign In
+            Вернуться к входу
           </a>
         </div>
 
@@ -284,11 +284,11 @@
           </div>
 
           <h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-3">
-            Verification Failed
+            Ошибка подтверждения
           </h2>
 
           <p class="text-muted mb-2">
-            We couldn't verify your email address.
+            Не удалось подтвердить ваш email.
           </p>
 
           {#if errorMessage}
@@ -299,20 +299,20 @@
 
           <div class="bg-primary/10 rounded-lg p-4 mb-6 text-left">
             <p class="text-sm font-medium text-black mb-2">
-              What you can do:
+              Что вы можете сделать:
             </p>
             <ul class="text-sm text-muted space-y-1">
               <li class="flex items-start gap-2">
                 <span class="text-primary">•</span>
-                Request a new verification email
+                Запросить новое письмо для подтверждения
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-primary">•</span>
-                Check if you already verified your email
+                Проверьте, возможно вы уже подтвердили email
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-primary">•</span>
-                Contact support if the problem persists
+                Обратитесь в поддержку, если проблема не устранена
               </li>
             </ul>
           </div>
@@ -321,7 +321,7 @@
             <div class="p-4 bg-success-light border border-success/20 rounded-lg mb-4 animate-scale-in">
               <div class="flex items-center gap-2 text-success">
                 <CheckCircle size={16} />
-                <span class="text-sm font-medium">Verification email sent! Check your inbox.</span>
+                <span class="text-sm font-medium">Письмо для подтверждения отправлено! Проверьте почту.</span>
               </div>
             </div>
           {/if}
@@ -349,10 +349,10 @@
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Sending...
+                  Отправка...
                 {:else}
                   <RefreshCw size={18} />
-                  Request New Verification Email
+                  Запросить новое письмо для подтверждения
                 {/if}
               </button>
             </form>
@@ -363,13 +363,13 @@
               href="/login/"
               class="text-primary hover:text-primary font-medium text-sm transition-colors"
             >
-              Try Signing In
+              Попробовать войти
             </a>
             <a
               href="/contact/"
               class="text-muted hover:text-primary font-medium text-sm transition-colors"
             >
-              Contact Support
+              Связаться с поддержкой
             </a>
           </div>
         </div>

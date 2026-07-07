@@ -14,9 +14,9 @@
 	};
 
 	function formatExperience(year?: string, month?: string): string {
-		if (!year && !month) return 'Not specified';
-		const years = year ? `${year} year${parseInt(year) !== 1 ? 's' : ''}` : '';
-		const months = month ? `${month} month${parseInt(month) !== 1 ? 's' : ''}` : '';
+		if (!year && !month) return 'Не указано';
+		const years = year ? `${year} г.${parseInt(year) !== 1 ? '' : ''}` : '';
+		const months = month ? `${month} мес.${parseInt(month) !== 1 ? '' : ''}` : '';
 		return [years, months].filter(Boolean).join(' ');
 	}
 </script>
@@ -27,8 +27,8 @@
 			<Briefcase size={20} class="text-primary-600" />
 		</div>
 		<div>
-			<h2 class="text-lg font-semibold text-gray-900">Professional Information</h2>
-			<p class="text-sm text-gray-600">Your career details and preferences</p>
+			<h2 class="text-lg font-semibold text-gray-900">Профессиональная информация</h2>
+			<p class="text-sm text-gray-600">Ваши карьерные данные и предпочтения</p>
 		</div>
 	</div>
 
@@ -36,13 +36,13 @@
 		<!-- Job Role -->
 		<div class="md:col-span-2">
 			<label for="job_role" class="block text-sm font-medium text-gray-700 mb-2">
-				Current/Desired Job Role
+				Текущая/Желаемая должность
 			</label>
 			<input
 				id="job_role"
 				type="text"
 				bind:value={formData.job_role}
-				placeholder="e.g., Full Stack Developer"
+				placeholder="напр., Full Stack разработчик"
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 			/>
 		</div>
@@ -50,20 +50,20 @@
 		<!-- Professional Summary -->
 		<div class="md:col-span-2">
 			<label for="profile_description" class="block text-sm font-medium text-gray-700 mb-2">
-				Professional Summary
+				Профессиональное резюме
 			</label>
 			<textarea
 				id="profile_description"
 				bind:value={formData.profile_description}
 				rows="4"
-				placeholder="Brief description of your professional background and goals..."
+				placeholder="Краткое описание вашего профессионального опыта и целей..."
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none resize-none"
 			></textarea>
 		</div>
 
 		<!-- Total Experience -->
 		<fieldset class="border-0 p-0 m-0">
-			<legend class="block text-sm font-medium text-gray-700 mb-2">Total Experience</legend>
+			<legend class="block text-sm font-medium text-gray-700 mb-2">Общий опыт</legend>
 			<div class="grid grid-cols-2 gap-3">
 				<div>
 					<input
@@ -71,7 +71,7 @@
 						bind:value={formData.year}
 						min="0"
 						max="50"
-						placeholder="Years"
+						placeholder="Годы"
 						class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 					/>
 				</div>
@@ -81,7 +81,7 @@
 						bind:value={formData.month}
 						min="0"
 						max="11"
-						placeholder="Months"
+						placeholder="Месяцы"
 						class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 					/>
 				</div>
@@ -94,13 +94,13 @@
 		<!-- Notice Period -->
 		<div>
 			<label for="notice_period" class="block text-sm font-medium text-gray-700 mb-2">
-				Notice Period
+				Срок уведомления
 			</label>
 			<input
 				id="notice_period"
 				type="text"
 				bind:value={formData.notice_period}
-				placeholder="e.g., 30 days, Immediate"
+				placeholder="напр., 30 дней, Немедленно"
 				class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all outline-none"
 			/>
 		</div>
@@ -108,7 +108,7 @@
 		<!-- Current Salary -->
 		<div>
 			<label for="current_salary" class="block text-sm font-medium text-gray-700 mb-2">
-				Current Salary (Annual)
+				Текущая зарплата (годовая)
 			</label>
 			<div class="relative">
 				<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -127,7 +127,7 @@
 		<!-- Expected Salary -->
 		<div>
 			<label for="expected_salary" class="block text-sm font-medium text-gray-700 mb-2">
-				Expected Salary (Annual)
+				Ожидаемая зарплата (годовая)
 			</label>
 			<div class="relative">
 				<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">

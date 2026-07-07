@@ -3,60 +3,60 @@
 
 	// Features included in the free plan
 	const includedFeatures = [
-		{ name: 'Unlimited Job Postings', icon: Zap },
-		{ name: 'Access to Entire Candidate Database', icon: Users },
-		{ name: 'Advanced Search & Filters', icon: Target },
-		{ name: 'Application Tracking System', icon: TrendingUp },
-		{ name: 'Email Notifications', icon: Clock },
-		{ name: 'Company Profile Page', icon: BadgeCheck },
-		{ name: 'Resume Database Access', icon: Users },
-		{ name: 'Candidate Messaging', icon: Heart },
-		{ name: 'Priority Customer Support', icon: Shield },
-		{ name: 'Analytics & Insights', icon: Award }
+		{ name: 'Безлимитные публикации вакансий', icon: Zap },
+		{ name: 'Доступ ко всей базе кандидатов', icon: Users },
+		{ name: 'Расширенный поиск и фильтры', icon: Target },
+		{ name: 'Система отслеживания заявок', icon: TrendingUp },
+		{ name: 'Email-уведомления', icon: Clock },
+		{ name: 'Страница профиля компании', icon: BadgeCheck },
+		{ name: 'Доступ к базе резюме', icon: Users },
+		{ name: 'Переписка с кандидатами', icon: Heart },
+		{ name: 'Приоритетная поддержка', icon: Shield },
+		{ name: 'Аналитика и инсайты', icon: Award }
 	];
 
 	// What competitors charge for
 	const competitorFeatures = [
-		{ name: 'Job Posting Fees', free: true, competitors: false },
-		{ name: 'Resume Database Access', free: true, competitors: false },
-		{ name: 'Featured Listings', free: true, competitors: false },
-		{ name: 'Unlimited Applications', free: true, competitors: false },
-		{ name: 'Advanced Analytics', free: true, competitors: false }
+		{ name: 'Платные публикации вакансий', free: true, competitors: false },
+		{ name: 'Доступ к базе резюме', free: true, competitors: false },
+		{ name: 'Рекомендованные публикации', free: true, competitors: false },
+		{ name: 'Безлимитные заявки', free: true, competitors: false },
+		{ name: 'Расширенная аналитика', free: true, competitors: false }
 	];
 
 	// FAQs
 	const faqs = [
 		{
-			question: 'Is PeelJobs really 100% free?',
-			answer: "Yes! We never charge for job postings, candidate access, or any recruiting features. Our mission is to connect employers with the best talent in India at zero cost."
+			question: 'PeelJobs действительно на 100% бесплатный?',
+			answer: "Да! Мы никогда не берём плату за публикации вакансий, доступ к кандидатам или любые функции рекрутинга. Наша миссия — связывать работодателей с лучшими специалистами в India без каких-либо затрат."
 		},
 		{
-			question: 'Are there any hidden fees or premium plans?',
-			answer: "No hidden fees whatsoever. We don't have premium plans because we believe all employers deserve equal access to top talent, regardless of their budget."
+			question: 'Есть ли скрытые платежи или премиум-тарифы?',
+			answer: "Никаких скрытых платежей. У нас нет премиум-тарифов, потому что мы считаем, что все работодатели заслуживают равного доступа к лучшим специалистам, независимо от бюджета."
 		},
 		{
-			question: 'How do you make money if everything is free?',
-			answer: "We're supported by strategic partnerships and display advertising. We never compromise the quality of our platform or charge employers for core recruiting features."
+			question: 'Как вы зарабатываете, если всё бесплатно?',
+			answer: "Нас поддерживают стратегические партнёрства и рекламные показы. Мы никогда не снижаем качество платформы и не берём с работодателей плату за основные функции рекрутинга."
 		},
 		{
-			question: 'Will you start charging in the future?',
-			answer: "No. We're committed to keeping PeelJobs free forever. Our goal is to make quality hiring accessible to every employer in India, from startups to enterprises."
+			question: 'Вы начнёте брать плату в будущем?',
+			answer: "Нет. Мы обязуемся сохранять PeelJobs бесплатным навсегда. Наша цель — сделать качественный найм доступным для каждого работодателя в India, от стартапов до крупных компаний."
 		},
 		{
-			question: 'How many jobs can I post?',
-			answer: "There's no limit! Post as many jobs as you need, whenever you need. We want to help you build your entire team without worrying about costs."
+			question: 'Сколько вакансий я могу опубликовать?',
+			answer: "Без ограничений! Публикуйте столько вакансий, сколько нужно, в любое время. Мы хотим помочь вам собрать всю команду, не заботясь о расходах."
 		},
 		{
-			question: 'Can I access the resume database for free?',
-			answer: 'Absolutely! You get full access to our database of over 1 million job seekers, including advanced search filters, without paying a single rupee.'
+			question: 'Могу ли я бесплатно получить доступ к базе резюме?',
+			answer: 'Конечно! Вы получаете полный доступ к нашей базе из более чем 1 миллиона соискателей, включая расширенные фильтры поиска, не заплатив ни рупии.'
 		},
 		{
-			question: 'How quickly can I start posting jobs?',
-			answer: 'You can create an account and post your first job in under 5 minutes. No credit card required, no approval wait times.'
+			question: 'Как быстро я смогу начать публиковать вакансии?',
+			answer: 'Вы можете создать аккаунт и опубликовать первую вакансию менее чем за 5 минут. Кредитная карта не требуется, время ожидания одобрения — нулевое.'
 		},
 		{
-			question: 'What kind of support do I get?',
-			answer: "All employers get access to our dedicated support team via email and chat. We're here to help you succeed in finding the right talent."
+			question: 'Какую поддержку я получу?',
+			answer: "Все работодатели получают доступ к нашей выделенной команде поддержки по email и чату. Мы здесь, чтобы помочь вам найти подходящих специалистов."
 		}
 	];
 
@@ -68,14 +68,14 @@
 </script>
 
 <svelte:head>
-	<title>Pricing - 100% Free Forever | PeelJobs - India's Free Job Posting Platform</title>
-	<meta name="description" content="Post unlimited jobs for FREE. No hidden costs, no premium plans. Access 1M+ candidates, advanced hiring tools, and unlimited job postings at zero cost. Join 50K+ employers hiring on PeelJobs." />
-	<meta property="og:title" content="100% Free Job Posting Platform - PeelJobs Pricing" />
-	<meta property="og:description" content="Never pay for job postings again. Unlimited free access to India's largest talent pool. Post jobs, search resumes, and hire the best candidates - all for free." />
+	<title>Тарифы - 100% бесплатно навсегда | PeelJobs - Бесплатная платформа вакансий в India</title>
+	<meta name="description" content="Публикуйте неограниченное количество вакансий БЕСПЛАТНО. Без скрытых платежей, без премиум-тарифов. Доступ к 1М+ кандидатам, продвинутые инструменты найма и безлимитные публикации вакансий бесплатно. Присоединяйтесь к 50К+ работодателям на PeelJobs." />
+	<meta property="og:title" content="100% бесплатная платформа вакансий - Тарифы PeelJobs" />
+	<meta property="og:description" content="Больше никогда не платите за публикации вакансий. Безлимитный бесплатный доступ к крупнейшему пулу талантов в India. Публикуйте вакансии, ищите резюме и нанимайте лучших кандидатов — всё бесплатно." />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="100% Free Job Posting Platform - PeelJobs Pricing" />
-	<meta name="twitter:description" content="Unlimited job postings, resume database access, and hiring tools - all FREE forever." />
+	<meta name="twitter:title" content="100% бесплатная платформа вакансий - Тарифы PeelJobs" />
+	<meta name="twitter:description" content="Безлимитные публикации вакансий, доступ к базе резюме и инструменты найма — всё БЕСПЛАТНО навсегда." />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -91,11 +91,11 @@
 		<nav class="mb-8" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-sm text-muted">
 				<li>
-					<a href="/" class="hover:text-white transition-colors">Home</a>
+					<a href="/" class="hover:text-white transition-colors">Главная</a>
 				</li>
 				<li class="flex items-center gap-2">
 					<ChevronRight size={14} />
-					<span class="text-white font-medium">Pricing</span>
+					<span class="text-white font-medium">Тарифы</span>
 				</li>
 			</ol>
 		</nav>
@@ -104,26 +104,26 @@
 			<!-- Free Badge -->
 			<div class="inline-flex items-center gap-2 px-4 py-2 bg-success/20 text-success rounded-full text-sm font-medium mb-6 animate-fade-in-down" style="opacity: 0;">
 				<Sparkles size={16} />
-				<span>100% Free Forever</span>
+				<span>100% бесплатно навсегда</span>
 			</div>
 
 			<h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms;">
-				Hire the Best Talent in India
-				<span class="block text-success mt-2">Without Spending a Rupee</span>
+				Нанимайте лучших специалистов в India
+				<span class="block text-success mt-2">Не потратив ни рупии</span>
 			</h1>
 
 			<p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-10 max-w-3xl mx-auto animate-fade-in-up" style="opacity: 0; animation-delay: 200ms;">
-				Join 50,000+ employers who trust PeelJobs for their hiring needs. Post unlimited jobs, access 1 million+ candidates, and build your dream team - all for <strong class="text-white">FREE</strong>.
+				Присоединяйтесь к 50 000+ работодателей, которые доверяют PeelJobs свои задачи найма. Публикуйте безлимитные вакансии, получите доступ к 1 миллиону+ кандидатов и создайте команду мечты — всё <strong class="text-white">БЕСПЛАТНО</strong>.
 			</p>
 
 			<!-- CTA Buttons -->
 			<div class="flex flex-col sm:flex-row gap-4 justify-center mb-10 animate-fade-in-up" style="opacity: 0; animation-delay: 300ms;">
 				<a href="/employer/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm">
-					Start Hiring Free
+					Начните нанимать бесплатно
 					<ArrowRight size={18} />
 				</a>
 				<a href="#features" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 text-white font-medium rounded-full hover:bg-white/20 transition-colors border border-white/20">
-					See What's Included
+					Посмотрите, что включено
 				</a>
 			</div>
 
@@ -131,15 +131,15 @@
 			<div class="flex flex-wrap justify-center gap-6 text-sm text-muted animate-fade-in-up" style="opacity: 0; animation-delay: 400ms;">
 				<div class="flex items-center gap-2">
 					<Check size={16} class="text-success" />
-					<span>No Credit Card Required</span>
+					<span>Кредитная карта не требуется</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<Check size={16} class="text-success" />
-					<span>No Hidden Fees</span>
+					<span>Без скрытых платежей</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<Check size={16} class="text-success" />
-					<span>Setup in 5 Minutes</span>
+					<span>Настройка за 5 минут</span>
 				</div>
 			</div>
 		</div>
@@ -150,9 +150,9 @@
 <section id="features" class="py-16 lg:py-24 bg-surface">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<div class="text-center mb-12">
-			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">One Simple Plan. Everything Included.</h2>
+			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Один простой тариф. Всё включено.</h2>
 			<p class="text-base lg:text-lg text-muted max-w-3xl mx-auto">
-				No tiers, no upsells, no complicated pricing. Just one powerful platform with everything you need to hire great people.
+				Без уровней, без допродаж, без сложных тарифов. Одна мощная платформа со всем необходимым для найма.
 			</p>
 		</div>
 
@@ -161,18 +161,18 @@
 			<div class="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-primary relative">
 				<!-- Popular Badge -->
 				<div class="absolute top-0 right-0 bg-primary text-white px-5 py-2 text-sm font-medium rounded-bl-lg">
-					Most Popular
+					Популярный
 				</div>
 
 				<div class="p-8 lg:p-10">
 					<!-- Plan Header -->
 					<div class="text-center mb-8">
-						<h3 class="text-2xl lg:text-3xl font-semibold text-black mb-4">Free Forever Plan</h3>
+						<h3 class="text-2xl lg:text-3xl font-semibold text-black mb-4">Бесплатный тариф навсегда</h3>
 						<div class="mb-4">
 							<span class="text-6xl lg:text-7xl font-semibold text-primary">₹0</span>
-							<span class="text-2xl text-muted ml-2">forever</span>
+							<span class="text-2xl text-muted ml-2">навсегда</span>
 						</div>
-						<p class="text-muted text-lg">Everything you need to build your team. No catch.</p>
+						<p class="text-muted text-lg">Всё, что нужно для создания команды. Без подвоха.</p>
 					</div>
 
 					<!-- Features List -->
@@ -193,7 +193,7 @@
 
 					<!-- CTA Button -->
 					<a href="/employer/" class="w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-colors shadow-sm hover:shadow-md">
-						Get Started Free
+						Начать бесплатно
 						<ArrowRight size={18} />
 					</a>
 				</div>
@@ -206,9 +206,9 @@
 <section class="py-16 lg:py-24 bg-white">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<div class="text-center mb-12">
-			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">How We Compare</h2>
+			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Сравнение с конкурентами</h2>
 			<p class="text-base lg:text-lg text-muted max-w-3xl mx-auto">
-				See what other platforms charge thousands for - and what we give you for free.
+				Узнайте, за что другие платформы берут тысячи — и что мы даём бесплатно.
 			</p>
 		</div>
 
@@ -219,10 +219,10 @@
 					<div class="p-4 lg:p-6"></div>
 					<div class="p-4 lg:p-6 text-center border-l border-border">
 						<div class="font-semibold text-primary text-lg lg:text-xl">PeelJobs</div>
-						<div class="text-xs lg:text-sm text-muted mt-1">Free Forever</div>
+						<div class="text-xs lg:text-sm text-muted mt-1">Бесплатно навсегда</div>
 					</div>
 					<div class="p-4 lg:p-6 text-center border-l border-border">
-						<div class="font-semibold text-black text-lg lg:text-xl">Competitors</div>
+						<div class="font-semibold text-black text-lg lg:text-xl">Конкуренты</div>
 						<div class="text-xs lg:text-sm text-muted mt-1">₹10K-50K/month</div>
 					</div>
 				</div>
@@ -251,7 +251,7 @@
 								<div class="inline-flex items-center justify-center w-8 h-8 bg-error-light rounded-full">
 									<X size={16} class="text-error" />
 								</div>
-								<div class="text-xs text-muted mt-1 hidden lg:block">Extra Cost</div>
+								<div class="text-xs text-muted mt-1 hidden lg:block">Доп. оплата</div>
 							{/if}
 						</div>
 					</div>
@@ -265,9 +265,9 @@
 <section class="py-16 lg:py-24 bg-surface">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<div class="text-center mb-12">
-			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Why Is PeelJobs Free?</h2>
+			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Почему PeelJobs бесплатный?</h2>
 			<p class="text-base lg:text-lg text-muted max-w-3xl mx-auto">
-				Our mission is simple: connect employers with the best talent in India without financial barriers.
+				Наша миссия проста: связывать работодателей с лучшими специалистами в India без финансовых барьеров.
 			</p>
 		</div>
 
@@ -276,9 +276,9 @@
 				<div class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
 					<Heart size={28} class="text-primary" />
 				</div>
-				<h3 class="text-xl font-semibold text-black mb-4">Our Mission</h3>
+				<h3 class="text-xl font-semibold text-black mb-4">Наша миссия</h3>
 				<p class="text-muted leading-relaxed">
-					We believe every company, from startups to enterprises, deserves access to top talent without budget constraints limiting their growth.
+					Мы считаем, что каждая компания — от стартапа до корпорации — заслуживает доступа к лучшим специалистам без ограничений бюджета, тормозящих рост.
 				</p>
 			</div>
 
@@ -286,9 +286,9 @@
 				<div class="w-14 h-14 bg-success-light rounded-lg flex items-center justify-center mb-6">
 					<Users size={28} class="text-success" />
 				</div>
-				<h3 class="text-xl font-semibold text-black mb-4">More Opportunities</h3>
+				<h3 class="text-xl font-semibold text-black mb-4">Больше возможностей</h3>
 				<p class="text-muted leading-relaxed">
-					By eliminating posting fees, we create more job opportunities for seekers and help employers find candidates they otherwise couldn't afford to reach.
+					Устраняя плату за публикации, мы создаём больше возможностей для соискателей и помогаем работодателям находить кандидатов, до которых иначе не добрались бы из-за стоимости.
 				</p>
 			</div>
 
@@ -296,9 +296,9 @@
 				<div class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
 					<TrendingUp size={28} class="text-primary" />
 				</div>
-				<h3 class="text-xl font-semibold text-black mb-4">Better Outcomes</h3>
+				<h3 class="text-xl font-semibold text-black mb-4">Лучшие результаты</h3>
 				<p class="text-muted leading-relaxed">
-					When more employers can afford to post jobs and more candidates apply, everyone wins. We measure success by successful hires, not revenue.
+					Когда больше работодателей могут публиковать вакансии, а больше кандидатов откликаются, выигрывают все. Мы измеряем успех успешными наймами, а не выручкой.
 				</p>
 			</div>
 		</div>
@@ -309,9 +309,9 @@
 <section class="py-16 lg:py-24 bg-white">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<div class="text-center mb-12">
-			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Frequently Asked Questions</h2>
+			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Частые вопросы</h2>
 			<p class="text-base lg:text-lg text-muted max-w-3xl mx-auto">
-				Everything you need to know about our free platform
+				Всё, что нужно знать о нашей бесплатной платформе
 			</p>
 		</div>
 
@@ -339,37 +339,37 @@
 <section class="py-16 lg:py-24 bg-[#1D2226] text-white">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 text-center">
 		<div class="max-w-3xl mx-auto">
-			<h2 class="text-2xl lg:text-3xl font-semibold tracking-tight mb-6">Ready to Start Hiring?</h2>
+			<h2 class="text-2xl lg:text-3xl font-semibold tracking-tight mb-6">Готовы начать нанимать?</h2>
 			<p class="text-lg text-gray-300 mb-10 leading-relaxed">
-				Join thousands of employers who are building amazing teams without spending a rupee. Create your free account in minutes and post your first job today.
+				Присоединяйтесь к тысячам работодателей, которые создают отличные команды, не потратив ни рупии. Создайте бесплатный аккаунт за несколько минут и опубликуйте первую вакансию уже сегодня.
 			</p>
 
 			<div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
 				<a href="/employer/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm">
-					Create Free Account
+					Создать бесплатный аккаунт
 					<ArrowRight size={18} />
 				</a>
 				<a href="/contact/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 text-white font-medium rounded-full hover:bg-white/20 transition-colors border border-white/20">
-					Talk to Our Team
+					Поговорить с командой
 				</a>
 			</div>
 
 			<div class="flex flex-wrap justify-center gap-6 text-sm text-muted">
 				<div class="flex items-center gap-2">
 					<Check size={16} class="text-success" />
-					<span>Free Forever</span>
+					<span>Бесплатно навсегда</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<Check size={16} class="text-success" />
-					<span>No Credit Card</span>
+					<span>Без кредитной карты</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<Check size={16} class="text-success" />
-					<span>5 Minute Setup</span>
+					<span>Настройка за 5 минут</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<Check size={16} class="text-success" />
-					<span>Unlimited Postings</span>
+					<span>Безлимитные публикации</span>
 				</div>
 			</div>
 		</div>
