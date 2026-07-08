@@ -15,8 +15,9 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
 			const refreshResponse = await fetch(`${API_BASE_URL}/auth/token/refresh/`, {
 				method: 'POST',
 				headers: {
-					Cookie: `refresh_token=${refreshToken}`
-				}
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ refresh: refreshToken })
 			});
 
 			if (refreshResponse.ok) {

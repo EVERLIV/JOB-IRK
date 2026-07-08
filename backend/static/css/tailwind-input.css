@@ -1,2 +1,7 @@
 /* Tailwind CSS v4 - Input file */
 @import "tailwindcss";
+
+/* Scan Django templates and static JS for utility classes */
+@source "../../templates/**/*.html";
+@source "../../**/templates/**/*.html";
+@source "../js/**/*.js";

@@ -36,8 +36,9 @@ async function ensureValidAuth(event: Parameters<Handle>[0]['event']) {
 	const refreshResponse = await event.fetch(`${API_BASE_URL}/auth/token/refresh/`, {
 		method: 'POST',
 		headers: {
-			Cookie: `refresh_token=${refreshToken}`
-		}
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ refresh: refreshToken })
 	}).catch(() => null);
 
 	if (!refreshResponse?.ok) {

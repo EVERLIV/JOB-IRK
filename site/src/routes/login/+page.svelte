@@ -1,22 +1,26 @@
 <script>
   import '../../app.css';
 
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import { page } from '$app/stores';
+  import { enhance } from '$app/forms';
   import { AlertCircle, Loader2, Briefcase, Shield, Zap, Mail, Lock } from '@lucide/svelte';
-  import { authStore } from '$lib/stores/auth';
-  import { goto } from '$app/navigation';
 
-  let isLoading = false;
-  let loadingProvider = '';
-  let error = '';
-  let email = '';
-  let password = '';
+  let { data, form } = $props();
+
+  let isLoading = $state(false);
+  let loadingProvider = $state('');
+  let socialError = $state('');
+  let urlError = $state('');
+  let email = $state(untrack(() => form?.email || ''));
+  let password = $state('');
+
+  let error = $derived(form?.error || socialError || urlError || '');
 
   onMount(() => {
-    const urlError = $page.url.searchParams.get('error');
-    if (urlError) {
-      error = getErrorMessage(urlError);
+    const errorCode = $page.url.searchParams.get('error');
+    if (errorCode) {
+      urlError = getErrorMessage(errorCode);
     }
   });
 
@@ -36,7 +40,7 @@
     if (isLoading) return;
     isLoading = true;
     loadingProvider = provider;
-    error = '';
+    socialError = '';
     try {
       if (provider === 'google') {
         const { getGoogleAuthUrl } = await import('$lib/api/auth');
@@ -44,44 +48,20 @@
         const response = await getGoogleAuthUrl(redirectUri);
         window.location.href = response.auth_url;
       } else if (provider === 'facebook') {
-        error = 'Вход через Facebook скоро появится!';
+        socialError = 'Вход через Facebook скоро появится!';
         isLoading = false;
         loadingProvider = '';
       }
     } catch (err) {
-      error = err instanceof Error ? err.message : 'Не удалось начать вход. Пожалуйста, попробуйте снова.';
-      isLoading = false;
-      loadingProvider = '';
-    }
-  }
-
-  async function handlePasswordLogin() {
-    if (isLoading) return;
-    if (!email || !password) {
-      error = 'Введите email и пароль.';
-      return;
-    }
-
-    isLoading = true;
-    loadingProvider = 'password';
-    error = '';
-
-    try {
-      const { login } = await import('$lib/api/auth');
-      const response = await login(email, password);
-      authStore.login(response.user);
-      const redirectTo = $page.url.searchParams.get('redirect') || '/';
-      goto(redirectTo);
-    } catch (err) {
-      error = err instanceof Error ? err.message : 'Не удалось войти. Пожалуйста, попробуйте снова.';
-    } finally {
+      socialError = err instanceof Error ? err.message : 'Не удалось начать вход. Пожалуйста, попробуйте снова.';
       isLoading = false;
       loadingProvider = '';
     }
   }
 
   function clearError() {
-    error = '';
+    socialError = '';
+    urlError = '';
   }
 
   const features = [
@@ -189,13 +169,27 @@
             <span class="px-4 bg-white text-sm text-muted">или</span>
           </div>
         </div>
-        <form onsubmit={(e) => { e.preventDefault(); handlePasswordLogin(); }} class="space-y-3 mb-6">
+        <form
+          method="POST"
+          use:enhance={() => {
+            isLoading = true;
+            loadingProvider = 'password';
+            return async ({ update }) => {
+              await update();
+              isLoading = false;
+              loadingProvider = '';
+            };
+          }}
+          class="space-y-3 mb-6"
+        >
+          <input type="hidden" name="redirect_to" value={data.redirectTo} />
           <div class="relative">
             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Mail size={18} class="text-muted" />
             </span>
             <input
               type="email"
+              name="email"
               bind:value={email}
               placeholder="email@example.com"
               class="w-full h-12 pl-10 pr-4 border border-border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary-500/20 outline-none"
@@ -207,6 +201,7 @@
             </span>
             <input
               type="password"
+              name="password"
               bind:value={password}
               placeholder="Пароль"
               class="w-full h-12 pl-10 pr-4 border border-border rounded-lg bg-white text-black placeholder-muted focus:border-primary focus:ring-2 focus:ring-primary-500/20 outline-none"

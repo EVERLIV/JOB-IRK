@@ -1,4 +1,5 @@
 import os
+from urllib.parse import parse_qs, unquote, urlparse
 
 from celery.schedules import crontab
 from corsheaders.defaults import default_headers, default_methods
@@ -32,7 +33,14 @@ logging = "DEBUG"
 GIT_APP_ID = os.getenv("GITAPPID")
 GIT_APP_SECRET = os.getenv("GITAPPSECRET")
 
-ALLOWED_HOSTS = ["peeljobs.com", "test.peeljobs.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        "ALLOWED_HOSTS",
+        "peeljobs.com,test.peeljobs.com,localhost,127.0.0.1",
+    ).split(",")
+    if host.strip()
+]
 
 # tw app
 tw_oauth_token_secret = os.getenv("twoauthtokensecret")
@@ -77,20 +85,40 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",  # Django 5.x uses psycopg 3.x by default
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
-        "OPTIONS": {
-            # Connection options for psycopg 3.x
-            "connect_timeout": 10,
-        },
+def _database_from_url(database_url: str) -> dict:
+    parsed = urlparse(database_url)
+    query = parse_qs(parsed.query)
+    options = {"connect_timeout": 10}
+    sslmode = query.get("sslmode", [None])[0]
+    if sslmode:
+        options["sslmode"] = sslmode
+    return {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": unquote(parsed.path.lstrip("/")),
+        "USER": unquote(parsed.username or ""),
+        "PASSWORD": unquote(parsed.password or ""),
+        "HOST": parsed.hostname or "",
+        "PORT": parsed.port or 5432,
+        "OPTIONS": options,
     }
-}
+
+
+if os.getenv("DATABASE_URL"):
+    DATABASES = {"default": _database_from_url(os.getenv("DATABASE_URL"))}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DB_NAME"),
+            "USER": os.getenv("DB_USER"),
+            "PASSWORD": os.getenv("DB_PASSWORD"),
+            "HOST": os.getenv("DB_HOST"),
+            "PORT": os.getenv("DB_PORT"),
+            "OPTIONS": {
+                "connect_timeout": 10,
+            },
+        }
+    }
 
 
 TIME_ZONE = "Asia/Kolkata"
@@ -173,6 +201,8 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w+\.peeljobs\.com$",
+    r"^https://.*\.vercel\.app$",
+    r"^https://.*\.railway\.app$",
 ]
 CORS_ALLOW_METHODS = list(default_methods)
 CORS_ALLOW_HEADERS = list(default_headers)
@@ -264,13 +294,25 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 #     },
 # }
 
+_haystack_url = os.getenv("HAYSTACKURL", "http://127.0.0.1:9200/")
+_haystack_engine = os.getenv(
+    "HAYSTACK_ENGINE",
+    "haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine",
+)
+
 HAYSTACK_CONNECTIONS = {
     "default": {
-        "ENGINE": "haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine",
-        "URL": "http://127.0.0.1:9200/",
+        "ENGINE": _haystack_engine,
+        "URL": _haystack_url,
         "INDEX_NAME": "haystack",
     },
 }
+if _haystack_engine.endswith("SimpleEngine"):
+    HAYSTACK_CONNECTIONS = {
+        "default": {
+            "ENGINE": "haystack.backends.simple_backend.SimpleEngine",
+        },
+    }
 
 
 HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
@@ -529,9 +571,10 @@ CELERY_MONITOR_URL = os.getenv("CELERY_MONITOR_URL")
 # Tailwind CSS Configuration
 TAILWIND_CSS_FILE = "css/tailwind-output.css"
 
-# Try to load local settings for development
-try:
-    from .settings_local import *
-    print("Local development settings loaded")
-except ImportError:
-    pass  # settings_local.py doesn't exist or has import errors
+# Try to load local settings for development (skip when using staging settings)
+if os.getenv("DJANGO_SETTINGS_MODULE", "jobsp.settings") != "jobsp.settings_staging":
+    try:
+        from .settings_local import *
+        print("Local development settings loaded")
+    except ImportError:
+        pass  # settings_local.py doesn't exist or has import errors
