@@ -2,57 +2,44 @@
  * Environment Configuration
  * Centralized access to environment variables
  *
- * SvelteKit exposes environment variables through $env module.
- * Variables must be prefixed with PUBLIC_ to be accessible in client-side code.
+ * Uses dynamic public env so Vercel builds succeed before env vars are configured.
+ * Set PUBLIC_* in Vercel Project → Settings → Environment Variables to override.
  */
 
-import { PUBLIC_API_BASE_URL, PUBLIC_SITE_URL, PUBLIC_RECRUITER_URL } from '$env/static/public';
+import { env } from '$env/dynamic/public';
+import { dev } from '$app/environment';
 
-/**
- * API Base URL for backend requests
- * Default: http://localhost:8000/api/v1
- */
-export const API_BASE_URL = PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
+const localDefaults = {
+	PUBLIC_API_BASE_URL: 'http://localhost:8000/api/v1',
+	PUBLIC_SITE_URL: 'http://localhost:5173',
+	PUBLIC_RECRUITER_URL: 'http://localhost:5174'
+} as const;
 
-/**
- * Site URL for frontend
- * Default: http://localhost:5173
- */
-export const SITE_URL = PUBLIC_SITE_URL || 'http://localhost:5173';
+const productionDefaults = {
+	PUBLIC_API_BASE_URL: 'https://placeholder.up.railway.app/api/v1',
+	PUBLIC_SITE_URL: 'https://job-irk-kg-aerospace.vercel.app',
+	PUBLIC_RECRUITER_URL: 'https://job-irk-kg-aerospace.vercel.app'
+} as const;
 
-/**
- * Recruiter Site URL for recruiter portal
- * Default: http://localhost:5174
- */
-export const RECRUITER_URL = PUBLIC_RECRUITER_URL || 'http://localhost:5174';
+const defaults = dev ? localDefaults : productionDefaults;
 
-/**
- * Check if we're running in development mode
- */
-export const isDevelopment = import.meta.env.DEV;
+export const API_BASE_URL = env.PUBLIC_API_BASE_URL || defaults.PUBLIC_API_BASE_URL;
 
-/**
- * Check if we're running in production mode
- */
-export const isProduction = import.meta.env.PROD;
+export const SITE_URL = env.PUBLIC_SITE_URL || defaults.PUBLIC_SITE_URL;
 
-/**
- * Get the API base path (path only, without host)
- * This is used for client-side API calls that go through Vite proxy
- */
+export const RECRUITER_URL = env.PUBLIC_RECRUITER_URL || defaults.PUBLIC_RECRUITER_URL;
+
+export const isDevelopment = dev;
+
+export const isProduction = !dev;
+
 export function getApiBasePath(): string {
-  // In client-side code during development, use proxy path
-  if (typeof window !== 'undefined' && isDevelopment) {
-    return '/api/v1';
-  }
-  // In server-side code or production, use full URL
-  return API_BASE_URL;
+	if (typeof window !== 'undefined' && isDevelopment) {
+		return '/api/v1';
+	}
+	return API_BASE_URL;
 }
 
-/**
- * Get the full API URL (with host)
- * This is used for server-side API calls
- */
 export function getApiBaseUrl(): string {
-  return API_BASE_URL;
+	return API_BASE_URL;
 }
