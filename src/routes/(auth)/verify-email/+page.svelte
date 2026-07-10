@@ -25,8 +25,8 @@
 </script>
 
 <svelte:head>
-	<title>Подтверждение email - PeelJobs Recruiter</title>
-	<meta name="description" content="Подтвердите email вашего аккаунта работодателя PeelJobs." />
+	<title>Подтверждение email - Truddy.ru Recruiter</title>
+	<meta name="description" content="Подтвердите email вашего аккаунта работодателя Truddy.ru." />
 </svelte:head>
 
 <Card padding="lg" class="shadow-lg">

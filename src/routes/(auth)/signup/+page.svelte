@@ -95,8 +95,8 @@
 </script>
 
 <svelte:head>
-	<title>Регистрация — PeelJobs для рекрутеров</title>
-	<meta name="description" content="Создайте аккаунт работодателя PeelJobs и начните нанимать лучших специалистов уже сегодня." />
+	<title>Регистрация — Truddy.ru для рекрутеров</title>
+	<meta name="description" content="Создайте аккаунт работодателя Truddy.ru и начните нанимать лучших специалистов уже сегодня." />
 </svelte:head>
 
 <div class="w-full">
@@ -105,7 +105,7 @@
 		<div class="space-y-8 lg:sticky lg:top-8 hidden lg:block">
 			<div>
 				<h1 class="text-3xl xl:text-4xl font-semibold text-black mb-4 leading-tight">
-					Присоединяйтесь к 10 000+ компаний, нанимающих через PeelJobs
+					Присоединяйтесь к 10 000+ компаний, нанимающих через Truddy.ru
 				</h1>
 				<p class="text-base xl:text-lg text-muted leading-relaxed">
 					Получите доступ к крупнейшей базе талантов Индии с 100k+ активных соискателей. Размещайте неограниченное количество вакансий бесплатно и находите идеальных кандидатов быстрее.
@@ -136,7 +136,7 @@
 			<Card padding="lg" class="shadow-md">
 				<h3 class="text-xl font-semibold text-black mb-6 flex items-center gap-2">
 					<Target class="w-5 h-5 text-warning" />
-					Почему рекрутеры выбирают PeelJobs
+					Почему рекрутеры выбирают Truddy.ru
 				</h3>
 				<div class="space-y-5">
 					<div class="flex items-start gap-4">

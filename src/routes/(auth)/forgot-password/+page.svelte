@@ -23,8 +23,8 @@
 </script>
 
 <svelte:head>
-	<title>Восстановление пароля - PeelJobs Recruiter</title>
-	<meta name="description" content="Сбросьте пароль аккаунта работодателя PeelJobs." />
+	<title>Восстановление пароля - Truddy.ru Recruiter</title>
+	<meta name="description" content="Сбросьте пароль аккаунта работодателя Truddy.ru." />
 </svelte:head>
 
 <Card padding="lg" class="shadow-lg">

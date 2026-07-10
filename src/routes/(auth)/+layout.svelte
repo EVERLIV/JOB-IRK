@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Building2 } from '@lucide/svelte';
+	import BrandLogo from '$lib/components/BrandLogo.svelte';
+	import { SITE_TAGLINE } from '$lib/config/brand';
 	import { setContext } from 'svelte';
 
 	const layoutState = $state({
@@ -16,11 +17,7 @@
 	<!-- Header -->
 	<header class="bg-white border-b border-border">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-			<a href="/" class="flex items-center gap-2">
-				<Building2 class="w-8 h-8 text-primary" />
-				<span class="text-xl font-bold text-black">PeelJobs</span>
-				<span class="text-sm text-muted ml-2">Для работодателей</span>
-			</a>
+			<BrandLogo href="/" subtitle={SITE_TAGLINE} />
 		</div>
 	</header>
 
@@ -35,7 +32,7 @@
 	<footer class="bg-white border-t border-border py-6">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted">
-				<p>&copy; 2025 PeelJobs. Все права защищены.</p>
+				<p>&copy; 2025 Truddy.ru. Все права защищены.</p>
 				<div class="flex gap-6">
 					<a href="/about/" class="hover:text-black transition-colors">О нас</a>
 					<a href="/privacy/" class="hover:text-black transition-colors">Конфиденциальность</a>

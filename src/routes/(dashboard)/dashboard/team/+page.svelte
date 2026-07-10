@@ -148,7 +148,7 @@
 </script>
 
 <svelte:head>
-	<title>Управление командой - PeelJobs Recruiter</title>
+	<title>Управление командой - Truddy.ru Recruiter</title>
 </svelte:head>
 
 <div class="max-w-7xl space-y-6">

@@ -160,7 +160,7 @@
 </script>
 
 <svelte:head>
-	<title>Кандидаты - {data.job.title} - PeelJobs</title>
+	<title>Кандидаты - {data.job.title} - Truddy.ru</title>
 </svelte:head>
 
 <div class="space-y-6">

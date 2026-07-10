@@ -25,8 +25,8 @@
 </script>
 
 <svelte:head>
-	<title>Вход - PeelJobs Recruiter</title>
-	<meta name="description" content="Войдите в аккаунт работодателя PeelJobs, чтобы управлять вакансиями и работать с кандидатами." />
+	<title>Вход - Truddy.ru Recruiter</title>
+	<meta name="description" content="Войдите в аккаунт работодателя Truddy.ru, чтобы управлять вакансиями и работать с кандидатами." />
 </svelte:head>
 
 <div class="w-full">
@@ -36,7 +36,7 @@
 			<!-- Hero Section -->
 			<div>
 				<h1 class="text-3xl xl:text-4xl font-semibold text-black mb-4 leading-tight">
-					С возвращением в PeelJobs
+					С возвращением в Truddy.ru
 				</h1>
 				<p class="text-base xl:text-lg text-muted leading-relaxed">
 					Продолжайте управлять вакансиями и находить сильных кандидатов.
@@ -220,7 +220,7 @@
 			<div class="mt-5 pt-5 border-t border-border">
 				<p class="text-center text-sm text-muted">
 					Ищете работу?
-					<a href="https://peeljobs.com/login/" class="font-medium text-primary hover:text-primary-hover transition-colors">
+					<a href="https://truddy.ru/login/" class="font-medium text-primary hover:text-primary-hover transition-colors">
 						Вход для соискателя
 					</a>
 				</p>

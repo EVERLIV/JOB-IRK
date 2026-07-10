@@ -96,7 +96,7 @@
 </script>
 
 <svelte:head>
-	<title>Неактивные вакансии - PeelJobs</title>
+	<title>Неактивные вакансии - Truddy.ru</title>
 </svelte:head>
 
 <div class="space-y-6">

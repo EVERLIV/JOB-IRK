@@ -99,13 +99,13 @@
 
 <svelte:head>
 	<title>Добро пожаловать — настройка аккаунта</title>
-	<meta name="description" content="Завершите настройку профиля работодателя PeelJobs." />
+	<meta name="description" content="Завершите настройку профиля работодателя Truddy.ru." />
 </svelte:head>
 
 <Card padding="lg" class="shadow-lg max-w-2xl mx-auto">
 	<!-- Header -->
 	<div class="text-center mb-8">
-		<h1 class="text-2xl font-semibold text-black">Добро пожаловать в PeelJobs!</h1>
+		<h1 class="text-2xl font-semibold text-black">Добро пожаловать в Truddy.ru!</h1>
 		<p class="text-muted mt-2">Настройте аккаунт работодателя всего за несколько шагов</p>
 	</div>
 

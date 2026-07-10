@@ -209,7 +209,7 @@
 </script>
 
 <svelte:head>
-	<title>Редактирование — {data.job.title} - PeelJobs Recruiter</title>
+	<title>Редактирование — {data.job.title} - Truddy.ru Recruiter</title>
 </svelte:head>
 
 <div class="max-w-5xl mx-auto space-y-6">

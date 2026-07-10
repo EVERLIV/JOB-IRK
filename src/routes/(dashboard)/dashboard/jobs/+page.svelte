@@ -139,7 +139,7 @@
 </script>
 
 <svelte:head>
-	<title>Вакансии - PeelJobs Recruiter</title>
+	<title>Вакансии - Truddy.ru Recruiter</title>
 </svelte:head>
 
 <div class="space-y-6">

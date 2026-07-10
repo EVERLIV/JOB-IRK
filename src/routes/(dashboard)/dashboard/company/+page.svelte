@@ -96,7 +96,7 @@
 </script>
 
 <svelte:head>
-	<title>Профиль компании - PeelJobs Recruiter</title>
+	<title>Профиль компании - Truddy.ru Recruiter</title>
 </svelte:head>
 
 <div class="max-w-4xl space-y-6">
@@ -299,7 +299,7 @@
 						type="tel"
 						name="phone_number"
 						bind:value={formData.phone}
-						placeholder="+91-9876543210"
+						placeholder="+7 395 211-12-22"
 						disabled={!isAdmin}
 						class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:bg-surface disabled:text-muted"
 					/>

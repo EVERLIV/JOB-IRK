@@ -81,7 +81,7 @@
 </script>
 
 <svelte:head>
-	<title>Микросайт компании - PeelJobs</title>
+	<title>Микросайт компании - Truddy.ru</title>
 </svelte:head>
 
 <div class="space-y-6">

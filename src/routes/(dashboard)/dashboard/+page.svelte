@@ -82,7 +82,7 @@
 </script>
 
 <svelte:head>
-	<title>Панель управления - PeelJobs Recruiter</title>
+	<title>Панель управления - Truddy.ru Recruiter</title>
 </svelte:head>
 
 <div class="space-y-6">
