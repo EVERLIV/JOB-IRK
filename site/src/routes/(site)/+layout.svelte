@@ -26,6 +26,7 @@
   import { authStore } from "$lib/stores/auth";
   import Toast from "$lib/components/Toast.svelte";
   import BrandLogo from "$lib/components/BrandLogo.svelte";
+  import { RECRUITER_URL } from "$lib/config/env";
 
   // Receive children snippet
   let { children, data }: { children: any; data: { user: any; isAuthenticated: boolean } } = $props();
@@ -520,7 +521,7 @@
               Регистрация
             </a>
             <a
-              href="/employer/"
+              href="{RECRUITER_URL}/"
               class="h-8 px-4 flex items-center text-sm font-semibold text-primary-600 border border-primary-600 rounded-full hover:bg-primary-50 transition-colors"
             >
               Работодателям
@@ -698,7 +699,7 @@
                 Регистрация
               </a>
               <a
-                href="/employer/"
+                href="{RECRUITER_URL}/"
                 class="flex items-center justify-center w-full h-10 text-success-600 font-semibold border border-success-600 rounded-full hover:bg-success-light transition-colors"
               >
                 Работодателям
@@ -810,14 +811,14 @@
           <ul class="space-y-2.5">
             <li>
               <a
-                href="https://recruiter.truddy.ru"
+                href="{RECRUITER_URL}/signup/"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
                 >Разместить вакансию</a
               >
             </li>
             <li>
               <a
-                href="https://recruiter.truddy.ru/dashboard"
+                href="{RECRUITER_URL}/dashboard/"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
                 >Кабинет работодателя</a
               >

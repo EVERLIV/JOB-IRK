@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Check, X, Zap, Users, TrendingUp, Shield, Clock, Heart, Award, Target, Sparkles, ArrowRight, BadgeCheck, ChevronRight, ChevronDown } from '@lucide/svelte';
+	import { RECRUITER_URL } from '$lib/config/env';
 
 	// Features included in the free plan
 	const includedFeatures = [
@@ -118,7 +119,7 @@
 
 			<!-- CTA Buttons -->
 			<div class="flex flex-col sm:flex-row gap-4 justify-center mb-10 animate-fade-in-up" style="opacity: 0; animation-delay: 300ms;">
-				<a href="/employer/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm">
+				<a href="{RECRUITER_URL}/signup/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm">
 					Начните нанимать бесплатно
 					<ArrowRight size={18} />
 				</a>
@@ -192,7 +193,7 @@
 					</div>
 
 					<!-- CTA Button -->
-					<a href="/employer/" class="w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-colors shadow-sm hover:shadow-md">
+					<a href="{RECRUITER_URL}/signup/" class="w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary-hover text-white font-medium rounded-full transition-colors shadow-sm hover:shadow-md">
 						Начать бесплатно
 						<ArrowRight size={18} />
 					</a>
@@ -345,7 +346,7 @@
 			</p>
 
 			<div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-				<a href="/employer/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm">
+				<a href="{RECRUITER_URL}/signup/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors shadow-sm">
 					Создать бесплатный аккаунт
 					<ArrowRight size={18} />
 				</a>
