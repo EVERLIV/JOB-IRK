@@ -11,12 +11,14 @@ import { dev } from '$app/environment';
 
 const localDefaults = {
 	PUBLIC_API_BASE_URL: 'http://localhost:8000/api/v1',
-	PUBLIC_SITE_URL: 'http://localhost:5174'
+	PUBLIC_SITE_URL: 'http://localhost:5174',
+	PUBLIC_JOBSEEKER_URL: 'http://localhost:5173'
 } as const;
 
 const productionDefaults = {
 	PUBLIC_API_BASE_URL: 'https://placeholder.up.railway.app/api/v1',
-	PUBLIC_SITE_URL: 'https://job-irk-recruiter-kg-aerospace.vercel.app'
+	PUBLIC_SITE_URL: 'https://job-irk-recruiter.vercel.app',
+	PUBLIC_JOBSEEKER_URL: 'https://job-irk.vercel.app'
 } as const;
 
 const defaults = dev ? localDefaults : productionDefaults;
@@ -24,6 +26,8 @@ const defaults = dev ? localDefaults : productionDefaults;
 export const API_BASE_URL = env.PUBLIC_API_BASE_URL || defaults.PUBLIC_API_BASE_URL;
 
 export const SITE_URL = env.PUBLIC_SITE_URL || defaults.PUBLIC_SITE_URL;
+
+export const JOBSEEKER_URL = env.PUBLIC_JOBSEEKER_URL || defaults.PUBLIC_JOBSEEKER_URL;
 
 export const isDevelopment = dev;
 
