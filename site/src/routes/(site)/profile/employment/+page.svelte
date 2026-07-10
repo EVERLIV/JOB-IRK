@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Опыт работы - Профиль - PeelJobs</title>
+	<title>Опыт работы - Профиль - Truddy.ru</title>
 	<meta name="description" content="Отслеживание вашего профессионального опыта работы" />
 </svelte:head>
 

@@ -25,6 +25,7 @@
   } from "@lucide/svelte";
   import { authStore } from "$lib/stores/auth";
   import Toast from "$lib/components/Toast.svelte";
+  import BrandLogo from "$lib/components/BrandLogo.svelte";
 
   // Receive children snippet
   let { children, data }: { children: any; data: { user: any; isAuthenticated: boolean } } = $props();
@@ -126,43 +127,36 @@
   ];
 
   const locations = [
-    { name: "Chennai", slug: "chennai" },
-    { name: "Bangalore", slug: "bangalore" },
-    { name: "Mumbai", slug: "mumbai" },
-    { name: "Kolkata", slug: "kolkata" },
-    { name: "Delhi", slug: "delhi" },
-    { name: "Хайдарабад", slug: "hyderabad" },
-    { name: "Noida", slug: "noida" },
-    { name: "Gurgaon", slug: "gurgaon" },
-    { name: "Pune", slug: "pune" },
-    { name: "Ahmedabad", slug: "ahmedabad" },
-    { name: "Odisha", slug: "odisha" },
-    { name: "Coimbatore", slug: "coimbatore" },
-    { name: "Jaipur", slug: "jaipur" },
-    { name: "Indore", slug: "indore" },
-    { name: "Thane", slug: "thane" },
-    { name: "Gujarat", slug: "gujarat" },
-    { name: "Kochi", slug: "kochi" },
+    { name: "Иркутск", slug: "irkutsk" },
+    { name: "Ангарск", slug: "angarsk" },
+    { name: "Братск", slug: "bratsk" },
+    { name: "Усолье-Сибирское", slug: "usolie-sibirskoe" },
+    { name: "Усть-Илимск", slug: "ust-ilimsk" },
+    { name: "Шелехов", slug: "shelekhov" },
+    { name: "Новосибирск", slug: "novosibirsk" },
+    { name: "Красноярск", slug: "krasnoyarsk" },
+    { name: "Москва", slug: "moscow" },
+    { name: "Санкт-Петербург", slug: "saint-petersburg" },
+    { name: "Екатеринбург", slug: "ekaterinburg" },
+    { name: "Томск", slug: "tomsk" },
+    { name: "Владивосток", slug: "vladivostok" },
+    { name: "Хабаровск", slug: "khabarovsk" },
+    { name: "Улан-Удэ", slug: "ulan-ude" },
+    { name: "Удалённо", slug: "remote" },
   ];
 
   const internshipCities = [
-    { name: "Хайдарабад", slug: "hyderabad" },
-    { name: "Bangalore", slug: "bangalore" },
-    { name: "Chennai", slug: "chennai" },
-    { name: "Pune", slug: "pune" },
-    { name: "Delhi", slug: "delhi" },
-    { name: "Mumbai", slug: "mumbai" },
-    { name: "Coimbatore", slug: "coimbatore" },
-    { name: "Goa", slug: "goa" },
-    { name: "Kanchipuram", slug: "kanchipuram" },
-    { name: "Kerala", slug: "kerala" },
-    { name: "Kochi", slug: "kochi" },
-    { name: "Trivandrum", slug: "trivandrum" },
-    { name: "Gujarat", slug: "gujarat" },
-    { name: "Nasik", slug: "nasik" },
-    { name: "Noida", slug: "noida" },
-    { name: "Kolkata", slug: "kolkata" },
-    { name: "Gurgaon", slug: "gurgaon" },
+    { name: "Иркутск", slug: "irkutsk" },
+    { name: "Ангарск", slug: "angarsk" },
+    { name: "Братск", slug: "bratsk" },
+    { name: "Новосибирск", slug: "novosibirsk" },
+    { name: "Красноярск", slug: "krasnoyarsk" },
+    { name: "Томск", slug: "tomsk" },
+    { name: "Москва", slug: "moscow" },
+    { name: "Санкт-Петербург", slug: "saint-petersburg" },
+    { name: "Екатеринбург", slug: "ekaterinburg" },
+    { name: "Владивосток", slug: "vladivostok" },
+    { name: "Удалённо", slug: "remote" },
   ];
 </script>
 
@@ -178,10 +172,7 @@
     <nav class="max-w-7xl mx-auto px-4 lg:px-8">
       <div class="flex justify-between items-center h-14">
         <!-- Logo -->
-        <a href="/" data-sveltekit-reload class="flex items-center gap-2 group">
-          <img src="/logo.png" alt="PeelJobs" class="h-8 w-auto" />
-          <span class="text-xl font-semibold text-black">PeelJobs</span>
-        </a>
+        <BrandLogo href="/" reload size="md" />
 
         <!-- Desktop Navigation -->
         <div class="hidden lg:flex items-center gap-1">
@@ -733,17 +724,16 @@
       >
         <!-- Brand Column -->
         <div class="lg:col-span-2">
-          <a href="/" class="flex items-center gap-2 mb-5">
-            <img src="/logo.png" alt="PeelJobs" class="h-8 w-auto" />
-            <span class="text-xl font-semibold">PeelJobs</span>
-          </a>
+          <div class="mb-5">
+            <BrandLogo href="/" textClass="text-white" />
+          </div>
           <p class="text-gray-400 text-sm leading-relaxed mb-5 max-w-sm">
             Надёжная платформа для поиска работы, связывающая профессионалов
             с проверенными вакансиями в ведущих компаниях.
           </p>
           <div class="flex items-center gap-2">
             <a
-              href="https://x.com/peeljobs"
+              href="https://x.com/truddyru"
               class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"
               aria-label="Мы в Twitter"
               rel="noopener noreferrer"
@@ -752,7 +742,7 @@
               <Twitter size={16} />
             </a>
             <a
-              href="https://linkedin.com/company/peeljobs"
+              href="https://linkedin.com/company/truddyru"
               class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"
               aria-label="Мы в LinkedIn"
               rel="noopener noreferrer"
@@ -761,7 +751,7 @@
               <Linkedin size={16} />
             </a>
             <a
-              href="https://facebook.com/peeljobs"
+              href="https://facebook.com/truddyru"
               class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"
               aria-label="Мы в Facebook"
               rel="noopener noreferrer"
@@ -820,14 +810,14 @@
           <ul class="space-y-2.5">
             <li>
               <a
-                href="https://recruiter.peeljobs.com"
+                href="https://recruiter.truddy.ru"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
                 >Разместить вакансию</a
               >
             </li>
             <li>
               <a
-                href="https://recruiter.peeljobs.com/dashboard"
+                href="https://recruiter.truddy.ru/dashboard"
                 class="text-gray-400 hover:text-white transition-colors text-sm"
                 >Кабинет работодателя</a
               >
@@ -847,7 +837,7 @@
           <h5 class="font-semibold text-white mb-4 text-sm">Связаться с нами</h5>
           <div class="space-y-3">
             <a
-              href="mailto:peeljobs@micropyramid.com"
+              href="mailto:support@truddy.ru"
               class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors group"
             >
               <div
@@ -855,7 +845,7 @@
               >
                 <Mail size={14} />
               </div>
-              <span class="text-sm">peeljobs@micropyramid.com</span>
+              <span class="text-sm">support@truddy.ru</span>
             </a>
             <div class="flex items-center gap-3 text-gray-400">
               <div
@@ -877,7 +867,7 @@
           class="flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p class="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} PeelJobs. Все права защищены.
+            &copy; {new Date().getFullYear()} Truddy.ru. Все права защищены.
           </p>
           <div class="flex flex-wrap justify-center gap-6 text-sm">
             <a

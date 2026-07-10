@@ -55,8 +55,9 @@ class JobFilter(filters.FilterSet):
     )
 
     # Salary filters
-    min_salary = filters.NumberFilter(method='filter_min_salary', label='Minimum Salary (LPA)')
-    max_salary = filters.NumberFilter(method='filter_max_salary', label='Maximum Salary (LPA)')
+    # Salary filters (values in monthly RUB, or annual if job.salary_type=Year)
+    min_salary = filters.NumberFilter(method='filter_min_salary', label='Minimum Salary (RUB/month)')
+    max_salary = filters.NumberFilter(method='filter_max_salary', label='Maximum Salary (RUB/month)')
 
     # Experience filters
     min_experience = filters.NumberFilter(method='filter_min_experience', label='Minimum Experience (years)')
@@ -115,45 +116,37 @@ class JobFilter(filters.FilterSet):
 
     def filter_min_salary(self, queryset, name, value):
         """
-        Filter jobs where max_salary >= user's min_salary (in LPA)
-        Handles both Month and Year salary types
+        Filter jobs where max_salary >= user's min_salary (monthly RUB).
+        Handles both Month and Year salary types.
         """
         if not value:
             return queryset
 
-        # Convert LPA to actual salary value
-        min_salary_value = int(value * 100000)  # Convert lakhs to rupees
+        min_salary_value = int(value)
 
         return queryset.filter(
             Q(
-                # Year-based salary
-                (Q(salary_type='Year') & Q(max_salary__gte=min_salary_value)) |
-                # Month-based salary (multiply by 12)
-                (Q(salary_type='Month') & Q(max_salary__gte=min_salary_value / 12))
+                (Q(salary_type='Month') & Q(max_salary__gte=min_salary_value)) |
+                (Q(salary_type='Year') & Q(max_salary__gte=min_salary_value * 12))
             ) |
-            # Include jobs with no salary specified
             Q(min_salary=0, max_salary=0)
         )
 
     def filter_max_salary(self, queryset, name, value):
         """
-        Filter jobs where min_salary <= user's max_salary (in LPA)
-        Handles both Month and Year salary types
+        Filter jobs where min_salary <= user's max_salary (monthly RUB).
+        Handles both Month and Year salary types.
         """
         if not value:
             return queryset
 
-        # Convert LPA to actual salary value
-        max_salary_value = int(value * 100000)
+        max_salary_value = int(value)
 
         return queryset.filter(
             Q(
-                # Year-based salary
-                (Q(salary_type='Year') & Q(min_salary__lte=max_salary_value)) |
-                # Month-based salary (multiply by 12)
-                (Q(salary_type='Month') & Q(min_salary__lte=max_salary_value / 12))
+                (Q(salary_type='Month') & Q(min_salary__lte=max_salary_value)) |
+                (Q(salary_type='Year') & Q(min_salary__lte=max_salary_value * 12))
             ) |
-            # Include jobs with no salary specified
             Q(min_salary=0, max_salary=0)
         )
 

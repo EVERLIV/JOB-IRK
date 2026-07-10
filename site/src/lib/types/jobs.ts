@@ -163,8 +163,8 @@ export interface JobSearchParams {
   industry?: string[];  // Industry slugs
   education?: string[]; // Qualification slugs
   job_type?: string[];  // Job type values
-  min_salary?: number;  // In LPA
-  max_salary?: number;  // In LPA
+  min_salary?: number;  // Monthly RUB
+  max_salary?: number;  // Monthly RUB
   min_experience?: number;  // In years
   max_experience?: number;  // In years
   fresher?: boolean;

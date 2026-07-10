@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Технические навыки - Профиль - PeelJobs</title>
+	<title>Технические навыки - Профиль - Truddy.ru</title>
 	<meta name="description" content="Управление вашими техническими навыками и экспертностью" />
 </svelte:head>
 

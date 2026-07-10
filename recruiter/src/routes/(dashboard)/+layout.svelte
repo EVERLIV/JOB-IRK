@@ -14,7 +14,7 @@
 	import { authStore } from '$lib/stores/auth';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { Avatar } from '$lib/components/ui';
+	import BrandLogo from '$lib/components/BrandLogo.svelte';
 	import type { LayoutData } from './$types';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
@@ -92,7 +92,7 @@
 		<div class="h-full flex flex-col">
 			<!-- Logo -->
 			<div class="h-16 flex items-center px-6 border-b border-border">
-				<a href="/dashboard/" class="text-xl font-bold text-primary">PeelJobs</a>
+				<BrandLogo href="/dashboard/" size="sm" />
 			</div>
 
 			<!-- Navigation -->

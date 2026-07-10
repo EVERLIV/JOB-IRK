@@ -93,7 +93,7 @@
 </script>
 
 <svelte:head>
-	<title>Сохранённые вакансии - PeelJobs</title>
+	<title>Сохранённые вакансии - Truddy.ru</title>
 	<meta name="description" content="Просматривайте все сохранённые вакансии в одном месте" />
 </svelte:head>
 

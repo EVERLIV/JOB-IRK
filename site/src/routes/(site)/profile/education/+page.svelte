@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>Образование - Профиль - PeelJobs</title>
+	<title>Образование - Профиль - Truddy.ru</title>
 	<meta name="description" content="Управление вашим образованием" />
 </svelte:head>
 

@@ -116,7 +116,7 @@
 </script>
 
 <svelte:head>
-	<title>Предпросмотр: {job.title} - PeelJobs</title>
+	<title>Предпросмотр: {job.title} - Truddy.ru</title>
 </svelte:head>
 
 <div class="min-h-screen bg-surface">

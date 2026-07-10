@@ -27,8 +27,8 @@
 	// FAQs
 	const faqs = [
 		{
-			question: 'PeelJobs действительно на 100% бесплатный?',
-			answer: "Да! Мы никогда не берём плату за публикации вакансий, доступ к кандидатам или любые функции рекрутинга. Наша миссия — связывать работодателей с лучшими специалистами в India без каких-либо затрат."
+			question: 'Truddy.ru действительно на 100% бесплатный?',
+			answer: "Да! Мы никогда не берём плату за публикации вакансий, доступ к кандидатам или любые функции рекрутинга. Наша миссия — связывать работодателей с лучшими специалистами в России без каких-либо затрат."
 		},
 		{
 			question: 'Есть ли скрытые платежи или премиум-тарифы?',
@@ -40,7 +40,7 @@
 		},
 		{
 			question: 'Вы начнёте брать плату в будущем?',
-			answer: "Нет. Мы обязуемся сохранять PeelJobs бесплатным навсегда. Наша цель — сделать качественный найм доступным для каждого работодателя в India, от стартапов до крупных компаний."
+			answer: "Нет. Мы обязуемся сохранять Truddy.ru бесплатным навсегда. Наша цель — сделать качественный найм доступным для каждого работодателя в России, от стартапов до крупных компаний."
 		},
 		{
 			question: 'Сколько вакансий я могу опубликовать?',
@@ -68,13 +68,13 @@
 </script>
 
 <svelte:head>
-	<title>Тарифы - 100% бесплатно навсегда | PeelJobs - Бесплатная платформа вакансий в India</title>
-	<meta name="description" content="Публикуйте неограниченное количество вакансий БЕСПЛАТНО. Без скрытых платежей, без премиум-тарифов. Доступ к 1М+ кандидатам, продвинутые инструменты найма и безлимитные публикации вакансий бесплатно. Присоединяйтесь к 50К+ работодателям на PeelJobs." />
-	<meta property="og:title" content="100% бесплатная платформа вакансий - Тарифы PeelJobs" />
-	<meta property="og:description" content="Больше никогда не платите за публикации вакансий. Безлимитный бесплатный доступ к крупнейшему пулу талантов в India. Публикуйте вакансии, ищите резюме и нанимайте лучших кандидатов — всё бесплатно." />
+	<title>Тарифы - 100% бесплатно навсегда | Truddy.ru - Бесплатная платформа вакансий в России</title>
+	<meta name="description" content="Публикуйте неограниченное количество вакансий БЕСПЛАТНО. Без скрытых платежей, без премиум-тарифов. Доступ к 1М+ кандидатам, продвинутые инструменты найма и безлимитные публикации вакансий бесплатно. Присоединяйтесь к 50К+ работодателям на Truddy.ru." />
+	<meta property="og:title" content="100% бесплатная платформа вакансий - Тарифы Truddy.ru" />
+	<meta property="og:description" content="Больше никогда не платите за публикации вакансий. Безлимитный бесплатный доступ к крупнейшему пулу талантов в России. Публикуйте вакансии, ищите резюме и нанимайте лучших кандидатов — всё бесплатно." />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="100% бесплатная платформа вакансий - Тарифы PeelJobs" />
+	<meta name="twitter:title" content="100% бесплатная платформа вакансий - Тарифы Truddy.ru" />
 	<meta name="twitter:description" content="Безлимитные публикации вакансий, доступ к базе резюме и инструменты найма — всё БЕСПЛАТНО навсегда." />
 </svelte:head>
 
@@ -108,12 +108,12 @@
 			</div>
 
 			<h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms;">
-				Нанимайте лучших специалистов в India
+				Нанимайте лучших специалистов в России
 				<span class="block text-success mt-2">Не потратив ни рупии</span>
 			</h1>
 
 			<p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-10 max-w-3xl mx-auto animate-fade-in-up" style="opacity: 0; animation-delay: 200ms;">
-				Присоединяйтесь к 50 000+ работодателей, которые доверяют PeelJobs свои задачи найма. Публикуйте безлимитные вакансии, получите доступ к 1 миллиону+ кандидатов и создайте команду мечты — всё <strong class="text-white">БЕСПЛАТНО</strong>.
+				Присоединяйтесь к 50 000+ работодателей, которые доверяют Truddy.ru свои задачи найма. Публикуйте безлимитные вакансии, получите доступ к 1 миллиону+ кандидатов и создайте команду мечты — всё <strong class="text-white">БЕСПЛАТНО</strong>.
 			</p>
 
 			<!-- CTA Buttons -->
@@ -218,7 +218,7 @@
 				<div class="grid grid-cols-3 bg-surface border-b border-border">
 					<div class="p-4 lg:p-6"></div>
 					<div class="p-4 lg:p-6 text-center border-l border-border">
-						<div class="font-semibold text-primary text-lg lg:text-xl">PeelJobs</div>
+						<div class="font-semibold text-primary text-lg lg:text-xl">Truddy.ru</div>
 						<div class="text-xs lg:text-sm text-muted mt-1">Бесплатно навсегда</div>
 					</div>
 					<div class="p-4 lg:p-6 text-center border-l border-border">
@@ -265,9 +265,9 @@
 <section class="py-16 lg:py-24 bg-surface">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<div class="text-center mb-12">
-			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Почему PeelJobs бесплатный?</h2>
+			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Почему Truddy.ru бесплатный?</h2>
 			<p class="text-base lg:text-lg text-muted max-w-3xl mx-auto">
-				Наша миссия проста: связывать работодателей с лучшими специалистами в India без финансовых барьеров.
+				Наша миссия проста: связывать работодателей с лучшими специалистами в России без финансовых барьеров.
 			</p>
 		</div>
 

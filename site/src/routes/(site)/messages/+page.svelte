@@ -193,7 +193,7 @@
 </script>
 
 <svelte:head>
-	<title>Сообщения - PeelJobs</title>
+	<title>Сообщения - Truddy.ru</title>
 	<meta name="description" content="Общайтесь с рекрутерами и HR-менеджерами" />
 </svelte:head>
 

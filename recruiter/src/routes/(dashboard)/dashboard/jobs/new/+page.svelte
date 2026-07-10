@@ -339,7 +339,7 @@
 
 	function getApplicationMethodLabel(method: string): string {
 		const labels: Record<string, string> = {
-			portal: 'Через портал PeelJobs',
+			portal: 'Через портал Truddy.ru',
 			external: 'Внешняя ссылка',
 			email: 'По email'
 		};
@@ -355,7 +355,7 @@
 </script>
 
 <svelte:head>
-	<title>Новая вакансия - PeelJobs Recruiter</title>
+	<title>Новая вакансия - Truddy.ru Recruiter</title>
 </svelte:head>
 
 <div class="max-w-5xl mx-auto space-y-6">
@@ -604,7 +604,7 @@
 									id="job-locations-search"
 									type="text"
 									bind:value={formData.searchCity}
-									placeholder="Поиск города... (например, Bangalore, Mumbai)"
+									placeholder="Поиск города... (например, Иркутск, Новосибирск)"
 									class="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
 									disabled={formData.selectedLocationIds.length >= 3}
 								/>
@@ -896,7 +896,7 @@
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="minimum-salary" class="block text-sm font-medium text-muted mb-2">
-								Минимальная зарплата (INR)
+								Минимальная зарплата (₽/мес.)
 							</label>
 							<input
 								id="minimum-salary"
@@ -910,7 +910,7 @@
 
 						<div>
 							<label for="maximum-salary" class="block text-sm font-medium text-muted mb-2">
-								Максимальная зарплата (INR)
+								Максимальная зарплата (₽/мес.)
 							</label>
 							<input
 								id="maximum-salary"
@@ -983,7 +983,7 @@
 										class="w-4 h-4 text-primary"
 									/>
 									<div>
-										<div class="text-sm font-medium text-black">Отклик на портале PeelJobs</div>
+										<div class="text-sm font-medium text-black">Отклик на портале Truddy.ru</div>
 										<div class="text-xs text-muted">Кандидаты откликаются через нашу платформу</div>
 									</div>
 								</label>
@@ -1174,7 +1174,7 @@
 							<div>
 								<h3 class="font-semibold text-black mb-3">Оплата</h3>
 								<p class="text-sm text-muted">
-									INR {formData.salaryMin || '0'} - {formData.salaryMax || '0'} в год
+									{formData.salaryMin || '0'} – {formData.salaryMax || '0'} ₽/мес.
 									{#if !formData.showSalary}<span class="text-muted">(скрыто от кандидатов)</span>{/if}
 								</p>
 								{#if formData.benefits.length > 0}

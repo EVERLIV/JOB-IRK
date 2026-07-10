@@ -61,7 +61,7 @@ class Command(BaseCommand):
         if not config_path.exists():
             raise CommandError(f"Config file not found: {config_path}")
 
-        with open(config_path) as f:
+        with open(config_path, encoding="utf-8") as f:
             self.test_users = json.load(f)
 
         self.stdout.write(f"Loading test users from: {config_path}")
@@ -205,7 +205,7 @@ class Command(BaseCommand):
 
     def _create_company_admin(self, data):
         """Create or update the company admin account (creates/owns the company)."""
-        city = self._get_city(data.get("city", "Hyderabad"))
+        city = self._get_city(data.get("city", "Иркутск"))
 
         user = User.objects.filter(email=data["email"]).first()
         created = False
@@ -277,7 +277,7 @@ class Command(BaseCommand):
 
     def _create_recruiter(self, data):
         """Create or update the company recruiter account (non-admin, uses existing company)."""
-        city = self._get_city(data.get("city", "Hyderabad"))
+        city = self._get_city(data.get("city", "Иркутск"))
 
         user = User.objects.filter(email=data["email"]).first()
         created = False
@@ -340,7 +340,7 @@ class Command(BaseCommand):
 
     def _create_individual(self, data):
         """Create or update the individual/consultant recruiter account (no company)."""
-        city = self._get_city(data.get("city", "Bangalore"))
+        city = self._get_city(data.get("city", "Иркутск"))
 
         user = User.objects.filter(email=data["email"]).first()
         created = False
@@ -398,7 +398,7 @@ class Command(BaseCommand):
 
         created_posts = []
         for i, job_data in enumerate(job_posts_data):
-            city = self._get_city(job_data.get("city", "Hyderabad"))
+            city = self._get_city(job_data.get("city", "Иркутск"))
             title = job_data.get("title", "Software Developer")
             slug = slugify(f"{title}-{user.username}-{i}")
 
@@ -422,7 +422,7 @@ class Command(BaseCommand):
                 max_month=0,
                 min_salary=job_data.get("min_salary", 0),
                 max_salary=job_data.get("max_salary", 0),
-                salary_type="Year",
+                salary_type="Month",
                 job_type=job_data.get("job_type", "full-time"),
                 work_mode=job_data.get("work_mode", "in-office"),
                 status="Live",
@@ -456,7 +456,7 @@ class Command(BaseCommand):
 
     def _create_jobseeker(self, data):
         """Create or update the jobseeker account with full profile."""
-        city = self._get_city(data.get("city", "Hyderabad"))
+        city = self._get_city(data.get("city", "Иркутск"))
 
         user = User.objects.filter(email=data["email"]).first()
         created = False
@@ -602,7 +602,7 @@ class Command(BaseCommand):
         )
 
         # Get qualification
-        qual_name = education_data.get("qualification", "B.Tech")
+        qual_name = education_data.get("qualification", "Бакалавр")
         qualification = Qualification.objects.filter(
             name__icontains=qual_name
         ).first()

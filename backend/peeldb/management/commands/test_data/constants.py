@@ -53,21 +53,21 @@ NOTICE_PERIODS = ["Immediate", "15 Days", "1 Month", "2 Months", "3 Months"]
 # Degree types
 DEGREE_TYPES = ["Permanent", "PartTime"]
 
-# Common qualifications (match with fixtures)
+# Common qualifications (match with fixtures / RF degrees)
 COMMON_QUALIFICATIONS = [
-    "BE/B.Tech", "ME/M.Tech", "MCA", "BCA", "MBA", "BSc", "MSc", "Diploma"
+    "Бакалавр", "Специалист", "Магистр", "MBA", "Диплом", "Среднее профессиональное"
 ]
 
-# Salary ranges by experience (in INR per annum)
+# Salary ranges by experience (monthly RUB, Irkutsk/Siberia-oriented)
 SALARY_RANGES = {
-    0: (200000, 400000),    # Fresher
-    1: (300000, 600000),    # 1 year
-    2: (400000, 800000),    # 2 years
-    3: (500000, 1000000),   # 3 years
-    5: (800000, 1500000),   # 5 years
-    7: (1000000, 2000000),  # 7 years
-    10: (1500000, 3000000), # 10 years
-    15: (2000000, 5000000), # 15+ years
+    0: (60000, 100000),     # Junior / fresher
+    1: (80000, 130000),
+    2: (100000, 160000),
+    3: (120000, 200000),
+    5: (150000, 250000),
+    7: (180000, 300000),
+    10: (220000, 400000),
+    15: (280000, 550000),
 }
 
 # Experience levels (years)

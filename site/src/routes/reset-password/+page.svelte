@@ -3,6 +3,7 @@
   import { goto } from '$app/navigation';
   import { Lock, Eye, EyeOff, CheckCircle, XCircle, ShieldCheck } from '@lucide/svelte';
   import { apiClient } from '$lib/api/client';
+  import BrandLogo from '$lib/components/BrandLogo.svelte';
 
   let password = '';
   let confirmPassword = '';
@@ -116,20 +117,15 @@
 </script>
 
 <svelte:head>
-  <title>Сброс пароля - PeelJobs</title>
-  <meta name="description" content="Сбросьте пароль от аккаунта PeelJobs" />
+  <title>Сброс пароля - Truddy.ru</title>
+  <meta name="description" content="Сбросьте пароль от аккаунта Truddy.ru" />
 </svelte:head>
 
 <div class="min-h-screen bg-surface flex items-center justify-center p-6">
   <div class="w-full max-w-md">
     <!-- Logo -->
     <div class="text-center mb-8 animate-fade-in-down" style="opacity: 0; animation-fill-mode: forwards;">
-      <a href="/" class="inline-flex items-center gap-3">
-        <div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center">
-          <span class="text-xl font-semibold text-white">P</span>
-        </div>
-        <span class="text-2xl font-semibold text-black">PeelJobs</span>
-      </a>
+      <BrandLogo href="/" size="lg" class="justify-center" />
     </div>
 
     <!-- Card -->

@@ -3,6 +3,7 @@
   import { goto } from '$app/navigation';
   import { Mail, CheckCircle, XCircle, Loader2, RefreshCw, Clock } from '@lucide/svelte';
   import { enhance } from '$app/forms';
+  import BrandLogo from '$lib/components/BrandLogo.svelte';
 
   /** @type {{ data?: { status?: string; message?: string; email?: string }; form?: { success?: boolean; message?: string } }} */
   let { data, form } = $props();
@@ -49,20 +50,15 @@
 </script>
 
 <svelte:head>
-  <title>Подтверждение email - PeelJobs</title>
-  <meta name="description" content="Подтвердите ваш email на PeelJobs" />
+  <title>Подтверждение email - Truddy.ru</title>
+  <meta name="description" content="Подтвердите ваш email на Truddy.ru" />
 </svelte:head>
 
 <div class="min-h-screen bg-surface flex items-center justify-center p-6">
   <div class="w-full max-w-md">
     <!-- Logo -->
     <div class="text-center mb-8 animate-fade-in-down" style="opacity: 0; animation-fill-mode: forwards;">
-      <a href="/" class="inline-flex items-center gap-3">
-        <div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center">
-          <span class="text-xl font-semibold text-white">P</span>
-        </div>
-        <span class="text-2xl font-semibold text-black">PeelJobs</span>
-      </a>
+      <BrandLogo href="/" size="lg" class="justify-center" />
     </div>
 
     <!-- Card -->
@@ -180,7 +176,7 @@
           </h2>
 
           <p class="text-muted mb-6">
-            Ваш email подтверждён. Теперь вам доступен весь функционал PeelJobs.
+            Ваш email подтверждён. Теперь вам доступен весь функционал Truddy.ru.
           </p>
 
           <div class="bg-success-light rounded-lg p-4 mb-6">

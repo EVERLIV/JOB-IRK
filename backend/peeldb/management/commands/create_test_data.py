@@ -216,7 +216,7 @@ class Command(BaseCommand):
             lambda: f"{random.choice(COMPANY_PREFIXES)}{random.choice(COMPANY_SUFFIXES)}",
             lambda: f"{random.choice(INDIAN_LAST_NAMES)} {random.choice(COMPANY_SUFFIXES)}",
             lambda: f"{random.choice(COMPANY_PREFIXES)} {random.choice(COMPANY_SUFFIXES)} {random.choice(COMPANY_TYPE_SUFFIXES)}",
-            lambda: f"{random.choice(COMPANY_PREFIXES)}{random.choice(COMPANY_SUFFIXES)} India",
+            lambda: f"ООО «{random.choice(COMPANY_PREFIXES)}{random.choice(COMPANY_SUFFIXES)}»",
         ]
 
         while True:
@@ -244,7 +244,7 @@ class Command(BaseCommand):
                 website=f"https://www.{slugify(name).replace('-', '')}.com",
                 address=f"{random.randint(1, 500)}, {random.choice(BUSINESS_PARKS)}, {city.name}",
                 profile=f"<p>{name} is a leading technology company. {random.choice(COMPANY_PROFILES)} {TEST_DATA_MARKER}</p>",
-                phone_number=f"+91{random.randint(7000000000, 9999999999)}",
+                phone_number=f"+79{random.randint(1000000000, 9999999999)}",
                 email=f"hr@{slugify(name).replace('-', '')}.com",
                 size=random.choice(COMPANY_SIZES),
                 company_type=random.choice(COMPANY_TYPES),
@@ -291,7 +291,7 @@ class Command(BaseCommand):
                 city=city,
                 state=city.state,
                 country=city.state.country,
-                mobile=f"+91{random.randint(7000000000, 9999999999)}",
+                mobile=f"+79{random.randint(1000000000, 9999999999)}",
                 profile_description=f"Recruiter at {company.name}. {TEST_DATA_MARKER}",
                 job_title=random.choice(RECRUITER_TITLES),
             )
@@ -350,7 +350,7 @@ class Command(BaseCommand):
                 current_city=city,
                 state=city.state,
                 country=city.state.country,
-                mobile=f"+91{random.randint(7000000000, 9999999999)}",
+                mobile=f"+79{random.randint(1000000000, 9999999999)}",
                 year=str(years_exp),
                 month=str(months_exp),
                 current_salary=str(current_salary),
@@ -563,7 +563,7 @@ class Command(BaseCommand):
                 max_month=0,
                 min_salary=min_salary,
                 max_salary=max_salary,
-                salary_type="Year",
+                salary_type="Month",
                 job_type=job_type,
                 work_mode=random.choice(WORK_MODES),
                 status=status,

@@ -121,7 +121,7 @@ else:
     }
 
 
-TIME_ZONE = "Asia/Kolkata"
+TIME_ZONE = "Asia/Irkutsk"
 
 LANGUAGE_CODE = "en-us"
 
@@ -319,7 +319,7 @@ HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
 HAYSTACK_DEFAULT_OPERATOR = "OR"
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1
 
-CELERY_TIMEZONE = "Asia/Calcutta"
+CELERY_TIMEZONE = "Asia/Irkutsk"
 
 CELERY_BEAT_SCHEDULE = {
     # Executes every day evening at 5:00 PM GMT +5.30
@@ -423,7 +423,7 @@ THUMBNAIL_PRESERVE_FORMAT = False
 THUMBNAIL_FORMAT = "PNG"
 THUMBNAIL_CACHE_TIMEOUT = 3600 * 24 * 365 * 10
 
-TIMEZONE = "Asia/Calcutta"
+TIMEZONE = "Asia/Irkutsk"
 LOGO = "http://localhost:8000/logo.png"
 
 

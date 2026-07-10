@@ -72,14 +72,14 @@ def send_verification_email(user, request, company=None):
         # Synchronous email for development (no Celery needed)
         send_email(
             mto=[user.email],
-            msubject="Verify your PeelJobs Recruiter account",
+            msubject="Verify your Truddy.ru Recruiter account",
             mbody=html_content
         )
     else:
         # Async email via Celery for production
         send_email.delay(
             mto=[user.email],
-            msubject="Verify your PeelJobs Recruiter account",
+            msubject="Verify your Truddy.ru Recruiter account",
             mbody=html_content
         )
 
@@ -108,14 +108,14 @@ def send_password_reset_email(user, request):
         # Synchronous email for development (no Celery needed)
         send_email(
             mto=[user.email],
-            msubject="Reset your PeelJobs Recruiter password",
+            msubject="Reset your Truddy.ru Recruiter password",
             mbody=html_content
         )
     else:
         # Async email via Celery for production
         send_email.delay(
             mto=[user.email],
-            msubject="Reset your PeelJobs Recruiter password",
+            msubject="Reset your Truddy.ru Recruiter password",
             mbody=html_content
         )
 

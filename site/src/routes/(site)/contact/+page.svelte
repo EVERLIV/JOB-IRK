@@ -51,8 +51,8 @@
 		{
 			icon: Mail,
 			title: 'Эл. почта',
-			details: 'peeljobs@micropyramid.com',
-			link: 'mailto:peeljobs@micropyramid.com',
+			details: 'support@truddy.ru',
+			link: 'mailto:support@truddy.ru',
 			description: 'Напишите нам в любое время'
 		},
 		{
@@ -70,8 +70,8 @@
 			answer: 'Обычно мы отвечаем на все обращения в течение 24 часов в рабочие дни.'
 		},
 		{
-			question: 'PeelJobs действительно бесплатный?',
-			answer: 'Да! PeelJobs полностью бесплатен как для соискателей, так и для работодателей. Никаких скрытых платежей.'
+			question: 'Truddy.ru действительно бесплатный?',
+			answer: 'Да! Truddy.ru полностью бесплатен как для соискателей, так и для работодателей. Никаких скрытых платежей.'
 		},
 		{
 			question: 'Могу ли я посетить ваш офис?',
@@ -162,7 +162,7 @@
 				errors.submit = 'Исправьте ошибки выше и попробуйте снова.';
 				toast.error('Проверьте форму на наличие ошибок');
 			} else {
-				errors.submit = 'Не удалось отправить сообщение. Попробуйте снова или напишите нам на peeljobs@micropyramid.com';
+				errors.submit = 'Не удалось отправить сообщение. Попробуйте снова или напишите нам на support@truddy.ru';
 				toast.error('Не удалось отправить сообщение. Попробуйте снова.');
 			}
 		} finally {
@@ -172,19 +172,19 @@
 </script>
 
 <svelte:head>
-	<title>Связаться с нами - PeelJobs | Свяжитесь с нашей командой поддержки</title>
-	<meta name="description" content="Есть вопросы или нужна помощь? Свяжитесь с командой поддержки PeelJobs. Мы помогаем соискателям и работодателям на нашей бесплатной платформе." />
-	<link rel="canonical" href="https://peeljobs.com/contact/" />
+	<title>Связаться с нами - Truddy.ru | Свяжитесь с нашей командой поддержки</title>
+	<meta name="description" content="Есть вопросы или нужна помощь? Свяжитесь с командой поддержки Truddy.ru. Мы помогаем соискателям и работодателям на нашей бесплатной платформе." />
+	<link rel="canonical" href="https://truddy.ru/contact/" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Связаться с поддержкой PeelJobs - Мы готовы помочь" />
+	<meta property="og:title" content="Связаться с поддержкой Truddy.ru - Мы готовы помочь" />
 	<meta property="og:description" content="Свяжитесь с нашей командой по любым вопросам о нашей бесплатной платформе." />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://peeljobs.com/contact/" />
+	<meta property="og:url" content="https://truddy.ru/contact/" />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Связаться с PeelJobs" />
+	<meta name="twitter:title" content="Связаться с Truddy.ru" />
 	<meta name="twitter:description" content="Обратитесь к нашей команде поддержки за помощью." />
 </svelte:head>
 
@@ -547,11 +547,11 @@
 						Возникли проблемы с аккаунтом, откликами или поиском работы? Наша команда поддержки готова помочь.
 					</p>
 					<a
-						href="mailto:peeljobs@micropyramid.com"
+						href="mailto:support@truddy.ru"
 						class="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-medium group"
 					>
 						<Mail size={16} />
-						<span class="break-all">peeljobs@micropyramid.com</span>
+						<span class="break-all">support@truddy.ru</span>
 					</a>
 				</div>
 
@@ -566,11 +566,11 @@
 						Вопросы о публикации вакансий или управлении кандидатами? Мы поможем вам найти подходящих специалистов!
 					</p>
 					<a
-						href="mailto:peeljobs@micropyramid.com"
+						href="mailto:support@truddy.ru"
 						class="inline-flex items-center gap-2 text-success hover:text-success font-medium group"
 					>
 						<Mail size={16} />
-						<span class="break-all">peeljobs@micropyramid.com</span>
+						<span class="break-all">support@truddy.ru</span>
 					</a>
 				</div>
 			</div>

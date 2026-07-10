@@ -90,22 +90,22 @@
 </script>
 
 <svelte:head>
-	<title>О нас - PeelJobs | Бесплатный портал вакансий, демократизирующий найм</title>
+	<title>О нас - Truddy.ru | Бесплатный портал вакансий, демократизирующий найм</title>
 	<meta
 		name="description"
-		content="PeelJobs — бесплатный портал вакансий, связывающий таланты с возможностями. Узнайте о нашей миссии демократизировать найм, делая исключительный рекрутинг доступным для бизнеса любого размера без финансовых барьеров."
+		content="Truddy.ru — бесплатный портал вакансий, связывающий таланты с возможностями. Узнайте о нашей миссии демократизировать найм, делая исключительный рекрутинг доступным для бизнеса любого размера без финансовых барьеров."
 	/>
-	<link rel="canonical" href="https://peeljobs.com/about/" />
+	<link rel="canonical" href="https://truddy.ru/about/" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="О PeelJobs - Демократизация найма, одно соединение за раз" />
-	<meta property="og:description" content="Узнайте, как PeelJobs преображает рекрутинг с нашей бесплатной, доступной платформой, которая помогает как компаниям, так и соискателям." />
+	<meta property="og:title" content="О Truddy.ru - Демократизация найма, одно соединение за раз" />
+	<meta property="og:description" content="Узнайте, как Truddy.ru преображает рекрутинг с нашей бесплатной, доступной платформой, которая помогает как компаниям, так и соискателям." />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://peeljobs.com/about/" />
+	<meta property="og:url" content="https://truddy.ru/about/" />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="О PeelJobs - Бесплатный портал вакансий" />
+	<meta name="twitter:title" content="О Truddy.ru - Бесплатный портал вакансий" />
 	<meta name="twitter:description" content="Узнайте о нашей миссии демократизировать найм для всех." />
 </svelte:head>
 
@@ -231,7 +231,7 @@
 		<div class="text-center mb-10 lg:mb-12">
 			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Наши ценности</h2>
 			<p class="text-base lg:text-lg text-muted max-w-3xl mx-auto">
-				Эти фундаментальные принципы направляют всё, что мы делаем в PeelJobs
+				Эти фундаментальные принципы направляют всё, что мы делаем в Truddy.ru
 			</p>
 		</div>
 
@@ -256,7 +256,7 @@
 <section class="py-16 lg:py-24 bg-white">
 	<div class="max-w-7xl mx-auto px-4 lg:px-8">
 		<div class="text-center mb-10 lg:mb-12">
-			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Почему PeelJobs?</h2>
+			<h2 class="text-2xl lg:text-3xl font-semibold text-black tracking-tight mb-4">Почему Truddy.ru?</h2>
 			<p class="text-base lg:text-lg text-muted max-w-3xl mx-auto">
 				Мы больше, чем просто доска вакансий — мы ваш партнёр в построении успешных карьер и команд
 			</p>
@@ -358,7 +358,7 @@
 	<div class="max-w-7xl mx-auto px-4 lg:px-8 text-center">
 		<div class="max-w-3xl mx-auto">
 			<h2 class="text-2xl lg:text-3xl font-semibold tracking-tight mb-4">
-				Готовы ощутить разницу с PeelJobs?
+				Готовы ощутить разницу с Truddy.ru?
 			</h2>
 			<p class="text-base lg:text-lg text-gray-300 mb-8 lg:mb-10">
 				Присоединяйтесь к тысячам соискателей и компаний, которые открыли лучший способ связи.

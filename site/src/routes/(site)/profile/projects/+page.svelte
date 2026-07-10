@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>Проекты - Профиль - PeelJobs</title>
+	<title>Проекты - Профиль - Truddy.ru</title>
 	<meta name="description" content="Продемонстрируйте ваше портфолио и достижения" />
 </svelte:head>
 

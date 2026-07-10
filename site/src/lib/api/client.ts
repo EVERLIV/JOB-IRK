@@ -1,5 +1,5 @@
 /**
- * Base API Client for PeelJobs
+ * Base API Client for Truddy.ru
  * Cookie-first HTTP client for candidate site.
  */
 

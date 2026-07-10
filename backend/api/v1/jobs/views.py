@@ -41,7 +41,7 @@ class JobViewSet(viewsets.ReadOnlyModelViewSet):
     - industry: Filter by industry slugs (multiple)
     - education: Filter by qualification slugs (multiple)
     - job_type: Filter by job type (full-time, internship, etc.)
-    - min_salary, max_salary: Salary range in LPA
+    - min_salary, max_salary: Salary range in RUB/month
     - min_experience, max_experience: Experience range in years
     - fresher: Fresher jobs only (boolean)
     - is_remote: Remote jobs only (boolean)
@@ -170,13 +170,13 @@ class JobViewSet(viewsets.ReadOnlyModelViewSet):
             OpenApiParameter(
                 name='min_salary',
                 type=OpenApiTypes.NUMBER,
-                description='Minimum salary in LPA (Lakhs Per Annum)',
+                description='Minimum salary in RUB per month',
                 required=False,
             ),
             OpenApiParameter(
                 name='max_salary',
                 type=OpenApiTypes.NUMBER,
-                description='Maximum salary in LPA (Lakhs Per Annum)',
+                description='Maximum salary in RUB per month',
                 required=False,
             ),
             OpenApiParameter(

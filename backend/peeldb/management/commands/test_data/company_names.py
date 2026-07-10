@@ -1,76 +1,63 @@
-# Company name generation data
+# Company name generation data for Russia / Irkutsk region
 
 COMPANY_PREFIXES = [
-    "Tech", "Info", "Soft", "Data", "Cloud", "Digital", "Smart", "Next",
-    "Prime", "Core", "Apex", "Global", "Infinite", "Bright", "Nova", "Cyber",
-    "Quantum", "Rapid", "Swift", "Peak", "Vertex", "Zenith", "Alpha", "Omega",
-    "Neo", "Ultra", "Mega", "Super", "Hyper", "Meta", "Syn", "Pro",
+    "Байкал", "Сибирь", "Иркут", "Ангара", "Тайга", "Север", "Восток", "Цифра",
+    "Техно", "Софт", "Дата", "Клауд", "Смарт", "Нова", "Про", "Мета",
+    "Альфа", "Омега", "Нео", "Ультра", "Гипер", "Квант", "Пик", "Вершина",
 ]
 
 COMPANY_SUFFIXES = [
-    "Systems", "Solutions", "Technologies", "Labs", "Infotech", "Techno",
-    "Software", "Innovations", "Services", "Consulting", "Networks", "Dynamics",
-    "Logic", "Ware", "Soft", "Tech", "Mind", "Edge", "Works", "Hub",
+    "Системы", "Решения", "Технологии", "Лаб", "Софт", "Сервис",
+    "Инновации", "Консалтинг", "Сети", "Динамика", "Воркс", "Хаб",
+    "Групп", "Платформа", "Цифра", "Код",
 ]
 
 COMPANY_TYPE_SUFFIXES = [
-    "Pvt Ltd", "Private Limited", "Solutions Pvt Ltd", "Technologies Pvt Ltd",
-    "India Pvt Ltd", "Software Pvt Ltd", "IT Services", "Consulting LLP",
+    "ООО", "АО", "ИП", "ООО ИТ", "Группа компаний",
 ]
 
-# Realistic Indian IT company name patterns
 INDIAN_COMPANY_PATTERNS = [
     "{prefix}{suffix}",
+    "{prefix} {suffix}",
     "{prefix}{suffix} {type}",
     "{lastname} {suffix}",
-    "{lastname} {suffix} {type}",
-    "{prefix} {suffix} India",
-    "{firstname}{suffix}",
+    "{lastname} {type}",
+    "ООО «{prefix}{suffix}»",
 ]
 
-# Business park and address patterns
 ADDRESS_PATTERNS = [
-    "{number}, {park}, {area}, {city}",
-    "Floor {floor}, {building}, {area}, {city}",
-    "{building}, Plot {number}, {park}, {city}",
-    "{number}/{floor}, {area}, {city} - {pincode}",
+    "ул. {area}, д. {number}, {city}",
+    "пр. {area}, {number}, офис {floor}, {city}",
+    "{building}, {area}, {city}",
+    "БЦ «{building}», {area}, {city}",
 ]
 
 BUSINESS_PARKS = [
-    "Cyber Park", "Tech Park", "IT Park", "Software Park", "Business Park",
-    "Innovation Hub", "Technology Campus", "Corporate Park", "Digital Zone",
-    "Techno Park", "Info Park", "Software City", "IT Tower", "Tech Tower",
+    "БЦ Байкал", "Академгородок", "Бизнес-центр Сибирь", "Технопарк",
+    "ИТ-парк", "Инновационный центр", "БЦ Ангара", "Офисный центр Свердлова",
 ]
 
 BUILDINGS = [
-    "Prestige Tower", "DLF Cyber City", "Embassy Tech Village", "RMZ Ecoworld",
-    "Manyata Tech Park", "Bagmane Tech Park", "ITPL", "Electronic City",
-    "Mindspace", "Raheja Mindspace", "Cyber Gateway", "Platina Tower",
-    "World Trade Center", "Phoenix Market City", "Orion Mall Tower",
+    "Иркутск-Сити", "Байкал Плаза", "Сибирь Тауэр", "Ангара Центр",
+    "Декабрьских Событий", "130-й квартал", "БЦ Ленина", "Технопарк НГУ",
 ]
 
 AREAS = [
-    "Whitefield", "Electronic City", "Marathahalli", "Koramangala", "HSR Layout",
-    "BTM Layout", "Indiranagar", "Jayanagar", "JP Nagar", "Bannerghatta Road",
-    "HITEC City", "Gachibowli", "Madhapur", "Kondapur", "Jubilee Hills",
-    "Banjara Hills", "Kukatpally", "Ameerpet", "Begumpet", "Secunderabad",
-    "Andheri", "Powai", "BKC", "Lower Parel", "Goregaon", "Malad", "Thane",
-    "Gurugram", "Noida", "Greater Noida", "Faridabad", "Ghaziabad",
-    "Salt Lake", "Rajarhat", "New Town", "Sector V", "Park Street",
-    "OMR", "Sholinganallur", "Perungudi", "Velachery", "Adyar", "T Nagar",
-    "Kharadi", "Hinjewadi", "Baner", "Wakad", "Viman Nagar", "Magarpatta",
+    "Свердлова", "Ленина", "Карла Маркса", "Декабрьских Событий", "Лермонтова",
+    "Байкальская", "Рабочего Штаба", "Мухиной", "Полярная", "Юрия Тена",
+    "Космическая", "Баррикад", "Советская", "Горького", "Радужный",
+    "Академгородок", "Студгородок", "Правобережный", "Левобережный",
 ]
 
-# Company profiles
 COMPANY_PROFILES = [
-    "Leading IT services and consulting company delivering innovative solutions.",
-    "Premier software development firm specializing in enterprise applications.",
-    "Cutting-edge technology company focused on digital transformation.",
-    "Full-service IT solutions provider with expertise in cloud and data.",
-    "Dynamic software company building next-generation applications.",
-    "Innovative tech startup disrupting the industry with AI/ML solutions.",
-    "Established IT services firm with a global delivery model.",
-    "Boutique software consultancy known for quality and expertise.",
-    "Fast-growing technology company with a focus on product development.",
-    "Enterprise software company serving Fortune 500 clients.",
+    "IT-компания из Сибири: разработка ПО и цифровизация бизнеса.",
+    "Разработка корпоративных систем и веб-сервисов для региона.",
+    "Команда инженеров с фокусом на облако, данные и интеграции.",
+    "Продуктовая IT-компания: SaaS и заказные решения.",
+    "Консалтинг и внедрение информационных систем.",
+    "Стартап в сфере AI/ML и аналитики данных.",
+    "Сервисная IT-компания с проектами по всей России.",
+    "Бутик-студия разработки с акцентом на качество.",
+    "Растущая tech-компания, продукт для B2B.",
+    "Enterprise-разработка для промышленного и госзаказа.",
 ]

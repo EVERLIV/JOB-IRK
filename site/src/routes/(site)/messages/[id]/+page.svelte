@@ -291,7 +291,7 @@
 </script>
 
 <svelte:head>
-	<title>{conversation?.recruiter.name || 'Разговор'} - Сообщения - PeelJobs</title>
+	<title>{conversation?.recruiter.name || 'Разговор'} - Сообщения - Truddy.ru</title>
 	<meta name="description" content="Чат с {conversation?.recruiter.name || 'рекрутером'}" />
 </svelte:head>
 

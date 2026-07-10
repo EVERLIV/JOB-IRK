@@ -5,6 +5,7 @@
   import { page } from '$app/stores';
   import { enhance } from '$app/forms';
   import { AlertCircle, Loader2, Briefcase, Shield, Zap, Mail, Lock } from '@lucide/svelte';
+  import BrandLogo from '$lib/components/BrandLogo.svelte';
 
   let { data, form } = $props();
 
@@ -72,8 +73,8 @@
 </script>
 
 <svelte:head>
-  <title>Вход - PeelJobs</title>
-  <meta name="description" content="Войдите в PeelJobs - Ваш путь к карьерным возможностям" />
+  <title>Вход - Truddy.ru</title>
+  <meta name="description" content="Войдите в Truddy.ru - Ваш путь к карьерным возможностям" />
 </svelte:head>
 
 <div class="min-h-screen bg-white flex">
@@ -84,10 +85,7 @@
     </div>
     <div class="relative z-10 flex flex-col justify-center px-12 xl:px-16 w-full">
       <div class="mb-10 animate-fade-in-up" style="opacity: 0; animation-fill-mode: forwards;">
-        <a href="/" class="inline-flex items-center gap-2">
-          <img src="/logo.png" alt="PeelJobs" class="h-10 w-auto" />
-          <span class="text-2xl font-semibold text-white">PeelJobs</span>
-        </a>
+        <BrandLogo href="/" size="lg" textClass="text-white" />
       </div>
       <div class="mb-10">
         <h1 class="text-3xl xl:text-4xl font-semibold text-white tracking-tight mb-4 animate-fade-in-up" style="opacity: 0; animation-delay: 100ms; animation-fill-mode: forwards;">
@@ -115,10 +113,7 @@
   <div class="flex-1 flex items-center justify-center p-6 lg:p-12">
     <div class="w-full max-w-sm">
       <div class="lg:hidden text-center mb-8 animate-fade-in-down" style="opacity: 0; animation-fill-mode: forwards;">
-        <a href="/" class="inline-flex items-center gap-2">
-          <img src="/logo.png" alt="PeelJobs" class="h-10 w-auto" />
-          <span class="text-2xl font-semibold text-black">PeelJobs</span>
-        </a>
+        <BrandLogo href="/" size="lg" class="justify-center" />
       </div>
       <div class="animate-fade-in-up" style="opacity: 0; animation-delay: 100ms; animation-fill-mode: forwards;">
         <div class="text-center mb-8">
@@ -233,7 +228,7 @@
           <a href="/privacy/" class="text-primary-600 hover:text-primary-700 font-semibold hover:underline">Политикой конфиденциальности</a>
         </p>
         <p class="text-sm text-muted">
-          Впервые в PeelJobs?
+          Впервые в Truddy.ru?
           <a href="/register/" class="text-primary-600 hover:text-primary-700 font-semibold hover:underline">Зарегистрироваться</a>
         </p>
       </div>

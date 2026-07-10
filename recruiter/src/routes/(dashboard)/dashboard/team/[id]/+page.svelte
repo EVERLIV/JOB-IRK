@@ -40,7 +40,7 @@
 </script>
 
 <svelte:head>
-	<title>{member.first_name} {member.last_name} — участник команды — PeelJobs</title>
+	<title>{member.first_name} {member.last_name} — участник команды — Truddy.ru</title>
 </svelte:head>
 
 <div class="space-y-6">

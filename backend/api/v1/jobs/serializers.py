@@ -145,29 +145,28 @@ class JobListSerializer(serializers.ModelSerializer):
             return f"{min_exp}-{max_exp} years"
 
     def get_salary_display(self, obj):
-        """Format salary range as readable string"""
+        """Format salary range as readable RUB string"""
         if obj.min_salary == 0 and obj.max_salary == 0:
-            return "Not Disclosed"
+            return "Не указана"
 
-        # Normalize to LPA (Lakhs Per Annum)
         min_sal = obj.min_salary
         max_sal = obj.max_salary
+        period = "мес."
 
-        if obj.salary_type == "Month":
-            min_sal = (min_sal * 12) / 100000  # Convert to lakhs
-            max_sal = (max_sal * 12) / 100000
-        else:
-            min_sal = min_sal / 100000
-            max_sal = max_sal / 100000
+        if obj.salary_type == "Year":
+            min_sal = min_sal // 12 if min_sal else 0
+            max_sal = max_sal // 12 if max_sal else 0
+
+        def _fmt(value: int) -> str:
+            return f"{value:,}".replace(",", " ")
 
         if min_sal == 0 and max_sal > 0:
-            return f"Up to ₹{max_sal:.1f} LPA"
-        elif min_sal > 0 and max_sal == 0:
-            return f"From ₹{min_sal:.1f} LPA"
-        elif min_sal == max_sal:
-            return f"₹{min_sal:.1f} LPA"
-        else:
-            return f"₹{min_sal:.1f}-{max_sal:.1f} LPA"
+            return f"до {_fmt(max_sal)} ₽/{period}"
+        if min_sal > 0 and max_sal == 0:
+            return f"от {_fmt(min_sal)} ₽/{period}"
+        if min_sal == max_sal:
+            return f"{_fmt(min_sal)} ₽/{period}"
+        return f"{_fmt(min_sal)}–{_fmt(max_sal)} ₽/{period}"
 
     def get_location_display(self, obj):
         """Get primary location for display"""

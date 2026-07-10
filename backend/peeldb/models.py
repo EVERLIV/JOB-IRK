@@ -249,8 +249,8 @@ class City(models.Model):
                 'name': 'City name cannot contain multiple locations. Please create separate entries for each city.'
             })
 
-        # Check for special characters (except spaces, hyphens, apostrophes, periods)
-        if re.search(r'[^a-zA-Z\s\-\'\.]', self.name):
+        # Allow Latin and Cyrillic letters, spaces, hyphens, apostrophes, periods
+        if re.search(r"[^a-zA-Zа-яА-ЯёЁ\s\-'\.]", self.name):
             raise ValidationError({
                 'name': 'City name cannot contain numbers or special characters. Only letters, spaces, hyphens, apostrophes, and periods are allowed.'
             })

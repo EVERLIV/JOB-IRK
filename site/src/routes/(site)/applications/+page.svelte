@@ -143,7 +143,7 @@
 </script>
 
 <svelte:head>
-	<title>Мои отклики - PeelJobs</title>
+	<title>Мои отклики - Truddy.ru</title>
 	<meta name="description" content="Отслеживайте все ваши отклики на вакансии в одном месте" />
 </svelte:head>
 

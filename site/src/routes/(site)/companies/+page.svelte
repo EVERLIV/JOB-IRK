@@ -277,7 +277,7 @@
 </script>
 
 <svelte:head>
-  <title>Лучшие компании Индии - PeelJobs</title>
+  <title>Лучшие компании Индии - Truddy.ru</title>
   <meta name="description" content="Откройте для себя лучшие компании, нанимающие в Индии. Просматривайте {totalCompanies.toLocaleString()} компаний по отраслям, местоположению и типу." />
 </svelte:head>
 

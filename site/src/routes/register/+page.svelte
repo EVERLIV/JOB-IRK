@@ -4,6 +4,7 @@
   import { enhance } from '$app/forms';
   import { RECRUITER_URL } from '$lib/config/env';
   import { getGoogleAuthUrl } from '$lib/api/auth';
+  import BrandLogo from '$lib/components/BrandLogo.svelte';
   import {
     User,
     Mail,
@@ -203,8 +204,8 @@
 </script>
 
 <svelte:head>
-  <title>Регистрация - PeelJobs</title>
-  <meta name="description" content="Создайте аккаунт на PeelJobs и начните поиск идеальной работы или найм лучших специалистов." />
+  <title>Регистрация - Truddy.ru</title>
+  <meta name="description" content="Создайте аккаунт на Truddy.ru и начните поиск идеальной работы или найм лучших специалистов." />
 </svelte:head>
 
 <div class="min-h-screen flex">
@@ -218,12 +219,7 @@
 
     <div class="relative z-10 flex flex-col justify-center px-12 xl:px-16 w-full">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 mb-12">
-        <div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center">
-          <span class="text-xl font-bold text-white">P</span>
-        </div>
-        <span class="text-2xl font-semibold text-white">PeelJobs</span>
-      </a>
+      <BrandLogo href="/" size="lg" textClass="text-white" class="mb-12" />
 
       <!-- Main Heading -->
       <h1 class="text-3xl xl:text-4xl font-semibold text-white leading-tight mb-4">
@@ -273,12 +269,7 @@
     <!-- Header -->
     <header class="border-b border-border">
       <div class="max-w-lg mx-auto w-full px-6 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 lg:hidden">
-          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <span class="text-sm font-bold text-white">P</span>
-          </div>
-          <span class="text-lg font-semibold text-black">PeelJobs</span>
-        </a>
+        <BrandLogo href="/" size="sm" class="lg:hidden" />
         <div class="text-sm text-muted ml-auto">
           Уже есть аккаунт?{' '}
           <a href="/login/" class="text-primary hover:text-primary-hover font-medium">Войти</a>
@@ -293,7 +284,7 @@
           <div class="animate-fade-in-up" style="opacity: 0; animation-fill-mode: forwards;">
             <div class="text-center mb-10">
               <h1 class="text-2xl font-semibold text-black mb-2">
-                Присоединяйтесь к PeelJobs
+                Присоединяйтесь к Truddy.ru
               </h1>
               <p class="text-muted">
                 Выберите, как вы хотите начать

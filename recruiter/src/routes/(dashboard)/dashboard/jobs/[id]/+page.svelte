@@ -90,7 +90,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.job.title} - Детали вакансии - PeelJobs</title>
+	<title>{data.job.title} - Детали вакансии - Truddy.ru</title>
 </svelte:head>
 
 <div class="space-y-6">

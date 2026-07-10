@@ -65,7 +65,7 @@
   let showIndustryModal = $state(false);
   let showEducationModal = $state(false);
 
-  // Salary filter (INR in Lakhs per Annum)
+  // Salary filter (monthly RUB)
   let salaryMin = $state<number | null>(null);
   let salaryMax = $state<number | null>(null);
 
@@ -514,8 +514,8 @@
 </script>
 
 <svelte:head>
-  <title>Поиск вакансий - PeelJobs</title>
-  <meta name="description" content="Найдите работу мечты с PeelJobs. Просматривайте тысячи вакансий с расширенными фильтрами по городу, навыкам, зарплате и другим параметрам." />
+  <title>Поиск вакансий - Truddy.ru</title>
+  <meta name="description" content="Найдите работу мечты с Truddy.ru. Просматривайте тысячи вакансий с расширенными фильтрами по городу, навыкам, зарплате и другим параметрам." />
 </svelte:head>
 
 <div class="min-h-screen bg-surface-50">
@@ -652,7 +652,7 @@
 
             <!-- Salary Range -->
             <CollapsibleFilterSection
-              title="Зарплата (LPA)"
+              title="Зарплата (₽/мес.)"
               hasActiveFilter={salaryMin !== null || salaryMax !== null}
             >
               <div class="grid grid-cols-2 gap-3">
@@ -662,7 +662,7 @@
                     id="salary-min"
                     type="number"
                     bind:value={salaryMin}
-                    placeholder="0"
+                    placeholder="80000"
                     class="w-full px-3 py-2 bg-surface border border-border rounded-lg focus:bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-600/10 text-sm transition-all outline-none"
                   />
                 </div>
@@ -672,7 +672,7 @@
                     id="salary-max"
                     type="number"
                     bind:value={salaryMax}
-                    placeholder="∞"
+                    placeholder="250000"
                     class="w-full px-3 py-2 bg-surface border border-border rounded-lg focus:bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-600/10 text-sm transition-all outline-none"
                   />
                 </div>

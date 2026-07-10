@@ -173,7 +173,7 @@
 </script>
 
 <svelte:head>
-	<title>Личные данные - Профиль - PeelJobs</title>
+	<title>Личные данные - Профиль - Truddy.ru</title>
 	<meta name="description" content="Управление личными данными и предпочтениями" />
 </svelte:head>
 

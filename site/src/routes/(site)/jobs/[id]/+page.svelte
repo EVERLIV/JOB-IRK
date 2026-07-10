@@ -150,7 +150,7 @@
 </script>
 
 <svelte:head>
-  <title>{job.title} в {job.company_name} | PeelJobs</title>
+  <title>{job.title} в {job.company_name} | Truddy.ru</title>
   <meta
     name="description"
     content="{job.title} в {job.company_name}, {job.location_display}. {job.salary_display}, {job.experience_display}. {job.vacancies > 0 ? `${job.vacancies} вакансий.` : ''} Откликнитесь!"
@@ -219,7 +219,7 @@
     baseSalary: job.min_salary > 0 || job.max_salary > 0
       ? {
           '@type': 'MonetaryAmount',
-          currency: 'INR',
+          currency: 'RUB',
           value: {
             '@type': 'QuantitativeValue',
             minValue: job.min_salary || undefined,

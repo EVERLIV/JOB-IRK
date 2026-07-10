@@ -8,7 +8,7 @@
     Clock,
     ChevronRight,
     Building2,
-    IndianRupee,
+    Banknote,
     GraduationCap,
     ArrowRight,
     Home,
@@ -157,10 +157,10 @@
 </script>
 
 <svelte:head>
-  <title>PeelJobs — Найдите работу мечты | Умная платформа для поиска работы</title>
+  <title>Truddy.ru — Найдите работу мечты | Умная платформа для поиска работы</title>
   <meta
     name="description"
-    content="Тысячи вакансий по всей Индии. PeelJobs связывает талантливых профессионалов с ведущими компаниями с помощью умного подбора."
+    content="Тысячи вакансий по всей России. Truddy.ru связывает талантливых профессионалов с ведущими компаниями с помощью умного подбора."
   />
 </svelte:head>
 
@@ -209,7 +209,7 @@
         >
           Присоединяйтесь к <span class="font-semibold text-black"
             >1 миллиону профессионалов</span
-          >, которые используют PeelJobs для поиска проверенных вакансий в ведущих компаниях Индии.
+          >, которые используют Truddy.ru для поиска проверенных вакансий в ведущих компаниях России.
         </p>
 
         <!-- Trust Badges -->
@@ -297,7 +297,7 @@
               >
               <Autocomplete
                 id="location-search"
-                placeholder="напр. Bangalore, Mumbai, Удалённо"
+                placeholder="напр. Иркутск, Новосибирск, Удалённо"
                 bind:value={location}
                 icon={MapPin}
                 suggestions={locationSuggestions}
@@ -348,7 +348,7 @@
           <div class="mt-5 pt-5 border-t border-border">
             <p class="text-xs text-muted mb-2">Популярные:</p>
             <div class="flex flex-wrap gap-2">
-              {#each ["Python Developer", "React", "Bangalore", "Удалённо", "Начинающим"] as term}
+              {#each ["Python Developer", "React", "Иркутск", "Удалённо", "Начинающим"] as term}
                 <a
                   href="/jobs/?search={encodeURIComponent(term)}"
                   class="px-3 py-1 bg-surface text-muted hover:text-primary-600 hover:bg-primary-50 rounded-full text-xs font-medium transition-colors"
@@ -442,12 +442,12 @@
   </div>
 </section>
 
-<!-- Why Choose PeelJobs -->
+<!-- Why Choose Truddy.ru -->
 <section class="py-16 bg-[#1D2226]">
   <div class="max-w-7xl mx-auto px-4 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-2xl lg:text-3xl font-semibold text-white mb-3">
-        Почему PeelJobs?
+        Почему Truddy.ru?
       </h2>
       <p class="text-gray-400 max-w-xl mx-auto">
         Создано для тех, кто ищет результаты, а не сложности.
@@ -572,7 +572,7 @@
               </div>
               {#if job.salary_display}
                 <div class="flex items-center gap-2 text-sm text-muted">
-                  <IndianRupee size={14} class="flex-shrink-0" />
+                  <Banknote size={14} class="flex-shrink-0" />
                   <span class="truncate">{job.salary_display}</span>
                 </div>
               {/if}

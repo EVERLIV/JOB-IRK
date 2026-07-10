@@ -102,7 +102,7 @@
 </script>
 
 <svelte:head>
-	<title>Аналитика - PeelJobs Recruiter</title>
+	<title>Аналитика - Truddy.ru Recruiter</title>
 </svelte:head>
 
 <div class="space-y-6">

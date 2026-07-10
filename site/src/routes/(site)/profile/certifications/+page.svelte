@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>Сертификаты - Профиль - PeelJobs</title>
+	<title>Сертификаты - Профиль - Truddy.ru</title>
 	<meta name="description" content="Управление вашими профессиональными сертификатами" />
 </svelte:head>
 
