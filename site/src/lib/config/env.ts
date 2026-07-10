@@ -18,7 +18,7 @@ const localDefaults = {
 const productionDefaults = {
 	PUBLIC_API_BASE_URL: 'https://placeholder.up.railway.app/api/v1',
 	PUBLIC_SITE_URL: 'https://job-irk-kg-aerospace.vercel.app',
-	PUBLIC_RECRUITER_URL: 'https://job-irk-kg-aerospace.vercel.app'
+	PUBLIC_RECRUITER_URL: 'https://job-irk-recruiter-kg-aerospace.vercel.app'
 } as const;
 
 const defaults = dev ? localDefaults : productionDefaults;
