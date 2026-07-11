@@ -16,25 +16,31 @@ const localDefaults = {
 } as const;
 
 const productionDefaults = {
-	PUBLIC_API_BASE_URL: 'https://placeholder.up.railway.app/api/v1',
+	PUBLIC_API_BASE_URL: 'https://api-production-e35c.up.railway.app/api/v1',
 	PUBLIC_SITE_URL: 'https://job-irk-recruiter.vercel.app',
 	PUBLIC_JOBSEEKER_URL: 'https://job-irk.vercel.app'
 } as const;
 
 const defaults = dev ? localDefaults : productionDefaults;
 
-export const API_BASE_URL = env.PUBLIC_API_BASE_URL || defaults.PUBLIC_API_BASE_URL;
+function clean(value: string | undefined, fallback: string): string {
+	return (value ?? fallback).trim();
+}
 
-export const SITE_URL = env.PUBLIC_SITE_URL || defaults.PUBLIC_SITE_URL;
+export const API_BASE_URL = clean(env.PUBLIC_API_BASE_URL, defaults.PUBLIC_API_BASE_URL);
 
-export const JOBSEEKER_URL = env.PUBLIC_JOBSEEKER_URL || defaults.PUBLIC_JOBSEEKER_URL;
+export const SITE_URL = clean(env.PUBLIC_SITE_URL, defaults.PUBLIC_SITE_URL);
+
+export const JOBSEEKER_URL = clean(env.PUBLIC_JOBSEEKER_URL, defaults.PUBLIC_JOBSEEKER_URL);
 
 export const isDevelopment = dev;
 
 export const isProduction = !dev;
 
-/** @deprecated Use getApiBaseUrl() instead */
 export function getApiBasePath(): string {
+	if (typeof window !== 'undefined') {
+		return '/api/v1';
+	}
 	return API_BASE_URL;
 }
 

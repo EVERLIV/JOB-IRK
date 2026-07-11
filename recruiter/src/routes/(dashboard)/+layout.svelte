@@ -15,6 +15,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import BrandLogo from '$lib/components/BrandLogo.svelte';
+	import { Avatar } from '$lib/components/ui';
 	import type { LayoutData } from './$types';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
@@ -122,7 +123,7 @@
 						onclick={() => (userMenuOpen = !userMenuOpen)}
 						class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-surface transition-colors"
 					>
-						<Avatar name="{user?.first_name || 'U'} {user?.last_name || ''}" size="md" />
+						<Avatar alt="{user?.first_name || 'U'} {user?.last_name || ''}" size="md" />
 						<div class="flex-1 min-w-0 text-left">
 							<p class="text-sm font-medium text-black truncate">
 								{user?.first_name || 'Пользователь'} {user?.last_name || ''}

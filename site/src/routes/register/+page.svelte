@@ -24,7 +24,7 @@
     Zap
   } from '@lucide/svelte';
 
-  /** @type {{ form?: { message?: string; email?: string; success?: boolean } }} */
+  /** @type {{ form?: { message?: string; email?: string; success?: boolean; requiresVerification?: boolean } }} */
   let { form } = $props();
 
   let step = $state(1);
@@ -44,7 +44,11 @@
   // Handle form result
   $effect(() => {
     if (form?.success && form?.email) {
-      goto(`/verify-email/?email=${encodeURIComponent(form.email)}`);
+      if (form.requiresVerification === false) {
+        goto(`/login/?registered=${encodeURIComponent(form.email)}`);
+      } else {
+        goto(`/verify-email/?email=${encodeURIComponent(form.email)}`);
+      }
     } else if (form?.message) {
       errors = { submit: form.message };
       isLoading = false;
@@ -416,7 +420,11 @@
                 return async ({ result, update }) => {
                   isLoading = false;
                   if (result.type === 'success' && result.data?.success) {
-                    goto(`/verify-email/?email=${encodeURIComponent(email)}`);
+                    if (result.data.requiresVerification === false) {
+                      goto(`/login/?registered=${encodeURIComponent(email)}`);
+                    } else {
+                      goto(`/verify-email/?email=${encodeURIComponent(email)}`);
+                    }
                   } else {
                     await update();
                   }

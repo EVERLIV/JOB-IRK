@@ -138,23 +138,43 @@ def register(request):
     if serializer.is_valid():
         result = serializer.save()
         user = result['user']
+        auto_verify = getattr(settings, "AUTO_VERIFY_EMAIL", False)
 
-        # Send verification email
-        try:
-            send_verification_email(user, request)
-        except Exception as e:
-            # Log error but don't fail registration
-            print(f"Failed to send verification email: {e}")
+        if auto_verify:
+            user.is_active = True
+            user.email_verified = True
+            user.activation_code = ""
+            user.activation_code_created = None
+            user.save(
+                update_fields=[
+                    "is_active",
+                    "email_verified",
+                    "activation_code",
+                    "activation_code_created",
+                ]
+            )
+            message = "Registration successful. You can log in now."
+        else:
+            # Send verification email
+            try:
+                send_verification_email(user, request)
+            except Exception as e:
+                # Log error but don't fail registration
+                print(f"Failed to send verification email: {e}")
+            message = (
+                "Registration successful. Please check your email to verify your account."
+            )
 
         return Response({
             "success": True,
+            "requires_verification": not auto_verify,
             "user": {
                 "id": user.id,
                 "email": user.email,
                 "user_type": user.user_type,
                 "is_active": user.is_active
             },
-            "message": "Registration successful. Please check your email to verify your account."
+            "message": message
         }, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

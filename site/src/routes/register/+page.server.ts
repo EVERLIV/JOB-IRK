@@ -75,10 +75,11 @@ export const actions: Actions = {
 				});
 			}
 
-			// Success - return email for redirect
+			// Success - redirect to verify-email or login depending on API
 			return {
 				success: true,
-				email
+				email,
+				requiresVerification: data.requires_verification !== false
 			};
 		} catch (error) {
 			console.error('Registration error:', error);

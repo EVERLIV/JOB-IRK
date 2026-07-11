@@ -10,7 +10,7 @@ ALLOWED_HOSTS = [
     host.strip()
     for host in os.getenv(  # noqa: F405
         "ALLOWED_HOSTS",
-        "localhost,127.0.0.1,.railway.app",
+        "localhost,127.0.0.1,.railway.app,.onrender.com,.loca.lt",
     ).split(",")
     if host.strip()
 ]
@@ -27,6 +27,9 @@ CSRF_COOKIE_SAMESITE = AUTH_COOKIE_SAMESITE
 
 # Email: log to console on staging (verification links appear in Railway logs)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Skip email verification on staging — users can log in immediately after register
+AUTO_VERIFY_EMAIL = os.getenv("AUTO_VERIFY_EMAIL", "true").lower() == "true"  # noqa: F405
 
 # Local file storage (ephemeral on Railway — fine for staging)
 DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"

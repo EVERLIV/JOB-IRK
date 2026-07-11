@@ -1,0 +1,34 @@
+# Render.com blueprint for Django API + external Neon PostgreSQL
+# Dashboard: New → Blueprint → connect EVERLIV/JOB-IRK repo, set DATABASE_URL manually
+
+services:
+  - type: web
+    name: job-irk-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: bash bin/start.sh
+    healthCheckPath: /api/v1/
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: jobsp.settings_staging
+      - key: DEBUG
+        value: "false"
+      - key: AUTO_VERIFY_EMAIL
+        value: "true"
+      - key: AUTH_COOKIE_SECURE
+        value: "true"
+      - key: AUTH_COOKIE_SAMESITE
+        value: Lax
+      - key: SITE_FRONTEND_URL
+        value: https://job-irk.vercel.app
+      - key: RECRUITER_FRONTEND_URL
+        value: https://job-irk-recruiter.vercel.app
+      - key: ALLOWED_HOSTS
+        value: localhost,127.0.0.1,.onrender.com
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: PEEL_URL
+        sync: false

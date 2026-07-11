@@ -155,7 +155,7 @@
 							disabled={loading}
 							placeholder="Повторите пароль"
 							size="lg"
-							error={formData.confirmPassword && formData.password !== formData.confirmPassword}
+							error={Boolean(formData.confirmPassword && formData.password !== formData.confirmPassword)}
 							class="pr-12"
 						>
 							{#snippet iconLeft()}

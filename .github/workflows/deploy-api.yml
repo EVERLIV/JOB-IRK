@@ -1,0 +1,39 @@
+name: Deploy API to Railway
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'backend/**'
+      - 'render.yaml'
+      - '.github/workflows/deploy-api.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.RAILWAY_TOKEN != '' }}
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli@4.5.4
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway link ${{ vars.RAILWAY_PROJECT_ID }} || railway init --name job-irk-api
+          railway variables \
+            --set "DJANGO_SETTINGS_MODULE=jobsp.settings_staging" \
+            --set "DEBUG=false" \
+            --set "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" \
+            --set "DATABASE_URL=${{ secrets.DATABASE_URL }}" \
+            --set "AUTO_VERIFY_EMAIL=true" \
+            --set "SITE_FRONTEND_URL=https://job-irk.vercel.app" \
+            --set "RECRUITER_FRONTEND_URL=https://job-irk-recruiter.vercel.app" \
+            --set "ALLOWED_HOSTS=localhost,127.0.0.1,.railway.app"
+          railway up --detach

@@ -4,12 +4,13 @@
 
 	type Size = 'sm' | 'md' | 'lg';
 
-	interface Props extends HTMLInputAttributes {
+	interface Props extends Omit<HTMLInputAttributes, 'size'> {
 		size?: Size;
 		error?: boolean;
 		iconLeft?: Snippet;
 		iconRight?: Snippet;
 		class?: string;
+		value?: string;
 	}
 
 	let {
@@ -18,6 +19,7 @@
 		iconLeft,
 		iconRight,
 		class: className = '',
+		value = $bindable(''),
 		...restProps
 	}: Props = $props();
 
@@ -47,7 +49,7 @@
 		</div>
 	{/if}
 
-	<input class={classes} {...restProps} />
+	<input class={classes} bind:value {...restProps} />
 
 	{#if iconRight}
 		<div class="absolute inset-y-0 right-0 flex items-center pr-3 text-muted">

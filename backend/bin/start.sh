@@ -3,6 +3,8 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+export DJANGO_SETTINGS_MODULE="${DJANGO_SETTINGS_MODULE:-jobsp.settings_staging}"
+
 echo "Running database migrations..."
 python manage.py migrate --noinput
 

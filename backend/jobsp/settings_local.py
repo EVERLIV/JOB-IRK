@@ -4,10 +4,13 @@
 
 from .settings import *
 
+# Unit tests: python manage.py test
+# BDD (optional): pip install -r dev-requirements.txt && python manage.py behave
+
 # Development-specific installed apps
 LOCAL_INSTALLED_APPS = [
-    # "schema_viewer",  # Install with: pip install -r dev-requirements.txt
-    # "behave_django",  # Install with: pip install -r dev-requirements.txt
+    # "schema_viewer",  # pip install -r dev-requirements.txt
+    # "behave_django",  # pip install -r dev-requirements.txt
     # Uncomment the following for debug toolbar support
     # "debug_toolbar",
     # "template_profiler_panel",
@@ -29,9 +32,6 @@ TEMPLATE_DEBUG = DEBUG
 
 # Use console email backend for local development
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-# Test runner for BDD tests
-TEST_RUNNER = "django_behave.runner.DjangoBehaveTestSuiteRunner"
 
 # Internal IPs for debug toolbar and other dev tools
 INTERNAL_IPS = ("127.0.0.1", "localhost")
