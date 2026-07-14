@@ -310,7 +310,7 @@
             <div class="space-y-4">
               {#each jobs as job, index}
                 <a
-                  href="/jobs/{job.slug.replace(/^\/+/, '')}/"
+                  href="/jobs/{job.slug.replace(/^\/+|\/+$/g, '')}/"
                   class="group block p-4 border border-border rounded-lg hover:border-primary/30 hover:shadow-md transition-all duration-200"
                   style="animation: fade-in-up 0.5s ease forwards; animation-delay: {250 + index * 50}ms; opacity: 0;"
                 >

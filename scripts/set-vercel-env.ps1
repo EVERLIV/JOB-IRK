@@ -12,8 +12,10 @@ $ErrorActionPreference = "Stop"
 
 function Set-VercelEnv {
     param([string]$Project, [string]$Name, [string]$Value, [string]$Env = "production")
-    Write-Host "  $Project : $Name"
-    $Value | vercel env add $Name $Env --scope $Scope --project $Project --force 2>&1 | Out-Null
+    # Trim so Windows CRLF never gets stored inside the secret value
+    $clean = $Value.Trim()
+    Write-Host "  $Project : $Name = $clean"
+    $clean | vercel env add $Name $Env --scope $Scope --force 2>&1 | Out-Null
 }
 
 Write-Host "Setting env for job-irk (site)..."

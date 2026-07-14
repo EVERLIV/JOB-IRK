@@ -169,7 +169,9 @@ celery -A jobsp beat --loglevel=info
 
 ## Production Deployment
 
-### Environment Variables
+For the current **Railway + Neon + Vercel** stack (seed data, env checklist, soft vs hard launch), see **[docs/PRODUCTION.md](docs/PRODUCTION.md)**.
+
+### Environment Variables (legacy self-host)
 
 ```env
 DEBUG=False

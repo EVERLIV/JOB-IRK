@@ -35,7 +35,7 @@ try {
     }
 
     Write-Host "Setting environment variables..."
-    npx @railway/cli variable `
+    npx @railway/cli@4.5.4 variables `
         --set "DJANGO_SETTINGS_MODULE=jobsp.settings_staging" `
         --set "DEBUG=false" `
         --set "SECRET_KEY=$SecretKey" `
@@ -45,7 +45,8 @@ try {
         --set "AUTH_COOKIE_SAMESITE=Lax" `
         --set "SITE_FRONTEND_URL=$SiteUrl" `
         --set "RECRUITER_FRONTEND_URL=$RecruiterUrl" `
-        --set "ALLOWED_HOSTS=localhost,127.0.0.1,.railway.app"
+        --set "DEFAULT_FROM_EMAIL=Truddy <noreply@truddy.ru>" `
+        --set "ALLOWED_HOSTS=localhost,127.0.0.1,.railway.app,api-production-e35c.up.railway.app"
 
     Write-Host "Deploying backend..."
     npx @railway/cli@4.5.4 up --detach

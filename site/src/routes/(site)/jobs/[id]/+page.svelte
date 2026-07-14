@@ -760,7 +760,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {#each relatedJobs as relatedJob, index}
             <a
-              href="/jobs/{relatedJob.slug.replace(/^\/+/, '')}"
+              href="/jobs/{relatedJob.slug.replace(/^\/+|\/+$/g, '')}/"
               class="group bg-white rounded-lg border border-border overflow-hidden hover:shadow-card-hover hover:border-primary-200 transition-all"
               aria-label="Посмотреть вакансию {relatedJob.title} в {relatedJob.company_name}"
               style="animation: fade-in-up 0.4s ease forwards; animation-delay: {index * 50}ms; opacity: 0;"

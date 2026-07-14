@@ -92,27 +92,37 @@ class JobViewSet(viewsets.ReadOnlyModelViewSet):
     )
     def retrieve(self, request, *args, **kwargs):
         """
-        Retrieve job by ID or slug
-        Supports both numeric ID and string slug
-        Normalizes slug to match database format (with leading/trailing slashes)
+        Retrieve job by ID or slug.
+        Accepts numeric id, plain slug, or legacy /slug/ form.
         """
-        lookup_value = kwargs.get('id')
+        lookup_value = (kwargs.get('id') or '').strip()
 
-        # Try to retrieve by ID first
+        qs = self.get_queryset()
+        instance = None
+
         try:
             if lookup_value.isdigit():
-                instance = self.get_queryset().get(id=int(lookup_value))
+                instance = qs.get(id=int(lookup_value))
             else:
-                # Normalize slug: ensure it starts and ends with /
-                # Database slugs are stored as /slug-text/
-                normalized_slug = lookup_value.strip()
-                if not normalized_slug.startswith('/'):
-                    normalized_slug = '/' + normalized_slug
-                if not normalized_slug.endswith('/'):
-                    normalized_slug = normalized_slug + '/'
-
-                # Try by normalized slug
-                instance = self.get_queryset().get(slug=normalized_slug)
+                plain = lookup_value.strip('/')
+                candidates = [
+                    lookup_value,
+                    plain,
+                    f'/{plain}/',
+                    f'{plain}/',
+                    f'/{plain}',
+                ]
+                # Preserve order, drop empties/dupes
+                seen = set()
+                for candidate in candidates:
+                    if not candidate or candidate in seen:
+                        continue
+                    seen.add(candidate)
+                    instance = qs.filter(slug=candidate).first()
+                    if instance:
+                        break
+                if instance is None:
+                    raise JobPost.DoesNotExist()
         except JobPost.DoesNotExist:
             return Response(
                 {'detail': 'Job not found.'},

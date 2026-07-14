@@ -7,23 +7,5 @@
       "status": "Enabled",
       "slug": "russia"
     }
-  },
-  {
-    "model": "peeldb.country",
-    "pk": 2,
-    "fields": {
-      "name": "India",
-      "status": "Disabled",
-      "slug": "india"
-    }
-  },
-  {
-    "model": "peeldb.country",
-    "pk": 3,
-    "fields": {
-      "name": "Australia",
-      "status": "Disabled",
-      "slug": "australia"
-    }
   }
 ]

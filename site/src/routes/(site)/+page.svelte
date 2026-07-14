@@ -530,7 +530,7 @@
     <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
       {#each featuredJobs as job, i (job.id)}
         <a
-          href={job.slug}
+          href="/jobs/{job.slug.replace(/^\/+|\/+$/g, '')}/"
           class="group bg-white rounded-lg border border-border overflow-hidden hover:shadow-md hover:border-primary-200 transition-all"
           style="animation: fade-in-up 0.4s ease forwards; animation-delay: {i *
             50}ms; opacity: 0;"

@@ -14,164 +14,14 @@
     "pk": 2,
     "fields": {
       "country": 1,
-      "name": "Москва",
+      "name": "Республика Бурятия",
       "status": "Enabled",
-      "slug": "moscow"
+      "slug": "buryatia"
     }
   },
   {
     "model": "peeldb.state",
     "pk": 3,
-    "fields": {
-      "country": 1,
-      "name": "Санкт-Петербург",
-      "status": "Enabled",
-      "slug": "saint-petersburg"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 4,
-    "fields": {
-      "country": 1,
-      "name": "Новосибирская область",
-      "status": "Enabled",
-      "slug": "novosibirskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 5,
-    "fields": {
-      "country": 1,
-      "name": "Красноярский край",
-      "status": "Enabled",
-      "slug": "krasnoyarskiy-kray"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 6,
-    "fields": {
-      "country": 1,
-      "name": "Свердловская область",
-      "status": "Enabled",
-      "slug": "sverdlovskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 7,
-    "fields": {
-      "country": 1,
-      "name": "Республика Татарстан",
-      "status": "Enabled",
-      "slug": "tatarstan"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 8,
-    "fields": {
-      "country": 1,
-      "name": "Нижегородская область",
-      "status": "Enabled",
-      "slug": "nizhegorodskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 9,
-    "fields": {
-      "country": 1,
-      "name": "Самарская область",
-      "status": "Enabled",
-      "slug": "samarskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 10,
-    "fields": {
-      "country": 1,
-      "name": "Ростовская область",
-      "status": "Enabled",
-      "slug": "rostovskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 11,
-    "fields": {
-      "country": 1,
-      "name": "Краснодарский край",
-      "status": "Enabled",
-      "slug": "krasnodarskiy-kray"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 12,
-    "fields": {
-      "country": 1,
-      "name": "Приморский край",
-      "status": "Enabled",
-      "slug": "primorskiy-kray"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 13,
-    "fields": {
-      "country": 1,
-      "name": "Хабаровский край",
-      "status": "Enabled",
-      "slug": "khabarovskiy-kray"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 14,
-    "fields": {
-      "country": 1,
-      "name": "Томская область",
-      "status": "Enabled",
-      "slug": "tomskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 15,
-    "fields": {
-      "country": 1,
-      "name": "Омская область",
-      "status": "Enabled",
-      "slug": "omskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 16,
-    "fields": {
-      "country": 1,
-      "name": "Челябинская область",
-      "status": "Enabled",
-      "slug": "chelyabinskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 17,
-    "fields": {
-      "country": 1,
-      "name": "Республика Бурятия",
-      "status": "Enabled",
-      "slug": "buryatiya"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 18,
     "fields": {
       "country": 1,
       "name": "Забайкальский край",
@@ -181,22 +31,12 @@
   },
   {
     "model": "peeldb.state",
-    "pk": 19,
+    "pk": 4,
     "fields": {
       "country": 1,
-      "name": "Московская область",
+      "name": "Красноярский край",
       "status": "Enabled",
-      "slug": "moskovskaya-oblast"
-    }
-  },
-  {
-    "model": "peeldb.state",
-    "pk": 20,
-    "fields": {
-      "country": 1,
-      "name": "Пермский край",
-      "status": "Enabled",
-      "slug": "permskiy-kray"
+      "slug": "krasnoyarskiy-kray"
     }
   }
 ]

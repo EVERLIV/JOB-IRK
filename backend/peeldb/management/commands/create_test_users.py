@@ -16,6 +16,7 @@ from django.apps import apps
 from django.db import transaction
 from django.utils import timezone
 from django.utils.text import slugify
+from peeldb.slugify_ru import slugify_ru
 
 from peeldb.models import (
     Company,
@@ -399,22 +400,33 @@ class Command(BaseCommand):
         created_posts = []
         for i, job_data in enumerate(job_posts_data):
             city = self._get_city(job_data.get("city", "Иркутск"))
-            title = job_data.get("title", "Software Developer")
-            slug = slugify(f"{title}-{user.username}-{i}")
+            title = job_data.get("title", "Сотрудник")
+            company_label = ""
+            if user.company and user.company.name:
+                company_label = user.company.name
+            elif job_data.get("company_name"):
+                company_label = job_data["company_name"]
+            else:
+                company_label = f"{user.first_name} {user.last_name}".strip() or user.username
 
-            # Check if slug exists and make it unique
+            slug = slugify_ru(f"{title}-{company_label}-{i}")
+            if not slug or slug == "job":
+                slug = slugify_ru(f"{title}-{user.username}-{i}") or f"job-{user.id}-{i}"
+
+            # Check if slug exists and make it unique (store as /slug/ for API compat)
             base_slug = slug
             counter = 1
-            while JobPost.objects.filter(slug=slug).exists():
+            while JobPost.objects.filter(slug__in=[slug, f"/{slug}/", f"{slug}/"]).exists():
                 slug = f"{base_slug}-{counter}"
                 counter += 1
+            slug = f"/{slug}/"
 
             job = JobPost.objects.create(
                 user=user,
                 company=user.company,  # None for individual recruiters
                 title=title,
                 slug=slug,
-                description=job_data.get("description", f"Job posting for {title}"),
+                description=job_data.get("description", f"Вакансия: {title}"),
                 vacancies=job_data.get("vacancies", 1),
                 min_year=job_data.get("min_year", 0),
                 max_year=job_data.get("max_year", 5),
@@ -429,11 +441,11 @@ class Command(BaseCommand):
                 published_on=timezone.now(),
                 fresher=(job_data.get("min_year", 0) == 0),
                 country=self.country,
-                meta_title=f"{title} Jobs",
-                meta_description=f"Apply for {title} position.",
-                company_name=user.company.name if user.company else "",
-                company_address=user.company.address if user.company else "",
-                company_description=user.company.profile if user.company else "",
+                meta_title=f"{title} — работа в {job_data.get('city', 'Иркутске')}",
+                meta_description=f"Вакансия «{title}» на Truddy.ru",
+                company_name=company_label,
+                company_address=user.company.address if user.company else job_data.get("company_address", ""),
+                company_description=user.company.profile if user.company else job_data.get("company_description", ""),
             )
 
             # Add location
@@ -446,7 +458,9 @@ class Command(BaseCommand):
                 job.skills.set(skills)
 
             # Add industries
-            industries = self._get_industries_by_name(job_data.get("industries", ["IT"]))
+            industries = self._get_industries_by_name(
+                job_data.get("industries", ["Розничная торговля"])
+            )
             if industries:
                 job.industry.set(industries)
 

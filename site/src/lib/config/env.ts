@@ -24,7 +24,8 @@ const productionDefaults = {
 const defaults = dev ? localDefaults : productionDefaults;
 
 function clean(value: string | undefined, fallback: string): string {
-	return (value ?? fallback).trim();
+	// Vercel env paste on Windows sometimes stores trailing \r\n
+	return (value ?? fallback).replace(/[\r\n]+/g, '').trim();
 }
 
 export const API_BASE_URL = clean(env.PUBLIC_API_BASE_URL, defaults.PUBLIC_API_BASE_URL);

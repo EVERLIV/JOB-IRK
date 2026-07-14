@@ -7,7 +7,8 @@
 **PeelJobs** is a dynamic, user-centric job board platform designed to streamline the entire hiring process, from job posting to application management. Built with modern web technologies, it offers a seamless experience for job seekers, recruiters, and administrators through robust role-based access control (RBAC).
 
 🔗 **Documentation**: https://opensource-job-portal.readthedocs.io/en/latest/  
-📋 **Setup Guide**: See [SETUP.md](SETUP.md) for complete development and deployment instructions
+📋 **Setup Guide**: See [SETUP.md](SETUP.md) for complete development and deployment instructions  
+🚀 **Production**: See [docs/PRODUCTION.md](docs/PRODUCTION.md) for Railway + Neon + Vercel seed & env runbook
 
 ---
 
