@@ -65,3 +65,12 @@ HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.BaseSignalProcessor"
 # Run Celery tasks synchronously without Redis
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
+
+# In-process cache for filter-options / short-lived API payloads (no Redis on staging)
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "truddy-staging",
+        "TIMEOUT": 300,
+    }
+}

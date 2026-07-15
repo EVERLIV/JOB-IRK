@@ -207,22 +207,33 @@ class JobListSerializer(serializers.ModelSerializer):
             return f"{years} year{'s' if years != 1 else ''} ago"
 
     def get_applicants_count(self, obj):
-        """Get number of applicants for this job"""
+        """Prefer annotated count from queryset to avoid N+1 queries."""
+        annotated = getattr(obj, "applicants_count_anno", None)
+        if annotated is not None:
+            return annotated
         return AppliedJobs.objects.filter(job_post=obj).count()
 
     def get_is_saved(self, obj):
-        """Check if job is saved by current user"""
-        request = self.context.get('request')
-        if request and request.user.is_authenticated:
-            return SavedJobs.objects.filter(job_post=obj, user=request.user).exists()
-        return False
+        """Check if job is saved by current user (batch-aware)."""
+        request = self.context.get("request")
+        user = getattr(request, "user", None) if request else None
+        if not user or not getattr(user, "is_authenticated", False):
+            return False
+        saved_ids = self.context.get("saved_job_ids")
+        if saved_ids is not None:
+            return obj.id in saved_ids
+        return SavedJobs.objects.filter(job_post=obj, user=user).exists()
 
     def get_is_applied(self, obj):
-        """Check if user has already applied for this job"""
-        request = self.context.get('request')
-        if request and request.user.is_authenticated:
-            return AppliedJobs.objects.filter(job_post=obj, user=request.user).exists()
-        return False
+        """Check if user has already applied (batch-aware)."""
+        request = self.context.get("request")
+        user = getattr(request, "user", None) if request else None
+        if not user or not getattr(user, "is_authenticated", False):
+            return False
+        applied_ids = self.context.get("applied_job_ids")
+        if applied_ids is not None:
+            return obj.id in applied_ids
+        return AppliedJobs.objects.filter(job_post=obj, user=user).exists()
 
     def get_accepts_applications(self, obj):
         """Check if this job post can still accept applications (30-day rule)"""

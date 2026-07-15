@@ -1,7 +1,17 @@
 import type { LayoutServerLoad } from './$types';
 import { API_BASE_URL } from '$lib/config/env';
 
-export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
+async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = 2500) {
+	const controller = new AbortController();
+	const timer = setTimeout(() => controller.abort(), timeoutMs);
+	try {
+		return await fetch(url, { ...init, signal: controller.signal });
+	} finally {
+		clearTimeout(timer);
+	}
+}
+
+export const load: LayoutServerLoad = async ({ cookies }) => {
 	let accessToken = cookies.get('access_token');
 	const refreshToken = cookies.get('refresh_token');
 	const secureCookies = API_BASE_URL.startsWith('https://');
@@ -10,15 +20,18 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
 		cookies.delete('refresh_token', { path: '/' });
 	};
 
+	// Never block the whole page on a cold Railway/Neon wake for auth
 	if (!accessToken && refreshToken) {
 		try {
-			const refreshResponse = await fetch(`${API_BASE_URL}/auth/token/refresh/`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
+			const refreshResponse = await fetchWithTimeout(
+				`${API_BASE_URL}/auth/token/refresh/`,
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ refresh: refreshToken })
 				},
-				body: JSON.stringify({ refresh: refreshToken })
-			});
+				2500
+			);
 
 			if (refreshResponse.ok) {
 				const refreshData = await refreshResponse.json();
@@ -39,7 +52,7 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
 				});
 			}
 		} catch {
-			clearAuthCookies();
+			// Keep refresh cookie; page still renders as guest if API is cold
 		}
 	}
 
@@ -51,11 +64,11 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
 	}
 
 	try {
-		const response = await fetch(`${API_BASE_URL}/auth/me/`, {
-			headers: {
-				Authorization: `Bearer ${accessToken}`
-			}
-		});
+		const response = await fetchWithTimeout(
+			`${API_BASE_URL}/auth/me/`,
+			{ headers: { Authorization: `Bearer ${accessToken}` } },
+			2500
+		);
 
 		if (!response.ok) {
 			clearAuthCookies();
@@ -71,7 +84,6 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
 			isAuthenticated: true
 		};
 	} catch {
-		clearAuthCookies();
 		return {
 			user: null,
 			isAuthenticated: false

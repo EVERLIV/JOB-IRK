@@ -63,21 +63,65 @@ class JobViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         """
-        Get optimized queryset with prefetched relations
-        Only returns Live jobs by default
+        Optimized queryset: annotate applicant counts, prefetch relations.
+        Use distinct() only when M2M filters would otherwise duplicate rows.
         """
-        return JobPost.objects.filter(
-            status='Live'
-        ).select_related(
-            'company',
-            'country',
-            'major_skill'
-        ).prefetch_related(
-            'location',
-            'skills',
-            'industry',
-            'edu_qualification'
-        ).distinct()
+        qs = (
+            JobPost.objects.filter(status="Live")
+            .select_related("company", "country", "major_skill")
+            .prefetch_related("location", "skills", "industry", "edu_qualification")
+            .annotate(applicants_count_anno=Count("appliedjobs", distinct=True))
+        )
+
+        # M2M filters can produce duplicate JobPost rows — distinct only then
+        params = self.request.query_params if hasattr(self, "request") else {}
+        needs_distinct = any(
+            params.get(key)
+            for key in ("location", "skills", "industry", "education")
+        )
+        if needs_distinct:
+            qs = qs.distinct()
+        return qs
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.setdefault("saved_job_ids", set())
+        context.setdefault("applied_job_ids", set())
+        return context
+
+    @extend_schema(summary="List jobs", tags=["Jobs"])
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        jobs = page if page is not None else list(queryset)
+        job_ids = [j.id for j in jobs]
+
+        context = self.get_serializer_context()
+        user = request.user
+        if user and user.is_authenticated and job_ids:
+            context["saved_job_ids"] = set(
+                SavedJobs.objects.filter(user=user, job_post_id__in=job_ids).values_list(
+                    "job_post_id", flat=True
+                )
+            )
+            context["applied_job_ids"] = set(
+                AppliedJobs.objects.filter(user=user, job_post_id__in=job_ids).values_list(
+                    "job_post_id", flat=True
+                )
+            )
+        else:
+            context["saved_job_ids"] = set()
+            context["applied_job_ids"] = set()
+
+        serializer = self.get_serializer(jobs, many=True, context=context)
+        response = (
+            self.get_paginated_response(serializer.data)
+            if page is not None
+            else Response(serializer.data)
+        )
+        # Short public cache — reduces SSR hammering from Vercel
+        response["Cache-Control"] = "public, max-age=30, stale-while-revalidate=60"
+        return response
 
     def get_serializer_class(self):
         """Use detailed serializer for retrieve, lightweight for list"""
@@ -133,130 +177,8 @@ class JobViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
     @extend_schema(
-        summary="List jobs",
-        description="Get paginated list of job postings with advanced filtering and search capabilities",
-        parameters=[
-            OpenApiParameter(
-                name='search',
-                type=OpenApiTypes.STR,
-                description='Search in job title, company name, description, and job role',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='location',
-                type=OpenApiTypes.STR,
-                description='Filter by location slug (can be specified multiple times)',
-                required=False,
-                many=True,
-            ),
-            OpenApiParameter(
-                name='skills',
-                type=OpenApiTypes.STR,
-                description='Filter by skill slug (can be specified multiple times)',
-                required=False,
-                many=True,
-            ),
-            OpenApiParameter(
-                name='industry',
-                type=OpenApiTypes.STR,
-                description='Filter by industry slug (can be specified multiple times)',
-                required=False,
-                many=True,
-            ),
-            OpenApiParameter(
-                name='education',
-                type=OpenApiTypes.STR,
-                description='Filter by education/qualification slug (can be specified multiple times)',
-                required=False,
-                many=True,
-            ),
-            OpenApiParameter(
-                name='job_type',
-                type=OpenApiTypes.STR,
-                description='Filter by job type (full-time, internship, walk-in, government, Fresher)',
-                required=False,
-                many=True,
-            ),
-            OpenApiParameter(
-                name='min_salary',
-                type=OpenApiTypes.NUMBER,
-                description='Minimum salary in RUB per month',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='max_salary',
-                type=OpenApiTypes.NUMBER,
-                description='Maximum salary in RUB per month',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='min_experience',
-                type=OpenApiTypes.INT,
-                description='Minimum years of experience',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='max_experience',
-                type=OpenApiTypes.INT,
-                description='Maximum years of experience',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='fresher',
-                type=OpenApiTypes.BOOL,
-                description='Show only fresher jobs',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='is_remote',
-                type=OpenApiTypes.BOOL,
-                description='Show only remote jobs',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='ordering',
-                type=OpenApiTypes.STR,
-                description='Order results by field (prefix with - for descending). Options: published_on, title, min_salary, max_salary',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='page',
-                type=OpenApiTypes.INT,
-                description='Page number for pagination',
-                required=False,
-            ),
-            OpenApiParameter(
-                name='page_size',
-                type=OpenApiTypes.INT,
-                description='Number of results per page (max 100)',
-                required=False,
-            ),
-        ],
-        tags=['Jobs'],
-    )
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
-
-    @extend_schema(
         summary="Manage saved jobs",
         description="Save, unsave, or get saved jobs (requires authentication)",
-        request={
-            'application/json': {
-                'type': 'object',
-                'properties': {
-                    'job_id': {
-                        'type': 'integer',
-                        'description': 'ID of the job to save (required for POST)'
-                    }
-                }
-            }
-        },
-        responses={
-            200: {'description': 'Success - GET returns list of saved jobs'},
-            201: {'description': 'Job saved successfully'},
-            400: {'description': 'Bad request'},
-            404: {'description': 'Job not found'}
-        },
         tags=['Jobs'],
     )
     @action(detail=False, methods=['get', 'post'], permission_classes=[IsAuthenticated], url_path='saved')
@@ -467,55 +389,72 @@ class JobFilterOptionsView(APIView):
         tags=['Jobs'],
     )
     def get(self, request):
-        """Get all filter options with job counts"""
+        """Get all filter options with job counts (cached ~5 min)."""
+        from django.core.cache import cache
 
-        # Base queryset for live jobs
-        live_jobs = JobPost.objects.filter(status='Live')
+        cache_key = "job_filter_options_v2"
+        cached = cache.get(cache_key)
+        if cached is not None:
+            response = Response(cached)
+            response["Cache-Control"] = "public, max-age=120, stale-while-revalidate=300"
+            response["X-Cache"] = "HIT"
+            return response
 
-        # Get locations with job counts
-        locations = City.objects.filter(
-            locations__in=live_jobs
-        ).annotate(
-            count=Count('locations', filter=Q(locations__status='Live'))
-        ).order_by('-count', 'name').values('id', 'name', 'slug', 'count')[:50]
+        live_jobs = JobPost.objects.filter(status="Live")
 
-        # Get skills with job counts
-        skills = Skill.objects.filter(
-            jobpost__in=live_jobs
-        ).annotate(
-            count=Count('jobpost', filter=Q(jobpost__status='Live'))
-        ).order_by('-count', 'name').values('id', 'name', 'slug', 'count')[:50]
+        locations = list(
+            City.objects.filter(locations__status="Live")
+            .annotate(count=Count("locations", filter=Q(locations__status="Live"), distinct=True))
+            .filter(count__gt=0)
+            .order_by("-count", "name")
+            .values("id", "name", "slug", "count")[:50]
+        )
 
-        # Get industries with job counts
-        industries = Industry.objects.filter(
-            jobpost__in=live_jobs
-        ).annotate(
-            count=Count('jobpost', filter=Q(jobpost__status='Live'))
-        ).order_by('-count', 'name').values('id', 'name', 'slug', 'count')
+        skills = list(
+            Skill.objects.filter(jobpost__status="Live")
+            .annotate(count=Count("jobpost", filter=Q(jobpost__status="Live"), distinct=True))
+            .filter(count__gt=0)
+            .order_by("-count", "name")
+            .values("id", "name", "slug", "count")[:50]
+        )
 
-        # Get education/qualifications with job counts
-        education = Qualification.objects.filter(
-            jobpost__in=live_jobs
-        ).annotate(
-            count=Count('jobpost', filter=Q(jobpost__status='Live'))
-        ).order_by('-count', 'name').values('id', 'name', 'slug', 'count')
+        industries = list(
+            Industry.objects.filter(jobpost__status="Live")
+            .annotate(count=Count("jobpost", filter=Q(jobpost__status="Live"), distinct=True))
+            .filter(count__gt=0)
+            .order_by("-count", "name")
+            .values("id", "name", "slug", "count")
+        )
 
-        # Get job types with counts
+        education = list(
+            Qualification.objects.filter(jobpost__status="Live")
+            .annotate(count=Count("jobpost", filter=Q(jobpost__status="Live"), distinct=True))
+            .filter(count__gt=0)
+            .order_by("-count", "name")
+            .values("id", "name", "slug", "count")
+        )
+
         from peeldb.models import JOB_TYPE
-        job_types = []
-        for value, label in JOB_TYPE:
-            count = live_jobs.filter(job_type=value).count()
-            if count > 0:
-                job_types.append({
-                    'value': value,
-                    'label': label,
-                    'count': count
-                })
 
-        return Response({
-            'locations': list(locations),
-            'skills': list(skills),
-            'industries': list(industries),
-            'education': list(education),
-            'job_types': job_types,
-        })
+        type_counts = {
+            row["job_type"]: row["count"]
+            for row in live_jobs.values("job_type").annotate(count=Count("id"))
+        }
+        job_types = [
+            {"value": value, "label": label, "count": type_counts[value]}
+            for value, label in JOB_TYPE
+            if type_counts.get(value)
+        ]
+
+        payload = {
+            "locations": locations,
+            "skills": skills,
+            "industries": industries,
+            "education": education,
+            "job_types": job_types,
+        }
+        cache.set(cache_key, payload, 300)
+        response = Response(payload)
+        response["Cache-Control"] = "public, max-age=120, stale-while-revalidate=300"
+        response["X-Cache"] = "MISS"
+        return response

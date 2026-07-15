@@ -132,6 +132,27 @@ Optional later: Redis/Celery workers, Elasticsearch, Sentry, custom domains.
 
 ---
 
+## 6. Why pages feel slow (1–2 minutes)
+
+Measured stack (Vercel SSR → Railway API → Neon):
+
+| Layer | Typical wait |
+|-------|--------------|
+| Neon autosuspend wake | 3–10+ s on first query |
+| Railway free sleep / cold dyno | +several seconds |
+| Home SSR used to call API **sequentially** | ~2× API latency |
+| `filter-options` heavy COUNT queries every request | 3+ s when cold |
+
+Mitigations in code: parallel SSR, LocMem cache for filter-options, fewer N+1 queries, short `Cache-Control`, auth timeouts, GitHub Actions keepalive cron.
+
+Still required for stable speed:
+
+1. Neon Console → disable **Scale to zero** / keep compute awake (or paid plan).
+2. Railway → keep service always on (not slept).
+3. Prefer Neon region close to Railway region.
+
+---
+
 ## 5. What not to do
 
 - Do not run `create_test_data` on Neon production.

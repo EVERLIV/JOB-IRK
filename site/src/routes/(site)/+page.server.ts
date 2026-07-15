@@ -31,61 +31,81 @@ interface Job {
   time_ago: string;
 }
 
-// Curated categories - relevant industries
+// Regional Truddy categories (must match industries fixture slugs)
 const curatedCategorySlugs = [
-  'it-software',
-  'bpo',
-  'banking',
-  'education',
-  'sales',
-  'accounting',
-  'medical',
-  'advertising',
-  'construction',
-  'automobile',
-  'travel',
-  'freshers'
+  'roznichnaya-torgovlya',
+  'transport-i-logistika',
+  'stroitelstvo',
+  'obschestvennoe-pitanie',
+  'skladskoe-hozyaystvo',
+  'meditsina-i-farmatsevtika',
+  'obrazovanie',
+  'ohrana-i-bezopasnost',
+  'proizvodstvo',
+  'zhkh-i-gorodskoe-hozyaystvo',
+  'avtoservis-i-avtobiznes',
+  'uslugi-naseleniyu'
 ];
 
-export const load: PageServerLoad = async ({ fetch }) => {
+async function fetchJson(url: string, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} for ${url}`);
+    }
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+export const load: PageServerLoad = async () => {
   try {
     const apiBaseUrl = getApiBaseUrl();
 
-    // Fetch filter options (categories and locations)
-    const filterOptionsResponse = await fetch(`${apiBaseUrl}/jobs/filter-options/`);
-    if (!filterOptionsResponse.ok) {
-      throw new Error('Failed to fetch filter options');
-    }
-    const filterOptions = await filterOptionsResponse.json();
+    // Parallel SSR fetches — do not wait sequentially on cold Railway/Neon
+    const [filterOptions, jobsData] = await Promise.all([
+      fetchJson(`${apiBaseUrl}/jobs/filter-options/`),
+      fetchJson(`${apiBaseUrl}/jobs/?page=1&page_size=8`)
+    ]);
 
-    // Filter for curated categories only, maintaining order
     const allCategories = filterOptions.industries || [];
-    const topCategories = curatedCategorySlugs
-      .map(slug => allCategories.find((c: any) => c.slug === slug))
-      .filter(Boolean) // Remove undefined entries
-      .map((category: any) => ({
+    const matched = curatedCategorySlugs
+      .map((slug) => allCategories.find((c: { slug: string }) => c.slug === slug))
+      .filter(Boolean)
+      .map((category: { id: number; name: string; slug: string }) => ({
         id: category.id,
-        name: category.name.trim(), // Clean up whitespace
+        name: category.name.trim(),
         slug: category.slug
       })) as Category[];
 
-    // Get top 12 locations sorted by job count
+    // Fallback: top industries by job count when curated list is empty
+    const topCategories =
+      matched.length > 0
+        ? matched
+        : (allCategories as Array<{ id: number; name: string; slug: string; count?: number }>)
+            .slice()
+            .sort((a, b) => (b.count || 0) - (a.count || 0))
+            .slice(0, 12)
+            .map((category) => ({
+              id: category.id,
+              name: category.name.trim(),
+              slug: category.slug
+            }));
+
     const topLocations = (filterOptions.locations || [])
-      .sort((a: any, b: any) => (b.count || 0) - (a.count || 0))
+      .slice()
+      .sort((a: { count?: number }, b: { count?: number }) => (b.count || 0) - (a.count || 0))
       .slice(0, 12)
-      .map((location: any) => ({
+      .map((location: { id: number; name: string; slug: string; count?: number }) => ({
         id: location.id,
         name: location.name,
         slug: location.slug,
         jobs_count: location.count
       })) as Location[];
 
-    // Fetch latest jobs for featured section
-    const jobsResponse = await fetch(`${apiBaseUrl}/jobs/?page=1&page_size=8`);
-    if (!jobsResponse.ok) {
-      throw new Error('Failed to fetch jobs');
-    }
-    const jobsData = await jobsResponse.json();
     const featuredJobs = (jobsData.results || []) as Job[];
 
     return {
@@ -95,7 +115,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
     };
   } catch (error) {
     console.error('Error loading home page data:', error);
-    // Return empty data on error to allow page to render
     return {
       topCategories: [] as Category[],
       topLocations: [] as Location[],

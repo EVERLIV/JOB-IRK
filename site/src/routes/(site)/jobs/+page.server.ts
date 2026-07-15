@@ -136,11 +136,19 @@ export const load: PageServerLoad = async ({ url, fetch, cookies }) => {
       : `${API_BASE_URL}/api/v1/jobs/`;
     const filterOptionsUrl = `${API_BASE_URL}/api/v1/jobs/filter-options/`;
 
-    // Fetch data in parallel
-    const [jobsResponse, filterOptionsResponse] = await Promise.all([
-      fetch(jobsUrl, { headers }),
-      fetch(filterOptionsUrl),
-    ]);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+
+    let jobsResponse: Response;
+    let filterOptionsResponse: Response;
+    try {
+      [jobsResponse, filterOptionsResponse] = await Promise.all([
+        fetch(jobsUrl, { headers, signal: controller.signal }),
+        fetch(filterOptionsUrl, { signal: controller.signal }),
+      ]);
+    } finally {
+      clearTimeout(timer);
+    }
 
     // Check for errors
     if (!jobsResponse.ok) {
